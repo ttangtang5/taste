@@ -2,8 +2,9 @@ package com.tang.taste.common.dao;
 
 import com.tang.taste.common.entity.pojo.Booking;
 import com.tang.taste.common.entity.pojo.BookingExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface BookingMapper {
     long countByExample(BookingExample example);

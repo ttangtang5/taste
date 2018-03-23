@@ -99,17 +99,20 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.tang.taste.common.entity.pojo.ShoppingCart">
-    insert into shopping_cart (cart_id, user_id, sum_money, 
-      `status`)
-    values (#{cartId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{sumMoney,jdbcType=DOUBLE}, 
-      #{status,jdbcType=INTEGER})
+    <selectKey keyProperty="cartId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into shopping_cart (user_id, sum_money, `status`
+      )
+    values (#{userId,jdbcType=INTEGER}, #{sumMoney,jdbcType=DOUBLE}, #{status,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.tang.taste.common.entity.pojo.ShoppingCart">
+    <selectKey keyProperty="cartId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into shopping_cart
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="cartId != null">
-        cart_id,
-      </if>
       <if test="userId != null">
         user_id,
       </if>
@@ -121,9 +124,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="cartId != null">
-        #{cartId,jdbcType=INTEGER},
-      </if>
       <if test="userId != null">
         #{userId,jdbcType=INTEGER},
       </if>

@@ -2,8 +2,9 @@ package com.tang.taste.common.dao;
 
 import com.tang.taste.common.entity.pojo.ContentCategory;
 import com.tang.taste.common.entity.pojo.ContentCategoryExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface ContentCategoryMapper {
     long countByExample(ContentCategoryExample example);

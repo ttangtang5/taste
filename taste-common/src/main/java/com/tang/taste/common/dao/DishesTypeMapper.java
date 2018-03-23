@@ -2,8 +2,9 @@ package com.tang.taste.common.dao;
 
 import com.tang.taste.common.entity.pojo.DishesType;
 import com.tang.taste.common.entity.pojo.DishesTypeExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface DishesTypeMapper {
     long countByExample(DishesTypeExample example);

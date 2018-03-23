@@ -2,8 +2,9 @@ package com.tang.taste.common.dao;
 
 import com.tang.taste.common.entity.pojo.Role;
 import com.tang.taste.common.entity.pojo.RoleExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface RoleMapper {
     long countByExample(RoleExample example);

@@ -21,7 +21,7 @@
 		<javaModelGenerator targetPackage="com.tang.taste.common.entity.pojo" targetProject="src/main/java">
 		</javaModelGenerator>
 		<!--生成xml-->
-		<sqlMapGenerator targetPackage="com.tang.taste.common.dao.mapper" targetProject="src/main/java">
+		<sqlMapGenerator targetPackage="com.tang.taste.common.dao" targetProject="src/main/java">
 		</sqlMapGenerator>
 		<!--生成dao接口 type="XMLMAPPER"生成xml的dao实现-->
 		<javaClientGenerator type="XMLMAPPER" targetPackage="com.tang.taste.common.dao" targetProject="src/main/java">
@@ -51,19 +51,17 @@
 			<generatedKey column="id" sqlStatement="MySql" identity="true" />
 		</table>
 		<table tableName="shopping_cart" domainObjectName="ShoppingCart">
-			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+			<generatedKey column="cart_id" sqlStatement="MySql" identity="true" />
 		</table>
 		<table tableName="shopping_cart_detail" domainObjectName="ShoppingCartDetail">
-			<generatedKey column="id" sqlStatement="MySql" identity="true" />
 		</table>
 		<table tableName="order_detail" domainObjectName="OrderDetail">
-			<generatedKey column="id" sqlStatement="MySql" identity="true" />
 		</table>
 		<table tableName="order" domainObjectName="Order">
-			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+			<generatedKey column="order_Id" sqlStatement="MySql" identity="true" />
 		</table>
 		<table tableName="dishes_type" domainObjectName="DishesType">
-			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+			<generatedKey column="type_id" sqlStatement="MySql" identity="true" />
 		</table>
 		<table tableName="content_category" domainObjectName="ContentCategory">
 			<generatedKey column="id" sqlStatement="MySql" identity="true" />
@@ -73,6 +71,8 @@
 		</table>
 		<table tableName="booking" domainObjectName="Booking">
 			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="user_address" domainObjectName="UserAddress">
 		</table>
 	</context>
 </generatorConfiguration>

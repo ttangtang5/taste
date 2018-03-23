@@ -98,17 +98,18 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.tang.taste.common.entity.pojo.DishesType">
-    insert into dishes_type (type_id, `type`, del_flag
-      )
-    values (#{typeId,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{delFlag,jdbcType=INTEGER}
-      )
+    <selectKey keyProperty="typeId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into dishes_type (`type`, del_flag)
+    values (#{type,jdbcType=VARCHAR}, #{delFlag,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.tang.taste.common.entity.pojo.DishesType">
+    <selectKey keyProperty="typeId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into dishes_type
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="typeId != null">
-        type_id,
-      </if>
       <if test="type != null">
         `type`,
       </if>
@@ -117,9 +118,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="typeId != null">
-        #{typeId,jdbcType=INTEGER},
-      </if>
       <if test="type != null">
         #{type,jdbcType=VARCHAR},
       </if>

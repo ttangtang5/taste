@@ -2,8 +2,9 @@ package com.tang.taste.common.dao;
 
 import com.tang.taste.common.entity.pojo.Salary;
 import com.tang.taste.common.entity.pojo.SalaryExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface SalaryMapper {
     long countByExample(SalaryExample example);

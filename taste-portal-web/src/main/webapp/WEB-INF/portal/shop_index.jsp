@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="../decorators/taglib.jsp"%>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -7,6 +8,7 @@
 <head>
     <base href="<%=basePath%>">
     <meta charset="utf-8">
+    <meta name="decorator" content="default">
     <title>首页</title>
 
     <!-- Fonts START -->
@@ -15,24 +17,16 @@
     <!-- Fonts END -->
 
     <!-- Global styles START -->
-    <link href="/static/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="/static/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${ctxStatic}/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="${ctxStatic}/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Global styles END -->
 
     <!-- Page level plugin styles START -->
-    <link href="/static/assets/global/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet">
-    <link href="/static/assets/global/plugins/carousel-owl-carousel/owl-carousel/owl.carousel.css" rel="stylesheet">
-    <link href="/static/assets/global/plugins/slider-layer-slider/css/layerslider.css" rel="stylesheet">
+    <link href="${ctxStatic}/assets/global/plugins/slider-layer-slider/css/layerslider.css" rel="stylesheet">
     <!-- Page level plugin styles END -->
 
     <!-- Theme styles START -->
-    <link href="/static/assets/global/css/components.css" rel="stylesheet">
-    <link href="/static/assets/frontend/layout/css/style.css" rel="stylesheet">
-    <link href="/static/assets/frontend/pages/css/style-shop.css" rel="stylesheet" type="text/css">
-    <link href="/static/assets/frontend/pages/css/style-layer-slider.css" rel="stylesheet">
-    <link href="/static/assets/frontend/layout/css/style-responsive.css" rel="stylesheet">
-    <link href="/static/assets/frontend/layout/css/themes/red.css" rel="stylesheet" id="style-color">
-    <link href="/static/assets/frontend/layout/css/custom.css" rel="stylesheet">
+    <link href="${ctxStatic}/assets/frontend/pages/css/style-layer-slider.css" rel="stylesheet">
     <!-- Theme styles END -->
 </head>
 <!-- Head END -->
@@ -57,41 +51,11 @@
 </div>
 <!-- END BEGIN STYLE CUSTOMIZER -->
 
-<!-- BEGIN TOP BAR -->
-<div class="pre-header">
-    <div class="container">
-        <div class="row">
-            <!-- BEGIN TOP BAR LEFT PART -->
-            <div class="col-md-6 col-sm-6 additional-shop-info">
-                <ul class="list-unstyled list-inline">
-                    <li><i class="fa fa-phone"></i><span>+1 456 6717</span></li>
-                    <!-- BEGIN LANGS -->
-                    <li class="langs-block">
-                        <a href="javascript:void(0);" class="current">中国</a>
-                    </li>
-                    <!-- END LANGS -->
-                </ul>
-            </div>
-            <!-- END TOP BAR LEFT PART -->
-            <!-- BEGIN TOP BAR MENU -->
-            <div class="col-md-6 col-sm-6 additional-nav">
-                <ul class="list-unstyled list-inline pull-right">
-                    <li><a href="shop-account.html">个人中心</a></li>
-                    <li><a href="shop-wishlist.html">收藏</a></li>
-                    <li><a href="shop-checkout.html">订单</a></li>
-                    <li><a href="page-login.html">登录</a></li>
-                </ul>
-            </div>
-            <!-- END TOP BAR MENU -->
-        </div>
-    </div>
-</div>
-<!-- END TOP BAR -->
 
 <!-- BEGIN HEADER -->
 <div class="header">
     <div class="container">
-        <a class="site-logo" href="shop-index.html"><img src="/static/assets/frontend/layout/img/logos/logo-shop-red.png" alt="餐厅图标"></a>
+        <a class="site-logo" href="shop-index.html"><img src="${ctxStatic}/assets/frontend/layout/img/logos/logo-shop-red.png" alt="餐厅图标"></a>
 
         <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
 
@@ -107,14 +71,14 @@
                 <div class="top-cart-content">
                     <ul class="scroller" style="height: 100px;">
                         <li>
-                            <a href="shop-item.html"><img src="/static/assets/frontend/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
+                            <a href="shop-item.html"><img src="${ctxStatic}/assets/frontend/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
                             <span class="cart-content-count">x 1</span>
                             <strong><a href="shop-item.html">Rolex Classic Watch</a></strong>
                             <em>$1230</em>
                             <a href="javascript:void(0);" class="del-goods">&nbsp;</a>
                         </li>
                         <li>
-                            <a href="shop-item.html"><img src="/static/assets/frontend/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
+                            <a href="shop-item.html"><img src="${ctxStatic}/assets/frontend/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
                             <span class="cart-content-count">x 1</span>
                             <strong><a href="shop-item.html">Rolex Classic Watch</a></strong>
                             <em>$1230</em>
@@ -213,11 +177,11 @@
                                     </div>
                                     <div class="col-md-12 nav-brands">
                                         <ul>
-                                            <li><a href="shop-product-list.html"><img title="esprit" alt="esprit" src="/static/assets/frontend/pages/img/brands/esprit.jpg"></a></li>
-                                            <li><a href="shop-product-list.html"><img title="gap" alt="gap" src="/static/assets/frontend/pages/img/brands/gap.jpg"></a></li>
-                                            <li><a href="shop-product-list.html"><img title="next" alt="next" src="/static/assets/frontend/pages/img/brands/next.jpg"></a></li>
-                                            <li><a href="shop-product-list.html"><img title="puma" alt="puma" src="/static/assets/frontend/pages/img/brands/puma.jpg"></a></li>
-                                            <li><a href="shop-product-list.html"><img title="zara" alt="zara" src="/static/assets/frontend/pages/img/brands/zara.jpg"></a></li>
+                                            <li><a href="shop-product-list.html"><img title="esprit" alt="esprit" src="${ctxStatic}/assets/frontend/pages/img/brands/esprit.jpg"></a></li>
+                                            <li><a href="shop-product-list.html"><img title="gap" alt="gap" src="${ctxStatic}/assets/frontend/pages/img/brands/gap.jpg"></a></li>
+                                            <li><a href="shop-product-list.html"><img title="next" alt="next" src="${ctxStatic}/assets/frontend/pages/img/brands/next.jpg"></a></li>
+                                            <li><a href="shop-product-list.html"><img title="puma" alt="puma" src="${ctxStatic}/assets/frontend/pages/img/brands/puma.jpg"></a></li>
+                                            <li><a href="shop-product-list.html"><img title="zara" alt="zara" src="${ctxStatic}/assets/frontend/pages/img/brands/zara.jpg"></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -237,7 +201,7 @@
                                     <div class="col-md-3 col-sm-4 col-xs-6">
                                         <div class="product-item">
                                             <div class="pi-img-wrapper">
-                                                <a href="shop-item.html"><img src="/static/assets/frontend/pages/img/products/model4.jpg" class="img-responsive" alt="Berry Lace Dress"></a>
+                                                <a href="shop-item.html"><img src="${ctxStatic}/assets/frontend/pages/img/products/model4.jpg" class="img-responsive" alt="Berry Lace Dress"></a>
                                             </div>
                                             <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
                                             <div class="pi-price">$29.00</div>
@@ -247,7 +211,7 @@
                                     <div class="col-md-3 col-sm-4 col-xs-6">
                                         <div class="product-item">
                                             <div class="pi-img-wrapper">
-                                                <a href="shop-item.html"><img src="/static/assets/frontend/pages/img/products/model3.jpg" class="img-responsive" alt="Berry Lace Dress"></a>
+                                                <a href="shop-item.html"><img src="${ctxStatic}/assets/frontend/pages/img/products/model3.jpg" class="img-responsive" alt="Berry Lace Dress"></a>
                                             </div>
                                             <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
                                             <div class="pi-price">$29.00</div>
@@ -257,7 +221,7 @@
                                     <div class="col-md-3 col-sm-4 col-xs-6">
                                         <div class="product-item">
                                             <div class="pi-img-wrapper">
-                                                <a href="shop-item.html"><img src="/static/assets/frontend/pages/img/products/model7.jpg" class="img-responsive" alt="Berry Lace Dress"></a>
+                                                <a href="shop-item.html"><img src="${ctxStatic}/assets/frontend/pages/img/products/model7.jpg" class="img-responsive" alt="Berry Lace Dress"></a>
                                             </div>
                                             <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
                                             <div class="pi-price">$29.00</div>
@@ -267,7 +231,7 @@
                                     <div class="col-md-3 col-sm-4 col-xs-6">
                                         <div class="product-item">
                                             <div class="pi-img-wrapper">
-                                                <a href="shop-item.html"><img src="/static/assets/frontend/pages/img/products/model4.jpg" class="img-responsive" alt="Berry Lace Dress"></a>
+                                                <a href="shop-item.html"><img src="${ctxStatic}/assets/frontend/pages/img/products/model4.jpg" class="img-responsive" alt="Berry Lace Dress"></a>
                                             </div>
                                             <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
                                             <div class="pi-price">$29.00</div>
@@ -331,7 +295,7 @@
         <!-- slide one start -->
         <div class="ls-slide ls-slide1" data-ls="offsetxin: right; slidedelay: 7000; transition2d: 24,25,27,28;">
 
-            <img src="/static/assets/frontend/pages/img/layerslider/slide1/bg.jpg" class="ls-bg" alt="Slide background">
+            <img src="${ctxStatic}/assets/frontend/pages/img/layerslider/slide1/bg.jpg" class="ls-bg" alt="Slide background">
 
             <div class="ls-l ls-title" style="top: 96px; left: 35%; white-space: nowrap;" data-ls="
             fade: true; 
@@ -361,7 +325,7 @@
         <!-- slide two start -->
         <div class="ls-slide ls-slide2" data-ls="offsetxin: right; slidedelay: 7000; transition2d: 110,111,112,113;">
 
-            <img src="/static/assets/frontend/pages/img/layerslider/slide2/bg.jpg" class="ls-bg" alt="Slide background">
+            <img src="${ctxStatic}/assets/frontend/pages/img/layerslider/slide2/bg.jpg" class="ls-bg" alt="Slide background">
 
             <div class="ls-l ls-title" style="top: 40%; left: 21%; white-space: nowrap;" data-ls="
           fade: true; 
@@ -411,7 +375,7 @@
         <!-- slide three start -->
         <div class="ls-slide ls-slide3" data-ls="offsetxin: right; slidedelay: 7000; transition2d: 92,93,105;">
 
-            <img src="/static/assets/frontend/pages/img/layerslider/slide3/bg.jpg" class="ls-bg" alt="Slide background">
+            <img src="${ctxStatic}/assets/frontend/pages/img/layerslider/slide3/bg.jpg" class="ls-bg" alt="Slide background">
 
             <div class="ls-l ls-title" style="top: 83px; left: 33%; white-space: nowrap;" data-ls="
           fade: true; 
@@ -450,7 +414,7 @@
         <!-- slide four start -->
         <div class="ls-slide ls-slide4" data-ls="offsetxin: right; slidedelay: 7000; transition2d: 110,111,112,113;">
 
-            <img src="/static/assets/frontend/pages/img/layerslider/slide5/bg.jpg" class="ls-bg" alt="Slide background">
+            <img src="${ctxStatic}/assets/frontend/pages/img/layerslider/slide5/bg.jpg" class="ls-bg" alt="Slide background">
 
             <div class="ls-l ls-title" style="top: 35%; left: 60%; white-space: nowrap;" data-ls="
           fade: true; 
@@ -498,9 +462,9 @@
                     <div>
                         <div class="product-item">
                             <div class="pi-img-wrapper">
-                                <img src="/static/assets/frontend/pages/img/products/model1.jpg" class="img-responsive" alt="Berry Lace Dress">
+                                <img src="${ctxStatic}/assets/frontend/pages/img/products/model1.jpg" class="img-responsive" alt="Berry Lace Dress">
                                 <div>
-                                    <a href="/static/assets/frontend/pages/img/products/model1.jpg" class="btn btn-default fancybox-button">缩放</a>
+                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/model1.jpg" class="btn btn-default fancybox-button">缩放</a>
                                     <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">查看</a>
                                 </div>
                             </div>
@@ -513,9 +477,9 @@
                     <div>
                         <div class="product-item">
                             <div class="pi-img-wrapper">
-                                <img src="/static/assets/frontend/pages/img/products/model2.jpg" class="img-responsive" alt="Berry Lace Dress">
+                                <img src="${ctxStatic}/assets/frontend/pages/img/products/model2.jpg" class="img-responsive" alt="Berry Lace Dress">
                                 <div>
-                                    <a href="/static/assets/frontend/pages/img/products/model2.jpg" class="btn btn-default fancybox-button">缩放</a>
+                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/model2.jpg" class="btn btn-default fancybox-button">缩放</a>
                                     <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">查看</a>
                                 </div>
                             </div>
@@ -527,9 +491,9 @@
                     <div>
                         <div class="product-item">
                             <div class="pi-img-wrapper">
-                                <img src="/static/assets/frontend/pages/img/products/model6.jpg" class="img-responsive" alt="Berry Lace Dress">
+                                <img src="${ctxStatic}/assets/frontend/pages/img/products/model6.jpg" class="img-responsive" alt="Berry Lace Dress">
                                 <div>
-                                    <a href="/static/assets/frontend/pages/img/products/model6.jpg" class="btn btn-default fancybox-button">缩放</a>
+                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/model6.jpg" class="btn btn-default fancybox-button">缩放</a>
                                     <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">查看</a>
                                 </div>
                             </div>
@@ -541,9 +505,9 @@
                     <div>
                         <div class="product-item">
                             <div class="pi-img-wrapper">
-                                <img src="/static/assets/frontend/pages/img/products/model4.jpg" class="img-responsive" alt="Berry Lace Dress">
+                                <img src="${ctxStatic}/assets/frontend/pages/img/products/model4.jpg" class="img-responsive" alt="Berry Lace Dress">
                                 <div>
-                                    <a href="/static/assets/frontend/pages/img/products/model4.jpg" class="btn btn-default fancybox-button">Zoom</a>
+                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/model4.jpg" class="btn btn-default fancybox-button">Zoom</a>
                                     <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
                                 </div>
                             </div>
@@ -556,9 +520,9 @@
                     <div>
                         <div class="product-item">
                             <div class="pi-img-wrapper">
-                                <img src="/static/assets/frontend/pages/img/products/model5.jpg" class="img-responsive" alt="Berry Lace Dress">
+                                <img src="${ctxStatic}/assets/frontend/pages/img/products/model5.jpg" class="img-responsive" alt="Berry Lace Dress">
                                 <div>
-                                    <a href="/static/assets/frontend/pages/img/products/model5.jpg" class="btn btn-default fancybox-button">Zoom</a>
+                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/model5.jpg" class="btn btn-default fancybox-button">Zoom</a>
                                     <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
                                 </div>
                             </div>
@@ -570,9 +534,9 @@
                     <div>
                         <div class="product-item">
                             <div class="pi-img-wrapper">
-                                <img src="/static/assets/frontend/pages/img/products/model3.jpg" class="img-responsive" alt="Berry Lace Dress">
+                                <img src="${ctxStatic}/assets/frontend/pages/img/products/model3.jpg" class="img-responsive" alt="Berry Lace Dress">
                                 <div>
-                                    <a href="/static/assets/frontend/pages/img/products/model3.jpg" class="btn btn-default fancybox-button">Zoom</a>
+                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/model3.jpg" class="btn btn-default fancybox-button">Zoom</a>
                                     <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
                                 </div>
                             </div>
@@ -584,9 +548,9 @@
                     <div>
                         <div class="product-item">
                             <div class="pi-img-wrapper">
-                                <img src="/static/assets/frontend/pages/img/products/model7.jpg" class="img-responsive" alt="Berry Lace Dress">
+                                <img src="${ctxStatic}/assets/frontend/pages/img/products/model7.jpg" class="img-responsive" alt="Berry Lace Dress">
                                 <div>
-                                    <a href="/static/assets/frontend/pages/img/products/model7.jpg" class="btn btn-default fancybox-button">Zoom</a>
+                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/model7.jpg" class="btn btn-default fancybox-button">Zoom</a>
                                     <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
                                 </div>
                             </div>
@@ -652,9 +616,9 @@
                     <div>
                         <div class="product-item">
                             <div class="pi-img-wrapper">
-                                <img src="/static/assets/frontend/pages/img/products/k1.jpg" class="img-responsive" alt="Berry Lace Dress">
+                                <img src="${ctxStatic}/assets/frontend/pages/img/products/k1.jpg" class="img-responsive" alt="Berry Lace Dress">
                                 <div>
-                                    <a href="/static/assets/frontend/pages/img/products/k1.jpg" class="btn btn-default fancybox-button">Zoom</a>
+                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/k1.jpg" class="btn btn-default fancybox-button">Zoom</a>
                                     <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
                                 </div>
                             </div>
@@ -667,9 +631,9 @@
                     <div>
                         <div class="product-item">
                             <div class="pi-img-wrapper">
-                                <img src="/static/assets/frontend/pages/img/products/k2.jpg" class="img-responsive" alt="Berry Lace Dress">
+                                <img src="${ctxStatic}/assets/frontend/pages/img/products/k2.jpg" class="img-responsive" alt="Berry Lace Dress">
                                 <div>
-                                    <a href="/static/assets/frontend/pages/img/products/k2.jpg" class="btn btn-default fancybox-button">Zoom</a>
+                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/k2.jpg" class="btn btn-default fancybox-button">Zoom</a>
                                     <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
                                 </div>
                             </div>
@@ -681,9 +645,9 @@
                     <div>
                         <div class="product-item">
                             <div class="pi-img-wrapper">
-                                <img src="/static/assets/frontend/pages/img/products/k3.jpg" class="img-responsive" alt="Berry Lace Dress">
+                                <img src="${ctxStatic}/assets/frontend/pages/img/products/k3.jpg" class="img-responsive" alt="Berry Lace Dress">
                                 <div>
-                                    <a href="/static/assets/frontend/pages/img/products/k3.jpg" class="btn btn-default fancybox-button">Zoom</a>
+                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/k3.jpg" class="btn btn-default fancybox-button">Zoom</a>
                                     <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
                                 </div>
                             </div>
@@ -695,9 +659,9 @@
                     <div>
                         <div class="product-item">
                             <div class="pi-img-wrapper">
-                                <img src="/static/assets/frontend/pages/img/products/k4.jpg" class="img-responsive" alt="Berry Lace Dress">
+                                <img src="${ctxStatic}/assets/frontend/pages/img/products/k4.jpg" class="img-responsive" alt="Berry Lace Dress">
                                 <div>
-                                    <a href="/static/assets/frontend/pages/img/products/k4.jpg" class="btn btn-default fancybox-button">Zoom</a>
+                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/k4.jpg" class="btn btn-default fancybox-button">Zoom</a>
                                     <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
                                 </div>
                             </div>
@@ -710,9 +674,9 @@
                     <div>
                         <div class="product-item">
                             <div class="pi-img-wrapper">
-                                <img src="/static/assets/frontend/pages/img/products/k1.jpg" class="img-responsive" alt="Berry Lace Dress">
+                                <img src="${ctxStatic}/assets/frontend/pages/img/products/k1.jpg" class="img-responsive" alt="Berry Lace Dress">
                                 <div>
-                                    <a href="/static/assets/frontend/pages/img/products/k1.jpg" class="btn btn-default fancybox-button">Zoom</a>
+                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/k1.jpg" class="btn btn-default fancybox-button">Zoom</a>
                                     <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
                                 </div>
                             </div>
@@ -724,9 +688,9 @@
                     <div>
                         <div class="product-item">
                             <div class="pi-img-wrapper">
-                                <img src="/static/assets/frontend/pages/img/products/k2.jpg" class="img-responsive" alt="Berry Lace Dress">
+                                <img src="${ctxStatic}/assets/frontend/pages/img/products/k2.jpg" class="img-responsive" alt="Berry Lace Dress">
                                 <div>
-                                    <a href="/static/assets/frontend/pages/img/products/k2.jpg" class="btn btn-default fancybox-button">Zoom</a>
+                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/k2.jpg" class="btn btn-default fancybox-button">Zoom</a>
                                     <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
                                 </div>
                             </div>
@@ -752,13 +716,13 @@
                     </ol>
                     <div class="carousel-inner">
                         <div class="item active">
-                            <img src="/static/assets/frontend/pages/img/index-sliders/slide1.jpg" class="img-responsive" alt="Berry Lace Dress">
+                            <img src="${ctxStatic}/assets/frontend/pages/img/index-sliders/slide1.jpg" class="img-responsive" alt="Berry Lace Dress">
                         </div>
                         <div class="item">
-                            <img src="/static/assets/frontend/pages/img/index-sliders/slide2.jpg" class="img-responsive" alt="Berry Lace Dress">
+                            <img src="${ctxStatic}/assets/frontend/pages/img/index-sliders/slide2.jpg" class="img-responsive" alt="Berry Lace Dress">
                         </div>
                         <div class="item">
-                            <img src="/static/assets/frontend/pages/img/index-sliders/slide3.jpg" class="img-responsive" alt="Berry Lace Dress">
+                            <img src="${ctxStatic}/assets/frontend/pages/img/index-sliders/slide3.jpg" class="img-responsive" alt="Berry Lace Dress">
                         </div>
                     </div>
                 </div>
@@ -774,9 +738,9 @@
                     <div>
                         <div class="product-item">
                             <div class="pi-img-wrapper">
-                                <img src="/static/assets/frontend/pages/img/products/k4.jpg" class="img-responsive" alt="Berry Lace Dress">
+                                <img src="${ctxStatic}/assets/frontend/pages/img/products/k4.jpg" class="img-responsive" alt="Berry Lace Dress">
                                 <div>
-                                    <a href="/static/assets/frontend/pages/img/products/k4.jpg" class="btn btn-default fancybox-button">Zoom</a>
+                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/k4.jpg" class="btn btn-default fancybox-button">Zoom</a>
                                     <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
                                 </div>
                             </div>
@@ -788,9 +752,9 @@
                     <div>
                         <div class="product-item">
                             <div class="pi-img-wrapper">
-                                <img src="/static/assets/frontend/pages/img/products/k2.jpg" class="img-responsive" alt="Berry Lace Dress">
+                                <img src="${ctxStatic}/assets/frontend/pages/img/products/k2.jpg" class="img-responsive" alt="Berry Lace Dress">
                                 <div>
-                                    <a href="/static/assets/frontend/pages/img/products/k2.jpg" class="btn btn-default fancybox-button">Zoom</a>
+                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/k2.jpg" class="btn btn-default fancybox-button">Zoom</a>
                                     <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
                                 </div>
                             </div>
@@ -802,9 +766,9 @@
                     <div>
                         <div class="product-item">
                             <div class="pi-img-wrapper">
-                                <img src="/static/assets/frontend/pages/img/products/k3.jpg" class="img-responsive" alt="Berry Lace Dress">
+                                <img src="${ctxStatic}/assets/frontend/pages/img/products/k3.jpg" class="img-responsive" alt="Berry Lace Dress">
                                 <div>
-                                    <a href="/static/assets/frontend/pages/img/products/k3.jpg" class="btn btn-default fancybox-button">Zoom</a>
+                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/k3.jpg" class="btn btn-default fancybox-button">Zoom</a>
                                     <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
                                 </div>
                             </div>
@@ -816,9 +780,9 @@
                     <div>
                         <div class="product-item">
                             <div class="pi-img-wrapper">
-                                <img src="/static/assets/frontend/pages/img/products/k1.jpg" class="img-responsive" alt="Berry Lace Dress">
+                                <img src="${ctxStatic}/assets/frontend/pages/img/products/k1.jpg" class="img-responsive" alt="Berry Lace Dress">
                                 <div>
-                                    <a href="/static/assets/frontend/pages/img/products/k1.jpg" class="btn btn-default fancybox-button">Zoom</a>
+                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/k1.jpg" class="btn btn-default fancybox-button">Zoom</a>
                                     <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
                                 </div>
                             </div>
@@ -830,9 +794,9 @@
                     <div>
                         <div class="product-item">
                             <div class="pi-img-wrapper">
-                                <img src="/static/assets/frontend/pages/img/products/k4.jpg" class="img-responsive" alt="Berry Lace Dress">
+                                <img src="${ctxStatic}/assets/frontend/pages/img/products/k4.jpg" class="img-responsive" alt="Berry Lace Dress">
                                 <div>
-                                    <a href="/static/assets/frontend/pages/img/products/k4.jpg" class="btn btn-default fancybox-button">Zoom</a>
+                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/k4.jpg" class="btn btn-default fancybox-button">Zoom</a>
                                     <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
                                 </div>
                             </div>
@@ -844,9 +808,9 @@
                     <div>
                         <div class="product-item">
                             <div class="pi-img-wrapper">
-                                <img src="/static/assets/frontend/pages/img/products/k3.jpg" class="img-responsive" alt="Berry Lace Dress">
+                                <img src="${ctxStatic}/assets/frontend/pages/img/products/k3.jpg" class="img-responsive" alt="Berry Lace Dress">
                                 <div>
-                                    <a href="/static/assets/frontend/pages/img/products/k3.jpg" class="btn btn-default fancybox-button">Zoom</a>
+                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/k3.jpg" class="btn btn-default fancybox-button">Zoom</a>
                                     <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
                                 </div>
                             </div>
@@ -863,76 +827,6 @@
         <!-- END TWO PRODUCTS & PROMO -->
     </div>
 </div>
-<!-- BEGIN STEPS -->
-<div class="steps-block steps-block-red">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 steps-block-col">
-                <i class="fa fa-gift"></i>
-                <div>
-                    <h2>下单</h2>
-                    <em>30分钟送达</em>
-                </div>
-                <span>&nbsp;</span>
-            </div>
-            <div class="col-md-4 steps-block-col">
-                <i class="fa fa-truck"></i>
-                <div>
-                    <h2>免费配送</h2>
-                    <em>限校园内</em>
-                </div>
-                <span>&nbsp;</span>
-            </div>
-            <div class="col-md-4 steps-block-col">
-                <i class="fa fa-phone"></i>
-                <div>
-                    <h2>477 505 8877</h2>
-                    <em>营业时间：7:00-21:00</em>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- END STEPS -->
-
-<!-- BEGIN PRE-FOOTER -->
-<div class="pre-footer">
-    <div class="container">
-        <div class="row">
-            <!-- BEGIN BOTTOM ABOUT BLOCK -->
-            <div class="pre-footer-col">
-                <h2 style="text-align: center;">关于我们</h2>
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam sit nonummy nibh euismod tincidunt ut laoreet dolore magna aliquarm erat sit volutpat. Nostrud exerci tation ullamcorper suscipit lobortis nisl aliquip  commodo consequat. </p>
-                <p>Duis autem vel eum iriure dolor vulputate velit esse molestie at dolore.</p>
-            </div>
-            <!-- END BOTTOM ABOUT BLOCK -->
-        </div>
-        <hr>
-    </div>
-</div>
-<!-- END PRE-FOOTER -->
-
-<!-- BEGIN FOOTER -->
-<div class="footer">
-    <div class="container">
-        <div class="row">
-            <!-- BEGIN COPYRIGHT -->
-            <div class="col-md-6 col-sm-6 padding-top-10" style="text-align: center;">
-                2018 © *******. ALL Rights Reserved.
-            </div>
-            <!-- END COPYRIGHT -->
-            <!-- BEGIN PAYMENTS -->
-            <div class="col-md-6 col-sm-6">
-                <ul class="list-unstyled list-inline pull-right">
-                    <li><img src="/static/assets/frontend/layout/img/payments/western-union.jpg" alt="We accept Western Union" title="支持微信支付"></li>
-                    <li><img src="/static/assets/frontend/layout/img/payments/american-express.jpg" alt="We accept American Express" title="支持支付宝"></li>
-                </ul>
-            </div>
-            <!-- END PAYMENTS -->
-        </div>
-    </div>
-</div>
-<!-- END FOOTER -->
 
 <!-- BEGIN fast view of a product -->
 <div id="product-pop-up" style="display: none; width: 700px;">
@@ -940,12 +834,12 @@
         <div class="row">
             <div class="col-md-6 col-sm-6 col-xs-3">
                 <div class="product-main-image">
-                    <img src="/static/assets/frontend/pages/img/products/model7.jpg" alt="Cool green dress with red bell" class="img-responsive">
+                    <img src="${ctxStatic}/assets/frontend/pages/img/products/model7.jpg" alt="Cool green dress with red bell" class="img-responsive">
                 </div>
                 <div class="product-other-images">
-                    <a href="javascript:;" class="active"><img alt="Berry Lace Dress" src="/static/assets/frontend/pages/img/products/model3.jpg"></a>
-                    <a href="javascript:;"><img alt="Berry Lace Dress" src="/static/assets/frontend/pages/img/products/model4.jpg"></a>
-                    <a href="javascript:;"><img alt="Berry Lace Dress" src="/static/assets/frontend/pages/img/products/model5.jpg"></a>
+                    <a href="javascript:;" class="active"><img alt="Berry Lace Dress" src="${ctxStatic}/assets/frontend/pages/img/products/model3.jpg"></a>
+                    <a href="javascript:;"><img alt="Berry Lace Dress" src="${ctxStatic}/assets/frontend/pages/img/products/model4.jpg"></a>
+                    <a href="javascript:;"><img alt="Berry Lace Dress" src="${ctxStatic}/assets/frontend/pages/img/products/model5.jpg"></a>
                 </div>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-9">
@@ -995,33 +889,32 @@
     </div>
 </div>
 <!-- END fast view of a product -->
-
 <!-- Load javascripts at bottom, this will reduce page load time -->
 <!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
 <!--[if lt IE 9]>
-<script src="/static/assets/global/plugins/respond.min.js"></script>
+<script src="${ctxStatic}/assets/global/plugins/respond.min.js"></script>
 <![endif]-->
-<script src="/static/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
-<script src="/static/assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
-<script src="/static/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="/static/assets/frontend/layout/scripts/back-to-top.js" type="text/javascript"></script>
-<script src="/static/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="${ctxStatic}/js/jquery-2.1.1.js" type="text/javascript"></script>
+<script src="${ctxStatic}/assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+<script src="${ctxStatic}/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="${ctxStatic}/assets/frontend/layout/scripts/back-to-top.js" type="text/javascript"></script>
+<script src="${ctxStatic}/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
 
 <!-- BEGIN PAGE LEVEL JAVASCRIPTS (REQUIRED ONLY FOR CURRENT PAGE) -->
-<script src="/static/assets/global/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script><!-- pop up -->
-<script src="/static/assets/global/plugins/carousel-owl-carousel/owl-carousel/owl.carousel.min.js" type="text/javascript"></script><!-- slider for products -->
-<script src='/static/assets/global/plugins/zoom/jquery.zoom.min.js' type="text/javascript"></script><!-- product zoom -->
-<script src="/static/assets/global/plugins/bootstrap-touchspin/bootstrap.touchspin.js" type="text/javascript"></script><!-- Quantity -->
+<script src="${ctxStatic}/assets/global/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script><!-- pop up -->
+<script src="${ctxStatic}/assets/global/plugins/carousel-owl-carousel/owl-carousel/owl.carousel.min.js" type="text/javascript"></script><!-- slider for products -->
+<script src='${ctxStatic}/assets/global/plugins/zoom/jquery.zoom.min.js' type="text/javascript"></script><!-- product zoom -->
+<script src="${ctxStatic}/assets/global/plugins/bootstrap-touchspin/bootstrap.touchspin.js" type="text/javascript"></script><!-- Quantity -->
 
 <!-- BEGIN LayerSlider -->
-<script src="/static/assets/global/plugins/slider-layer-slider/js/greensock.js" type="text/javascript"></script><!-- External libraries: GreenSock -->
-<script src="/static/assets/global/plugins/slider-layer-slider/js/layerslider.transitions.js" type="text/javascript"></script><!-- LayerSlider script files -->
-<script src="/static/assets/global/plugins/slider-layer-slider/js/layerslider.kreaturamedia.jquery.js" type="text/javascript"></script><!-- LayerSlider script files -->
-<script src="/static/assets/frontend/pages/scripts/layerslider-init.js" type="text/javascript"></script>
+<script src="${ctxStatic}/assets/global/plugins/slider-layer-slider/js/greensock.js" type="text/javascript"></script><!-- External libraries: GreenSock -->
+<script src="${ctxStatic}/assets/global/plugins/slider-layer-slider/js/layerslider.transitions.js" type="text/javascript"></script><!-- LayerSlider script files -->
+<script src="${ctxStatic}/assets/global/plugins/slider-layer-slider/js/layerslider.kreaturamedia.jquery.js" type="text/javascript"></script><!-- LayerSlider script files -->
+<script src="${ctxStatic}/assets/frontend/pages/scripts/layerslider-init.js" type="text/javascript"></script>
 <!-- END LayerSlider -->
 
-<script src="/static/assets/frontend/layout/scripts/layout.js" type="text/javascript"></script>
+<script src="${ctxStatic}/assets/frontend/layout/scripts/layout.js" type="text/javascript"></script>
 <script type="text/javascript">
     jQuery(document).ready(function() {
         Layout.init();

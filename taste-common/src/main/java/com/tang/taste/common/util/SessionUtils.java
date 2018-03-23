@@ -26,6 +26,7 @@ public class SessionUtils {
     private static final String SESSION_MENUBTN_MAP = "session_menubtn"; //系统菜单按钮
 
 
+
     /**
      * 设置session的值
      * @param request
@@ -111,7 +112,7 @@ public class SessionUtils {
      * @return SysUser
      */
     public static void removeValidateCode(HttpServletRequest request){
-        removeAttr(request, SESSION_VALIDATECODE);
+        removeAttr(request,SESSION_VALIDATECODE);
     }
 
     /**
@@ -163,8 +164,6 @@ public class SessionUtils {
 
     *//**
      * 获取菜单按钮
-     * @param request
-     * @param menuUri
      *//*
     public static List<String> getMemuBtnListVal(HttpServletRequest request,String menuUri){
         Map btnMap  = (Map)getAttr(request, SESSION_MENUBTN_MAP);
@@ -173,4 +172,20 @@ public class SessionUtils {
         }
         return (List<String>)btnMap.get(menuUri);
     }*/
+
+    public static String getSessionUser() {
+        return SESSION_USER;
+    }
+
+    public static String getSessionValidatecode() {
+        return SESSION_VALIDATECODE;
+    }
+
+    public static String getSessionAccessUrls() {
+        return SESSION_ACCESS_URLS;
+    }
+
+    public static String getSessionMenubtnMap() {
+        return SESSION_MENUBTN_MAP;
+    }
 }

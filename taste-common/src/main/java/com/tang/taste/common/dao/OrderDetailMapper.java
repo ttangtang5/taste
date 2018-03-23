@@ -2,8 +2,9 @@ package com.tang.taste.common.dao;
 
 import com.tang.taste.common.entity.pojo.OrderDetail;
 import com.tang.taste.common.entity.pojo.OrderDetailExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface OrderDetailMapper {
     long countByExample(OrderDetailExample example);

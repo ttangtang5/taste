@@ -2,8 +2,9 @@ package com.tang.taste.common.dao;
 
 import com.tang.taste.common.entity.pojo.Stuff;
 import com.tang.taste.common.entity.pojo.StuffExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface StuffMapper {
     long countByExample(StuffExample example);
