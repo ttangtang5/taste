@@ -3,6 +3,7 @@ package com.tang.taste.portal.service;
 import com.tang.taste.common.entity.pojo.User;
 import com.tang.taste.common.entity.pojo.UserExample;
 import com.tang.taste.common.util.ClusterRedis;
+import com.tang.taste.common.util.CookieUtils;
 import com.tang.taste.common.util.MD5Utils;
 import com.tang.taste.common.util.SerializeUtils;
 import com.tang.taste.portal.dao.UserDao;
@@ -64,6 +65,7 @@ public class UserService {
     public String login(User user, String remember, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         UserExample userExample = new UserExample();
         userExample.createCriteria().andPhoneEqualTo(user.getPhone());
+        userExample.createCriteria().andStatusEqualTo(1);
         List<User> list = userDao.selectByExample(userExample);
         String salt = null;
         String dbPwd = null;
@@ -78,13 +80,11 @@ public class UserService {
                 String id = "user:"+list.get(0).getId();
                 clusterRedis.setexKeyValue(id,60*60,value);
                 //将用户id存放至session
-                request.getSession(true).setAttribute("id",id);
+                request.getSession(true).setAttribute("id",String.valueOf(list.get(0).getId()));
                 //自动登录
                 if("1".equals(remember)){
-                    Cookie cookie = new Cookie("id",id);
-                    cookie.setMaxAge(60*60*24*7);
-                    cookie.setPath(request.getContextPath()+"/");
-                    response.addCookie(cookie);
+                    CookieUtils.setCookie(request,response,"id",String.valueOf(list.get(0).getId()),60*60*24*7);
+                    /*cookie.setPath(request.getContextPath()+"/");*/
                 }
                 return "200";
             }else{
@@ -92,5 +92,14 @@ public class UserService {
             }
         }
         return "2";
+    }
+
+    /**
+     * 通过编号获取用户信息
+     * @param id
+     * @return
+     */
+    public User getUserById(String id){
+        return userDao.selectByPrimaryKey(Integer.valueOf(id));
     }
 }

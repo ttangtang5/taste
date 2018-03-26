@@ -3,10 +3,7 @@ package com.tang.taste.portal.controller;
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Maps;
 import com.tang.taste.common.entity.pojo.User;
-import com.tang.taste.common.util.RandomNumberUtils;
-import com.tang.taste.common.util.SessionUtils;
-import com.tang.taste.common.util.SmsUtils;
-import com.tang.taste.common.util.VerifyCodeUtils;
+import com.tang.taste.common.util.*;
 import com.tang.taste.portal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -72,7 +69,6 @@ public class UserController {
     @RequestMapping("login")
     @ResponseBody
     public String loginUser(String logPhoneNum,String logPassword,String gifCaptcha,String remember,HttpServletRequest request,HttpServletResponse response) throws Exception{
-        System.out.println(SessionUtils.getAttr(request, "_code"));
         String code = (String) SessionUtils.getAttr(request, "_code");
         if(code != null && code != "" && code.equals(gifCaptcha)){
             User user = new User();
@@ -82,6 +78,17 @@ public class UserController {
             return userService.login(user,remember,request,response);
         }
         return "1";
+    }
+
+
+    @RequestMapping("toLogOut")
+    public String loginOut(HttpServletRequest request,HttpServletResponse response)throws Exception{
+        //获取session
+        SessionUtils.removeAttr(request,"id");
+        SessionUtils.removeAttr(request,"username");
+        //取消cookie
+        CookieUtils.deleteCookie(request,response,"id");
+        return "portal/shop_index";
     }
 
     /**

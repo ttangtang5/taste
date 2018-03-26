@@ -60,10 +60,10 @@
         <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
 
         <!-- BEGIN CART -->
-        <div class="top-cart-block">
+        <div class="top-cart-block" >
             <div class="top-cart-info">
-                <a href="javascript:void(0);" class="top-cart-info-count">3件</a>
-                <a href="javascript:void(0);" class="top-cart-info-value">￥1260</a>
+                <a href="javascript:void(0);" class="top-cart-info-count"><span id="top-cart-info-count">2</span>件</a>
+                <a href="javascript:void(0);" class="top-cart-info-value">￥<span id="top-cart-info-value">2463</span></a>
             </div>
             <i class="fa fa-shopping-cart"></i>
             <!--shopping cart-->
@@ -74,20 +74,20 @@
                             <a href="shop-item.html"><img src="${ctxStatic}/assets/frontend/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
                             <span class="cart-content-count">x 1</span>
                             <strong><a href="shop-item.html">Rolex Classic Watch</a></strong>
-                            <em>$1230</em>
+                            <em>￥1233</em>
                             <a href="javascript:void(0);" class="del-goods">&nbsp;</a>
                         </li>
                         <li>
                             <a href="shop-item.html"><img src="${ctxStatic}/assets/frontend/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
                             <span class="cart-content-count">x 1</span>
                             <strong><a href="shop-item.html">Rolex Classic Watch</a></strong>
-                            <em>$1230</em>
+                            <em>￥1230</em>
                             <a href="javascript:void(0);" class="del-goods">&nbsp;</a>
                         </li>
                     </ul>
                     <div class="text-right">
-                        <a href="shop-shopping-cart.html" class="btn btn-default">查看</a>
-                        <a href="shop-checkout.html" class="btn btn-primary">结账</a>
+                        <a href="/toShopShoppingCart" class="btn btn-default">查看</a>
+                        <a href="/toShopCheckout" class="btn btn-primary">结账</a>
                     </div>
                 </div>
             </div>
@@ -101,173 +101,17 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
                         分类一
                     </a>
-
-                    <!-- BEGIN DROPDOWN MENU -->
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-submenu">
-                            <a href="shop-product-list.html">Hi Tops <i class="fa fa-angle-right"></i></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="shop-product-list.html">Second Level Link</a></li>
-                                <li><a href="shop-product-list.html">Second Level Link</a></li>
-                                <li class="dropdown-submenu">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                                        Second Level Link
-                                        <i class="fa fa-angle-right"></i>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="shop-product-list.html">Third Level Link</a></li>
-                                        <li><a href="shop-product-list.html">Third Level Link</a></li>
-                                        <li><a href="shop-product-list.html">Third Level Link</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li><a href="shop-product-list.html">Running Shoes</a></li>
-                        <li><a href="shop-product-list.html">Jackets and Coats</a></li>
-                    </ul>
-                    <!-- END DROPDOWN MENU -->
                 </li>
                 <li class="dropdown dropdown-megamenu">
                     <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
                         分类二
                     </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <div class="header-navigation-content">
-                                <div class="row">
-                                    <div class="col-md-4 header-navigation-col">
-                                        <h4>Footwear</h4>
-                                        <ul>
-                                            <li><a href="shop-product-list.html">Astro Trainers</a></li>
-                                            <li><a href="shop-product-list.html">Basketball Shoes</a></li>
-                                            <li><a href="shop-product-list.html">Boots</a></li>
-                                            <li><a href="shop-product-list.html">Canvas Shoes</a></li>
-                                            <li><a href="shop-product-list.html">Football Boots</a></li>
-                                            <li><a href="shop-product-list.html">Golf Shoes</a></li>
-                                            <li><a href="shop-product-list.html">Hi Tops</a></li>
-                                            <li><a href="shop-product-list.html">Indoor and Court Trainers</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-4 header-navigation-col">
-                                        <h4>Clothing</h4>
-                                        <ul>
-                                            <li><a href="shop-product-list.html">Base Layer</a></li>
-                                            <li><a href="shop-product-list.html">Character</a></li>
-                                            <li><a href="shop-product-list.html">Chinos</a></li>
-                                            <li><a href="shop-product-list.html">Combats</a></li>
-                                            <li><a href="shop-product-list.html">Cricket Clothing</a></li>
-                                            <li><a href="shop-product-list.html">Fleeces</a></li>
-                                            <li><a href="shop-product-list.html">Gilets</a></li>
-                                            <li><a href="shop-product-list.html">Golf Tops</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-4 header-navigation-col">
-                                        <h4>Accessories</h4>
-                                        <ul>
-                                            <li><a href="shop-product-list.html">Belts</a></li>
-                                            <li><a href="shop-product-list.html">Caps</a></li>
-                                            <li><a href="shop-product-list.html">Gloves, Hats and Scarves</a></li>
-                                        </ul>
-
-                                        <h4>Clearance</h4>
-                                        <ul>
-                                            <li><a href="shop-product-list.html">Jackets</a></li>
-                                            <li><a href="shop-product-list.html">Bottoms</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-12 nav-brands">
-                                        <ul>
-                                            <li><a href="shop-product-list.html"><img title="esprit" alt="esprit" src="${ctxStatic}/assets/frontend/pages/img/brands/esprit.jpg"></a></li>
-                                            <li><a href="shop-product-list.html"><img title="gap" alt="gap" src="${ctxStatic}/assets/frontend/pages/img/brands/gap.jpg"></a></li>
-                                            <li><a href="shop-product-list.html"><img title="next" alt="next" src="${ctxStatic}/assets/frontend/pages/img/brands/next.jpg"></a></li>
-                                            <li><a href="shop-product-list.html"><img title="puma" alt="puma" src="${ctxStatic}/assets/frontend/pages/img/brands/puma.jpg"></a></li>
-                                            <li><a href="shop-product-list.html"><img title="zara" alt="zara" src="${ctxStatic}/assets/frontend/pages/img/brands/zara.jpg"></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
                 </li>
                 <li><a href="shop-item.html">分类三</a></li>
                 <li class="dropdown dropdown100 nav-catalogue">
                     <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
                         分类四
                     </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <div class="header-navigation-content">
-                                <div class="row">
-                                    <div class="col-md-3 col-sm-4 col-xs-6">
-                                        <div class="product-item">
-                                            <div class="pi-img-wrapper">
-                                                <a href="shop-item.html"><img src="${ctxStatic}/assets/frontend/pages/img/products/model4.jpg" class="img-responsive" alt="Berry Lace Dress"></a>
-                                            </div>
-                                            <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
-                                            <div class="pi-price">$29.00</div>
-                                            <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-sm-4 col-xs-6">
-                                        <div class="product-item">
-                                            <div class="pi-img-wrapper">
-                                                <a href="shop-item.html"><img src="${ctxStatic}/assets/frontend/pages/img/products/model3.jpg" class="img-responsive" alt="Berry Lace Dress"></a>
-                                            </div>
-                                            <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
-                                            <div class="pi-price">$29.00</div>
-                                            <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-sm-4 col-xs-6">
-                                        <div class="product-item">
-                                            <div class="pi-img-wrapper">
-                                                <a href="shop-item.html"><img src="${ctxStatic}/assets/frontend/pages/img/products/model7.jpg" class="img-responsive" alt="Berry Lace Dress"></a>
-                                            </div>
-                                            <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
-                                            <div class="pi-price">$29.00</div>
-                                            <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-sm-4 col-xs-6">
-                                        <div class="product-item">
-                                            <div class="pi-img-wrapper">
-                                                <a href="shop-item.html"><img src="${ctxStatic}/assets/frontend/pages/img/products/model4.jpg" class="img-responsive" alt="Berry Lace Dress"></a>
-                                            </div>
-                                            <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
-                                            <div class="pi-price">$29.00</div>
-                                            <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                        Pages
-                    </a>
-
-                    <ul class="dropdown-menu">
-                        <li class="active"><a href="shop-index.html">Home Default</a></li>
-                        <li><a href="shop-index-header-fix.html">Home Header Fixed</a></li>
-                        <li><a href="shop-index-light-footer.html">Home Light Footer</a></li>
-                        <li><a href="shop-product-list.html">Product List</a></li>
-                        <li><a href="shop-search-result.html">Search Result</a></li>
-                        <li><a href="shop-item.html">Product Page</a></li>
-                        <li><a href="shop-shopping-cart-null.html">Shopping Cart (Null Cart)</a></li>
-                        <li><a href="shop-shopping-cart.html">Shopping Cart</a></li>
-                        <li><a href="shop-checkout.html">Checkout</a></li>
-                        <li><a href="shop-about.html">About</a></li>
-                        <li><a href="shop-contacts.html">Contacts</a></li>
-                        <li><a href="shop-account.html">My account</a></li>
-                        <li><a href="shop-wishlist.html">My Wish List</a></li>
-                        <li><a href="shop-goods-compare.html">Product Comparison</a></li>
-                        <li><a href="shop-standart-forms.html">Standart Forms</a></li>
-                        <li><a href="shop-faq.html">FAQ</a></li>
-                        <li><a href="shop-privacy-policy.html">Privacy Policy</a></li>
-                        <li><a href="shop-terms-conditions-page.html">Terms &amp; Conditions</a></li>
-                    </ul>
                 </li>
 
                 <!-- BEGIN TOP SEARCH -->
@@ -298,25 +142,25 @@
             <img src="${ctxStatic}/assets/frontend/pages/img/layerslider/slide1/bg.jpg" class="ls-bg" alt="Slide background">
 
             <div class="ls-l ls-title" style="top: 96px; left: 35%; white-space: nowrap;" data-ls="
-            fade: true; 
-            fadeout: true; 
-            durationin: 750; 
-            durationout: 750; 
-            easingin: easeOutQuint; 
-            rotatein: 90; 
-            rotateout: -90; 
-            scalein: .5; 
-            scaleout: .5; 
-            showuntil: 4000;
+                fade: true;
+                fadeout: true;
+                durationin: 750;
+                durationout: 750;
+                easingin: easeOutQuint;
+                rotatein: 90;
+                rotateout: -90;
+                scalein: .5;
+                scaleout: .5;
+                showuntil: 4000;
           ">Tones of <strong>shop UI features</strong> designed</div>
 
             <div class="ls-l ls-mini-text" style="top: 338px; left: 35%; white-space: nowrap;" data-ls="
-          fade: true; 
-          fadeout: true; 
-          durationout: 750; 
-          easingin: easeOutQuint; 
-          delayin: 300; 
-          showuntil: 4000;
+                  fade: true;
+                  fadeout: true;
+                  durationout: 750;
+                  easingin: easeOutQuint;
+                  delayin: 300;
+                  showuntil: 4000;
           ">Lorem ipsum dolor sit amet  constectetuer diam<br > adipiscing elit euismod ut laoreet dolore.
             </div>
         </div>
@@ -328,46 +172,48 @@
             <img src="${ctxStatic}/assets/frontend/pages/img/layerslider/slide2/bg.jpg" class="ls-bg" alt="Slide background">
 
             <div class="ls-l ls-title" style="top: 40%; left: 21%; white-space: nowrap;" data-ls="
-          fade: true; 
-          fadeout: true;  
-          durationin: 750; durationout: 109750; 
-          easingin: easeOutQuint; 
-          easingout: easeInOutQuint; 
-          delayin: 0; 
-          delayout: 0; 
-          rotatein: 90; 
-          rotateout: -90; 
-          scalein: .5; 
-          scaleout: .5; 
-          showuntil: 4000;
+              fade: true;
+              fadeout: true;
+              durationin: 750; durationout: 109750;
+              easingin: easeOutQuint;
+              easingout: easeInOutQuint;
+              delayin: 0;
+              delayout: 0;
+              rotatein: 90;
+              rotateout: -90;
+              scalein: .5;
+              scaleout: .5;
+              showuntil: 4000;
           "><strong>Unlimted</strong> Layout Options <em>Fully Responsive</em>
             </div>
 
             <div class="ls-l ls-price" style="top: 50%; left: 45%; white-space: nowrap;" data-ls="
-          fade: true; 
-          fadeout: true;  
-          durationout: 109750; 
-          easingin: easeOutQuint; 
-          delayin: 300; 
-          scalein: .8; 
-          scaleout: .8; 
-          showuntil: 4000;"><b>from</b> <strong><span>$</span>25</strong>
+              fade: true;
+              fadeout: true;
+              durationout: 109750;
+              easingin: easeOutQuint;
+              delayin: 300;
+              scalein: .8;
+              scaleout: .8;
+              showuntil: 4000;
+           "><b>from</b> <strong><span>$</span>25</strong>
             </div>
 
             <a href="javascript:;" class="ls-l ls-more" style="top: 72%; left: 21%; display: inline-block; white-space: nowrap;" data-ls="
-          fade: true; 
-          fadeout: true; 
-          durationin: 750; 
-          durationout: 750; 
-          easingin: easeOutQuint; 
-          easingout: easeInOutQuint; 
-          delayin: 0; 
-          delayout: 0; 
-          rotatein: 90; 
-          rotateout: -90; 
-          scalein: .5; 
-          scaleout: .5; 
-          showuntil: 4000;">See More Details
+              fade: true;
+              fadeout: true;
+              durationin: 750;
+              durationout: 750;
+              easingin: easeOutQuint;
+              easingout: easeInOutQuint;
+              delayin: 0;
+              delayout: 0;
+              rotatein: 90;
+              rotateout: -90;
+              scalein: .5;
+              scaleout: .5;
+              showuntil: 4000;
+            ">See More Details
             </a>
         </div>
         <!-- slide two end -->
@@ -378,28 +224,27 @@
             <img src="${ctxStatic}/assets/frontend/pages/img/layerslider/slide3/bg.jpg" class="ls-bg" alt="Slide background">
 
             <div class="ls-l ls-title" style="top: 83px; left: 33%; white-space: nowrap;" data-ls="
-          fade: true; 
-          fadeout: true; 
-          durationin: 750; 
-          durationout: 750; 
-          easingin: easeOutQuint; 
-          rotatein: 90; 
-          rotateout: -90; 
-          scalein: .5; 
-          scaleout: .5; 
-          showuntil: 4000;
+              fade: true;
+              fadeout: true;
+              durationin: 750;
+              durationout: 750;
+              easingin: easeOutQuint;
+              rotatein: 90;
+              rotateout: -90;
+              scalein: .5;
+              scaleout: .5;
+              showuntil: 4000;
           ">Full Admin &amp; Frontend <strong>eCommerce UI</strong> Is Ready For Your Project
             </div>
             <div class="ls-l" style="top: 333px; left: 33%; white-space: nowrap; font-size: 20px; font: 20px 'Open Sans Light', sans-serif;" data-ls="
-          fade: true; 
-          fadeout: true; 
-          durationout: 750; 
-          easingin: easeOutQuint; 
-          delayin: 300; 
-          scalein: .8; 
-          scaleout: .8; 
-          showuntil: 4000;
-          ">
+              fade: true;
+              fadeout: true;
+              durationout: 750;
+              easingin: easeOutQuint;
+              delayin: 300;
+              scalein: .8;
+              scaleout: .8;
+              showuntil: 4000;">
                 <a href="javascript:;" class="ls-buy">
                     Buy It Now!
                 </a>
@@ -417,28 +262,28 @@
             <img src="${ctxStatic}/assets/frontend/pages/img/layerslider/slide5/bg.jpg" class="ls-bg" alt="Slide background">
 
             <div class="ls-l ls-title" style="top: 35%; left: 60%; white-space: nowrap;" data-ls="
-          fade: true; 
-          fadeout: true; 
-          durationin: 750; 
-          durationout: 750; 
-          easingin: easeOutQuint; 
-          rotatein: 90; 
-          rotateout: -90; 
-          scalein: .5; 
-          scaleout: .5; 
+          fade: true;
+          fadeout: true;
+          durationin: 750;
+          durationout: 750;
+          easingin: easeOutQuint;
+          rotatein: 90;
+          rotateout: -90;
+          scalein: .5;
+          scaleout: .5;
           showuntil: 4000;">
                 The most<br>
                 wanted bijouterie
             </div>
 
             <div class="ls-l ls-mini-text" style="top: 70%; left: 60%; white-space: nowrap;" data-ls="
-          fade: true; 
-          fadeout: true;  
-          durationout: 750; 
-          easingin: easeOutQuint; 
-          delayin: 300; 
-          scalein: .8; 
-          scaleout: .8; 
+          fade: true;
+          fadeout: true;
+          durationout: 750;
+          easingin: easeOutQuint;
+          delayin: 300;
+          scalein: .8;
+          scaleout: .8;
           showuntil: 4000;">
                 <span>Lorem ipsum and</span>
                 <a href="javascript:;">Buy It Now!</a>
@@ -469,8 +314,8 @@
                                 </div>
                             </div>
                             <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
-                            <div class="pi-price">$29.00</div>
-                            <a href="javascript:;" class="btn btn-default add2cart">加入购物车</a>
+                            <div class="pi-price">$29.11</div>
+                            <a href="javascript:;" id="add2cart" class="btn btn-default add2cart">加入购物车</a>
                             <div class="sticker sticker-sale"></div>
                         </div>
                     </div>
@@ -564,146 +409,6 @@
             <!-- END SALE PRODUCT -->
         </div>
         <!-- END SALE PRODUCT & NEW ARRIVALS -->
-
-        <!-- BEGIN SIDEBAR & CONTENT -->
-        <div class="row margin-bottom-40 ">
-            <!-- BEGIN SIDEBAR -->
-            <div class="sidebar col-md-3 col-sm-4">
-                <ul class="list-group margin-bottom-25 sidebar-menu">
-                    <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> 分类一</a></li>
-                    <li class="list-group-item clearfix dropdown">
-                        <a href="shop-product-list.html">
-                            <i class="fa fa-angle-right"></i>
-                            分类二
-
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="list-group-item dropdown clearfix">
-                                <a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Shoes </a>
-                                <ul class="dropdown-menu">
-                                    <li class="list-group-item dropdown clearfix">
-                                        <a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Classic </a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Classic 1</a></li>
-                                            <li><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Classic 2</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="list-group-item dropdown clearfix">
-                                        <a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Sport  </a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Sport 1</a></li>
-                                            <li><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Sport 2</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Trainers</a></li>
-                            <li><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Jeans</a></li>
-                            <li><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Chinos</a></li>
-                            <li><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> T-Shirts</a></li>
-                        </ul>
-                    </li>
-                    <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> 分类三</a></li>
-                    <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> 分类四</a></li>
-                    <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> 分类五</a></li>
-                </ul>
-            </div>
-            <!-- END SIDEBAR -->
-            <!-- BEGIN CONTENT -->
-            <div class="col-md-9 col-sm-8">
-                <h2>Three items</h2>
-                <div class="owl-carousel owl-carousel3">
-                    <div>
-                        <div class="product-item">
-                            <div class="pi-img-wrapper">
-                                <img src="${ctxStatic}/assets/frontend/pages/img/products/k1.jpg" class="img-responsive" alt="Berry Lace Dress">
-                                <div>
-                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/k1.jpg" class="btn btn-default fancybox-button">Zoom</a>
-                                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
-                                </div>
-                            </div>
-                            <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
-                            <div class="pi-price">$29.00</div>
-                            <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-                            <div class="sticker sticker-new"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="product-item">
-                            <div class="pi-img-wrapper">
-                                <img src="${ctxStatic}/assets/frontend/pages/img/products/k2.jpg" class="img-responsive" alt="Berry Lace Dress">
-                                <div>
-                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/k2.jpg" class="btn btn-default fancybox-button">Zoom</a>
-                                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
-                                </div>
-                            </div>
-                            <h3><a href="shop-item.html">Berry Lace Dress2</a></h3>
-                            <div class="pi-price">$29.00</div>
-                            <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="product-item">
-                            <div class="pi-img-wrapper">
-                                <img src="${ctxStatic}/assets/frontend/pages/img/products/k3.jpg" class="img-responsive" alt="Berry Lace Dress">
-                                <div>
-                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/k3.jpg" class="btn btn-default fancybox-button">Zoom</a>
-                                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
-                                </div>
-                            </div>
-                            <h3><a href="shop-item.html">Berry Lace Dress3</a></h3>
-                            <div class="pi-price">$29.00</div>
-                            <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="product-item">
-                            <div class="pi-img-wrapper">
-                                <img src="${ctxStatic}/assets/frontend/pages/img/products/k4.jpg" class="img-responsive" alt="Berry Lace Dress">
-                                <div>
-                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/k4.jpg" class="btn btn-default fancybox-button">Zoom</a>
-                                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
-                                </div>
-                            </div>
-                            <h3><a href="shop-item.html">Berry Lace Dress4</a></h3>
-                            <div class="pi-price">$29.00</div>
-                            <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-                            <div class="sticker sticker-sale"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="product-item">
-                            <div class="pi-img-wrapper">
-                                <img src="${ctxStatic}/assets/frontend/pages/img/products/k1.jpg" class="img-responsive" alt="Berry Lace Dress">
-                                <div>
-                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/k1.jpg" class="btn btn-default fancybox-button">Zoom</a>
-                                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
-                                </div>
-                            </div>
-                            <h3><a href="shop-item.html">Berry Lace Dress5</a></h3>
-                            <div class="pi-price">$29.00</div>
-                            <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="product-item">
-                            <div class="pi-img-wrapper">
-                                <img src="${ctxStatic}/assets/frontend/pages/img/products/k2.jpg" class="img-responsive" alt="Berry Lace Dress">
-                                <div>
-                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/k2.jpg" class="btn btn-default fancybox-button">Zoom</a>
-                                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
-                                </div>
-                            </div>
-                            <h3><a href="shop-item.html">Berry Lace Dress6</a></h3>
-                            <div class="pi-price">$29.00</div>
-                            <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- END CONTENT -->
-        </div>
-        <!-- END SIDEBAR & CONTENT -->
         <!-- BEGIN PROMO -->
         <div class="col-md-6 shop-index-carousel">
             <div class="content-slider">
@@ -733,7 +438,7 @@
         <div class="row margin-bottom-35 ">
             <!-- BEGIN TWO PRODUCTS -->
             <div class="col-md-6 two-items-bottom-items">
-                <h2>Two items</h2>
+                <h2>推荐</h2>
                 <div class="owl-carousel owl-carousel2">
                     <div>
                         <div class="product-item">
@@ -836,11 +541,11 @@
                 <div class="product-main-image">
                     <img src="${ctxStatic}/assets/frontend/pages/img/products/model7.jpg" alt="Cool green dress with red bell" class="img-responsive">
                 </div>
-                <div class="product-other-images">
+               <%-- <div class="product-other-images">
                     <a href="javascript:;" class="active"><img alt="Berry Lace Dress" src="${ctxStatic}/assets/frontend/pages/img/products/model3.jpg"></a>
                     <a href="javascript:;"><img alt="Berry Lace Dress" src="${ctxStatic}/assets/frontend/pages/img/products/model4.jpg"></a>
                     <a href="javascript:;"><img alt="Berry Lace Dress" src="${ctxStatic}/assets/frontend/pages/img/products/model5.jpg"></a>
-                </div>
+                </div>--%>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-9">
                 <h2>Cool green dress with red bell</h2>
@@ -879,8 +584,8 @@
                     <div class="product-quantity">
                         <input id="product-quantity" type="text" value="1" readonly name="product-quantity" class="form-control input-sm">
                     </div>
-                    <button class="btn btn-primary" type="submit">Add to cart</button>
-                    <a href="shop-item.html" class="btn btn-default">More details</a>
+                    <button class="btn btn-primary" id="addCart" type="submit">添加至购物车</button>
+                    <a href="/toShopItem" class="btn btn-default">查看详情</a>
                 </div>
             </div>
 
@@ -915,6 +620,10 @@
 <!-- END LayerSlider -->
 
 <script src="${ctxStatic}/assets/frontend/layout/scripts/layout.js" type="text/javascript"></script>
+
+<!--自定义引用js-->
+<script src="${ctxStatic}/portal/shopping_cart.js" type="text/javascript"></script>
+<script src="${ctxStatic}/js/jquery.cookie.js" type="text/javascript"></script>
 <script type="text/javascript">
     jQuery(document).ready(function() {
         Layout.init();
@@ -922,8 +631,9 @@
         LayersliderInit.initLayerSlider();
         Layout.initImageZoom();
         Layout.initTouchspin();
-        Layout.initTwitter();
     });
+
+
 </script>
 <!-- END PAGE LEVEL JAVASCRIPTS -->
 </body>

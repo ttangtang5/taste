@@ -9,6 +9,17 @@
                 Exception.showMessage(data);
             }
         });
+
+        //显示信息
+        var name = '${sessionScope.username}';
+        if(name != ""){
+            $("#toLog").hide();
+            $("#toLogOut").show();
+            $("#toCenter").attr("href","/toShopAccount");
+            $("#toWish").attr("href","/toShopWishList");
+            $("#toOrder").attr("href","/");
+        }
     });
+
 
 </script> 

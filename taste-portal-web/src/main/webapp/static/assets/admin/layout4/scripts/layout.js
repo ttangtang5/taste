@@ -79,164 +79,164 @@ var Layout = function() {
     };
 
     // Handle sidebar menu
-    var handleSidebarMenu = function() {
-        $('.page-sidebar').on('click', 'li > a', function(e) {
+    var handleSidebarMenu =
 
-            if (Metronic.getViewPort().width >= resBreakpointMd && $(this).parents('.page-sidebar-menu-hover-submenu').size() === 1) { // exit of hover sidebar menu
-                return;
-            }
+    // Helper function to calculfunction() {
+    $('.page-sidebar').on('click', 'li > a', function(e) {
 
-            if ($(this).next().hasClass('sub-menu') === false) {
-                if (Metronic.getViewPort().width < resBreakpointMd && $('.page-sidebar').hasClass("in")) { // close the menu on mobile view while laoding a page 
-                    $('.page-header .responsive-toggler').click();
-                }
-                return;
-            }
+        if (Metronic.getViewPort().width >= resBreakpointMd && $(this).parents('.page-sidebar-menu-hover-submenu').size() === 1) { // exit of hover sidebar menu
+            return;
+        }
 
-            if ($(this).next().hasClass('sub-menu always-open')) {
-                return;
-            }
-
-            var parent = $(this).parent().parent();
-            var the = $(this);
-            var menu = $('.page-sidebar-menu');
-            var sub = $(this).next();
-
-            var autoScroll = menu.data("auto-scroll");
-            var slideSpeed = parseInt(menu.data("slide-speed"));
-            var keepExpand = menu.data("keep-expanded");
-
-            if (keepExpand !== true) {
-                parent.children('li.open').children('a').children('.arrow').removeClass('open');
-                parent.children('li.open').children('.sub-menu:not(.always-open)').slideUp(slideSpeed);
-                parent.children('li.open').removeClass('open');
-            }
-
-            var slideOffeset = -200;
-
-            if (sub.is(":visible")) {
-                $('.arrow', $(this)).removeClass("open");
-                $(this).parent().removeClass("open");
-                sub.slideUp(slideSpeed, function() {
-                    if (autoScroll === true && $('body').hasClass('page-sidebar-closed') === false) {
-                        if ($('body').hasClass('page-sidebar-fixed')) {
-                            menu.slimScroll({
-                                'scrollTo': (the.position()).top
-                            });
-                        } else {
-                            Metronic.scrollTo(the, slideOffeset);
-                        }
-                    }
-                });
-            } else {
-                $('.arrow', $(this)).addClass("open");
-                $(this).parent().addClass("open");
-                sub.slideDown(slideSpeed, function() {
-                    if (autoScroll === true && $('body').hasClass('page-sidebar-closed') === false) {
-                        if ($('body').hasClass('page-sidebar-fixed')) {
-                            menu.slimScroll({
-                                'scrollTo': (the.position()).top
-                            });
-                        } else {
-                            Metronic.scrollTo(the, slideOffeset);
-                        }
-                    }
-                });
-            }
-
-            e.preventDefault();
-        });
-
-        // handle ajax links within sidebar menu
-        $('.page-sidebar').on('click', ' li > a.ajaxify', function(e) {
-            e.preventDefault();
-            Metronic.scrollTop();
-
-            var url = $(this).attr("href");
-            var menuContainer = $('.page-sidebar ul');
-            var pageContent = $('.page-content');
-            var pageContentBody = $('.page-content .page-content-body');
-
-            menuContainer.children('li.active').removeClass('active');
-            menuContainer.children('arrow.open').removeClass('open');
-
-            $(this).parents('li').each(function() {
-                $(this).addClass('active');
-                $(this).children('a > span.arrow').addClass('open');
-            });
-            $(this).parents('li').addClass('active');
-
-            if (Metronic.getViewPort().width < resBreakpointMd && $('.page-sidebar').hasClass("in")) { // close the menu on mobile view while laoding a page 
+        if ($(this).next().hasClass('sub-menu') === false) {
+            if (Metronic.getViewPort().width < resBreakpointMd && $('.page-sidebar').hasClass("in")) { // close the menu on mobile view while laoding a page
                 $('.page-header .responsive-toggler').click();
             }
+            return;
+        }
 
-            Metronic.startPageLoading();
+        if ($(this).next().hasClass('sub-menu always-open')) {
+            return;
+        }
 
-            var the = $(this);
+        var parent = $(this).parent().parent();
+        var the = $(this);
+        var menu = $('.page-sidebar-menu');
+        var sub = $(this).next();
 
-            $.ajax({
-                type: "GET",
-                cache: false,
-                url: url,
-                dataType: "html",
-                success: function(res) {
+        var autoScroll = menu.data("auto-scroll");
+        var slideSpeed = parseInt(menu.data("slide-speed"));
+        var keepExpand = menu.data("keep-expanded");
 
-                    if (the.parents('li.open').size() === 0) {
-                        $('.page-sidebar-menu > li.open > a').click();
+        if (keepExpand !== true) {
+            parent.children('li.open').children('a').children('.arrow').removeClass('open');
+            parent.children('li.open').children('.sub-menu:not(.always-open)').slideUp(slideSpeed);
+            parent.children('li.open').removeClass('open');
+        }
+
+        var slideOffeset = -200;
+
+        if (sub.is(":visible")) {
+            $('.arrow', $(this)).removeClass("open");
+            $(this).parent().removeClass("open");
+            sub.slideUp(slideSpeed, function() {
+                if (autoScroll === true && $('body').hasClass('page-sidebar-closed') === false) {
+                    if ($('body').hasClass('page-sidebar-fixed')) {
+                        menu.slimScroll({
+                            'scrollTo': (the.position()).top
+                        });
+                    } else {
+                        Metronic.scrollTo(the, slideOffeset);
                     }
-
-                    Metronic.stopPageLoading();
-                    pageContentBody.html(res);
-                    Layout.fixContentHeight(); // fix content height
-                    Metronic.initAjax(); // initialize core stuff
-                },
-                error: function(xhr, ajaxOptions, thrownError) {
-                    Metronic.stopPageLoading();
-                    pageContentBody.html('<h4>Could not load the requested content.</h4>');
                 }
             });
+        } else {
+            $('.arrow', $(this)).addClass("open");
+            $(this).parent().addClass("open");
+            sub.slideDown(slideSpeed, function() {
+                if (autoScroll === true && $('body').hasClass('page-sidebar-closed') === false) {
+                    if ($('body').hasClass('page-sidebar-fixed')) {
+                        menu.slimScroll({
+                            'scrollTo': (the.position()).top
+                        });
+                    } else {
+                        Metronic.scrollTo(the, slideOffeset);
+                    }
+                }
+            });
+        }
+
+        e.preventDefault();
+    });
+
+    // handle ajax links within sidebar menu
+    $('.page-sidebar').on('click', ' li > a.ajaxify', function(e) {
+        e.preventDefault();
+        Metronic.scrollTop();
+
+        var url = $(this).attr("href");
+        var menuContainer = $('.page-sidebar ul');
+        var pageContent = $('.page-content');
+        var pageContentBody = $('.page-content .page-content-body');
+
+        menuContainer.children('li.active').removeClass('active');
+        menuContainer.children('arrow.open').removeClass('open');
+
+        $(this).parents('li').each(function() {
+            $(this).addClass('active');
+            $(this).children('a > span.arrow').addClass('open');
         });
+        $(this).parents('li').addClass('active');
 
-        // handle ajax link within main content
-        $('.page-content').on('click', '.ajaxify', function(e) {
-            e.preventDefault();
-            Metronic.scrollTop();
+        if (Metronic.getViewPort().width < resBreakpointMd && $('.page-sidebar').hasClass("in")) { // close the menu on mobile view while laoding a page
+            $('.page-header .responsive-toggler').click();
+        }
 
-            var url = $(this).attr("href");
-            var pageContent = $('.page-content');
-            var pageContentBody = $('.page-content .page-content-body');
+        Metronic.startPageLoading();
 
-            Metronic.startPageLoading();
+        var the = $(this);
 
-            if (Metronic.getViewPort().width < resBreakpointMd && $('.page-sidebar').hasClass("in")) { // close the menu on mobile view while laoding a page 
-                $('.page-header .responsive-toggler').click();
+        $.ajax({
+            type: "GET",
+            cache: false,
+            url: url,
+            dataType: "html",
+            success: function(res) {
+
+                if (the.parents('li.open').size() === 0) {
+                    $('.page-sidebar-menu > li.open > a').click();
+                }
+
+                Metronic.stopPageLoading();
+                pageContentBody.html(res);
+                Layout.fixContentHeight(); // fix content height
+                Metronic.initAjax(); // initialize core stuff
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                Metronic.stopPageLoading();
+                pageContentBody.html('<h4>Could not load the requested content.</h4>');
             }
-
-            $.ajax({
-                type: "GET",
-                cache: false,
-                url: url,
-                dataType: "html",
-                success: function(res) {
-                    Metronic.stopPageLoading();
-                    pageContentBody.html(res);
-                    Layout.fixContentHeight(); // fix content height
-                    Metronic.initAjax(); // initialize core stuff
-                },
-                error: function(xhr, ajaxOptions, thrownError) {
-                    pageContentBody.html('<h4>Could not load the requested content.</h4>');
-                    Metronic.stopPageLoading();
-                }
-            });
         });
+    });
 
-        // handle scrolling to top on responsive menu toggler click when header is fixed for mobile view
-        $(document).on('click', '.page-header-fixed-mobile .responsive-toggler', function(){
-            Metronic.scrollTop();
-        });      
-    };
+    // handle ajax link within main content
+    $('.page-content').on('click', '.ajaxify', function(e) {
+        e.preventDefault();
+        Metronic.scrollTop();
 
-    // Helper function to calculate sidebar height for fixed sidebar layout.
+        var url = $(this).attr("href");
+        var pageContent = $('.page-content');
+        var pageContentBody = $('.page-content .page-content-body');
+
+        Metronic.startPageLoading();
+
+        if (Metronic.getViewPort().width < resBreakpointMd && $('.page-sidebar').hasClass("in")) { // close the menu on mobile view while laoding a page
+            $('.page-header .responsive-toggler').click();
+        }
+
+        $.ajax({
+            type: "GET",
+            cache: false,
+            url: url,
+            dataType: "html",
+            success: function(res) {
+                Metronic.stopPageLoading();
+                pageContentBody.html(res);
+                Layout.fixContentHeight(); // fix content height
+                Metronic.initAjax(); // initialize core stuff
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                pageContentBody.html('<h4>Could not load the requested content.</h4>');
+                Metronic.stopPageLoading();
+            }
+        });
+    });
+
+    // handle scrolling to top on responsive menu toggler click when header is fixed for mobile view
+    $(document).on('click', '.page-header-fixed-mobile .responsive-toggler', function(){
+        Metronic.scrollTop();
+    });
+};ate sidebar height for fixed sidebar layout.
     var _calculateFixedSidebarViewportHeight = function() {
         var sidebarHeight = Metronic.getViewPort().height - $('.page-header').outerHeight() - 30;
         if ($('body').hasClass("page-footer-fixed")) {
