@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tang.taste.portal.dao.ContentDao">
+    <resultMap id="dishes_Map" type="com.tang.taste.common.entity.pojo.Content">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+        <result column="title" jdbcType="VARCHAR" property="title" />
+        <result column="sub_title" jdbcType="VARCHAR" property="subTitle" />
+        <result column="title_desc" jdbcType="VARCHAR" property="titleDesc" />
+        <result column="url" jdbcType="VARCHAR" property="url" />
+        <result column="picture" jdbcType="VARCHAR" property="picture" />
+        <result column="content" jdbcType="VARCHAR" property="content" />
+        <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="del_flag" jdbcType="INTEGER" property="delFlag" />
+        <association property="dishes"  javaType="com.tang.taste.common.entity.pojo.Dishes" >
+            <id column="id" jdbcType="INTEGER" property="id" />
+            <result column="dishes_name" jdbcType="VARCHAR" property="dishesName" />
+            <result column="dishes_price" jdbcType="DOUBLE" property="dishesPrice" />
+            <result column="supply_time" jdbcType="VARCHAR" property="supplyTime" />
+            <result column="picture" jdbcType="VARCHAR" property="picture" />
+            <result column="desc" jdbcType="VARCHAR" property="desc" />
+            <result column="del_flag" jdbcType="INTEGER" property="delFlag" />
+        </association>
+    </resultMap>
+  <sql id="Base_Column_List">
+    id, category_id, title, sub_title, title_desc, url, picture, content, created_time,
+    update_time, del_flag
+  </sql>
+
+  <select id="selectContentByCategory" parameterType="java.lang.String" resultMap="dishes_Map">
+      SELECT c.id, category_id, title, sub_title, title_desc, url, c.picture, content, c.created_time, c.update_time, c.del_flag, s.id, s.dishes_name, s.dishes_price, s.picture
+      FROM
+	    content c LEFT JOIN sys_dishes s ON c.content = s.id
+      WHERE
+        c.category_id = #{category}
+        AND c.del_flag = 0
+  </select>
+
+  <select id="selectDishesByContent" parameterType="java.util.Arrays" resultType="com.tang.taste.common.entity.pojo.Dishes">
+      SELECT id , dishes_name AS dishesName , dishes_price AS dishesPrice ,supply_time AS supplyTime,picture ,sys_dishes.desc ,del_flag
+      FROM sys_dishes
+      WHERE
+      id IN
+      <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+      </foreach>
+  </select>
+</mapper>

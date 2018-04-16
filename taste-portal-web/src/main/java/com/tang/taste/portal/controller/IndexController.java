@@ -39,8 +39,19 @@ public class IndexController {
     public String toLogin(HttpServletRequest request) throws Exception{
         String value = CookieUtils.getCookieValue(request,"id");
         if(value != null && value !=""){
-            SessionUtils.setAttr(request,"id",value);
-            return "redirect:toIndex";
+            String[] user = value.split(",");
+            if(user !=null && user.length == 3){
+                User user1 = new User();
+                user1.setId(Integer.valueOf(user[0]));
+                user1.setPhone(user[1]);
+                user1.setPassword(user[2]);
+                //校验密码信息
+                String msg = userService.login(user1, "0", request, null);
+                if("200".equals(msg)){
+                    SessionUtils.setAttr(request,"id",user1.getId());
+                    return "redirect:toIndex";
+                }
+            }
         }
         return "login/login";
     }
@@ -70,8 +81,15 @@ public class IndexController {
         return "portal/shop_index";
     }
 
+    /**
+     * 跳转个人中心
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("toShopAccount")
-    public String toShopAccount() throws Exception{
+    public String toShopAccount(HttpServletRequest request) throws Exception{
+        User user = userService.getUserById("4");
+        request.setAttribute("user",user);
         return "/portal/shop_account";
     }
 
@@ -80,29 +98,84 @@ public class IndexController {
         return "/portal/shop_checkout";
     }
 
+    /**
+     * 商品详情
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("toShopItem")
     public String toShopItem() throws Exception{
         return "/portal/shop_item";
     }
 
+    /**
+     * 跳转搜索列表
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("toShopProductList")
     public String toShopProductList() throws Exception{
         return "/portal/shop_product_list";
     }
 
+    /**
+     * 跳转购物车
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("toShopShoppingCart")
     public String toShopShoppingCart() throws Exception{
         return "/portal/shop_shopping_cart";
     }
 
-    @RequestMapping("toShopStandartForms")
-    public String toShopStandartForms() throws Exception{
-        return "/portal/shop_standart_forms";
+    /**
+     * 跳转订单列表
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("toShopOrderList")
+    public String toShopWishList() throws Exception{
+        return "/portal/shop_order_list";
     }
 
-    @RequestMapping("toShopWishList")
-    public String toShopWishList() throws Exception{
-        return "/portal/shop_wishlist";
+    /**
+     * 跳转结算页面
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("toShopOrder")
+    public String toShopOrder() throws Exception{
+        return "/portal/shop_order";
+    }
+
+    /**
+     * 跳转地址管理
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("toShopAddress")
+    public String toShopAddress() throws Exception{
+        return "/portal/shop_address";
+    }
+
+    /**
+     * 跳转地图
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("toShopMap")
+    public String toShopMap() throws Exception{
+        return "/portal/shop_map";
+    }
+
+    /**
+     * 跳转订单详情
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("toShopOrderView")
+    public String toShopOrderView() throws Exception{
+        return "/portal/shop_order_view";
     }
 
 }

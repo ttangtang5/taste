@@ -48,7 +48,7 @@
 <!-- BEGIN LOGIN -->
 <div class="content">
     <!-- BEGIN LOGIN FORM -->
-    <form class="login-form" action="##" method="post">
+    <form class="login-form"  method="post">
         <h3 class="form-title">登录</h3>
         <div class="alert alert-danger display-hide" id="logDiv" >
             <button class="close" data-close="alert"></button>
@@ -96,21 +96,49 @@
     </form>
     <!-- END LOGIN FORM -->
     <!-- BEGIN FORGOT PASSWORD FORM -->
-    <form class="forget-form" action="index.html" method="post">
+    <form class="forget-form"  method="post">
         <h3>忘记密码 ?</h3>
-        <p>
-            请输入手机号码重置密码。
-        </p>
+        <div class="alert alert-danger display-hide" id="forgetDiv" >
+            <button class="close" data-close="alert"></button>
+            <span id="forgetMsg"></span>
+        </div>
         <div class="form-group">
             <div class="input-icon">
-                <i class="fa fa-envelope"></i>
-                <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email" name="email"/>
+                <i class="fa fa-user"></i>
+                <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="手机号" id="forget-phone" name="forPhoneNum"/>
             </div>
+        </div>
+        <div class="form-group">
+            <div class="input-icon">
+                <button type="button" id="forget-captcha" class="btn green-haze pull-right captcha">
+                    获取验证码
+                </button>
+                <i class="fa fa-check"></i>
+                <input class="form-control placeholder-no-fix" style="width: 60%" type="text" maxlength="6" autocomplete="off" placeholder="验证码" id="forgetCaptcha" name="captcha"/>
+            </div>
+        </div>
+        <div class="forgetPssword" hidden>
+        <div class="form-group">
+            <label class="control-label visible-ie8 visible-ie9">新密码</label>
+            <div class="input-icon">
+                <i class="fa fa-lock"></i>
+                <input class="form-control placeholder-no-fix" type="password" autocomplete="off"  placeholder="请输入密码" id="forPassword" name="forPassword"  required/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label visible-ie8 visible-ie9">再次输入密码</label>
+            <div class="controls">
+                <div class="input-icon">
+                    <i class="fa fa-check"></i>
+                    <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="请再次输入密码" id="forRpassword" name="forRPassword" required/>
+                </div>
+            </div>
+        </div>
         </div>
         <div class="form-actions">
             <button type="button" id="back-btn" class="btn">
                 <i class="m-icon-swapleft"></i> 返回 </button>
-            <button type="submit" class="btn green-haze pull-right">
+            <button type="submit" id="forgetBtn" class="btn green-haze pull-right">
                 提交 <i class="m-icon-swapright m-icon-white"></i>
             </button>
         </div>
@@ -151,7 +179,7 @@
         </div>
         <div class="form-group">
             <div class="input-icon">
-                <button type="button" id="register-captcha" class="btn green-haze pull-right">
+                <button type="button" id="register-captcha" class="btn green-haze pull-right captcha">
                     获取验证码
                 </button>
                 <i class="fa fa-check"></i>

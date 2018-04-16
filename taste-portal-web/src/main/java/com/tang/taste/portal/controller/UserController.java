@@ -80,7 +80,33 @@ public class UserController {
         return "1";
     }
 
+    /**
+     * 重置密码
+     * @param forPhoneNum 手机号码
+     * @param forPassword 新密码
+     * @param captcha  验证码
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("forgetPassword")
+    @ResponseBody
+    public String forgetPassword(String forPhoneNum,String forPassword,String captcha,HttpServletRequest request,HttpServletResponse response)throws Exception{
+        String captchaServer = SessionUtils.getValidateCode(request);
+        if(captcha == null || captcha == "" || !captcha.equals(captchaServer)){
+            return "1";
+        }
+        return  userService.updateUserPwdByphone(forPhoneNum,forPassword);
+    }
 
+    /**
+     * 用户注销
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("toLogOut")
     public String loginOut(HttpServletRequest request,HttpServletResponse response)throws Exception{
         //获取session
@@ -145,16 +171,26 @@ public class UserController {
      * @param request
      * @return
      * @throws Exception
+     * @RequestMapping("getCaptcha/{phoneNum}")
+     *  public String getCaptcha(@PathVariable("phoneNum") String phoneNum,HttpServletRequest request)
      */
-    @RequestMapping("getCaptcha/{phoneNum}")
+    @RequestMapping("getCaptcha")
     @ResponseBody
-    public String getCaptcha(@PathVariable("phoneNum") String phoneNum,HttpServletRequest request) throws Exception{
+    public String getCaptcha(String phoneNum,String type,HttpServletRequest request) throws Exception{
+        String template = null;
+        if("1".equals(type)){
+            //注册模板
+            template = "SMS_128025051";
+        }else if("2".equals(type)){
+            //重置密码模板
+            template = "SMS_128095031";
+        }
         //获取随机数
         int numCode = RandomNumberUtils.getRandomCode(6);
         SessionUtils.setValidateCode(request,String.valueOf(numCode));
         HttpSession session = request.getSession(true);
         try {
-            boolean flag = SmsUtils.sendCaptcha(phoneNum,String.valueOf(numCode));
+            //boolean flag = SmsUtils.sendCaptcha(phoneNum,String.valueOf(numCode),template);
             //TimerTask实现5分钟后从session中删除checkCode
             final Timer timer=new Timer();
             timer.schedule(new TimerTask() {
@@ -171,4 +207,16 @@ public class UserController {
         return String.valueOf(numCode);
     }
 
+    /**
+     *  更新用户信息
+     * @param username
+     * @param firstname
+     * @param phone
+     * @return
+     */
+    @RequestMapping("saveUserMsg")
+    @ResponseBody
+    public String updateUserMsg(String username,String firstname,String phone,HttpServletRequest request){
+        return userService.updateUserMsgById(username,firstname,phone,request);
+    }
 }

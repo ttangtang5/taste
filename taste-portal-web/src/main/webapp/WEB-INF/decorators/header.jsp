@@ -39,7 +39,7 @@
                 <ul class="list-unstyled list-inline pull-right">
                     <li><a href="/toShopAccount" id="toCenter">个人中心</a></li>
                    <%-- <li><a href="/toShopWishList" id="toWish">收藏</a></li>--%>
-                    <li><a href="##" id="toOrder">订单</a></li>
+                    <li><a href="/toShopOrderList" id="toOrder">订单</a></li>
                     <li><a href="/toLogin" id="toLog">登录</a><span id="logMsg">${sessionScope.username}&nbsp;</span><a href="/taste/toLogOut" id="toLogOut" hidden>注销</a></li>
                 </ul>
             </div>

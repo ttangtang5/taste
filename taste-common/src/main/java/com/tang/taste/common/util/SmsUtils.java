@@ -49,7 +49,7 @@ public class SmsUtils {
      * @return
      * @throws ClientException
      */
-    public static SendSmsResponse sendSms(String phoneNum,String code) throws ClientException {
+    public static SendSmsResponse sendSms(String phoneNum,String code,String template) throws ClientException {
 
         //可自助调整超时时间
         System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
@@ -67,7 +67,7 @@ public class SmsUtils {
         //必填:短信签名-可在短信控制台中找到
         request.setSignName("唐蓝云");
         //必填:短信模板-可在短信控制台中找到
-        request.setTemplateCode("SMS_128025051");
+        request.setTemplateCode(template);
         //可选:模板中的变量替换JSON串,如模板内容为"亲爱的${name},您的验证码为${code}"时,此处的值为
         request.setTemplateParam("{\"code\":\""+code+"\"}");
 
@@ -139,10 +139,10 @@ public class SmsUtils {
      * @throws ClientException
      * @throws InterruptedException
      */
-    public static boolean sendCaptcha(String phoneNum,String code)throws ClientException, InterruptedException{
+    public static boolean sendCaptcha(String phoneNum,String code,String template)throws ClientException, InterruptedException{
         boolean flag = false;
         //发短信
-        SendSmsResponse response = sendSms(phoneNum,code);
+        SendSmsResponse response = sendSms(phoneNum,code,template);
         System.out.println("短信接口返回的数据----------------");
         System.out.println("Code=" + response.getCode());
         System.out.println("Message=" + response.getMessage());

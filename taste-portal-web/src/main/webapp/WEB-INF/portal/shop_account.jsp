@@ -57,8 +57,8 @@
                         修改密码</a></li>
                     <li class="list-group-item clearfix"><a  href="javascript:;"><i class="fa fa-angle-right"></i>
                         收货地址</a></li>
-                    <li class="list-group-item clearfix"><a  href="javascript:;"><i class="fa fa-angle-right"></i>
-                        订单信息</a></li>
+                    <%--<li class="list-group-item clearfix"><a  href="javascript:;"><i class="fa fa-angle-right"></i>
+                        订单信息</a></li>--%>
                 </ul>
             </div>
             <!-- END SIDEBAR -->
@@ -86,8 +86,7 @@
                                             </td>
                                             <td style="width:50%">
                                                 <a href="javascript:;" id="username" data-type="text" data-pk="1"
-                                                   data-original-title="请输入新的用户名">
-                                                    superuser </a>
+                                                   data-original-title="请输入新的用户名">${user.userName}</a>
                                             </td>
                                             <%--<td style="width:35%">
                                                 <span class="text-muted"></span>
@@ -95,13 +94,12 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                姓名：
+                                                真实姓名：
                                             </td>
                                             <td>
                                                 <a href="javascript:;" id="firstname" data-type="text" data-pk="1"
                                                    data-placement="right" data-placeholder="Required"
-                                                   data-original-title="请输入真实姓名">
-                                                </a>
+                                                   data-original-title="请输入真实姓名">${user.realName}</a>
                                             </td>
                                             <%--<td>
                                                 <span class="text-muted"></span>
@@ -109,30 +107,15 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                性别：
+                                                电话：
                                             </td>
                                             <td>
-                                                <a href="javascript:;" id="sex" data-type="select" data-pk="1"
-                                                   data-value="" data-original-title="请选择性别">
-                                                </a>
+                                                <a href="javascript:;" id="phone" data-type="text" data-pk="1"
+                                                   data-placement="right" data-placeholder="Required"
+                                                   data-original-title="请输入电话">${user.phone}</a>
                                             </td>
                                             <%--<td>
                                                 <span class="text-muted">Select, loaded from js array. Custom display </span>
-                                            </td>--%>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                出生年月日：
-                                            </td>
-                                            <td>
-                                                <a href="javascript:;" id="dob" data-type="combodate"
-                                                   data-value="1984-05-15" data-format="YYYY-MM-DD"
-                                                   data-viewformat="DD/MM/YYYY" data-template="D / MMM / YYYY"
-                                                   data-pk="1" data-original-title="请选择出生年月日">
-                                                </a>
-                                            </td>
-                                            <%--<td>
-                                                <span class="text-muted">Date field (combodate) </span>
                                             </td>--%>
                                         </tr>
                                         </tbody>
@@ -157,39 +140,39 @@
                                 <div class="content-form-page">
                                     <div class="row">
                                         <div class="col-md-7 col-sm-7">
-                                            <form class="form-horizontal form-without-legend" role="form">
+                                            <form class="form-horizontal form-without-legend forget-form" role="form">
                                                 <div class="form-group">
-                                                    <label for="email" class="col-lg-4 control-label">手机号:</label>
+                                                    <label  class="col-lg-4 control-label">手机号:</label>
                                                     <div class="col-lg-8">
-                                                        <input type="text" class="form-control" id="email">
+                                                        <input type="text" class="form-control" id="forgetPhone" name="forPhoneNum" value="${user.phone}" disabled>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="email" class="col-lg-4 control-label">验证码:</label>
+                                                    <label  class="col-lg-4 control-label">验证码:</label>
                                                     <div class="col-lg-8">
-                                                        <input type="text" class="form-control" id="code">
+                                                        <input type="text" id="forgetCaptcha" class="form-control" maxlength="6"  name="captcha" >
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-5">
-                                                        <button type="button" class="btn btn-primary">发送验证</button>
+                                                        <button type="button" id="captcha" class="btn btn-primary">发送验证</button>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="email" class="col-lg-4 control-label">新密码:</label>
+                                                    <label  class="col-lg-4 control-label">新密码:</label>
                                                     <div class="col-lg-8">
-                                                        <input type="password" class="form-control" id="password">
+                                                        <input type="password" class="form-control" id="password" maxlength="16" name="forPassword">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="email" class="col-lg-4 control-label">再次输入新密码:</label>
+                                                    <label class="col-lg-4 control-label">再次输入新密码:</label>
                                                     <div class="col-lg-8">
-                                                        <input type="password" class="form-control" id="password2">
+                                                        <input type="password" class="form-control" id="password2"  maxlength="16" name="forRPassword">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-5">
-                                                        <button type="submit" class="btn btn-primary">提交</button>
+                                                        <button type="submit" id="forgetBtn" class="btn btn-primary">提交</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -228,7 +211,7 @@
                     <hr>
                 </div>
             </div>
-            <div class="col-md-9 col-sm-7" id="order" hidden >
+            <%--<div class="col-md-9 col-sm-7" id="order" hidden >
                 <h1>订单信息</h1>
                 <div class="content-page">
                     <ul>
@@ -244,13 +227,26 @@
                     <!-- END CONTENT -->
                     <hr>
                 </div>
-            </div>
+            </div>--%>
             <!-- END CONTENT -->
         </div>
         <!-- END SIDEBAR & CONTENT -->
     </div>
 </div>
-
+<!-- 提示消息弹出窗口 begin -->
+<div class="modal fade" id="messageDiv" tabindex="-1">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"></button>
+                <h4 class="modal-title">提示</h4>
+            </div>
+            <div class="modal-body">
+                <span id="message"></span>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Load javascripts at bottom, this will reduce page load time -->
 <!-- BEGIN CORE PLUGINS(REQUIRED FOR ALL PAGES) -->
 <!--[if lt IE 9]>
@@ -287,7 +283,6 @@
 <script type="text/javascript" src="${ctxStatic}/assets/global/plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js"></script>
 <script type="text/javascript" src="${ctxStatic}/assets/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js"></script>
 <script type="text/javascript" src="${ctxStatic}/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-<script type="text/javascript" src="${ctxStatic}/assets/global/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-CN.js"></script>
 <script type="text/javascript" src="${ctxStatic}/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="${ctxStatic}/assets/global/plugins/moment.min.js"></script>
 <script type="text/javascript" src="${ctxStatic}/assets/global/plugins/jquery.mockjax.js"></script>

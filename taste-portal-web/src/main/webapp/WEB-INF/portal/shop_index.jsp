@@ -119,7 +119,7 @@
                     <div class="input-group input-medium">
                         <input type="text" class="form-control" placeholder="请输入搜索内容">
                         <span class="input-group-btn">
-											<button class="btn blue" type="button">搜索</button>
+											<button id="search" class="btn blue" type="button">搜索</button>
 											</span>
                     </div>
                 </li>
@@ -139,7 +139,7 @@
         <!-- slide one start -->
         <div class="ls-slide ls-slide1" data-ls="offsetxin: right; slidedelay: 7000; transition2d: 24,25,27,28;">
 
-            <img src="${ctxStatic}/assets/frontend/pages/img/layerslider/slide1/bg.jpg" class="ls-bg" alt="Slide background">
+            <img class="ls-bg" alt="Slide background">
 
             <div class="ls-l ls-title" style="top: 96px; left: 35%; white-space: nowrap;" data-ls="
                 fade: true;
@@ -169,7 +169,7 @@
         <!-- slide two start -->
         <div class="ls-slide ls-slide2" data-ls="offsetxin: right; slidedelay: 7000; transition2d: 110,111,112,113;">
 
-            <img src="${ctxStatic}/assets/frontend/pages/img/layerslider/slide2/bg.jpg" class="ls-bg" alt="Slide background">
+            <img  class="ls-bg" alt="Slide background">
 
             <div class="ls-l ls-title" style="top: 40%; left: 21%; white-space: nowrap;" data-ls="
               fade: true;
@@ -221,7 +221,7 @@
         <!-- slide three start -->
         <div class="ls-slide ls-slide3" data-ls="offsetxin: right; slidedelay: 7000; transition2d: 92,93,105;">
 
-            <img src="${ctxStatic}/assets/frontend/pages/img/layerslider/slide3/bg.jpg" class="ls-bg" alt="Slide background">
+            <img  class="ls-bg" alt="Slide background">
 
             <div class="ls-l ls-title" style="top: 83px; left: 33%; white-space: nowrap;" data-ls="
               fade: true;
@@ -259,7 +259,7 @@
         <!-- slide four start -->
         <div class="ls-slide ls-slide4" data-ls="offsetxin: right; slidedelay: 7000; transition2d: 110,111,112,113;">
 
-            <img src="${ctxStatic}/assets/frontend/pages/img/layerslider/slide5/bg.jpg" class="ls-bg" alt="Slide background">
+            <img  class="ls-bg" alt="Slide background">
 
             <div class="ls-l ls-title" style="top: 35%; left: 60%; white-space: nowrap;" data-ls="
           fade: true;
@@ -305,103 +305,89 @@
                 <h2>新品上架</h2>
                 <div class="owl-carousel owl-carousel5">
                     <div>
-                        <div class="product-item">
-                            <div class="pi-img-wrapper">
-                                <img src="${ctxStatic}/assets/frontend/pages/img/products/model1.jpg" class="img-responsive" alt="Berry Lace Dress">
-                                <div>
-                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/model1.jpg" class="btn btn-default fancybox-button">缩放</a>
-                                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">查看</a>
-                                </div>
+                    <div class="product-item">
+                        <div class="pi-img-wrapper">
+                            <img  class="img-responsive imgNewProduct" alt="Berry Lace Dress">
+                            <div>
+                                <a  class="btn btn-default fancybox-button newProductZoom">缩放</a>
+                                <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">查看</a>
                             </div>
-                            <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
-                            <div class="pi-price">$29.11</div>
-                            <a href="javascript:;" id="add2cart" class="btn btn-default add2cart">加入购物车</a>
-                            <div class="sticker sticker-sale"></div>
                         </div>
+                        <h3><a href="shop-item.html" class="aNewProduct"></a></h3>
+                        <div class="pi-price priceNewProduct" ></div>
+                        <a href="javascript:;" id="add2cart" class="btn btn-default add2cart">加入购物车</a>
+                        <div class="sticker sticker-sale"></div>
                     </div>
+                </div>
                     <div>
                         <div class="product-item">
                             <div class="pi-img-wrapper">
-                                <img src="${ctxStatic}/assets/frontend/pages/img/products/model2.jpg" class="img-responsive" alt="Berry Lace Dress">
+                                <img  class="img-responsive imgNewProduct" alt="Berry Lace Dress">
                                 <div>
-                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/model2.jpg" class="btn btn-default fancybox-button">缩放</a>
+                                    <a  class="btn btn-default fancybox-button newProductZoom">缩放</a>
                                     <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">查看</a>
                                 </div>
                             </div>
-                            <h3><a href="shop-item.html">Berry Lace Dress2</a></h3>
-                            <div class="pi-price">$29.00</div>
+                            <h3><a href="shop-item.html" class="aNewProduct"></a></h3>
+                            <div class="pi-price priceNewProduct"></div>
                             <a href="javascript:;" class="btn btn-default add2cart">加入购物车</a>
                         </div>
                     </div>
                     <div>
                         <div class="product-item">
                             <div class="pi-img-wrapper">
-                                <img src="${ctxStatic}/assets/frontend/pages/img/products/model6.jpg" class="img-responsive" alt="Berry Lace Dress">
+                                <img  class="img-responsive imgNewProduct" alt="Berry Lace Dress">
                                 <div>
-                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/model6.jpg" class="btn btn-default fancybox-button">缩放</a>
+                                    <a  class="btn btn-default fancybox-button newProductZoom">缩放</a>
                                     <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">查看</a>
                                 </div>
                             </div>
-                            <h3><a href="shop-item.html">Berry Lace Dress2</a></h3>
-                            <div class="pi-price">$29.00</div>
+                            <h3><a href="shop-item.html" class="aNewProduct"></a></h3>
+                            <div class="pi-price priceNewProduct"></div>
                             <a href="javascript:;" class="btn btn-default add2cart">加入购物车</a>
                         </div>
                     </div>
                     <div>
                         <div class="product-item">
                             <div class="pi-img-wrapper">
-                                <img src="${ctxStatic}/assets/frontend/pages/img/products/model4.jpg" class="img-responsive" alt="Berry Lace Dress">
+                                <img  class="img-responsive imgNewProduct" alt="Berry Lace Dress">
                                 <div>
-                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/model4.jpg" class="btn btn-default fancybox-button">Zoom</a>
+                                    <a  class="btn btn-default fancybox-button newProductZoom">缩放</a>
+                                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">查看</a>
+                                </div>
+                            </div>
+                            <h3><a href="shop-item.html" class="aNewProduct"></a></h3>
+                            <div class="pi-price priceNewProduct"></div>
+                            <a href="javascript:;" class="btn btn-default add2cart">加入购物车</a>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="product-item">
+                            <div class="pi-img-wrapper">
+                                <img  class="img-responsive imgNewProduct" alt="Berry Lace Dress">
+                                <div>
+                                    <a  class="btn btn-default fancybox-button newProductZoom">缩放</a>
+                                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">查看</a>
+                                </div>
+                            </div>
+                            <h3><a href="shop-item.html" class="aNewProduct"></a></h3>
+                            <div class="pi-price priceNewProduct"></div>
+                            <a href="javascript:;" class="btn btn-default add2cart">加入购物车</a>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="product-item">
+                            <div class="pi-img-wrapper">
+                                <img  class="img-responsive imgNewProduct" alt="Berry Lace Dress">
+                                <div>
+                                    <a  class="btn btn-default fancybox-button newProductZoom">Zoom</a>
                                     <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
                                 </div>
                             </div>
-                            <h3><a href="javascript:;">Berry Lace Dress4</a></h3>
-                            <div class="pi-price">$29.00</div>
-                            <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
+                            <h3><a href="javascript:;" class="aNewProduct"></a></h3>
+                            <div class="pi-price priceNewProduct"></div>
+                            <a href="javascript:;" class="btn btn-default add2cart">加入购物车</a>
                             <div class="sticker sticker-new"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="product-item">
-                            <div class="pi-img-wrapper">
-                                <img src="${ctxStatic}/assets/frontend/pages/img/products/model5.jpg" class="img-responsive" alt="Berry Lace Dress">
-                                <div>
-                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/model5.jpg" class="btn btn-default fancybox-button">Zoom</a>
-                                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
-                                </div>
-                            </div>
-                            <h3><a href="shop-item.html">Berry Lace Dress5</a></h3>
-                            <div class="pi-price">$29.00</div>
-                            <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="product-item">
-                            <div class="pi-img-wrapper">
-                                <img src="${ctxStatic}/assets/frontend/pages/img/products/model3.jpg" class="img-responsive" alt="Berry Lace Dress">
-                                <div>
-                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/model3.jpg" class="btn btn-default fancybox-button">Zoom</a>
-                                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
-                                </div>
-                            </div>
-                            <h3><a href="shop-item.html">Berry Lace Dress3</a></h3>
-                            <div class="pi-price">$29.00</div>
-                            <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="product-item">
-                            <div class="pi-img-wrapper">
-                                <img src="${ctxStatic}/assets/frontend/pages/img/products/model7.jpg" class="img-responsive" alt="Berry Lace Dress">
-                                <div>
-                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/model7.jpg" class="btn btn-default fancybox-button">Zoom</a>
-                                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
-                                </div>
-                            </div>
-                            <h3><a href="shop-item.html">Berry Lace Dress3</a></h3>
-                            <div class="pi-price">$29.00</div>
-                            <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
                         </div>
                     </div>
                 </div>
@@ -421,13 +407,13 @@
                     </ol>
                     <div class="carousel-inner">
                         <div class="item active">
-                            <img src="${ctxStatic}/assets/frontend/pages/img/index-sliders/slide1.jpg" class="img-responsive" alt="Berry Lace Dress">
+                            <img  class="img-responsive imgRecommend" alt="Berry Lace Dress">
                         </div>
                         <div class="item">
-                            <img src="${ctxStatic}/assets/frontend/pages/img/index-sliders/slide2.jpg" class="img-responsive" alt="Berry Lace Dress">
+                            <img  class="img-responsive imgRecommend" alt="Berry Lace Dress">
                         </div>
                         <div class="item">
-                            <img src="${ctxStatic}/assets/frontend/pages/img/index-sliders/slide3.jpg" class="img-responsive" alt="Berry Lace Dress">
+                            <img  class="img-responsive imgRecommend" alt="Berry Lace Dress">
                         </div>
                     </div>
                 </div>
@@ -443,84 +429,56 @@
                     <div>
                         <div class="product-item">
                             <div class="pi-img-wrapper">
-                                <img src="${ctxStatic}/assets/frontend/pages/img/products/k4.jpg" class="img-responsive" alt="Berry Lace Dress">
+                                <img  class="img-responsive imgRecommend" alt="Berry Lace Dress">
                                 <div>
-                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/k4.jpg" class="btn btn-default fancybox-button">Zoom</a>
+                                    <a  class="btn btn-default fancybox-button recommendZoom">Zoom</a>
                                     <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
                                 </div>
                             </div>
-                            <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
-                            <div class="pi-price">$29.00</div>
+                            <h3><a href="shop-item.html" class="aRecommend"></a></h3>
+                            <div class="pi-price priceRecommend"></div>
                             <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
                         </div>
                     </div>
                     <div>
                         <div class="product-item">
                             <div class="pi-img-wrapper">
-                                <img src="${ctxStatic}/assets/frontend/pages/img/products/k2.jpg" class="img-responsive" alt="Berry Lace Dress">
+                                <img  class="img-responsive imgRecommend" alt="Berry Lace Dress">
                                 <div>
-                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/k2.jpg" class="btn btn-default fancybox-button">Zoom</a>
+                                    <a  class="btn btn-default fancybox-button recommendZoom">Zoom</a>
                                     <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
                                 </div>
                             </div>
-                            <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
-                            <div class="pi-price">$29.00</div>
+                            <h3><a href="shop-item.html" class="aRecommend"></a></h3>
+                            <div class="pi-price priceRecommend"></div>
                             <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
                         </div>
                     </div>
                     <div>
                         <div class="product-item">
                             <div class="pi-img-wrapper">
-                                <img src="${ctxStatic}/assets/frontend/pages/img/products/k3.jpg" class="img-responsive" alt="Berry Lace Dress">
+                                <img  class="img-responsive imgRecommend" alt="Berry Lace Dress">
                                 <div>
-                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/k3.jpg" class="btn btn-default fancybox-button">Zoom</a>
+                                    <a class="btn btn-default fancybox-button recommendZoom">Zoom</a>
                                     <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
                                 </div>
                             </div>
-                            <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
-                            <div class="pi-price">$29.00</div>
+                            <h3><a href="shop-item.html" class="aRecommend"></a></h3>
+                            <div class="pi-price priceRecommend"></div>
                             <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
                         </div>
                     </div>
                     <div>
                         <div class="product-item">
                             <div class="pi-img-wrapper">
-                                <img src="${ctxStatic}/assets/frontend/pages/img/products/k1.jpg" class="img-responsive" alt="Berry Lace Dress">
+                                <img  class="img-responsive imgRecommend" alt="Berry Lace Dress">
                                 <div>
-                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/k1.jpg" class="btn btn-default fancybox-button">Zoom</a>
+                                    <a class="btn btn-default fancybox-button recommendZoom">Zoom</a>
                                     <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
                                 </div>
                             </div>
-                            <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
-                            <div class="pi-price">$29.00</div>
-                            <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="product-item">
-                            <div class="pi-img-wrapper">
-                                <img src="${ctxStatic}/assets/frontend/pages/img/products/k4.jpg" class="img-responsive" alt="Berry Lace Dress">
-                                <div>
-                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/k4.jpg" class="btn btn-default fancybox-button">Zoom</a>
-                                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
-                                </div>
-                            </div>
-                            <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
-                            <div class="pi-price">$29.00</div>
-                            <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="product-item">
-                            <div class="pi-img-wrapper">
-                                <img src="${ctxStatic}/assets/frontend/pages/img/products/k3.jpg" class="img-responsive" alt="Berry Lace Dress">
-                                <div>
-                                    <a href="${ctxStatic}/assets/frontend/pages/img/products/k3.jpg" class="btn btn-default fancybox-button">Zoom</a>
-                                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
-                                </div>
-                            </div>
-                            <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
-                            <div class="pi-price">$29.00</div>
+                            <h3><a href="shop-item.html" class="aRecommend"></a></h3>
+                            <div class="pi-price priceRecommend"></div>
                             <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
                         </div>
                     </div>
@@ -588,7 +546,6 @@
                     <a href="/toShopItem" class="btn btn-default">查看详情</a>
                 </div>
             </div>
-
             <div class="sticker sticker-sale"></div>
         </div>
     </div>
@@ -624,6 +581,7 @@
 <!--自定义引用js-->
 <script src="${ctxStatic}/portal/shopping_cart.js" type="text/javascript"></script>
 <script src="${ctxStatic}/js/jquery.cookie.js" type="text/javascript"></script>
+<script src="${ctxStatic}/portal/index.js" type="text/javascript"></script>
 <script type="text/javascript">
     jQuery(document).ready(function() {
         Layout.init();
@@ -631,6 +589,7 @@
         LayersliderInit.initLayerSlider();
         Layout.initImageZoom();
         Layout.initTouchspin();
+        IndexContent.init();
     });
 
 

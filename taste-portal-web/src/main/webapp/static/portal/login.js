@@ -2,21 +2,58 @@ var captcha;
 //注册获取验证码
 $("#register-captcha").click(function(){
     var num = $("#regPhoneNum").val();
+    if(num == null || num == ""){
+        $("#regMsg").empty();
+        $("#regDiv").show();
+        $("#regMsg").html("请输入手机号！");
+        return;
+    }
     $.ajax({
         type : "post",
-        url : "taste/getCaptcha/"+num,
+        url : "taste/getCaptcha",
+        data : {
+            phoneNum : num,
+            type : 1
+        },
+        dataType : "json",
+        success : function(data){
+            setTime();
+            $("#regDiv").hide();
+            captcha = data;
+        }
+    });
+    //setTime();
+});
+
+//重置密码获取验证码
+$("#forget-captcha").click(function(){
+    var num = $("#forget-phone").val();
+    if(num == null || num == ""){
+        $("#forgetMsg").empty();
+        $("#forgetDiv").show();
+        $("#forgetMsg").html("请输入手机号！");
+        return;
+    }
+    $.ajax({
+        type : "post",
+        url : "taste/getCaptcha",
+        data : {
+            phoneNum : num,
+            type : 2
+        },
         dataType : "json",
         success : function(data){
             setTime();
             captcha = data;
+            $("#forgetDiv").hide();
         }
     });
-    setTime();
+    //setTime();
 });
 
 //设置注册验证码一分钟获取一次
 var countdown=60;
-var obj = $("#register-captcha");
+var obj = $(".captcha");
 function setTime() {
     if (countdown == 0) {
         obj.removeAttr("disabled");
@@ -31,10 +68,7 @@ function setTime() {
     setTimeout(function () {
         setTime();
     }, 1000);
-
-
 }
-
 
 //设置登录验证码刷新
 $("#code").click(function(){
@@ -64,9 +98,10 @@ function isMobileMethod(phone){
         }
     }
 }
-//密码校验
+
+var pwdReg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/;//6到16位数字与字母组合
+//注册密码校验
 function isPassWordMethod(word,rword){
-    var pwdReg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/;//6到16位数字与字母组合
     if(pwdReg.test(word)){
         if(word == rword){
             return true;
@@ -90,6 +125,33 @@ function isPassWordMethod(word,rword){
         }
     }
 }
+
+//重置密码校验
+function isForgetPwdMethod(word,rword){
+    if(pwdReg.test(word)){
+        if(word == rword){
+            return true;
+        }else{
+            $("#forgetMsg").empty();
+            $("#forgetDiv").show();
+            $("#forgetMsg").html("两次密码不匹配！请重新输入！");
+            return false;
+        }
+    }else {
+        if(word == "" || word == null || rword == "" || rword == null){
+            $("#forgetMsg").empty();
+            $("#forgetDiv").show();
+            $("#forgetMsg").html("密码不能为空！");
+            return false;
+        }else{
+            $("#forgetMsg").empty();
+            $("#forgetDiv").show();
+            $("#forgetMsg").html("密码格式错误！密码8到16位数字与字母组合！");
+            return false;
+        }
+    }
+}
+
 //校验注册验证码
 var regCode = $("#captcha").keyup(function(){
     var code = $("#captcha").val();
@@ -106,6 +168,61 @@ var regCode = $("#captcha").keyup(function(){
         }
     }else{
         $("#regDiv").hide();
+    }
+});
+
+//校验重置密码验证码
+var forgetCode = $("#forgetCaptcha").keyup(function(){
+    var code = $("#forgetCaptcha").val();
+    var codeReg = /^\d{6}$/;
+    if(code.length == 6){
+        if(codeReg.test(code)){
+            if(code == captcha){
+                $("#forgetMsg").empty();
+                $("#forgetDiv").show();
+                $("#forgetMsg").html("身份校验成功！请输入新密码！");
+                $(".forgetPssword").show();
+                return true;
+            }
+            $("#forgetMsg").empty();
+            $("#forgetDiv").show();
+            $("#forgetMsg").html("验证码错误！请重新输入！");
+            return false;
+        }
+    }else{
+        $("#regDiv").hide();
+    }
+});
+
+//重置密码提交
+$("#forgetBtn").click(function(){
+    var forPhoneNum = $("#forget-phone").val();
+    var forPassword = $("#forPassword").val();
+    var forRPassword = $("#forRpassword").val();
+    var captcha = $("#forgetCaptcha").val();
+    if(isMobileMethod(forPhoneNum) && isForgetPwdMethod(forPassword,forRPassword) && forgetCode){
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "taste/forgetPassword",
+            data: $(".forget-form").serialize(),
+            success : function (result) {
+                if (result == "200") {
+                    $("#forgetMsg").empty();
+                    $("#forgetDiv").show();
+                    $("#forgetMsg").html("重置密码成功！3秒后自动跳转登录页面。。。");
+                    setTimeout(function () {
+                        location.reload();
+                    }, 3000);
+                } else {
+                    $("#forgetMsg").empty();
+                    $("#forgetDiv").show();
+                    $("#forgetMsg").html("重置密码失败！请重试！");
+                }
+            }
+        });
+    }else{
+        return false;
     }
 });
 
@@ -191,7 +308,6 @@ $("#loginBtn").click(function (){
         return false;
     }
 });
-
 
 //将登录验证码获取至页面
 function getCode(){

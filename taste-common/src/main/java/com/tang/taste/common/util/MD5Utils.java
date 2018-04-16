@@ -87,6 +87,11 @@ public class MD5Utils {
     public static void main(String[] args) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         byte[] btye = getSalt();
         System.out.println(Base64.getEncoder().encodeToString(btye));
+        //Base64 Decoded
+        byte[] decoded = Base64.getDecoder().decode("bPadx6VwKC9ySAEF");
+
+        //Verify original content
+        System.out.println(Base64.getEncoder().encodeToString(decoded));
         System.out.println(getEncryptedPwd("zhangsan",btye));
         byte[] btyes = Base64.getDecoder().decode("6tv/2oQA43X7EEiD");
         System.out.println(getEncryptedPwd("zhangsan",btye));

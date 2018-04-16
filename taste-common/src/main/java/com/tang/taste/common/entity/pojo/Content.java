@@ -1,9 +1,11 @@
 package com.tang.taste.common.entity.pojo;
 
+import com.tang.taste.common.entity.extra.ContentExtra;
+
 import java.io.Serializable;
 import java.util.Date;
 
-public class Content implements Serializable {
+public class Content extends ContentExtra implements Serializable {
     private Integer id;
 
     private Integer categoryId;

@@ -6,4 +6,5 @@
 <c:set var="ctxStatic" value="${pageContext.request.contextPath}/static"/>
 <script type="text/javascript">
    var rootPath = "${ctx}";
+   var rootPathStatic = "${ctxStatic}";
 </script>

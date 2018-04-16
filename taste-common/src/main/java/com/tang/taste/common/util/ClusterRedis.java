@@ -74,4 +74,8 @@ public class ClusterRedis implements IRedis{
     public void hdel(String mKey, String... sKey) {
         jedisCluster.hdel(mKey, sKey);
     }
+
+    public String ping(){
+        return jedisCluster.ping();
+    }
 }
