@@ -62,28 +62,14 @@
         <!-- BEGIN CART -->
         <div class="top-cart-block" >
             <div class="top-cart-info">
-                <a href="javascript:void(0);" class="top-cart-info-count"><span id="top-cart-info-count">2</span>件</a>
-                <a href="javascript:void(0);" class="top-cart-info-value">￥<span id="top-cart-info-value">2463</span></a>
+                <a href="javascript:void(0);" class="top-cart-info-count"><span id="top-cart-info-count">0</span>件</a>
+                <a href="javascript:void(0);" class="top-cart-info-value">￥<span id="top-cart-info-value">0</span></a>
             </div>
             <i class="fa fa-shopping-cart"></i>
             <!--shopping cart-->
             <div class="top-cart-content-wrapper">
                 <div class="top-cart-content">
                     <ul class="scroller" style="height: 100px;">
-                        <li>
-                            <a href="shop-item.html"><img src="${ctxStatic}/assets/frontend/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
-                            <span class="cart-content-count">x 1</span>
-                            <strong><a href="shop-item.html">Rolex Classic Watch</a></strong>
-                            <em>￥1233</em>
-                            <a href="javascript:void(0);" class="del-goods">&nbsp;</a>
-                        </li>
-                        <li>
-                            <a href="shop-item.html"><img src="${ctxStatic}/assets/frontend/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
-                            <span class="cart-content-count">x 1</span>
-                            <strong><a href="shop-item.html">Rolex Classic Watch</a></strong>
-                            <em>￥1230</em>
-                            <a href="javascript:void(0);" class="del-goods">&nbsp;</a>
-                        </li>
                     </ul>
                     <div class="text-right">
                         <a href="/toShopShoppingCart" class="btn btn-default">查看</a>
@@ -315,7 +301,7 @@
                         </div>
                         <h3><a href="shop-item.html" class="aNewProduct"></a></h3>
                         <div class="pi-price priceNewProduct" ></div>
-                        <a href="javascript:;" id="add2cart" class="btn btn-default add2cart">加入购物车</a>
+                        <a href="javascript:;"  class="btn btn-default add2cart">加入购物车</a>
                         <div class="sticker sticker-sale"></div>
                     </div>
                 </div>
@@ -431,13 +417,13 @@
                             <div class="pi-img-wrapper">
                                 <img  class="img-responsive imgRecommend" alt="Berry Lace Dress">
                                 <div>
-                                    <a  class="btn btn-default fancybox-button recommendZoom">Zoom</a>
-                                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
+                                    <a  class="btn btn-default fancybox-button recommendZoom">缩放</a>
+                                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">查看</a>
                                 </div>
                             </div>
                             <h3><a href="shop-item.html" class="aRecommend"></a></h3>
                             <div class="pi-price priceRecommend"></div>
-                            <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
+                            <a href="javascript:;" class="btn btn-default add2cart">加入购物车</a>
                         </div>
                     </div>
                     <div>
@@ -445,13 +431,13 @@
                             <div class="pi-img-wrapper">
                                 <img  class="img-responsive imgRecommend" alt="Berry Lace Dress">
                                 <div>
-                                    <a  class="btn btn-default fancybox-button recommendZoom">Zoom</a>
-                                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
+                                    <a  class="btn btn-default fancybox-button recommendZoom">缩放</a>
+                                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">查看</a>
                                 </div>
                             </div>
                             <h3><a href="shop-item.html" class="aRecommend"></a></h3>
                             <div class="pi-price priceRecommend"></div>
-                            <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
+                            <a href="javascript:;" class="btn btn-default add2cart">加入购物车</a>
                         </div>
                     </div>
                     <div>
@@ -459,13 +445,13 @@
                             <div class="pi-img-wrapper">
                                 <img  class="img-responsive imgRecommend" alt="Berry Lace Dress">
                                 <div>
-                                    <a class="btn btn-default fancybox-button recommendZoom">Zoom</a>
-                                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
+                                    <a class="btn btn-default fancybox-button recommendZoom">缩放</a>
+                                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">查看</a>
                                 </div>
                             </div>
                             <h3><a href="shop-item.html" class="aRecommend"></a></h3>
                             <div class="pi-price priceRecommend"></div>
-                            <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
+                            <a href="javascript:;" class="btn btn-default add2cart">加入购物车</a>
                         </div>
                     </div>
                     <div>
@@ -473,13 +459,13 @@
                             <div class="pi-img-wrapper">
                                 <img  class="img-responsive imgRecommend" alt="Berry Lace Dress">
                                 <div>
-                                    <a class="btn btn-default fancybox-button recommendZoom">Zoom</a>
-                                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
+                                    <a class="btn btn-default fancybox-button recommendZoom">缩放</a>
+                                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">查看</a>
                                 </div>
                             </div>
                             <h3><a href="shop-item.html" class="aRecommend"></a></h3>
                             <div class="pi-price priceRecommend"></div>
-                            <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
+                            <a href="javascript:;" class="btn btn-default add2cart">加入购物车</a>
                         </div>
                     </div>
                 </div>
@@ -590,6 +576,7 @@
         Layout.initImageZoom();
         Layout.initTouchspin();
         IndexContent.init();
+        ShoppingCart.init();
     });
 
 

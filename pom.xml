@@ -12,6 +12,7 @@
         <module>taste-portal-dao</module>
         <module>taste-portal-service</module>
         <module>taste-portal-web</module>
+        <module>taste-manage-dao</module>
     </modules>
     <packaging>pom</packaging>
 

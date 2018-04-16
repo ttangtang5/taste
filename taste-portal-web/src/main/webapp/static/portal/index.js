@@ -9,7 +9,7 @@ var IndexContent = function (){
     var initIndexContent = function (){
         $.ajax({
             type : 'post',
-            url : '/content/IndexsLideshow',
+            url : ctx+'/content/IndexsLideshow',
             dataType : 'json',
             success : function(data){
                 for(var i = 0; i < data.length; i++){
@@ -25,7 +25,7 @@ var IndexContent = function (){
     var initIndexNewProduct = function(){
         $.ajax({
             type : 'post',
-            url : '/content/NewProduct',
+            url : ctx+'/content/NewProduct',
             dataType : 'json',
             success : function(data){
                 for(var i = 0; i < data.length; i++){
@@ -47,7 +47,7 @@ var IndexContent = function (){
     var initIndexRecommend = function(){
         $.ajax({
             type : 'post',
-            url : '/content/Recommend',
+            url : ctx+'/content/Recommend',
             dataType : 'json',
             success : function(data){
                 for(var i = 0; i < data.length; i++){
@@ -66,7 +66,7 @@ var IndexContent = function (){
      * 搜索框
      */
     $("#search").click(function(){
-        window.location.href="/toShopProductList";
+        window.location.href=ctx+"/toShopProductList";
     });
 
     return {
