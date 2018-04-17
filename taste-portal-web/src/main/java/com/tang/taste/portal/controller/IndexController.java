@@ -49,6 +49,7 @@ public class IndexController {
                 String msg = userService.login(user1, "0", request, null);
                 if("200".equals(msg)){
                     SessionUtils.setAttr(request,"id",user1.getId());
+                    SessionUtils.setUser(request,user1);
                     return "redirect:toIndex";
                 }
             }

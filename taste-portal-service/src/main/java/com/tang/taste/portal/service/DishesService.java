@@ -33,4 +33,20 @@ public class DishesService {
         return list;
     }
 
+    /**
+     * 通过商品名称获取信息
+     * @param goodsName
+     * @return
+     */
+    public Dishes getDishesByGoodsName(String goodsName){
+        DishesExample dishesExample = new DishesExample();
+        dishesExample.createCriteria().andDishesNameEqualTo(goodsName);
+        dishesExample.createCriteria().andDelFlagEqualTo(0);
+        List<Dishes> dishes = dishesDao.selectByExample(dishesExample);
+        if(dishes != null && dishes.size() > 0){
+            return dishes.get(0);
+        }
+        return null;
+    }
+
 }

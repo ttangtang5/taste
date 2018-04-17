@@ -35,13 +35,76 @@
 
 <!-- Body BEGIN -->
 <body class="ecommerce">
+<!-- BEGIN HEADER -->
+<div class="header">
+    <div class="container">
+        <a class="site-logo" href="shop-index.html"><img src="${ctxStatic}/assets/frontend/layout/img/logos/logo-shop-red.png" alt="餐厅图标"></a>
 
+        <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
+
+        <!-- BEGIN CART -->
+        <div class="top-cart-block" >
+            <div class="top-cart-info">
+                <a href="javascript:void(0);" class="top-cart-info-count"><span id="top-cart-info-count">0</span>件</a>
+                <a href="javascript:void(0);" class="top-cart-info-value">￥<span id="top-cart-info-value">0</span></a>
+            </div>
+            <i class="fa fa-shopping-cart"></i>
+            <!--shopping cart-->
+            <div class="top-cart-content-wrapper">
+                <div class="top-cart-content">
+                    <ul class="scroller" style="height: 100px;">
+                    </ul>
+                    <div class="text-right">
+                        <a href="/toShopOrder" class="btn btn-primary">结算</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--END CART -->
+
+        <!-- BEGIN NAVIGATION -->
+        <div class="header-navigation">
+            <ul>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
+                        分类一
+                    </a>
+                </li>
+                <li class="dropdown dropdown-megamenu">
+                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
+                        分类二
+                    </a>
+                </li>
+                <li><a href="shop-item.html">分类三</a></li>
+                <li class="dropdown dropdown100 nav-catalogue">
+                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
+                        分类四
+                    </a>
+                </li>
+
+                <!-- BEGIN TOP SEARCH -->
+                <li class="menu-search">
+                    <div class="input-group input-medium">
+                        <input type="text" class="form-control" placeholder="请输入搜索内容">
+                        <span class="input-group-btn">
+											<button id="search" class="btn blue" type="button">搜索</button>
+											</span>
+                    </div>
+                </li>
+                <!-- END TOP SEARCH -->
+            </ul>
+        </div>
+        <!-- END NAVIGATION -->
+    </div>
+</div>
+<!-- Header END -->
 <div class="main">
     <div class="container">
         <ul class="breadcrumb">
             <li><a href="index.html">主页</a></li>
             <li class="active">搜索</li>
         </ul>
+
         <!-- BEGIN SIDEBAR & CONTENT -->
         <div class="row margin-bottom-40">
             <!-- BEGIN SIDEBAR -->
@@ -110,7 +173,7 @@
                         <div class="col-md-6">
                             <h1>关于搜索 <em>shoes</em>结果</h1>
                         </div>
-                        <div class="col-md-6">
+                        <%--<div class="col-md-6">
                             <form action="#">
                                 <div class="input-group">
                                     <input type="text" placeholder="请输入搜索内容" class="form-control">
@@ -119,7 +182,7 @@
                       </span>
                                 </div>
                             </form>
-                        </div>
+                        </div>--%>
                     </div>
                 </div>
                 <div class="row list-view-sorting clearfix">
@@ -406,15 +469,17 @@
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js" type="text/javascript"></script><!-- for slider-range -->
 
 <script src="${ctxStatic}/assets/frontend/layout/scripts/layout.js" type="text/javascript"></script>
+<script src="${ctxStatic}/portal/shopping_cart.js" type="text/javascript"></script>
+<script src="${ctxStatic}/js/jquery.cookie.js" type="text/javascript"></script>
 <script type="text/javascript">
     jQuery(document).ready(function() {
         Layout.init();
         Layout.initOWL();
-        Layout.initTwitter();
         Layout.initImageZoom();
         Layout.initTouchspin();
         Layout.initUniform();
         Layout.initSliderRange();
+        ShoppingCart.init();
     });
 </script>
 <!-- END PAGE LEVEL JAVASCRIPTS -->

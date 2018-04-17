@@ -112,6 +112,7 @@ public class UserController {
         //获取session
         SessionUtils.removeAttr(request,"id");
         SessionUtils.removeAttr(request,"username");
+        SessionUtils.removeUser(request);
         //取消cookie
         CookieUtils.deleteCookie(request,response,"id");
         return "portal/shop_index";

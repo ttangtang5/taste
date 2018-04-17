@@ -26,7 +26,7 @@
     <link href="${ctxStatic}/assets/admin/layout3/css/layout.css" rel="stylesheet" type="text/css">
     <link href="${ctxStatic}/assets/admin/layout3/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color">
     <!-- END THEME STYLES -->
-    <link rel="shortcut icon" href="favicon.ico"/>
+    <link href="${ctxStatic}/assets/global/plugins/bootstrap-table/bootstrap-table.css" rel="stylesheet" type="text/css"/>
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -127,39 +127,31 @@
                                                                         </div>
                                                                         <!--/row-->
                                                                         <h3 class="form-section">订单信息</h3>
-                                                                        <div class="row">
-                                                                            <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label col-md-4">商品名称:</label>
-                                                                                    <div class="col-md-6">
-                                                                                        <p class="form-control-static">
-                                                                                            产品1
-                                                                                        </p>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <!--/span-->
-                                                                            <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label col-md-3">数量:</label>
-                                                                                    <div class="col-md-6">
-                                                                                        <p class="form-control-static">
-                                                                                            New York
-                                                                                        </p>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <!--/span-->
-                                                                            <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label col-md-3">价格:</label>
-                                                                                    <div class="col-md-6">
-                                                                                        <p class="form-control-static">
-                                                                                            New York
-                                                                                        </p>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
+                                                                        <table id="cartTable"
+                                                                               data-classes="table-no-bordered"
+                                                                               data-toggle="table" data-cache="true"
+                                                                               data-url="${ctx}/shoppingCart/cartDetailShow"
+                                                                               <%--data-pagination="true"--%>
+                                                                               data-tool-bar="#toolbar">
+                                                                            <thead>
+                                                                            <tr>
+                                                                                <%--<th data-field="status" data-checkbox="true"></th>--%>
+                                                                                <th data-field="dishesId" data-visible="false"></th>
+                                                                                <th data-field="dishesPicture" data-formatter="picture">图片</th>
+                                                                                <th data-field="dishesName" data-formatter="dishesName" >名称</th>
+                                                                                <th data-field="num" data-formatter="quantity">数量</th>
+                                                                                <th data-field="dishesPrice" data-formatter="dishesPrice" >价格</th>
+                                                                                <th data-field="dishesTotal" data-formatter="dishesPrice">总计</th>
+                                                                            </tr>
+                                                                            </thead>
+                                                                        </table>
+                                                                        <div class="shopping-total">
+                                                                            <ul>
+                                                                                <li class="shopping-total-price">
+                                                                                    <em>总计</em>
+                                                                                    <strong class="price"><span>$</span>${total}</strong>
+                                                                                </li>
+                                                                            </ul>
                                                                         </div>
                                                                         <!--/row-->
                                                                         <!--/row-->
@@ -169,7 +161,16 @@
                                                                                 <div class="form-group">
                                                                                     <label class="control-label col-md-2">用餐人数:</label>
                                                                                     <div class="col-md-1">
-                                                                                        <select class="form-control input-circle"></select>
+                                                                                        <select class="form-control input-circle">
+                                                                                            <option value="1">1</option>
+                                                                                            <option value="2">2</option>
+                                                                                            <option value="3">3</option>
+                                                                                            <option value="4">4</option>
+                                                                                            <option value="5">5</option>
+                                                                                            <option value="6">6</option>
+                                                                                            <option value="8">8</option>
+                                                                                            <option value="10">备注人数</option>
+                                                                                        </select>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -179,7 +180,7 @@
                                                                                 <div class="form-group">
                                                                                     <label class="control-label col-md-2">备注:</label>
                                                                                     <div class="col-md-6">
-                                                                                        <textarea style="height: 80px;width: 300px"></textarea>
+                                                                                        <textarea style="height: 80px;width: 300px" maxlength="50"></textarea>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -191,8 +192,8 @@
                                                                             <div class="col-md-6">
                                                                                 <div class="row">
                                                                                     <div class="col-md-offset-3 col-md-9">
-                                                                                        <button type="button" class="btn default">取消</button>
-                                                                                        <button type="submit" class="btn green"><i class="fa fa-pencil"></i> 付款</button>
+                                                                                        <button type="button"  class="btn default">取消</button>
+                                                                                        <button type="submit"  class="btn green"><i class="fa fa-pencil"></i> 付款</button>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -259,6 +260,7 @@
 <script src="${ctxStatic}/assets/admin/pages/scripts/ecommerce-orders-view.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <!--自定义js-->
+<script src="${ctxStatic}/assets/global/plugins/bootstrap-table/bootstrap-table.js" type="text/javascript"></script>
 <script src="${ctxStatic}/layer/layer.js" type="text/javascript"></script>
 <script>
     jQuery(document).ready(function() {
@@ -287,6 +289,20 @@
         });
     });
 
+    function picture(value){
+        return '<img style="width:68px;height:80px" src="${ctxStatic}'+value+'"/>';
+    }
+
+    function dishesName(value){
+        return '<strong style="font-size: 18px;font-weight: normal;text-align:center">'+value+'</strong>';
+
+    }
+    function dishesPrice(value) {
+        return '<strong style="color: red;font-size: 21px;font-weight: normal;text-align:center"><span>￥</span>'+value+'</strong>';
+    }
+    function quantity(value){
+        return  '<strong style="font-size: 18px;font-weight: normal;text-align:center">'+value+'</strong>';
+    }
 </script>
 <!-- END JAVASCRIPTS -->
 </body>

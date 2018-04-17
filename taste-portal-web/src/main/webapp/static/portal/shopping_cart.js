@@ -4,7 +4,7 @@
 var ShoppingCart = function() {
 
     /**
-     * 初始化购物车
+     * 首页初始化购物车
      */
     var init = function(){
         //获取cookie中原有的商品列表
@@ -58,14 +58,14 @@ var ShoppingCart = function() {
         });
     }
     /**
-     * 购物车移除物品
+     * 首页购物车移除物品
      */
     $(".del-goods").click(function() {
         delClick();
     });
 
     /**
-     * 删除事件处理
+     * 首页删除事件处理
      */
     var delClick = function (){
         var target = event.target;
@@ -166,6 +166,44 @@ var ShoppingCart = function() {
         });
     });
 
+    var initCart = function(){
+        $.ajax({
+            type : 'post',
+            url : ctx+'/shoppingCart/cartDetailShow',
+            dataType : 'json',
+            success : function(data){
+                console.info(data);
+                var html = '<tr> ' +
+                    '            <td > ' +
+                    '                <input type="checkbox"> ' +
+                    '            </td> ' +
+                    '            <td class="goods-page-image"> ' +
+                    '                <a href="javascript:;"><img src="${ctxStatic}/assets/frontend/pages/img/products/model3.jpg" alt="Berry Lace Dress"></a> ' +
+                    '            </td> ' +
+                    '            <td class="goods-page-ref-no"> ' +
+                    '                javc2133 ' +
+                    '            </td> ' +
+                    '            <td class="goods-page-quantity"> ' +
+                    '                <div class="product-quantity"> ' +
+                    '                    <input id="product-quantity" type="text" value="1" readonly class="form-control input-sm"> ' +
+                    '                </div> ' +
+                    '            </td> ' +
+                    '            <td class="goods-page-price"> ' +
+                    '                <strong><span>$</span>47.00</strong> ' +
+                    '            </td> ' +
+                    '            <td class="goods-page-total"> ' +
+                    '                <strong><span>$</span>47.00</strong> ' +
+                    '            </td> ' +
+                    '            <td class="del-goods-col"> ' +
+                    '                <a class="del-goods" href="javascript:;">&nbsp;</a> ' +
+                    '            </td> ' +
+                    '        </tr>';
+                $("#tableTbody").append(html);
+            }
+        });
+    }
+
+
     return {
         init : function(){
             init();
@@ -173,6 +211,9 @@ var ShoppingCart = function() {
         initClick : function(){
             delClick();
         },
+        initCart : function () {
+            initCart();
+        }
     };
 
 

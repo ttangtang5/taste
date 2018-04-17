@@ -78,6 +78,7 @@ public class UserService {
                 //clusterRedis.setexKeyValue(id,60*60,value);
                 //将用户id存放至session
                 request.getSession(true).setAttribute("id",String.valueOf(list.get(0).getId()));
+                SessionUtils.setUser(request,list.get(0));
                 //自动登录
                 if("1".equals(remember)){
                     StringBuilder str = new StringBuilder();

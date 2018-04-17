@@ -63,6 +63,7 @@
         <downloadSources>true</downloadSources>
         <dysmsapi.version>1.0.0</dysmsapi.version>
         <sdkcore.version>3.3.1</sdkcore.version>
+        <solrj.version>4.10.3</solrj.version>
     </properties>
 
     <build>
@@ -431,6 +432,12 @@
                 <groupId>com.aliyun</groupId>
                 <artifactId>aliyun-java-sdk-core</artifactId>
                 <version>${sdkcore.version}</version>
+            </dependency>
+            <!-- solr客户端 -->
+            <dependency>
+                <groupId>org.apache.solr</groupId>
+                <artifactId>solr-solrj</artifactId>
+                <version>${solrj.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

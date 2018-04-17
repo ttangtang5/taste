@@ -4,9 +4,9 @@ import com.tang.taste.common.entity.pojo.Dishes;
 
 /**
  * FileName: ContentExtra
- * Author:   16
+ * @Author:   16
  * Date:     2018/4/3 11:10
- * Description:
+ * Description:内容扩展类
  */
 public class ContentExtra {
 

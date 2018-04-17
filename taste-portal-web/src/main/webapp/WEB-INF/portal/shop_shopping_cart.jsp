@@ -27,7 +27,7 @@
     <link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"><!-- for slider-range -->
     <link href="${ctxStatic}/assets/global/plugins/rateit/src/rateit.css" rel="stylesheet" type="text/css">
     <!-- Page level plugin styles END -->
-
+    <link href="${ctxStatic}/assets/global/plugins/bootstrap-table/bootstrap-table.css" rel="stylesheet" type="text/css"/>
     <!-- Theme styles START -->
     <!-- Theme styles END -->
 </head>
@@ -45,78 +45,97 @@
                 <h1>购物车</h1>
                 <div class="goods-page">
                     <div class="goods-data clearfix">
-                        <div class="table-wrapper-responsive">
-                            <table summary="Shopping cart">
-                                <tr>
-                                    <th class="goods-page-image">图片</th>
-                                    <th class="goods-page-description">描述</th>
-                                    <th class="goods-page-ref-no">名称</th>
-                                    <th class="goods-page-quantity">数量</th>
-                                    <th class="goods-page-price">价格</th>
-                                    <th class="goods-page-total" colspan="2">总计</th>
-                                </tr>
-                                <tr>
-                                    <td class="goods-page-image">
-                                        <a href="javascript:;"><img src="${ctxStatic}/assets/frontend/pages/img/products/model3.jpg" alt="Berry Lace Dress"></a>
-                                    </td>
-                                    <td class="goods-page-description">
-                                        <h3><a href="javascript:;">Cool green dress with red bell</a></h3>
-                                        <p><strong>Item 1</strong> - Color: Green; Size: S</p>
-                                        <em>More info is here</em>
-                                    </td>
-                                    <td class="goods-page-ref-no">
-                                        javc2133
-                                    </td>
-                                    <td class="goods-page-quantity">
-                                        <div class="product-quantity">
-                                            <input id="product-quantity" type="text" value="1" readonly class="form-control input-sm">
-                                        </div>
-                                    </td>
-                                    <td class="goods-page-price">
-                                        <strong><span>$</span>47.00</strong>
-                                    </td>
-                                    <td class="goods-page-total">
-                                        <strong><span>$</span>47.00</strong>
-                                    </td>
-                                    <td class="del-goods-col">
-                                        <a class="del-goods" href="javascript:;">&nbsp;</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="goods-page-image">
-                                        <a href="javascript:;"><img src="${ctxStatic}/assets/frontend/pages/img/products/model4.jpg" alt="Berry Lace Dress"></a>
-                                    </td>
-                                    <td class="goods-page-description">
-                                        <h3><a href="javascript:;">Cool green dress with red bell</a></h3>
-                                        <p><strong>Item 1</strong> - Color: Green; Size: S</p>
-                                        <em>More info is here</em>
-                                    </td>
-                                    <td class="goods-page-ref-no">
-                                        javc2133
-                                    </td>
-                                    <td class="goods-page-quantity">
-                                        <div class="product-quantity">
-                                            <input id="product-quantity2" type="text" value="1" readonly class="form-control input-sm">
-                                        </div>
-                                    </td>
-                                    <td class="goods-page-price">
-                                        <strong><span>$</span>47.00</strong>
-                                    </td>
-                                    <td class="goods-page-total">
-                                        <strong><span>$</span>47.00</strong>
-                                    </td>
-                                    <td class="del-goods-col">
-                                        <a class="del-goods" href="javascript:;">&nbsp;</a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-
+                        <%--
+                                                <div class="table-wrapper-responsive">
+                        --%>
+                        <%--<table summary="Shopping cart">
+                            <tr>
+                                <th class="goods-page-image">图片</th>
+                                <th class="goods-page-description">描述</th>
+                                <th class="goods-page-ref-no">名称</th>
+                                <th class="goods-page-quantity">数量</th>
+                                <th class="goods-page-price">价格</th>
+                                <th class="goods-page-total" colspan="2">总计</th>
+                            </tr>
+                            <tr>
+                                <td class="goods-page-image">
+                                    <a href="javascript:;"><img src="${ctxStatic}/assets/frontend/pages/img/products/model3.jpg" alt="Berry Lace Dress"></a>
+                                </td>
+                                <td class="goods-page-description">
+                                    <h3><a href="javascript:;">Cool green dress with red bell</a></h3>
+                                    <p><strong>Item 1</strong> - Color: Green; Size: S</p>
+                                    <em>More info is here</em>
+                                </td>
+                                <td class="goods-page-ref-no">
+                                    javc2133
+                                </td>
+                                <td class="goods-page-quantity">
+                                    <div class="product-quantity">
+                                        <input id="product-quantity" type="text" value="1" readonly class="form-control input-sm">
+                                    </div>
+                                </td>
+                                <td class="goods-page-price">
+                                    <strong><span>$</span>47.00</strong>
+                                </td>
+                                <td class="goods-page-total">
+                                    <strong><span>$</span>47.00</strong>
+                                </td>
+                                <td class="del-goods-col">
+                                    <a class="del-goods" href="javascript:;">&nbsp;</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="goods-page-image">
+                                    <a href="javascript:;"><img src="${ctxStatic}/assets/frontend/pages/img/products/model4.jpg" alt="Berry Lace Dress"></a>
+                                </td>
+                                <td class="goods-page-description">
+                                    <h3><a href="javascript:;">Cool green dress with red bell</a></h3>
+                                    <p><strong>Item 1</strong> - Color: Green; Size: S</p>
+                                    <em>More info is here</em>
+                                </td>
+                                <td class="goods-page-ref-no">
+                                    javc2133
+                                </td>
+                                <td class="goods-page-quantity">
+                                    <div class="product-quantity">
+                                        <input id="product-quantity2" type="text" value="1" readonly class="form-control input-sm">
+                                    </div>
+                                </td>
+                                <td class="goods-page-price">
+                                    <strong><span>$</span>47.00</strong>
+                                </td>
+                                <td class="goods-page-total">
+                                    <strong><span>$</span>47.00</strong>
+                                </td>
+                                <td class="del-goods-col">
+                                    <a class="del-goods" href="javascript:;">&nbsp;</a>
+                                </td>
+                            </tr>
+                        </table>--%>
+                        <table id="cartTable"
+                               data-classes="table-no-bordered"
+                               data-toggle="table" data-cache="true"
+                               data-url="${ctx}/shoppingCart/cartDetailShow"
+                               data-pagination="true"
+                               data-tool-bar="#toolbar">
+                            <thead>
+                            <tr>
+                                <%--<th data-field="status" data-checkbox="true"></th>--%>
+                                <th data-field="dishesId" data-visible="false"></th>
+                                <th data-field="dishesPicture" data-formatter="picture">图片</th>
+                                <th data-field="dishesName" data-formatter="dishesName" >名称</th>
+                                <th data-field="num" data-formatter="quantity">数量</th>
+                                <th data-field="dishesPrice" data-formatter="dishesPrice" >价格</th>
+                                <th data-field="dishesTotal" data-formatter="dishesPrice">总计</th>
+                            </tr>
+                            </thead>
+                        </table>
+                        <%--</div>--%>
                         <div class="shopping-total">
                             <ul>
                                 <li class="shopping-total-price">
-                                    <em>Total</em>
-                                    <strong class="price"><span>$</span>50.00</strong>
+                                    <em>总计</em>
+                                    <strong class="price"><span>$</span>${total}</strong>
                                 </li>
                             </ul>
                         </div>
@@ -128,9 +147,8 @@
             <!-- END CONTENT -->
         </div>
         <!-- END SIDEBAR & CONTENT -->
-
         <!-- BEGIN SIMILAR PRODUCTS -->
-        <div class="row margin-bottom-40">
+        <%--<div class="row margin-bottom-40">
             <div class="col-md-12 col-sm-12">
                 <h2>更多产品</h2>
                 <div class="owl-carousel owl-carousel4">
@@ -222,14 +240,14 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>--%>
         <!-- END SIMILAR PRODUCTS -->
     </div>
 </div>
 
 
 <!-- BEGIN fast view of a product -->
-<div id="product-pop-up" style="display: none; width: 700px;">
+<%--<div id="product-pop-up" style="display: none; width: 700px;">
     <div class="product-page product-pop-up">
         <div class="row">
             <div class="col-md-6 col-sm-6 col-xs-3">
@@ -287,7 +305,7 @@
             <div class="sticker sticker-sale"></div>
         </div>
     </div>
-</div>
+</div>--%>
 <!-- END fast view of a product -->
 
 <!-- Load javascripts at bottom, this will reduce page load time -->
@@ -311,17 +329,36 @@
 <script src="${ctxStatic}/assets/global/plugins/rateit/src/jquery.rateit.js" type="text/javascript"></script>
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js" type="text/javascript"></script><!-- for slider-range -->
 
+<script src="${ctxStatic}/assets/global/plugins/bootstrap-table/bootstrap-table.js" type="text/javascript"></script>
 <script src="${ctxStatic}/assets/frontend/layout/scripts/layout.js" type="text/javascript"></script>
 <script type="text/javascript">
     jQuery(document).ready(function() {
         Layout.init();
         Layout.initOWL();
-        Layout.initTwitter();
         Layout.initImageZoom();
         Layout.initTouchspin();
         Layout.initUniform();
         Layout.initSliderRange();
     });
+
+    function picture(value){
+        return '<img style="width:68px;height:80px" src="${ctxStatic}'+value+'"/>';
+    }
+
+    function dishesName(value){
+        return '<strong style="font-size: 18px;font-weight: normal;text-align:center">'+value+'</strong>';
+
+    }
+    function dishesPrice(value) {
+        return '<strong style="color: red;font-size: 21px;font-weight: normal;text-align:center"><span>￥</span>'+value+'</strong>';
+    }
+    function quantity(value){
+        return  ' <div class="product-quantity">\n' +
+            '<input id="product-quantity" type="number" value="'+value+'" min="1"  class="form-control input-sm" style="display: block;">' +
+            '  </div>';
+    }
+
+
 </script>
 <!-- END PAGE LEVEL JAVASCRIPTS -->
 </body>
