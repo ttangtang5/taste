@@ -35,7 +35,7 @@ var ShoppingCart = function() {
                     var countNum = 0;
                     for(var i = 0;i < msg.length; i++) {
                         for(var m = 0;m < names.length; m++){
-                            if(msg[i].dishesName == names[m]){
+                            if(msg[i].id == names[m]){
                                 var html = $('<li' +
                                     '                       <a href="shop-item.html"><img src="'+rootPathStatic+msg[i].picture+'" alt="Rolex Classic Watch" width="37" height="34"></a>' +
                                     '                       <span class="cart-content-count goodsNum" >x ' + num[m] + '</span>' +
@@ -72,17 +72,24 @@ var ShoppingCart = function() {
         var li = $(target).parent();
         var price = li.find("em").html().substr(1);
         var name = li.find(".goodsName").html().trim();
-        console.info($.cookie(name));
-        var nums = $.cookie(name).split(":")[0];
-        $.cookie(name,'');
-        li.remove();
-        //$(this).parent()等同$(target).parent()
-        var num = $("#top-cart-info-count").html();
-        num = Number(num) - Number(nums);
-        var value = $("#top-cart-info-value").html();
-        value = Number(value) - Number(price)*Number(nums);
-        $("#top-cart-info-count").html(num);
-        $("#top-cart-info-value").html(value);
+        $.ajax({
+            type : 'post',
+            url : ctx+'/shoppingCart/removeCart',
+            dataType : 'json',
+            data : {
+                dishesName : name
+            },
+            success : function(data){
+                li.remove();
+                //$(this).parent()等同$(target).parent()
+                var num = $("#top-cart-info-count").html();
+                num = Number(num) - Number(data);
+                var value = $("#top-cart-info-value").html();
+                value = Number(value) - Number(price)*Number(data);
+                $("#top-cart-info-count").html(num);
+                $("#top-cart-info-value").html(value);
+            }
+        });
     };
 
     /**
@@ -133,7 +140,7 @@ var ShoppingCart = function() {
                 goodsPrice : price
             },
             success : function (msg){
-                var goods = $.cookie(goodsName).split("=");
+                var goods = $.cookie(String(msg.id)).split("=");
                 //判断该商品cookie中是否存在
                 if(msg.isflag == 0){
                     var html = $('<li' +

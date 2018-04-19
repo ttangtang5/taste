@@ -1,5 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tang.taste.manage.dao.DishesDao">
-
+    <!--查找出所有菜品信息-->
+    <select id="getSearchContent" resultType="com.tang.taste.common.entity.extra.SearchDishes">
+        SELECT
+            d.id,
+            d.dishes_name,
+            d.dishes_price,
+            d.picture 'dishesPicture',
+            d.`desc` 'dishesDesc',
+            t.type 'dishesTypeName'
+        FROM
+            sys_dishes d,
+            dishes_type t
+        WHERE
+            d.dishes_type = t.type_id
+            AND d.del_flag = 0
+    </select>
+    <!--无搜索信息  分页查询-->
+    <select id="getAllSearchContent"  resultType="com.tang.taste.common.entity.extra.SearchDishes">
+        SELECT
+        d.id,
+        d.dishes_name,
+        d.dishes_price,
+        d.picture 'dishesPicture',
+        d.`desc` 'dishesDesc',
+        t.type 'dishesTypeName'
+        FROM
+        sys_dishes d,
+        dishes_type t
+        WHERE
+        d.dishes_type = t.type_id
+        AND d.del_flag = 0
+        <if test="offset != null and offset != '' or offset == 0 and limit != null and limit != ''">
+            limit #{offset},#{limit}
+        </if>
+    </select>
+    <!--统计无搜索信息  分页查询-->
+    <select id="countAllSearchContent" resultType="java.lang.Long">
+        SELECT
+          count(0)
+        FROM
+        sys_dishes d,
+        dishes_type t
+        WHERE
+        d.dishes_type = t.type_id
+        AND d.del_flag = 0
+    </select>
+    <!--通过分类id查询 分页-->
+    <select id="selectDishesByCategoryId" resultType="com.tang.taste.common.entity.extra.SearchDishes">
+        SELECT
+            d.id,
+            d.dishes_name,
+            d.dishes_price,
+            d.picture 'dishesPicture',
+            d.`desc` 'dishesDesc',
+            t.type 'dishesTypeName'
+        FROM
+            sys_dishes d,
+            dishes_type t
+        WHERE
+            d.dishes_type = t.type_id
+            AND d.del_flag = 0
+            AND type_id = #{categoryId}
+        <if test="offset != null and offset != '' or offset == 0 and limit != null and limit != ''">
+            limit #{offset},#{limit}
+        </if>
+    </select>
+    <!--统计类型为categoryId代理数量-->
+    <select id="countDishesByCategoryId" resultType="java.lang.Long">
+        SELECT
+            count(0)
+        FROM
+            sys_dishes d,
+            dishes_type t
+        WHERE
+            d.dishes_type = t.type_id
+            AND d.del_flag = 0
+            AND type_id = #{categoryId}
+    </select>
 </mapper>

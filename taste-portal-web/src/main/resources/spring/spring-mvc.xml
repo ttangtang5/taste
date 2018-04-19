@@ -7,6 +7,8 @@
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
+	<!--全局异常处理-->
+	<bean class="com.tang.taste.global.exception.GlobalExceptionResolver"/>
 	<!--注入solrServer-->
 	<!--单机版solr-->
 	<bean id="httpSolrServer" class="org.apache.solr.client.solrj.impl.HttpSolrServer" >
@@ -14,7 +16,7 @@
 	</bean>
 	<!-- 配置注解驱动 -->
 	<mvc:annotation-driven />
-    <context:property-placeholder location="classpath:properties/resource.properties" />
+    <context:property-placeholder location="classpath:properties/*.properties" ignore-unresolvable="true" />
     <!-- 视图解析器 -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

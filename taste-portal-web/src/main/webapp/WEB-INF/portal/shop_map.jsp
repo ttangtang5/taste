@@ -155,7 +155,6 @@
         return document.getElementById(id);
     }
 
-
     map.addControl(new BMap.NavigationControl());
     var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
         {"input" : "suggestId"

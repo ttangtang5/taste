@@ -1,8 +1,11 @@
 package com.tang.taste.portal.service;
 
 import com.tang.taste.common.entity.pojo.User;
+import com.tang.taste.common.entity.pojo.UserAddress;
+import com.tang.taste.common.entity.pojo.UserAddressExample;
 import com.tang.taste.common.entity.pojo.UserExample;
 import com.tang.taste.common.util.*;
+import com.tang.taste.portal.dao.UserAddressDao;
 import com.tang.taste.portal.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +31,8 @@ public class UserService {
     private UserDao userDao;
     @Autowired
     private ClusterRedis clusterRedis;
-
+    @Autowired
+    private UserAddressDao userAddressDao;
 
     /**
      * 添加用户
@@ -157,5 +161,45 @@ public class UserService {
             return "200";
         }
         return "1";
+    }
+
+    /**
+     * 查询用户地址列表
+     * @param userId
+     * @return
+     */
+    public List<UserAddress> selectUserAddressByUserId(int userId){
+        UserAddressExample userAddressExample = new UserAddressExample();
+        userAddressExample.createCriteria().andUserIdEqualTo(userId);
+        userAddressExample.createCriteria().andDelFlagEqualTo(0);
+        List<UserAddress> list = userAddressDao.selectByExample(userAddressExample);
+        return list;
+    }
+
+    /**
+     * 添加收货地址
+     * @param userAddress
+     * @return
+     */
+    public int addAddress(UserAddress userAddress){
+        return userAddressDao.insertSelective(userAddress);
+    }
+
+    /**
+     * 更新收货地址
+     * @param userAddress
+     * @return
+     */
+    public int updateAddress(UserAddress userAddress){
+        return userAddressDao.updateByPrimaryKeySelective(userAddress);
+    }
+
+    /**
+     * 删除收货地址
+     * @param id
+     * @return
+     */
+    public int deleteAddress(int id){
+        return userAddressDao.deleteByPrimaryKey(id);
     }
 }

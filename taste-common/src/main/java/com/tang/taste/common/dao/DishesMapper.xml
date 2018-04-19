@@ -5,6 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="dishes_name" jdbcType="VARCHAR" property="dishesName" />
     <result column="dishes_price" jdbcType="DOUBLE" property="dishesPrice" />
+    <result column="dishes_type" jdbcType="INTEGER" property="dishesType" />
     <result column="supply_time" jdbcType="VARCHAR" property="supplyTime" />
     <result column="picture" jdbcType="VARCHAR" property="picture" />
     <result column="desc" jdbcType="VARCHAR" property="desc" />
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, dishes_name, dishes_price, supply_time, picture, `desc`, del_flag
+    id, dishes_name, dishes_price, dishes_type, supply_time, picture, `desc`, del_flag
   </sql>
   <select id="selectByExample" parameterType="com.tang.taste.common.entity.pojo.DishesExample" resultMap="BaseResultMap">
     select
@@ -105,12 +106,12 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into sys_dishes (dishes_name, dishes_price, supply_time, 
-      picture, `desc`, del_flag
-      )
-    values (#{dishesName,jdbcType=VARCHAR}, #{dishesPrice,jdbcType=DOUBLE}, #{supplyTime,jdbcType=VARCHAR}, 
-      #{picture,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, #{delFlag,jdbcType=INTEGER}
-      )
+    insert into sys_dishes (dishes_name, dishes_price, dishes_type, 
+      supply_time, picture, `desc`, 
+      del_flag)
+    values (#{dishesName,jdbcType=VARCHAR}, #{dishesPrice,jdbcType=DOUBLE}, #{dishesType,jdbcType=INTEGER}, 
+      #{supplyTime,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, 
+      #{delFlag,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.tang.taste.common.entity.pojo.Dishes">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -123,6 +124,9 @@
       </if>
       <if test="dishesPrice != null">
         dishes_price,
+      </if>
+      <if test="dishesType != null">
+        dishes_type,
       </if>
       <if test="supplyTime != null">
         supply_time,
@@ -143,6 +147,9 @@
       </if>
       <if test="dishesPrice != null">
         #{dishesPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="dishesType != null">
+        #{dishesType,jdbcType=INTEGER},
       </if>
       <if test="supplyTime != null">
         #{supplyTime,jdbcType=VARCHAR},
@@ -176,6 +183,9 @@
       <if test="record.dishesPrice != null">
         dishes_price = #{record.dishesPrice,jdbcType=DOUBLE},
       </if>
+      <if test="record.dishesType != null">
+        dishes_type = #{record.dishesType,jdbcType=INTEGER},
+      </if>
       <if test="record.supplyTime != null">
         supply_time = #{record.supplyTime,jdbcType=VARCHAR},
       </if>
@@ -198,6 +208,7 @@
     set id = #{record.id,jdbcType=INTEGER},
       dishes_name = #{record.dishesName,jdbcType=VARCHAR},
       dishes_price = #{record.dishesPrice,jdbcType=DOUBLE},
+      dishes_type = #{record.dishesType,jdbcType=INTEGER},
       supply_time = #{record.supplyTime,jdbcType=VARCHAR},
       picture = #{record.picture,jdbcType=VARCHAR},
       `desc` = #{record.desc,jdbcType=VARCHAR},
@@ -214,6 +225,9 @@
       </if>
       <if test="dishesPrice != null">
         dishes_price = #{dishesPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="dishesType != null">
+        dishes_type = #{dishesType,jdbcType=INTEGER},
       </if>
       <if test="supplyTime != null">
         supply_time = #{supplyTime,jdbcType=VARCHAR},
@@ -234,6 +248,7 @@
     update sys_dishes
     set dishes_name = #{dishesName,jdbcType=VARCHAR},
       dishes_price = #{dishesPrice,jdbcType=DOUBLE},
+      dishes_type = #{dishesType,jdbcType=INTEGER},
       supply_time = #{supplyTime,jdbcType=VARCHAR},
       picture = #{picture,jdbcType=VARCHAR},
       `desc` = #{desc,jdbcType=VARCHAR},

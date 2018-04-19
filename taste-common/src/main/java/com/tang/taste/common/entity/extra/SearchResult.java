@@ -15,7 +15,7 @@ public class SearchResult implements Serializable {
 
     private long recordCount;
 
-    private List<SearchItem> searchItems;
+    private List<SearchDishes> searchDishes;
 
     public long getTotalPage() {
         return totalPage;
@@ -33,11 +33,11 @@ public class SearchResult implements Serializable {
         this.recordCount = recordCount;
     }
 
-    public List<SearchItem> getSearchItems() {
-        return searchItems;
+    public List<SearchDishes> getSearchDishes() {
+        return searchDishes;
     }
 
-    public void setSearchItems(List<SearchItem> searchItems) {
-        this.searchItems = searchItems;
+    public void setSearchDishes(List<SearchDishes> searchDishes) {
+        this.searchDishes = searchDishes;
     }
 }

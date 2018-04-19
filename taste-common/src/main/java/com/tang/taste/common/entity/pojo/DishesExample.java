@@ -294,6 +294,66 @@ public class DishesExample {
             return (Criteria) this;
         }
 
+        public Criteria andDishesTypeIsNull() {
+            addCriterion("dishes_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDishesTypeIsNotNull() {
+            addCriterion("dishes_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDishesTypeEqualTo(Integer value) {
+            addCriterion("dishes_type =", value, "dishesType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDishesTypeNotEqualTo(Integer value) {
+            addCriterion("dishes_type <>", value, "dishesType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDishesTypeGreaterThan(Integer value) {
+            addCriterion("dishes_type >", value, "dishesType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDishesTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("dishes_type >=", value, "dishesType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDishesTypeLessThan(Integer value) {
+            addCriterion("dishes_type <", value, "dishesType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDishesTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("dishes_type <=", value, "dishesType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDishesTypeIn(List<Integer> values) {
+            addCriterion("dishes_type in", values, "dishesType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDishesTypeNotIn(List<Integer> values) {
+            addCriterion("dishes_type not in", values, "dishesType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDishesTypeBetween(Integer value1, Integer value2) {
+            addCriterion("dishes_type between", value1, value2, "dishesType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDishesTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("dishes_type not between", value1, value2, "dishesType");
+            return (Criteria) this;
+        }
+
         public Criteria andSupplyTimeIsNull() {
             addCriterion("supply_time is null");
             return (Criteria) this;

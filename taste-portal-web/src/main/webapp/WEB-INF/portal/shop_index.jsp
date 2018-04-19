@@ -65,30 +65,19 @@
         <!-- BEGIN NAVIGATION -->
         <div class="header-navigation">
             <ul>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                        分类一
-                    </a>
-                </li>
-                <li class="dropdown dropdown-megamenu">
-                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                        分类二
-                    </a>
-                </li>
-                <li><a href="shop-item.html">分类三</a></li>
-                <li class="dropdown dropdown100 nav-catalogue">
-                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                        分类四
-                    </a>
-                </li>
+                <li><a href="${ctx}/search/toCategoryList?categoryId=1">主食</a></li>
+                <li><a href="${ctx}/search/toCategoryList?categoryId=2">粥、粉</a></li>
+                <li><a href="${ctx}/search/toCategoryList?categoryId=3">饮料</a></li>
+                <li><a href="${ctx}/search/toCategoryList?categoryId=4">其他</a></li>
+                <li><a href="">评价</a></li>
 
                 <!-- BEGIN TOP SEARCH -->
                 <li class="menu-search">
                     <div class="input-group input-medium">
-                        <input type="text" class="form-control" placeholder="请输入搜索内容">
+                        <input type="text" class="form-control" id="keyWord" placeholder="请输入搜索内容">
                         <span class="input-group-btn">
-											<button id="search" class="btn blue" type="button">搜索</button>
-											</span>
+                        <button id="search" class="btn blue" type="button">搜索</button>
+                        </span>
                     </div>
                 </li>
                 <!-- END TOP SEARCH -->
@@ -348,8 +337,8 @@
                             <div class="pi-img-wrapper">
                                 <img  class="img-responsive imgNewProduct" alt="Berry Lace Dress">
                                 <div>
-                                    <a  class="btn btn-default fancybox-button newProductZoom">Zoom</a>
-                                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
+                                    <a  class="btn btn-default fancybox-button newProductZoom">缩放</a>
+                                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">查看</a>
                                 </div>
                             </div>
                             <h3><a href="javascript:;" class="aNewProduct"></a></h3>
@@ -561,6 +550,16 @@
         ShoppingCart.init();
     });
 
+    /*$("#search").click(function(){
+        $.ajax({
+            type : 'post',
+            url : ctx +'/search/addDishesIndex',
+            dataType : 'json',
+            success : function(msg){
+                alert(msg);
+            }
+        });
+    });*/
 
 </script>
 <!-- END PAGE LEVEL JAVASCRIPTS -->

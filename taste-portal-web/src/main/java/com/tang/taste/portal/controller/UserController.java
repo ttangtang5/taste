@@ -1,8 +1,10 @@
 package com.tang.taste.portal.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.tang.taste.common.entity.pojo.User;
+import com.tang.taste.common.entity.pojo.UserAddress;
 import com.tang.taste.common.util.*;
 import com.tang.taste.portal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.Calendar;
-import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 /**
  * FileName: UserController
@@ -217,7 +216,74 @@ public class UserController {
      */
     @RequestMapping("saveUserMsg")
     @ResponseBody
-    public String updateUserMsg(String username,String firstname,String phone,HttpServletRequest request){
+    public String updateUserMsg(String username,String firstname,String phone,HttpServletRequest request) throws  Exception{
         return userService.updateUserMsgById(username,firstname,phone,request);
+    }
+
+    /**
+     * 显示用户的地址管理列表
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("getUserAddress")
+    @ResponseBody
+    public String getUserAddressByUserId(HttpServletRequest request) throws  Exception{
+        User user = SessionUtils.getUser(request);
+        List<UserAddress> list = Lists.newArrayList();
+        if(user != null){
+            list = userService.selectUserAddressByUserId(user.getId());
+        }
+        return JSON.toJSONString(list);
+    }
+
+    /**
+     *添加收货信息
+     * @param addressee
+     * @param address
+     * @param phone
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("addAddress")
+    @ResponseBody
+    public String addAddress(String addressee,String address,String phone,HttpServletRequest request) throws Exception{
+        User user = SessionUtils.getUser(request);
+        UserAddress userAddress = new UserAddress();
+        userAddress.setUserId(user.getId());
+        userAddress.setAddressee(addressee);
+        userAddress.setAddress(address);
+        userAddress.setPhone(phone);
+        int num = userService.addAddress(userAddress);
+        if(num == 1){
+            return "success";
+        }
+        return "error";
+    }
+
+    /**
+     * 修改收货信息
+     * @param userAddress
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("updateAddress")
+    @ResponseBody
+    public String updateAddress(UserAddress userAddress) throws Exception{
+        int num = userService.updateAddress(userAddress);
+        if(num == 1){
+            return "success";
+        }
+        return "error";
+    }
+
+    @RequestMapping("deleteAddress")
+    @ResponseBody
+    public String deleteAddress(int id) throws Exception{
+        int num = userService.deleteAddress(id);
+        if(num == 1){
+            return "success";
+        }
+        return "error";
     }
 }

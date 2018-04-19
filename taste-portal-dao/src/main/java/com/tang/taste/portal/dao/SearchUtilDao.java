@@ -1,7 +1,7 @@
 package com.tang.taste.portal.dao;
 
-import easyUI.SearchItem;
-import easyUI.SearchResult;
+import com.tang.taste.common.entity.extra.SearchDishes;
+import com.tang.taste.common.entity.extra.SearchResult;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.response.QueryResponse;
@@ -15,12 +15,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * FileName: SearchUtilDao
+ * FileName: SearchDao
  * @Author:   16
  * Date:     2018/2/6 19:43
  * Description:搜索查询
  */
-@Repository("searchUtilDao")
+@Repository
 public class SearchUtilDao {
 
     @Autowired
@@ -35,31 +35,30 @@ public class SearchUtilDao {
         long numFound = solrDocumentList.getNumFound();
         SearchResult searchResult = new SearchResult();
         searchResult.setRecordCount(numFound);
-        List<SearchItem> list = new ArrayList<>();
+        List<SearchDishes> list = new ArrayList<>();
         //将查询结果封装进入list中
         for (SolrDocument solrDocument:solrDocumentList) {
-            SearchItem item = new SearchItem();
+            SearchDishes item = new SearchDishes();
             item.setId((String) solrDocument.get("id"));
-            item.setItemCategoryName((String) solrDocument.get("item_category_name"));
-            item.setItemImage((String) solrDocument.get("item_image"));
-            item.setItemPrice((long) solrDocument.get("item_price"));
-            item.setItemSellPoint((String)solrDocument.get("item_sell_point"));
+            item.setDishesTypeName((String) solrDocument.get("dishes_type_name"));
+            item.setDishesPicture((String) solrDocument.get("dishes_picture"));
+            item.setDishesPrice((double) solrDocument.get("dishes_price"));
             //取搜索匹配高亮信息    返回结构可以看solr服务器上结构
             Map<String, Map<String, List<String>>> highlighting = queryResponse.getHighlighting();
-            List<String> list2 = highlighting.get(solrDocument.get("id")).get("item_title");
+            List<String> list2 = highlighting.get(solrDocument.get("id")).get("dishes_name");
             String title = "";
             //判断有无高亮信息
             if (list2 != null && list2.size() > 0) {
                 title = list2.get(0);
             } else {
-                title = (String) solrDocument.get("item_title");
+                title = (String) solrDocument.get("dishes_name");
             }
-            item.setItemTitle(title);
+            item.setDishesName(title);
             //添加到商品列表
             list.add(item);
         }
         //把结果添加到SearchResult中
-        searchResult.setSearchItems(list);
+        searchResult.setSearchDishes(list);
         //返回
         return searchResult;
     }

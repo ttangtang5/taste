@@ -8,6 +8,7 @@
 <head>
     <base href="<%=basePath%>">
     <meta charset="utf-8">
+    <title>地址管理</title>
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
     <link href="${ctxStatic}/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
     <link href="${ctxStatic}/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
@@ -29,26 +30,7 @@
 <div class="page-container">
     <!-- BEGIN CONTENT -->
         <div class="page-content">
-            <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-            <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                            <h4 class="modal-title">Modal title</h4>
-                        </div>
-                        <div class="modal-body">
-                            Widget settings form goes here
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn blue">Save changes</button>
-                            <button type="button" class="btn default" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                    <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
-            </div>
+
             <!-- BEGIN PAGE CONTENT-->
             <div class="row">
                 <div class="col-md-12">
@@ -59,24 +41,40 @@
                                 <i class="fa fa-user"></i>地址管理
                             </div>
                         </div>
-                        <div class="portlet-body">
-                            <table id="categoryTable"
-                                   data-toggle="table"
-                                   data-url=""
-                                   data-query-params=queryParams
-                                   data-page-list=[]
-                            <%--data-side-pagination="server"--%>
-                                   data-pagination="true">
-                                <thead>
-                                <tr>
-                                    <th data-field="title">标题</th>
-                                    <%--<th data-field="content">投诉内容</th>--%>
-                                    <th data-field="phone">联系电话</th>
-                                    <th data-field="cityName">地市</th>
-                                    <th data-field="remarks" data-formatter="opFormat">操作</th>
-                                </tr>
-                                </thead>
-                            </table>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12" style="padding:2em 0;">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped" id="categoryTable"
+                                               data-toggle="table"
+                                               data-url="${ctx}/taste/getUserAddress"
+                                               data-tool-bar="#toolbar" >
+                                            <thead>
+                                            <tr>
+                                                <th data-field="id" data-visible="false"></th>
+                                                <th data-field="addressee">收货人</th>
+                                                <th data-field="address">收货地址</th>
+                                                <th data-field="phone">联系电话</th>
+                                                <th data-field="remarks" data-formatter="opFormat">操作</th>
+                                            </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <span>收货人</span>
+                                <input type="text" id="addressee">
+                                <span>地址</span>
+                                <input type="text"  style="width: 400px;" id="suggestId" placeholder="请输入地址..."/>
+                                <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
+                                <span>联系电话</span>
+                                <input type="text" id="phone">
+                                <button class="btn blue" id="addAddress">添加</button>
+                                <button class="btn blue" id="saveAddress" style="display:none">保存</button>
+                                <button class="btn blue" id="cancel" style="display:none">取消</button>
+                                <span id="Msg" style="color:red;"></span>
+                            </div>
                         </div>
                     </div>
                     <!-- END SAMPLE TABLE PORTLET-->
@@ -94,11 +92,11 @@
                     <div class="portlet-body">
                         <form class="form-inline margin-bottom-10" action="#">
                             <div class="input-group">
-                                <input type="text"  style="width: 500px;" class="form-control" id="suggestId" placeholder="请输入地址..."/>
-                                    <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
-                                <span class="input-group-btn">
+                                <%--<input type="text"  style="width: 500px;" class="form-control" id="suggestId" placeholder="请输入地址..."/>
+                                    <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>--%>
+                               <%-- <span class="input-group-btn">
                                     <button class="btn blue" id="gmap_geocoding_btn">确定</button>
-                                 </span>
+                                 </span>--%>
                             </div>
                         </form>
                         <div id="gmap_geocoding" class="gmaps"></div>
@@ -144,23 +142,174 @@
         Demo.init(); // init demo features
     });
 
-    /**
-     * 编辑  改变表格状态
-     */
-    $(".edit").click(function(){
-
-    });
-
-    //操作函数
-    function opFormat(value, row) {
-        /*var id =  row.id;
-        var compStatus = row.compStatus;
-        var level=row.levelType;
-        var show = '<a href="javascript:;" class="btn btn-sm green" onclick="toDetail(' + id + ')">查看</a>';
-        return show;*/
+    function opFormat(value,row){
+        var id = row.id;
+        var show ='<button class="btn btn-sm blue edit" onclick="edit('+id+')" >编辑</button><button class="btn btn-sm red delete" onclick="del('+id+')">删除</button>' ;
+        return show;
     }
 
+    var editId;
+    /**
+     * 编辑
+     */
+   function edit(id){
+        editId = id;
+        $("#addAddress").hide();
+        $("#saveAddress").show();
+        $("#cancel").show();
+        var target = event.target;
+        var nodes = $(target).parent().parent().children();
+        var addressee = nodes[0].innerHTML;
+        var address = nodes[1].innerHTML;
+        var phone = nodes[2].innerHTML;
+        $("#addressee").val(addressee);
+        $("#suggestId").val(address);
+        $("#phone").val(phone);
+    };
 
+    //取消编辑
+   $("#cancel").click(function (){
+       $("#addAddress").show();
+       $("#saveAddress").hide();
+       $("#cancel").hide();
+   });
+
+   //保存修改
+   $("#saveAddress").click(function (){
+       var addressee = $("#addressee").val();
+       var address = $("#suggestId").val();
+       var phone = $("#phone").val();
+       if(addressee == ''){
+           $("#Msg").empty();
+           $("#Msg").html("收货人必填信息！");
+       }
+       if(isMobileMethod(phone)){
+           $.ajax({
+               type : 'post',
+               url : rootPath+'/taste/updateAddress',
+               data : {
+                   id : editId,
+                   addressee : addressee,
+                   address : address,
+                   phone : phone
+               },
+               success : function(data){
+                   if(data = 'success'){
+                       $("#Msg").empty();
+                       $("#Msg").html("修改成功！");
+                       setTimeout(function(){
+                           $("#Msg").empty();
+                           location.reload();
+                       },1000);
+                   }else{
+                       $("#Msg").empty();
+                       $("#Msg").html("修改失败！");
+                       setTimeout(function(){
+                           $("#Msg").empty();
+                       },3000);
+                   }
+               }
+           });
+
+       }
+   });
+
+    /**
+     * 删除
+     */
+    function del(id){
+        var target = event.target;
+
+        $.ajax({
+            type : 'post',
+            url : rootPath+'/taste/deleteAddress',
+            data : {
+                id : id
+            },
+            success : function(data){
+                if(data = 'success'){
+                    $(target).parent().parent().remove();
+                    $("#Msg").empty();
+                    $("#Msg").html("删除成功！");
+                    setTimeout(function(){
+                        $("#Msg").empty();
+                    },1000);
+                }else{
+                    $("#Msg").empty();
+                    $("#Msg").html("删除失败！");
+                    setTimeout(function(){
+                        $("#Msg").empty();
+                    },3000);
+                }
+            }
+        });
+    };
+
+    /**
+     * 添加地址
+     */
+    $("#addAddress").click(function(){
+        if($("#categoryTable").find('tr').length <= 5 ){
+            var addressee = $("#addressee").val();
+            var address = $("#suggestId").val();
+            var phone = $("#phone").val();
+            if(addressee == ''){
+                $("#Msg").empty();
+                $("#Msg").html("收货人必填信息！");
+            }
+            if(isMobileMethod(phone)){
+                $.ajax({
+                    type : 'post',
+                    url : rootPath+'/taste/addAddress',
+                    data : {
+                        addressee : addressee,
+                        address : address,
+                        phone : phone
+                    },
+                    success : function(data){
+                        if(data = 'success'){
+                            var tr = '<tr data-index="3"><td style="">'+addressee+'</td><td style="">'+address+'</td><td style="">'+phone+'</td><td style=""><button class="btn btn-sm blue edit" onclick="edit()" >编辑</button><button class="btn btn-sm red delete" onclick="del()">删除</button></td></tr>';
+                            $("#categoryTable").append(tr);
+                            $("#Msg").empty();
+                            $("#Msg").html("添加成功！");
+                            setTimeout(function(){
+                                $("#Msg").empty();
+                            },3000);
+                        }else{
+                            $("#Msg").empty();
+                            $("#Msg").html("添加失败！");
+                            setTimeout(function(){
+                                $("#Msg").empty();
+                            },3000);
+                        }
+                    }
+                });
+
+            }
+        }else{
+            $("#Msg").empty();
+            $("#Msg").html("最多保存四个可用地址");
+        }
+    });
+
+
+    // 手机号码验证
+    function isMobileMethod(phone){
+        var regPhone = /^(13[0-9]|15[0-9]|18[0-9]|147|145|17[0-9])\d{8}$/;
+        if(regPhone.test(phone)){
+            return true;
+        }else{
+            if(phone == "" || phone == null){
+                $("#Msg").empty();
+                $("#Msg").html("手机号码必填信息！");
+                return false;
+            }else{
+                $("#Msg").empty();
+                $("#Msg").html("手机号码格式错误！");
+                return false;
+            }
+        }
+    }
 
 </script>
 

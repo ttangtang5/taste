@@ -25,9 +25,9 @@ public class DishesService {
      * @param goods
      * @return
      */
-    public List<Dishes> getDishesByGoodsNames(List<String> goods){
+    public List<Dishes> getDishesByGoodsNames(List<Integer> goods){
         DishesExample dishesExample = new DishesExample();
-        dishesExample.createCriteria().andDishesNameIn(goods);
+        dishesExample.createCriteria().andIdIn(goods);
         dishesExample.createCriteria().andDelFlagEqualTo(0);
         List<Dishes> list = dishesDao.selectByExample(dishesExample);
         return list;

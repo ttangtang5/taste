@@ -9,6 +9,8 @@ public class Dishes implements Serializable {
 
     private Double dishesPrice;
 
+    private Integer dishesType;
+
     private String supplyTime;
 
     private String picture;
@@ -41,6 +43,14 @@ public class Dishes implements Serializable {
 
     public void setDishesPrice(Double dishesPrice) {
         this.dishesPrice = dishesPrice;
+    }
+
+    public Integer getDishesType() {
+        return dishesType;
+    }
+
+    public void setDishesType(Integer dishesType) {
+        this.dishesType = dishesType;
     }
 
     public String getSupplyTime() {
@@ -90,6 +100,7 @@ public class Dishes implements Serializable {
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getDishesName() == null ? other.getDishesName() == null : this.getDishesName().equals(other.getDishesName()))
             && (this.getDishesPrice() == null ? other.getDishesPrice() == null : this.getDishesPrice().equals(other.getDishesPrice()))
+            && (this.getDishesType() == null ? other.getDishesType() == null : this.getDishesType().equals(other.getDishesType()))
             && (this.getSupplyTime() == null ? other.getSupplyTime() == null : this.getSupplyTime().equals(other.getSupplyTime()))
             && (this.getPicture() == null ? other.getPicture() == null : this.getPicture().equals(other.getPicture()))
             && (this.getDesc() == null ? other.getDesc() == null : this.getDesc().equals(other.getDesc()))
@@ -103,6 +114,7 @@ public class Dishes implements Serializable {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getDishesName() == null) ? 0 : getDishesName().hashCode());
         result = prime * result + ((getDishesPrice() == null) ? 0 : getDishesPrice().hashCode());
+        result = prime * result + ((getDishesType() == null) ? 0 : getDishesType().hashCode());
         result = prime * result + ((getSupplyTime() == null) ? 0 : getSupplyTime().hashCode());
         result = prime * result + ((getPicture() == null) ? 0 : getPicture().hashCode());
         result = prime * result + ((getDesc() == null) ? 0 : getDesc().hashCode());
@@ -119,6 +131,7 @@ public class Dishes implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", dishesName=").append(dishesName);
         sb.append(", dishesPrice=").append(dishesPrice);
+        sb.append(", dishesType=").append(dishesType);
         sb.append(", supplyTime=").append(supplyTime);
         sb.append(", picture=").append(picture);
         sb.append(", desc=").append(desc);

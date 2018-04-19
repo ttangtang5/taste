@@ -12,7 +12,6 @@ geolocation.getCurrentPosition(function(r){
         map.panTo(r.point);
         geoc.getLocation(r.point, function(rs){
             var addComp = rs.addressComponents;
-            alert(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
             $("#suggestId").val(addComp.province + "" + addComp.city + "" + addComp.district + "" + addComp.street + "" + addComp.streetNumber);
         });
     }
@@ -32,12 +31,10 @@ map.addEventListener("click", function(e){
     map.addOverlay(marker);
     geoc.getLocation(pt, function(rs){
         var addComp = rs.addressComponents;
-        alert(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
         $("#suggestId").val(addComp.province + "" + addComp.city + "" + addComp.district + "" + addComp.street + "" + addComp.streetNumber);
     });
 });
 
-/*
 //搜索
 // 百度地图API功能
 function G(id) {
@@ -89,4 +86,4 @@ function setPlace(){
         onSearchComplete: myFun
     });
     local.search(myValue);
-}*/
+}

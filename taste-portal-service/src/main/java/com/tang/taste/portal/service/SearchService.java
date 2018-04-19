@@ -1,17 +1,19 @@
 package com.tang.taste.portal.service;
 
-import com.taotao.search.dao.SearchItemDao;
-import com.taotao.search.dao.SearchUtilDao;
-import com.taotao.search.service.ISearchService;
-import easyUI.SearchItem;
-import easyUI.SearchResult;
+import com.google.common.collect.Lists;
+import com.tang.taste.common.entity.extra.PageHelper;
+import com.tang.taste.common.entity.extra.SearchDishes;
+import com.tang.taste.common.entity.extra.SearchResult;
+import com.tang.taste.common.entity.pojo.Dishes;
+import com.tang.taste.manage.dao.DishesDao;
+import com.tang.taste.portal.dao.SearchUtilDao;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.common.SolrInputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -24,36 +26,36 @@ import java.util.List;
 public class SearchService  {
 
     @Autowired
-    private SearchItemDao searchItemDao;
-
-    @Resource(name="searchUtilDao")
+    private DishesDao dishesDao;
+    @Autowired
     private SearchUtilDao searchUtilDao;
 
     @Autowired
     private SolrServer solrServer;
 
+    @Value("${SEARCH_PAGE_SIZE}")
+    private Integer pageSize;
     /**
      * 将信息添加进索引库
      * @return
      */
-    @Override
+
     public String getSearchContent() {
-        List<SearchItem> list = null;
+        List<SearchDishes> list = Lists.newArrayList();
         try {
             //查找处索引数据
-            list = searchItemDao.getSearchContent();
+            list = dishesDao.getSearchContent();
             //遍历商品数据添加到索引库
-            for (SearchItem searchItem:list) {
+            for (SearchDishes searchDishes :list) {
                 //创建文档对象SolrInputDocument
                 SolrInputDocument solrInputDocument = new SolrInputDocument();
                 //向文档添加域
-                solrInputDocument.addField("id",searchItem.getId());
-                solrInputDocument.addField("item_title", searchItem.getItemTitle());
-                solrInputDocument.addField("item_sell_point", searchItem.getItemSellPoint());
-                solrInputDocument.addField("item_price", searchItem.getItemPrice());
-                solrInputDocument.addField("item_image", searchItem.getItemImage());
-                solrInputDocument.addField("item_category_name", searchItem.getItemCategoryName());
-                solrInputDocument.addField("item_desc", searchItem.getItemDesc());
+                solrInputDocument.addField("id", searchDishes.getId());
+                solrInputDocument.addField("dishes_name", searchDishes.getDishesName());
+                solrInputDocument.addField("dishes_price", searchDishes.getDishesPrice());
+                solrInputDocument.addField("dishes_picture", searchDishes.getDishesPicture());
+                solrInputDocument.addField("dishes_type_name", searchDishes.getDishesTypeName());
+                solrInputDocument.addField("dishes_desc", searchDishes.getDishesDesc());
                 //添加入solrServer 写入索引库
                 solrServer.add(solrInputDocument);
             }
@@ -73,7 +75,6 @@ public class SearchService  {
      * @param pageSize
      * @return
      */
-    @Override
     public SearchResult getQueryResult(String keyWords,Integer page,Integer pageSize) throws Exception {
         //创建solrQuery对象
         SolrQuery solrQuery = new SolrQuery();
@@ -86,10 +87,10 @@ public class SearchService  {
         if(pageSize < 1){ pageSize = 10;};
         solrQuery.setRows(pageSize);
         //设置默认的搜索域
-        solrQuery.set("df","item_title");
+        solrQuery.set("df","dishes_name");
         //设置高亮
         solrQuery.setHighlight(true);
-        solrQuery.addHighlightField("item_title");
+        solrQuery.addHighlightField("dishes_name");
         solrQuery.setHighlightSimplePre("<font color='red'>");
         solrQuery.setHighlightSimplePost("</font>");
         //执行查询语句
@@ -100,5 +101,45 @@ public class SearchService  {
         searchResult.setTotalPage(pages);
         //返回结果集
         return searchResult;
+    }
+
+    /**
+     * 无搜索内容  返回搜索结果
+     * @param page  第几页
+     * @return
+     * @throws Exception
+     */
+    public List<SearchDishes> getAllQueryResult(int page) throws Exception{
+        List<SearchDishes> list = dishesDao.getAllSearchContent(pageSize*(page-1),pageSize);
+        return list;
+    }
+
+    /**
+     *无搜索内容  统计条数
+     * @return
+     */
+    public long countAllQueryResult(){
+      long count = dishesDao.countAllSearchContent();
+        return count;
+    }
+
+    /**
+     * 通过分类id查找
+     * @param categoryId
+     * @param page
+     * @return
+     */
+    public List<SearchDishes> selectDishesByCategoryId(int categoryId,int page){
+        return  dishesDao.selectDishesByCategoryId(categoryId,pageSize*(page-1),pageSize);
+    }
+
+    /**
+     * 统计分类id的商品数量
+     * @param categoryId
+     * @return
+     */
+    public long countDishesByCategoryId(int categoryId){
+        long count = dishesDao.countDishesByCategoryId(categoryId);
+        return count;
     }
 }

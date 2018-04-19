@@ -66,7 +66,9 @@ var IndexContent = function (){
      * 搜索框
      */
     $("#search").click(function(){
-        window.location.href=ctx+"/toShopProductList";
+        var url = ctx+"/search?word=" + encodeURIComponent(document.getElementById("keyWord").value);
+        //var url = ctx+"/search/addDishesIndex";
+        window.location.href = url;
     });
 
     return {

@@ -277,6 +277,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!--阿里云服务-->
         <dependency>
             <groupId>fastdfs_client</groupId>
             <artifactId>fastdfs_client</artifactId>
@@ -288,6 +289,11 @@
         <dependency>
             <groupId>com.aliyun</groupId>
             <artifactId>aliyun-java-sdk-core</artifactId>
+        </dependency>
+        <!--引入solrj-->
+        <dependency>
+            <groupId>org.apache.solr</groupId>
+            <artifactId>solr-solrj</artifactId>
         </dependency>
     </dependencies>
 

@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -58,13 +59,13 @@ public class ShoppingCartController {
         StringBuffer stringBuffer = new StringBuffer();
         ShoppingCart shoppingCart = new ShoppingCart();
         ShoppingCartDetail shoppingCartDetail = new ShoppingCartDetail();
+        Dishes dishes = dishesService.getDishesByGoodsName(goodsName);
         Map msg = Maps.newHashMap();
-        String goodsValue = CookieUtils.getCookieValue(request,goodsName);
+        String goodsValue = CookieUtils.getCookieValue(request, String.valueOf(dishes.getId()));
         //获取user
         User user = SessionUtils.getUser(request);
         //CookieUtils.deleteCookie(request,response,goodsName);
         //如果购物车没此商品则加入购物车。
-        Dishes dishes = dishesService.getDishesByGoodsName(goodsName);
         if(goodsValue == null || goodsValue == ""){
             //判断商品是否在供应期
             if(dishes != null) {
@@ -74,7 +75,7 @@ public class ShoppingCartController {
                     stringBuffer.append(1);
                     stringBuffer.append(":");
                     stringBuffer.append(goodsPrice);
-                    CookieUtils.setCookie(request, response, goodsName, stringBuffer.toString(), 60 * 60 * 24 * 7);
+                    CookieUtils.setCookie(request, response, String.valueOf(dishes.getId()), stringBuffer.toString(), 60 * 60 * 24 * 7);
                     if(user != null){
                         shoppingCart.setUserId(user.getId());
                         shoppingCart.setStatus(0);
@@ -94,6 +95,7 @@ public class ShoppingCartController {
                         shoppingCartDetail.setStatus(0);
                         shoppingCartService.addShoppingCartDetail(shoppingCartDetail);
                     }
+                    msg.put("id", dishes.getId());
                     msg.put("status", 200);
                     //不存在该商品标志
                     msg.put("isflag", 0);
@@ -108,7 +110,7 @@ public class ShoppingCartController {
                 stringBuffer.append(integer);
                 stringBuffer.append(":");
                 stringBuffer.append(goodsPrice);
-                CookieUtils.setCookie(request,response,goodsName,stringBuffer.toString(),60*60*24*7);
+                CookieUtils.setCookie(request,response,String.valueOf(dishes.getId()),stringBuffer.toString(),60*60*24*7);
                 if(user != null) {
                     shoppingCart = shoppingCartService.getShoppingCartByUserId(user.getId());
                     shoppingCartDetail.setDishesId(dishes.getId());
@@ -120,6 +122,7 @@ public class ShoppingCartController {
                     }
                     shoppingCartService.updateShoppingCart(shoppingCart, user.getId());
                 }
+                msg.put("id", dishes.getId());
                 msg.put("status", 200);
                 //存在该商品标志
                 msg.put("isflag", 1);
@@ -137,9 +140,9 @@ public class ShoppingCartController {
      */
     @RequestMapping("/initCart")
     @ResponseBody
-    public String initCart(String[] goods,HttpServletRequest request) throws  Exception {
+    public String initCart(Integer[] goods,HttpServletRequest request) throws  Exception {
         if(goods != null && goods.length > 0){
-            List<String> list = Arrays.asList(goods);
+            List<Integer> list = Arrays.asList(goods);
             List<Dishes> dishes = dishesService.getDishesByGoodsNames(list);
             return JSON.toJSONString(dishes);
         }
@@ -191,7 +194,7 @@ public class ShoppingCartController {
                 long count = 0;
                 for (int i = 0; i < dishes.size(); i++){
                     for (int j =0 ; j < list.size(); j++) {
-                        if(dishes.get(i).getDishesName() != null && dishes.get(i).getDishesName().equalsIgnoreCase(list.get(j).toString())){
+                        if(String.valueOf(dishes.get(i).getId()) != null && String.valueOf(dishes.get(i).getId()) .equals(list.get(j).toString())){
                             ShoppingCartDetail shoppingCartDetail = new ShoppingCartDetail();
                             shoppingCartDetail.setDishesId(dishes.get(i).getId());
                             shoppingCartDetail.setDishesName(dishes.get(i).getDishesName());
@@ -215,6 +218,23 @@ public class ShoppingCartController {
             }
         }
         return null;
+    }
+
+    /**
+     * 将商品从购物车中移除
+     * @param dishesName
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/removeCart")
+    @ResponseBody
+    public String removeCart(String dishesName,HttpServletRequest request,HttpServletResponse response) throws Exception{
+        Dishes dishes = dishesService.getDishesByGoodsName(dishesName);
+        String num = CookieUtils.getCookieValue(request,String.valueOf(dishes.getId()));
+        CookieUtils.deleteCookie(request,response,String.valueOf(dishes.getId()));
+        return num.split(":")[0];
     }
 
 }
