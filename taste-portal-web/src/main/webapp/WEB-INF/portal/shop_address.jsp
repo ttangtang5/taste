@@ -7,6 +7,7 @@
 <html>
 <head>
     <base href="<%=basePath%>">
+    <meta name="decorator" content="default">
     <meta charset="utf-8">
     <title>地址管理</title>
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
@@ -66,7 +67,7 @@
                                 <span>收货人</span>
                                 <input type="text" id="addressee">
                                 <span>地址</span>
-                                <input type="text"  style="width: 400px;" id="suggestId" placeholder="请输入地址..."/>
+                                <input type="text"  style="width: 300px;" id="suggestId" placeholder="请输入地址..."/>
                                 <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
                                 <span>联系电话</span>
                                 <input type="text" id="phone">

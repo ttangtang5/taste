@@ -55,7 +55,7 @@
                         个人信息</a></li>
                     <li class="list-group-item clearfix"><a  href="javascript:;"><i class="fa fa-angle-right"></i>
                         修改密码</a></li>
-                    <li class="list-group-item clearfix"><a  href="javascript:;"><i class="fa fa-angle-right"></i>
+                    <li class="list-group-item clearfix"><a  href="${ctx}/toShopAddress"><i class="fa fa-angle-right"></i>
                         收货地址</a></li>
                     <%--<li class="list-group-item clearfix"><a  href="javascript:;"><i class="fa fa-angle-right"></i>
                         订单信息</a></li>--%>
@@ -187,47 +187,6 @@
                     <hr>
                 </div>
             </div>
-            <div class="col-md-9 col-sm-7" id="address2" hidden >
-                <h1>收货地址</h1>
-                <div class="content-page">
-                    <ul>
-                        <div class="page-content">
-                            <!-- BEGIN PAGE CONTENT-->
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <button id="addAddress" class="btn blue">新增</button>
-                                    <button id="saveAddress" class="btn blue">保存</button>
-                                    <hr>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                </div>
-                            </div>
-                            <!-- END PAGE CONTENT-->
-                        </div>
-                    </ul>
-                    <!-- END CONTENT -->
-                    <hr>
-                </div>
-            </div>
-            <%--<div class="col-md-9 col-sm-7" id="order" hidden >
-                <h1>订单信息</h1>
-                <div class="content-page">
-                    <ul>
-                        <div class="page-content">
-                            <!-- BEGIN PAGE CONTENT-->
-                            <div class="row">
-                                <div class="col-md-12">
-                                </div>
-                            </div>
-                            <!-- END PAGE CONTENT-->
-                        </div>
-                    </ul>
-                    <!-- END CONTENT -->
-                    <hr>
-                </div>
-            </div>--%>
             <!-- END CONTENT -->
         </div>
         <!-- END SIDEBAR & CONTENT -->

@@ -27,6 +27,7 @@
     <link href="${ctxStatic}/assets/admin/layout3/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color">
     <!-- END THEME STYLES -->
     <link rel="shortcut icon" href="favicon.ico"/>
+    <link href="${ctxStatic}/assets/global/plugins/bootstrap-table/bootstrap-table.css" rel="stylesheet" type="text/css"/>
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -111,65 +112,25 @@
                                                     </div>
                                                     <div class="portlet-body">
                                                         <div class="table-responsive">
-                                                            <table class="table table-hover table-bordered table-striped">
+                                                            <table id="orderTable" class="table table-hover table-bordered table-striped"
+                                                                   data-classes="table-no-bordered"
+                                                                   data-toggle="table"
+                                                                   data-cache="true"
+                                                                   data-url="${ctx}/order/orderList"
+                                                                   data-pagination="true"
+                                                                   data-tool-bar="#toolbar">
                                                                 <thead>
                                                                 <tr>
-                                                                    <th>
-                                                                        订单编号
-                                                                    </th>
-                                                                    <th>
-                                                                        收件人
-                                                                    </th>
-                                                                    <th>
-                                                                        联系方式
-                                                                    </th>
-                                                                    <th>
-                                                                        时间
-                                                                    </th>
-                                                                    <th>
-                                                                        订单总计
-                                                                    </th>
-                                                                    <th>
-                                                                        实付金额
-                                                                    </th>
-                                                                    <th>
-                                                                        订单状态
-                                                                    </th>
-                                                                    <th>
-                                                                        操作
-                                                                    </th>
+                                                                    <th data-field="orderId" >订单编号</th>
+                                                                    <th data-field="receiver" >收件人</th>
+                                                                    <th data-field="phone" >联系方式</th>
+                                                                    <th data-field="createTime" >时间</th>
+                                                                    <th data-field="sumNum" >订单总计</th>
+                                                                    <th data-field="paymentType" data-formatter="payType">付款方式</th>
+                                                                    <th data-field="status" data-formatter="orderStatus">订单状态</th>
+                                                                    <th data-field="remark" data-formatter="opFormat">操作</th>
                                                                 </tr>
                                                                 </thead>
-                                                                <tbody>
-                                                                <tr>
-                                                                    <td>
-                                                                        <a href="javascript:;">
-                                                                            Product 1 </a>
-                                                                    </td>
-                                                                    <td>
-                                                                        345.50$
-                                                                    </td>
-                                                                    <td>
-                                                                        345.50$
-                                                                    </td>
-                                                                    <td>
-                                                                        345.50$
-                                                                    </td>
-                                                                    <td>
-                                                                        345.50$
-                                                                    </td>
-                                                                    <td>
-                                                                        2
-                                                                    </td>
-                                                                    <td>
-                                                                        2.00$
-                                                                    </td>
-                                                                    <td>
-                                                                        <button class="btn btn-sm green view">查看</button>
-                                                                        <button class="btn btn-sm red">删除</button>
-                                                                    </td>
-                                                                </tr>
-                                                                </tbody>
                                                             </table>
                                                         </div>
                                                     </div>
@@ -228,6 +189,7 @@
 <!-- END PAGE LEVEL SCRIPTS -->
 <!--自定义js-->
 <script src="${ctxStatic}/layer/layer.js" type="text/javascript"></script>
+<script src="${ctxStatic}/assets/global/plugins/bootstrap-table/bootstrap-table.js" type="text/javascript"></script>
 <script>
     jQuery(document).ready(function() {
         Metronic.init(); // init metronic core components
@@ -236,17 +198,83 @@
         EcommerceOrdersView.init();
     });
 
+    //操作
+    function opFormat(value,row){
+        var id = row.orderId;
+        var show = '<button class="btn btn-sm green show" onclick="show('+id+')" >查看</button><button class="btn btn-sm red del" onclick="del('+id+')" >删除</button>';
+        return show;
+    }
+    //支付类型
+    function payType(value){
+        var show ;
+        switch(value)
+        {
+            case 1:
+                show = '支付宝支付';
+                break;
+            case 2:
+                show = '微信';
+                break;
+            default:
+                show = '货到付款';
+        }
+        return show;
+    }
+    //订单状态
+    function orderStatus(value){
+        var show ;
+        switch(value)
+        {
+            case 1:
+                show = '未付款';
+                break;
+            case 2:
+                show = '已付款';
+                break;
+            case 3:
+                show = '未发货';
+                break;
+            case 4:
+                show = '已发货';
+                break;
+            case 5:
+                show = '交易成功';
+                break;
+            default:
+                show = '交易关闭';
+        }
+        return show;
+    }
+    var orderId;
+    function del(id){
+        var target =event.target;
+        $.ajax({
+            type : 'post',
+            url : rootPath+'/order/delOrder',
+            dataType : 'json',
+            data : {
+                orderId : id
+            },
+            success : function(data){
+                if(data == 'success'){
+                 $(target).parent().parent().remove();
+                }else{
+                    alert('删除失败！');
+                }
+            }
+        });
+    }
     /**
      * 查看订单弹出详情
      */
-    $(".view").click(function(){
-
+    function show(id){
+        orderId = id;
         var index = layer.open( {
             type: 2,
             skin: 'demo-class',
             content: '/toShopOrderView',
-            area: ['980px', '480px'],
-            offset: ['100px', '200px'],
+            area: ['1200px', '500px'],
+            offset: ['100px', '100px'],
             scrollbar: false,
             anim: 0,
             cancel: function(index){
@@ -256,7 +284,7 @@
                 //return false //开启该代码可禁止点击该按钮关闭
             }
         });
-    });
+    }
 </script>
 <!-- END JAVASCRIPTS -->
 </body>

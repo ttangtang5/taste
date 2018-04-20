@@ -197,11 +197,6 @@
     <!-- END REGISTRATION FORM -->
 </div>
 <!-- END LOGIN -->
-<!-- BEGIN COPYRIGHT -->
-<div class="copyright">
-    2014 &copy; Metronic. Admin Dashboard Template.
-</div>
-<!-- END COPYRIGHT -->
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 <!-- BEGIN CORE PLUGINS -->
 <!--[if lt IE 9]>
@@ -236,7 +231,7 @@
         Demo.init();
         setTimeout(function(){
             getCode();
-        },500);
+        },800);
     });
 
 

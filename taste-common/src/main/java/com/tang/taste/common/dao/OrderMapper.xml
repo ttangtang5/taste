@@ -266,7 +266,7 @@
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update order
+    update `order`
     <set>
       <if test="record.orderId != null">
         order_Id = #{record.orderId,jdbcType=INTEGER},
@@ -334,7 +334,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update order
+    update `order`
     set order_Id = #{record.orderId,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=INTEGER},
       receiver = #{record.receiver,jdbcType=VARCHAR},
@@ -360,7 +360,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.tang.taste.common.entity.pojo.Order">
-    update order
+    update `order`
     <set>
       <if test="userId != null">
         user_id = #{userId,jdbcType=INTEGER},
@@ -423,7 +423,7 @@
     where order_Id = #{orderId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.tang.taste.common.entity.pojo.Order">
-    update order
+    update `order`
     set user_id = #{userId,jdbcType=INTEGER},
       receiver = #{receiver,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},

@@ -1,8 +1,10 @@
 package com.tang.taste.common.entity.pojo;
 
+import com.tang.taste.common.entity.extra.OrderDetailExtra;
+
 import java.io.Serializable;
 
-public class OrderDetail implements Serializable {
+public class OrderDetail extends OrderDetailExtra implements Serializable {
     private Integer orderId;
 
     private Integer dishesId;

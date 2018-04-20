@@ -76,7 +76,7 @@ public class SearchController {
     @RequestMapping("toCategoryList")
     public String toCategory(Model model,int categoryId, @RequestParam(defaultValue = "1") Integer page){
         long count = searchService.countDishesByCategoryId(categoryId);
-        List<SearchDishes> list = searchService.selectDishesByCategoryId(page,page);
+        List<SearchDishes> list = searchService.selectDishesByCategoryId(categoryId,page);
         model.addAttribute("query","");
         model.addAttribute("totalPages",count);
         model.addAttribute("itemList",list);

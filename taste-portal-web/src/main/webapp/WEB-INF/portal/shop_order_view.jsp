@@ -29,6 +29,7 @@
     <link id="style_color" href="${ctxStatic}/assets/admin/layout/css/themes/darkblue.css" rel="stylesheet" type="text/css"/>
     <link href="${ctxStatic}/assets/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>
     <!-- END THEME STYLES -->
+    <link href="${ctxStatic}/assets/global/plugins/bootstrap-table/bootstrap-table.css" rel="stylesheet" type="text/css"/>
     <link rel="shortcut icon" href="favicon.ico"/>
 </head>
 <!-- END HEAD -->
@@ -66,8 +67,7 @@
                     <div class="portlet light">
                         <div class="portlet-title">
                             <div class="caption">
-                                <i class="fa fa-shopping-cart"></i>订单详情 <span class="hidden-480">
-								| Dec 27, 2013 7:16:25 </span>
+                                <i class="fa fa-shopping-cart"></i>订单详情 <span class="hidden-480"></span>
                             </div>
                         </div>
                         <div class="portlet-body">
@@ -79,40 +79,80 @@
                                                 <div class="portlet blue-hoki box">
                                                     <div class="portlet-title">
                                                         <div class="caption">
-                                                            <i class="fa fa-cogs"></i>Customer Information
+                                                            <i class="fa fa-cogs"></i>订单信息
                                                         </div>
                                                     </div>
                                                     <div class="portlet-body">
                                                         <div class="row static-info">
-                                                            <div class="col-md-5 name">
-                                                                Customer Name:
+                                                            <div class="col-md-1 name ">
+                                                                收件人:
                                                             </div>
-                                                            <div class="col-md-7 value">
-                                                                Jhon Doe
+                                                            <div class="col-md-1 value addressee">
                                                             </div>
-                                                        </div>
-                                                        <div class="row static-info">
-                                                            <div class="col-md-5 name">
-                                                                Email:
+                                                            <div class="col-md-1 name">
+                                                                收货地址:
                                                             </div>
-                                                            <div class="col-md-7 value">
-                                                                jhon@doe.com
+                                                            <div class="col-md-5 value address">
                                                             </div>
                                                         </div>
                                                         <div class="row static-info">
-                                                            <div class="col-md-5 name">
-                                                                State:
+                                                            <div class="col-md-1 name">
+                                                                联系电话:
                                                             </div>
-                                                            <div class="col-md-7 value">
-                                                                New York
+                                                            <div class="col-md-1 value phone">
+                                                            </div>
+                                                            <div class="col-md-1 name ">
+                                                                时间:
+                                                            </div>
+                                                            <div class="col-md-5 value time">
+                                                            </div>
+                                                         </div>
+                                                        <div class="row static-info">
+                                                            <div class="col-md-1 name">
+                                                                订单总计:
+                                                            </div>
+                                                            <div class="col-md-1 value orderTotal">
+                                                            </div>
+                                                            <div class="col-md-1 name">
+                                                                付款方式:
+                                                            </div>
+                                                            <div class="col-md-5 value payType">
                                                             </div>
                                                         </div>
                                                         <div class="row static-info">
-                                                            <div class="col-md-5 name">
-                                                                Phone Number:
+                                                            <div class="col-md-1 name">
+                                                                订单状态:
                                                             </div>
-                                                            <div class="col-md-7 value">
-                                                                12234389
+                                                            <div class="col-md-1 value orderStatus">
+                                                            </div>
+                                                            <div class="col-md-1 name">
+                                                                订单留言：
+                                                            </div>
+                                                            <div class="col-md-5 value message">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row static-info">
+                                                            <div class="col-md-1 name">
+                                                                配送人:
+                                                            </div>
+                                                            <div class="col-md-1 value empName">
+                                                            </div>
+                                                            <div class="col-md-1 name">
+                                                                配送联系方式:
+                                                            </div>
+                                                            <div class="col-md-5 value empPhone">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row static-info">
+                                                            <div class="col-md-1 name">
+                                                                订单评价等级:
+                                                            </div>
+                                                            <div class="col-md-1 value rateLevel">
+                                                            </div>
+                                                            <div class="col-md-1 name">
+                                                                评价内容:
+                                                            </div>
+                                                            <div class="col-md-5 value rateContent">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -124,19 +164,29 @@
                                                 <div class="portlet green-meadow box">
                                                     <div class="portlet-title">
                                                         <div class="caption">
-                                                            <i class="fa fa-cogs"></i>Billing Address
+                                                            <i class="fa fa-cogs"></i>订单详情列表
                                                         </div>
                                                     </div>
                                                     <div class="portlet-body">
                                                         <div class="row static-info">
                                                             <div class="col-md-12 value">
-                                                                Jhon Done<br>
-                                                                #24 Park Avenue Str<br>
-                                                                New York<br>
-                                                                Connecticut, 23456 New York<br>
-                                                                United States<br>
-                                                                T: 123123232<br>
-                                                                F: 231231232<br>
+                                                                <table id="orderTable" class="table table-hover table-bordered table-striped"
+                                                                       data-classes="table-no-bordered"
+                                                                       data-query-params="queryParams"
+                                                                       data-toggle="table"
+                                                                       data-cache="true"
+                                                                       data-url="${ctx}/order/orderDetaileList"
+                                                                       data-pagination="true"
+                                                                       data-tool-bar="#toolbar">
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <th data-field="dishesName" >商品名称</th>
+                                                                        <th data-field="sumNum" >商品数量</th>
+                                                                        <th data-field="dishesPrice" >商品价格</th>
+                                                                        <th data-field="sumMoney" >总计</th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                </table>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -156,7 +206,7 @@
 </div>
     <!-- END CONTENT -->
     <!-- BEGIN QUICK SIDEBAR -->
-    <div class="page-quick-sidebar-wrapper">
+    <%--<div class="page-quick-sidebar-wrapper">
         <div class="page-quick-sidebar">
             <div class="nav-justified">
                 <ul class="nav nav-tabs nav-justified">
@@ -803,7 +853,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>--%>
     <!-- END QUICK SIDEBAR -->
 <!-- END CONTAINER -->
 <script src="${ctxStatic}/assets/global/plugins/respond.min.js"></script>
@@ -836,6 +886,8 @@
 <script src="${ctxStatic}/assets/global/scripts/datatable.js"></script>
 <script src="${ctxStatic}/assets/admin/pages/scripts/ecommerce-orders-view.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
+<script src="${ctxStatic}/assets/global/plugins/bootstrap-table/bootstrap-table.js" type="text/javascript"></script>
+
 <script>
     jQuery(document).ready(function() {
         Metronic.init(); // init metronic core components
@@ -844,6 +896,74 @@
         Demo.init(); // init demo features
         EcommerceOrdersView.init();
     });
+
+    $(function(){
+        $.ajax({
+            type : 'post',
+            url : rootPath + '/order/getOrder',
+            dataType : 'json',
+            data : {
+                orderId : parent.orderId
+            },
+            success : function(data){
+                $(".addressee").html(data.receiver);
+                $(".address").html(data.address);
+                $(".phone").html(data.phone);
+                $(".time").html(data.createTime);
+                $(".orderTotal").html(data.sumNum);
+                var show ;
+                switch(data.paymentType)
+                {
+                    case 1:
+                        show = '支付宝支付';
+                        break;
+                    case 2:
+                        show = '微信';
+                        break;
+                    default:
+                        show = '货到付款';
+                }
+                $(".payType").html(show);
+                switch(data.status)
+                {
+                    case 1:
+                        show = '未付款';
+                        break;
+                    case 2:
+                        show = '已付款';
+                        break;
+                    case 3:
+                        show = '未发货';
+                        break;
+                    case 4:
+                        show = '已发货';
+                        break;
+                    case 5:
+                        show = '交易成功';
+                        break;
+                    default:
+                        show = '交易关闭';
+                }
+                $(".orderStatus").html(show);
+                $(".message").html(data.buyerMessage);
+                $(".empName").html(data.empName);
+                $(".empPhone").html(data.empPhone);
+                $(".rateLevel").html(data.rateLevel);
+                $(".rateContent").html(data.rateContent);
+            }
+        });
+    });
+
+    function queryParams(params) {  //配置参数
+        var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+            /*pageSize: params.limit,   //页面大小
+            pageNumber: params.pageNumber,  //页码
+            sort: params.sort,  //排序列名
+            sortOrder: params.order//排位命令（desc，asc）*/
+            orderId : parent.orderId
+        };
+        return temp;
+    }
 </script>
 <!-- END JAVASCRIPTS -->
 </body>

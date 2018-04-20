@@ -40,27 +40,6 @@
     <!-- BEGIN PAGE CONTENT -->
     <div class="page-content">
         <div class="container">
-            <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-            <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                            <h4 class="modal-title">Modal title</h4>
-                        </div>
-                        <div class="modal-body">
-                            Widget settings form goes here
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn blue">Save changes</button>
-                            <button type="button" class="btn default" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                    <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
-            </div>
-            <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
             <!-- BEGIN PAGE BREADCRUMB -->
             <ul class="page-breadcrumb breadcrumb">
                 <li>
@@ -107,8 +86,9 @@
                                                                             <div class="col-md-12">
                                                                                 <div class="form-group">
                                                                                     <label class="control-label col-md-2">收件人:</label>
-                                                                                    <div class="col-md-8">
-                                                                                        <select class="form-control input-circle"></select>
+                                                                                    <div class="col-md-6">
+                                                                                        <select class="form-control input-circle addressee">
+                                                                                        </select>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -270,14 +250,31 @@
         EcommerceOrdersView.init();
     });
 
+    $(function(){
+        $.ajax({
+            type : 'post',
+            url : rootPath + '/taste/getUserAddress',
+            dataType : 'json',
+            success : function(data){
+                var option;
+                var str;
+                for(var i = 0;i < data.length;i++){
+                    str = data[i].addressee+'--'+data[i].phone+'--'+data[i].address;
+                    option = '<option value="'+data[i].id+'">'+str+'</option>';
+                    $(".addressee").append(option);
+                }
+            }
+        });
+    });
+
     $("#addAddress").click(function(){
         //弹出即全屏
         var index = layer.open({
             type: 2,
             skin: 'demo-class',
             content: '/toShopAddress',
-            area: ['980px', '480px'],
-            offset: ['100px', '200px'],
+            area: ['1100px', '480px'],
+            offset: ['80px', '150px'],
             scrollbar: false,
             anim: 0,
             cancel: function(index){

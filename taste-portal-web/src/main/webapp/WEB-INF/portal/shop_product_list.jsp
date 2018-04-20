@@ -65,11 +65,11 @@
         <!-- BEGIN NAVIGATION -->
         <div class="header-navigation">
             <ul>
-                <li><a href="shop-item.html">主食</a></li>
-                <li><a href="shop-item.html">粥、粉</a></li>
-                <li><a href="shop-item.html">饮料</a></li>
-                <li><a href="shop-item.html">其他</a></li>
-                <li><a href="shop-item.html">评价</a></li>
+                <li><a href="${ctx}/search/toCategoryList?categoryId=1" class="active">主食</a></li>
+                <li><a href="${ctx}/search/toCategoryList?categoryId=2">粥、粉</a></li>
+                <li><a href="${ctx}/search/toCategoryList?categoryId=3">饮料</a></li>
+                <li><a href="${ctx}/search/toCategoryList?categoryId=4">其他</a></li>
+                <li><a href="">评价</a></li>
 
 
                 <!-- BEGIN TOP SEARCH -->

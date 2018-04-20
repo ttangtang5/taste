@@ -11,21 +11,13 @@ public interface OrderDetailMapper {
 
     int deleteByExample(OrderDetailExample example);
 
-    int deleteByPrimaryKey(Integer orderId);
-
     int insert(OrderDetail record);
 
     int insertSelective(OrderDetail record);
 
     List<OrderDetail> selectByExample(OrderDetailExample example);
 
-    OrderDetail selectByPrimaryKey(Integer orderId);
-
     int updateByExampleSelective(@Param("record") OrderDetail record, @Param("example") OrderDetailExample example);
 
     int updateByExample(@Param("record") OrderDetail record, @Param("example") OrderDetailExample example);
-
-    int updateByPrimaryKeySelective(OrderDetail record);
-
-    int updateByPrimaryKey(OrderDetail record);
 }

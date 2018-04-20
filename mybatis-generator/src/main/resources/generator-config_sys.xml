@@ -54,10 +54,10 @@
 			<generatedKey column="cart_id" sqlStatement="MySql" identity="true" />
 		</table>
 		<table tableName="shopping_cart_detail" domainObjectName="ShoppingCartDetail">
-		</table>
+		</table>-->
 		<table tableName="order_detail" domainObjectName="OrderDetail">
 		</table>
-		<table tableName="order" domainObjectName="Order">
+		<!--<table tableName="order" domainObjectName="Order">
 			<generatedKey column="order_Id" sqlStatement="MySql" identity="true" />
 		</table>
 		<table tableName="dishes_type" domainObjectName="DishesType">
@@ -71,9 +71,9 @@
 		</table>
 		<table tableName="booking" domainObjectName="Booking">
 			<generatedKey column="id" sqlStatement="MySql" identity="true" />
-		</table>-->
+		</table>
 		<table tableName="user_address" domainObjectName="UserAddress">
 			<generatedKey column="id" sqlStatement="MySql" identity="true" />
-		</table>
+		</table>-->
 	</context>
 </generatorConfiguration>
