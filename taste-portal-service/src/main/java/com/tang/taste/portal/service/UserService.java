@@ -70,7 +70,7 @@ public class UserService {
         List<User> list = userDao.selectByExample(userExample);
         String salt = null;
         String dbPwd = null;
-        if(list !=null && list.size()==1){
+        if(list != null && list.size() == 1){
             salt = list.get(0).getSalt();
             dbPwd = list.get(0).getPassword();
             //校验输入的密码加密后是否匹配数据库密码
@@ -81,7 +81,7 @@ public class UserService {
                 String id = "user:"+list.get(0).getId();
                 //clusterRedis.setexKeyValue(id,60*60,value);
                 //将用户id存放至session
-                request.getSession(true).setAttribute("id",String.valueOf(list.get(0).getId()));
+                SessionUtils.setAttr(request,"id",list.get(0).getId());
                 SessionUtils.setUser(request,list.get(0));
                 //自动登录
                 if("1".equals(remember)){
@@ -201,5 +201,14 @@ public class UserService {
      */
     public int deleteAddress(int id){
         return userAddressDao.deleteByPrimaryKey(id);
+    }
+
+    /**
+     * 获取地址信息
+     * @param id
+     * @return
+     */
+    public UserAddress getAddressById(int id){
+        return userAddressDao.selectByPrimaryKey(id);
     }
 }

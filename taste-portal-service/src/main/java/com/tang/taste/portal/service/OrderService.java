@@ -75,4 +75,18 @@ public class OrderService {
        }
         return "error";
     }
+
+    /**
+     * 添加订单信息
+     * @param order
+     * @return
+     */
+    public int addOrder(Order order){
+        orderDao.insertSelective(order);
+        return order.getOrderId();
+    }
+
+    public void addOrderDetail(List<OrderDetail> orderDetail){
+        orderDetailDao.insertOrderDetail(orderDetail);
+    }
 }

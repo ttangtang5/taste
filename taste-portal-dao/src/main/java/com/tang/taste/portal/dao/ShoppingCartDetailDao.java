@@ -70,4 +70,7 @@ public interface ShoppingCartDetailDao extends ShoppingCartDetailMapper {
             " AND s.`status` = 0 " +
             "</script>"})
     long countShoppingCartDetail(int cartId);
+
+    int insertShoppingCartDetail(List<ShoppingCartDetail> list);
+
 }

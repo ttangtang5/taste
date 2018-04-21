@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tang.taste.portal.dao.ShoppingCartDetailDao">
+    <insert id="insertShoppingCartDetail" parameterType="com.tang.taste.common.entity.pojo.ShoppingCartDetail">
+       INSERT INTO shopping_cart_detail(cart_id,dishes_id,num,status)
+       VALUES
+      <foreach collection="list" item="detail" separator=",">
+          (#{detail.cartId},#{detail.dishesId},#{detail.num},#{detail.status})
+      </foreach>
+    </insert>
+</mapper>

@@ -2,6 +2,7 @@ package com.tang.taste.portal.dao;
 
 import com.tang.taste.common.dao.OrderDetailMapper;
 import com.tang.taste.common.entity.pojo.OrderDetail;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -38,5 +39,12 @@ public interface OrderDetailDao extends OrderDetailMapper{
             " AND o.del_flag = 0" +
             "</script>"})
     List<OrderDetail> selectOrderDetailList(int orderId);
+
+    /**
+     * 插入订单详情
+     * @param lists
+     * @return
+     */
+    int insertOrderDetail(List<OrderDetail> lists);
 
 }

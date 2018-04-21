@@ -42,7 +42,7 @@ public class LoginHandlerIntercepter implements HandlerInterceptor {
             }else{
                 //用户登陆过，验证通过，放行
                 //System.out.println("AuthorizationInterceptor放行请求");
-                flag=true;
+                flag = true;
             }
         }
         return flag;

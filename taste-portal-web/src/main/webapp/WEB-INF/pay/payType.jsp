@@ -130,7 +130,7 @@
 
                 <td>
 
-                    <input name="price" id="price" type="text" value="0.01"   class="input_text" > 元</td>
+                    <input name="price" id="price" type="text" value="${total}"   class="input_text" > 元</td>
             </tr>
             <!--              注释结束位置            -->
             <tr>
@@ -138,7 +138,7 @@
                     <div align="right">订单编号：</div>
                 </td>
 
-                <td><input name="pay_id" id="pay_id" type="text" value="1"  class="input_text"
+                <td><input name="pay_id" id="pay_id" type="text" value="${orderId}"  class="input_text"
                            style=" width:200px;"   ></td>
 
             </tr>

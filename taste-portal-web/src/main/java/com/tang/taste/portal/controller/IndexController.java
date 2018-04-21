@@ -1,10 +1,15 @@
 package com.tang.taste.portal.controller;
 
+import com.google.common.collect.Lists;
+import com.tang.taste.common.entity.pojo.Dishes;
+import com.tang.taste.common.entity.pojo.ShoppingCart;
+import com.tang.taste.common.entity.pojo.ShoppingCartDetail;
 import com.tang.taste.common.entity.pojo.User;
 import com.tang.taste.common.util.ClusterRedis;
 import com.tang.taste.common.util.CookieUtils;
 import com.tang.taste.common.util.SerializeUtils;
 import com.tang.taste.common.util.SessionUtils;
+import com.tang.taste.portal.service.ShoppingCartService;
 import com.tang.taste.portal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,6 +20,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Base64;
+import java.util.List;
 
 /**
  * FileName: IndexController
@@ -30,8 +36,8 @@ public class IndexController {
     private UserService userService;
     @Autowired
     private ClusterRedis clusterRedis;
-    @Value("${NOTIFY_URL}")
-    private String notifyUrl;
+    @Autowired
+    private ShoppingCartService shoppingCartService;
     /**
      * 跳转登录
      * @return
@@ -65,21 +71,61 @@ public class IndexController {
      * @throws Exception
      */
     @RequestMapping("toIndex")
-    public String toIndex(HttpServletRequest requeset) throws Exception{
+    public String toIndex(HttpServletRequest request,HttpServletResponse response) throws Exception{
         //判断是否登录
-        String id = (String) SessionUtils.getAttr(requeset, "id");
-        if(id != null && id != "" && id.contains("user:")){
-         //从redis获取用户信息
-            String userMsg = clusterRedis.getValue("user:" + id);
+        Integer id = (Integer) SessionUtils.getAttr(request, "id");
+        if(id != null && id != 0){
+            //从redis获取用户信息
+            //String userMsg = clusterRedis.getValue("user:" + id);
             //redis未命中 去数据库查找
-            User user = null;
+            /*User user = null;
             if(userMsg == null || userMsg == ""){
                 user =  userService.getUserById(id);
             }else{
                 //命中内存反序列化
                 user = (User)SerializeUtils.unSerialize(Base64.getDecoder().decode(clusterRedis.getValue("user:" + id)));
+            }*/
+            //将数据库购物车的数加入cookie
+            User user = SessionUtils.getUser(request);
+            ShoppingCart shoppingCart = shoppingCartService.getShoppingCartByUserId(user.getId());
+            List<ShoppingCartDetail> lists = shoppingCartService.getShoppingCartDetailByCartId(shoppingCart.getCartId());
+            shoppingCartService.deleteShoppingDetail(shoppingCart.getCartId());
+            List list = Lists.newArrayList();
+            List num = Lists.newArrayList();
+            Cookie[] cookies = request.getCookies();
+            for (int i = 0; i < cookies.length; i++){
+                String[] c = cookies[i].getValue().split(":");
+                if(c.length > 1 && c[1] != null){
+                    for (ShoppingCartDetail s : lists) {
+                        String str = null;
+                        if(cookies[i].getName().equals(s.getDishesId())){
+                           int goodsNum = Integer.valueOf(c[0]) + s.getNum();
+                           str = String.valueOf(goodsNum) + ":" + c[1];
+                           CookieUtils.setCookie(request,response,cookies[i].getName(),str);
+                        }else{
+                            str = s.getNum().toString() + ":" + s.getDishesPrice();
+                            CookieUtils.setCookie(request,response,s.getDishesId().toString(),str);
+                        }
+                    }
+                }
             }
-            SessionUtils.setAttr(requeset,"username",user.getUserName());
+
+            List<ShoppingCartDetail> details = Lists.newArrayList();
+            for (int i = 0; i < cookies.length; i++){
+                String[] c = cookies[i].getValue().split(":");
+                if(c.length > 1 && c[1] != null){
+                    ShoppingCartDetail shoppingCartDetail = new ShoppingCartDetail();
+                    shoppingCartDetail.setCartId(shoppingCart.getCartId());
+                    shoppingCartDetail.setDishesId(Integer.valueOf(cookies[i].getName()));
+                    shoppingCartDetail.setNum(Integer.valueOf(c[0]));
+                    shoppingCartDetail.setStatus(0);
+                    details.add(shoppingCartDetail);
+                }
+            }
+            shoppingCartService.addShoppingDetailList(details);
+            request.setAttribute("loginFlag","1");
+        }else{
+            request.setAttribute("loginFlag","0");
         }
         return "portal/shop_index";
     }
@@ -181,33 +227,6 @@ public class IndexController {
         return "/portal/shop_order_view";
     }
 
-    @RequestMapping("pay")
-    public String toPay(HttpServletRequest request) throws Exception{
-        /**
-         * 接收参数 创建订单
-         */
-        String token = "XDca0b2mokapJFIEi3llt2IpIPIPaGw4"; //记得更改 http://codepay.fateqq.com 后台可设置
-        String codepay_id ="46481" ;//记得更改 http://codepay.fateqq.com 后台可获得
 
-        String price = request.getParameter("price"); //表单提交的价格
-        String type = request.getParameter("type"); //支付类型  1：支付宝 2：QQ钱包 3：微信
-        String pay_id = request.getParameter("pay_id"); //支付人的唯一标识
-        String param = request.getParameter("param"); //自定义一些参数 支付后返回
-
-        String notify_url = notifyUrl;//通知地址
-        String return_url = "http://www.baidu.com";//支付后同步跳转地址
-
-        if(price == null){
-            price="1";
-        }
-        //参数有中文则需要URL编码
-        String url="redirect:http://codepay.fateqq.com:52888/creat_order?id="+codepay_id+"&pay_id="+pay_id+"&price="+price+"&type="+type+"&token="+token+"&param="+param+"&notify_url="+notify_url+"&return_url="+return_url;
-        return url;
-    }
-
-    @RequestMapping("notify")
-    public String demo(HttpServletRequest request) throws Exception{
-        return "/pay/notify";
-    }
 
 }

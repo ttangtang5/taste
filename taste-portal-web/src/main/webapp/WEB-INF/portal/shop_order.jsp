@@ -79,7 +79,7 @@
                                                         <div class="table-responsive">
                                                             <div class="portlet-body form">
                                                                 <!-- BEGIN FORM-->
-                                                                <form class="form-horizontal" role="form">
+                                                                <form class="form-horizontal" role="form" action="${ctx}/order/saveOrder" method="post">
                                                                     <div class="form-body">
                                                                         <h3 class="form-section">配送信息</h3>
                                                                         <div class="row">
@@ -87,7 +87,7 @@
                                                                                 <div class="form-group">
                                                                                     <label class="control-label col-md-2">收件人:</label>
                                                                                     <div class="col-md-6">
-                                                                                        <select class="form-control input-circle addressee">
+                                                                                        <select class="form-control input-circle addressee" name="addressee">
                                                                                         </select>
                                                                                     </div>
                                                                                 </div>
@@ -141,7 +141,7 @@
                                                                                 <div class="form-group">
                                                                                     <label class="control-label col-md-2">用餐人数:</label>
                                                                                     <div class="col-md-1">
-                                                                                        <select class="form-control input-circle">
+                                                                                        <select class="form-control input-circle" name="num">
                                                                                             <option value="1">1</option>
                                                                                             <option value="2">2</option>
                                                                                             <option value="3">3</option>
@@ -160,7 +160,7 @@
                                                                                 <div class="form-group">
                                                                                     <label class="control-label col-md-2">备注:</label>
                                                                                     <div class="col-md-6">
-                                                                                        <textarea style="height: 80px;width: 300px" maxlength="50"></textarea>
+                                                                                        <textarea style="height: 80px;width: 300px" maxlength="50" name="remarks"></textarea>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>

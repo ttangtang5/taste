@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tang.taste.portal.dao.OrderDetailDao">
+    <insert id="insertOrderDetail" parameterType="com.tang.taste.common.entity.pojo.OrderDetail">
+       insert into order_detail(order_id,dishes_id,sum_num,sum_money,pay_price,special_discount)
+       VALUES
+      <foreach collection="list" item="detail" separator=",">  +
+          (#{detail.orderId},#{detail.dishesId},#{detail.sumNum},#{detail.sumMoney},#{detail.payPrice},#{detail.specialDiscount})
+      </foreach>
+    </insert>
+</mapper>

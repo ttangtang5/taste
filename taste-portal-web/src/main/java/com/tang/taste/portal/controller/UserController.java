@@ -110,11 +110,10 @@ public class UserController {
     public String loginOut(HttpServletRequest request,HttpServletResponse response)throws Exception{
         //获取session
         SessionUtils.removeAttr(request,"id");
-        SessionUtils.removeAttr(request,"username");
         SessionUtils.removeUser(request);
         //取消cookie
         CookieUtils.deleteCookie(request,response,"id");
-        return "portal/shop_index";
+        return "redirect:/toIndex";
     }
 
     /**
@@ -166,7 +165,7 @@ public class UserController {
     }
 
     /**
-     * 获取注册验证码
+     * 获取注册验证码、重置密码模板
      * @param phoneNum
      * @param request
      * @return
@@ -190,9 +189,9 @@ public class UserController {
         SessionUtils.setValidateCode(request,String.valueOf(numCode));
         HttpSession session = request.getSession(true);
         try {
-            //boolean flag = SmsUtils.sendCaptcha(phoneNum,String.valueOf(numCode),template);
+            boolean flag = SmsUtils.sendCaptcha(phoneNum,String.valueOf(numCode),template);
             //TimerTask实现5分钟后从session中删除checkCode
-            final Timer timer=new Timer();
+            final Timer timer = new Timer();
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {

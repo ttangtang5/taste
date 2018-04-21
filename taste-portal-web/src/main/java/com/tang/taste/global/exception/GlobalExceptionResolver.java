@@ -23,7 +23,7 @@ public class GlobalExceptionResolver implements HandlerExceptionResolver {
         //控制台打印
         e.printStackTrace();
         //向日志写文件写入异常
-        logger.error("系统异常：",e);
+        //logger.error("系统异常：",e);
         //发邮件通过jmail实现
         //发短信
         //展示错误页面

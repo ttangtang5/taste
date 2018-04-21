@@ -3,6 +3,7 @@ package com.tang.taste.portal.service;
 import com.tang.taste.common.entity.extra.PageHelper;
 import com.tang.taste.common.entity.pojo.ShoppingCart;
 import com.tang.taste.common.entity.pojo.ShoppingCartDetail;
+import com.tang.taste.common.entity.pojo.ShoppingCartDetailExample;
 import com.tang.taste.common.entity.pojo.ShoppingCartExample;
 import com.tang.taste.portal.dao.ShoppingCartDao;
 import com.tang.taste.portal.dao.ShoppingCartDetailDao;
@@ -96,5 +97,24 @@ public class ShoppingCartService {
      */
     public long countShoppingCartDetailByCartId(int cartId){
         return shoppingCartDetailDao.countShoppingCartDetail(cartId);
+    }
+
+
+    /**
+     * 将cookie中的值插入购物车中
+     * @param list
+     */
+    public void addShoppingDetailList(List<ShoppingCartDetail> list){
+        shoppingCartDetailDao.insertShoppingCartDetail(list);
+    }
+
+    /**
+     * 删除购物车
+     * @param cartId
+     */
+    public void deleteShoppingDetail(int cartId){
+        ShoppingCartDetailExample shoppingCartDetailExample = new ShoppingCartDetailExample();
+        shoppingCartDetailExample.createCriteria().andCartIdEqualTo(cartId);
+        shoppingCartDetailDao.deleteByExample(shoppingCartDetailExample);
     }
 }

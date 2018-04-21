@@ -7,6 +7,7 @@
     <result column="receiver" jdbcType="VARCHAR" property="receiver" />
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="num" jdbcType="INTEGER" property="num" />
     <result column="sum_num" jdbcType="DOUBLE" property="sumNum" />
     <result column="emp_id" jdbcType="INTEGER" property="empId" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -82,7 +83,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    order_Id, user_id, receiver, address, phone, sum_num, emp_id, create_time, payment_type, 
+    order_Id, user_id, receiver, address, phone, num, sum_num, emp_id, create_time, payment_type, 
     `status`, update_time, payment_time, consign_time, end_time, close_time, buyer_message, 
     buyer_rate, rate_level, rate_content, del_flag
   </sql>
@@ -120,26 +121,26 @@
     <selectKey keyProperty="orderId" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into order (user_id, receiver, address, 
-      phone, sum_num, emp_id, 
-      create_time, payment_type, `status`, 
-      update_time, payment_time, consign_time, 
-      end_time, close_time, buyer_message, 
-      buyer_rate, rate_level, rate_content, 
-      del_flag)
+    insert into `order` (user_id, receiver, address,
+      phone, num, sum_num, 
+      emp_id, create_time, payment_type, 
+      `status`, update_time, payment_time, 
+      consign_time, end_time, close_time, 
+      buyer_message, buyer_rate, rate_level, 
+      rate_content, del_flag)
     values (#{userId,jdbcType=INTEGER}, #{receiver,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{sumNum,jdbcType=DOUBLE}, #{empId,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{paymentType,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{paymentTime,jdbcType=TIMESTAMP}, #{consignTime,jdbcType=TIMESTAMP}, 
-      #{endTime,jdbcType=TIMESTAMP}, #{closeTime,jdbcType=TIMESTAMP}, #{buyerMessage,jdbcType=VARCHAR}, 
-      #{buyerRate,jdbcType=INTEGER}, #{rateLevel,jdbcType=INTEGER}, #{rateContent,jdbcType=VARCHAR}, 
-      #{delFlag,jdbcType=INTEGER})
+      #{phone,jdbcType=VARCHAR}, #{num,jdbcType=INTEGER}, #{sumNum,jdbcType=DOUBLE}, 
+      #{empId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{paymentType,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{paymentTime,jdbcType=TIMESTAMP}, 
+      #{consignTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{closeTime,jdbcType=TIMESTAMP}, 
+      #{buyerMessage,jdbcType=VARCHAR}, #{buyerRate,jdbcType=INTEGER}, #{rateLevel,jdbcType=INTEGER}, 
+      #{rateContent,jdbcType=VARCHAR}, #{delFlag,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.tang.taste.common.entity.pojo.Order">
     <selectKey keyProperty="orderId" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into order
+    insert into `order`
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="userId != null">
         user_id,
@@ -152,6 +153,9 @@
       </if>
       <if test="phone != null">
         phone,
+      </if>
+      <if test="num != null">
+        num,
       </if>
       <if test="sumNum != null">
         sum_num,
@@ -212,6 +216,9 @@
       <if test="phone != null">
         #{phone,jdbcType=VARCHAR},
       </if>
+      <if test="num != null">
+        #{num,jdbcType=INTEGER},
+      </if>
       <if test="sumNum != null">
         #{sumNum,jdbcType=DOUBLE},
       </if>
@@ -260,13 +267,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.tang.taste.common.entity.pojo.OrderExample" resultType="java.lang.Long">
-    select count(*) from order
+    select count(*) from `order`
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update `order`
+    update order
     <set>
       <if test="record.orderId != null">
         order_Id = #{record.orderId,jdbcType=INTEGER},
@@ -282,6 +289,9 @@
       </if>
       <if test="record.phone != null">
         phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.num != null">
+        num = #{record.num,jdbcType=INTEGER},
       </if>
       <if test="record.sumNum != null">
         sum_num = #{record.sumNum,jdbcType=DOUBLE},
@@ -334,12 +344,13 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update `order`
+    update order
     set order_Id = #{record.orderId,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=INTEGER},
       receiver = #{record.receiver,jdbcType=VARCHAR},
       address = #{record.address,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=VARCHAR},
+      num = #{record.num,jdbcType=INTEGER},
       sum_num = #{record.sumNum,jdbcType=DOUBLE},
       emp_id = #{record.empId,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -360,7 +371,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.tang.taste.common.entity.pojo.Order">
-    update `order`
+    update order
     <set>
       <if test="userId != null">
         user_id = #{userId,jdbcType=INTEGER},
@@ -373,6 +384,9 @@
       </if>
       <if test="phone != null">
         phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null">
+        num = #{num,jdbcType=INTEGER},
       </if>
       <if test="sumNum != null">
         sum_num = #{sumNum,jdbcType=DOUBLE},
@@ -423,11 +437,12 @@
     where order_Id = #{orderId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.tang.taste.common.entity.pojo.Order">
-    update `order`
+    update order
     set user_id = #{userId,jdbcType=INTEGER},
       receiver = #{receiver,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
+      num = #{num,jdbcType=INTEGER},
       sum_num = #{sumNum,jdbcType=DOUBLE},
       emp_id = #{empId,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},

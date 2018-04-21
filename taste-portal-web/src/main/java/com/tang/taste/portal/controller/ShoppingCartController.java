@@ -3,7 +3,6 @@ package com.tang.taste.portal.controller;
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.tang.taste.common.dao.DishesMapper;
 import com.tang.taste.common.entity.extra.PageHelper;
 import com.tang.taste.common.entity.pojo.Dishes;
 import com.tang.taste.common.entity.pojo.ShoppingCart;
@@ -11,21 +10,16 @@ import com.tang.taste.common.entity.pojo.ShoppingCartDetail;
 import com.tang.taste.common.entity.pojo.User;
 import com.tang.taste.common.util.CookieUtils;
 import com.tang.taste.common.util.SessionUtils;
-import com.tang.taste.portal.service.ContentService;
 import com.tang.taste.portal.service.DishesService;
 import com.tang.taste.portal.service.ShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -207,13 +201,21 @@ public class ShoppingCartController {
                         }
                     }
                 }
+                ShoppingCart shoppingCart = shoppingCartService.getShoppingCartByUserId(user.getId());
+                List<ShoppingCartDetail> listDetail = shoppingCartService.getShoppingCartDetailByCartId(shoppingCart.getCartId());
+                //将信息加入数据库
+                shoppingCartService.addShoppingDetailList(rows);
+                rows.addAll(listDetail);
                 page.setRows(rows);
                 page.setTotal(count);
                 double total = 0;
                 for (ShoppingCartDetail shoppingCartDetail : rows) {
                     total = total + shoppingCartDetail.getDishesTotal();
                 }
+                total = shoppingCart.getSumMoney() + total;
                 SessionUtils.setAttr(request,"total",total);
+                shoppingCart.setSumMoney(total);
+                shoppingCartService.updateShoppingCart(shoppingCart, user.getId());
                 return JSON.toJSONString(rows);
             }
         }

@@ -16,6 +16,8 @@ public class Order extends OrderExtra implements Serializable {
 
     private String phone;
 
+    private Integer num;
+
     private Double sumNum;
 
     private Integer empId;
@@ -86,6 +88,14 @@ public class Order extends OrderExtra implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public Integer getNum() {
+        return num;
+    }
+
+    public void setNum(Integer num) {
+        this.num = num;
     }
 
     public Double getSumNum() {
@@ -225,6 +235,7 @@ public class Order extends OrderExtra implements Serializable {
             && (this.getReceiver() == null ? other.getReceiver() == null : this.getReceiver().equals(other.getReceiver()))
             && (this.getAddress() == null ? other.getAddress() == null : this.getAddress().equals(other.getAddress()))
             && (this.getPhone() == null ? other.getPhone() == null : this.getPhone().equals(other.getPhone()))
+            && (this.getNum() == null ? other.getNum() == null : this.getNum().equals(other.getNum()))
             && (this.getSumNum() == null ? other.getSumNum() == null : this.getSumNum().equals(other.getSumNum()))
             && (this.getEmpId() == null ? other.getEmpId() == null : this.getEmpId().equals(other.getEmpId()))
             && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
@@ -251,6 +262,7 @@ public class Order extends OrderExtra implements Serializable {
         result = prime * result + ((getReceiver() == null) ? 0 : getReceiver().hashCode());
         result = prime * result + ((getAddress() == null) ? 0 : getAddress().hashCode());
         result = prime * result + ((getPhone() == null) ? 0 : getPhone().hashCode());
+        result = prime * result + ((getNum() == null) ? 0 : getNum().hashCode());
         result = prime * result + ((getSumNum() == null) ? 0 : getSumNum().hashCode());
         result = prime * result + ((getEmpId() == null) ? 0 : getEmpId().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
@@ -280,6 +292,7 @@ public class Order extends OrderExtra implements Serializable {
         sb.append(", receiver=").append(receiver);
         sb.append(", address=").append(address);
         sb.append(", phone=").append(phone);
+        sb.append(", num=").append(num);
         sb.append(", sumNum=").append(sumNum);
         sb.append(", empId=").append(empId);
         sb.append(", createTime=").append(createTime);

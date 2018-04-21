@@ -23,7 +23,9 @@
                     <li><a href="/toShopAccount" id="toCenter">个人中心</a></li>
                    <%-- <li><a href="/toShopWishList" id="toWish">收藏</a></li>--%>
                     <li><a href="/toShopOrderList" id="toOrder">订单</a></li>
-                    <li><a href="/toLogin" id="toLog">登录</a><span id="logMsg">${sessionScope.username}&nbsp;</span><a href="/taste/toLogOut" id="toLogOut" hidden>注销</a></li>
+                    <li> <c:if test="${loginFlag == '0' }"><a href="${ctx}/toLogin" id="toLog">登录</a></c:if>
+                        <c:if test="${loginFlag == '1' }"><a href="${ctx}/taste/toLogOut" id="toLogOut" ><span id="logMsg">${sessionScope.session_user.userName}&nbsp;</span>注销</a></c:if>
+                    </li>
                 </ul>
             </div>
             <!-- END TOP BAR MENU -->
