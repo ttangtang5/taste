@@ -4,7 +4,7 @@
     <insert id="insertOrderDetail" parameterType="com.tang.taste.common.entity.pojo.OrderDetail">
        insert into order_detail(order_id,dishes_id,sum_num,sum_money,pay_price,special_discount)
        VALUES
-      <foreach collection="list" item="detail" separator=",">  +
+      <foreach collection="list" item="detail" separator=",">
           (#{detail.orderId},#{detail.dishesId},#{detail.sumNum},#{detail.sumMoney},#{detail.payPrice},#{detail.specialDiscount})
       </foreach>
     </insert>

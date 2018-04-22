@@ -91,7 +91,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.tang.taste.common.entity.pojo.OrderDetail">
+  <insert id="insert" parameterType="com.tang.taste.common.entity.pojo.OrderDetail" >
     insert into order_detail (order_id, dishes_id, sum_num, 
       sum_money, pay_price, special_discount, 
       del_flag)

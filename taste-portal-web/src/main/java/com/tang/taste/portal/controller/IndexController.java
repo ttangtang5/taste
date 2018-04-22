@@ -36,8 +36,7 @@ public class IndexController {
     private UserService userService;
     @Autowired
     private ClusterRedis clusterRedis;
-    @Autowired
-    private ShoppingCartService shoppingCartService;
+
     /**
      * 跳转登录
      * @return
@@ -85,44 +84,7 @@ public class IndexController {
                 //命中内存反序列化
                 user = (User)SerializeUtils.unSerialize(Base64.getDecoder().decode(clusterRedis.getValue("user:" + id)));
             }*/
-            //将数据库购物车的数加入cookie
-            User user = SessionUtils.getUser(request);
-            ShoppingCart shoppingCart = shoppingCartService.getShoppingCartByUserId(user.getId());
-            List<ShoppingCartDetail> lists = shoppingCartService.getShoppingCartDetailByCartId(shoppingCart.getCartId());
-            shoppingCartService.deleteShoppingDetail(shoppingCart.getCartId());
-            List list = Lists.newArrayList();
-            List num = Lists.newArrayList();
-            Cookie[] cookies = request.getCookies();
-            for (int i = 0; i < cookies.length; i++){
-                String[] c = cookies[i].getValue().split(":");
-                if(c.length > 1 && c[1] != null){
-                    for (ShoppingCartDetail s : lists) {
-                        String str = null;
-                        if(cookies[i].getName().equals(s.getDishesId())){
-                           int goodsNum = Integer.valueOf(c[0]) + s.getNum();
-                           str = String.valueOf(goodsNum) + ":" + c[1];
-                           CookieUtils.setCookie(request,response,cookies[i].getName(),str);
-                        }else{
-                            str = s.getNum().toString() + ":" + s.getDishesPrice();
-                            CookieUtils.setCookie(request,response,s.getDishesId().toString(),str);
-                        }
-                    }
-                }
-            }
 
-            List<ShoppingCartDetail> details = Lists.newArrayList();
-            for (int i = 0; i < cookies.length; i++){
-                String[] c = cookies[i].getValue().split(":");
-                if(c.length > 1 && c[1] != null){
-                    ShoppingCartDetail shoppingCartDetail = new ShoppingCartDetail();
-                    shoppingCartDetail.setCartId(shoppingCart.getCartId());
-                    shoppingCartDetail.setDishesId(Integer.valueOf(cookies[i].getName()));
-                    shoppingCartDetail.setNum(Integer.valueOf(c[0]));
-                    shoppingCartDetail.setStatus(0);
-                    details.add(shoppingCartDetail);
-                }
-            }
-            shoppingCartService.addShoppingDetailList(details);
             request.setAttribute("loginFlag","1");
         }else{
             request.setAttribute("loginFlag","0");

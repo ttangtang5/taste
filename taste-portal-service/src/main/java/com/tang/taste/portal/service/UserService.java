@@ -1,9 +1,7 @@
 package com.tang.taste.portal.service;
 
-import com.tang.taste.common.entity.pojo.User;
-import com.tang.taste.common.entity.pojo.UserAddress;
-import com.tang.taste.common.entity.pojo.UserAddressExample;
-import com.tang.taste.common.entity.pojo.UserExample;
+import com.google.common.collect.Lists;
+import com.tang.taste.common.entity.pojo.*;
 import com.tang.taste.common.util.*;
 import com.tang.taste.portal.dao.UserAddressDao;
 import com.tang.taste.portal.dao.UserDao;
@@ -33,6 +31,8 @@ public class UserService {
     private ClusterRedis clusterRedis;
     @Autowired
     private UserAddressDao userAddressDao;
+    @Autowired
+    private ShoppingCartService shoppingCartService;
 
     /**
      * 添加用户
@@ -92,6 +92,43 @@ public class UserService {
                     CookieUtils.setCookie(request,response,"id",str.toString(),60*60*24*7);
                     /*cookie.setPath(request.getContextPath()+"/");*/
                 }
+
+                //将数据库购物车的数加入cookie
+                User userCart = SessionUtils.getUser(request);
+                ShoppingCart shoppingCart = shoppingCartService.getShoppingCartByUserId(userCart.getId());
+                List<ShoppingCartDetail> lists = shoppingCartService.getShoppingCartDetailByCartId(shoppingCart.getCartId());
+                shoppingCartService.deleteShoppingDetail(shoppingCart.getCartId());
+                Cookie[] cookies = request.getCookies();
+                for (int i = 0; i < cookies.length; i++){
+                    String[] c = cookies[i].getValue().split(":");
+                    if(c.length > 1 && c[1] != null){
+                        for (ShoppingCartDetail s : lists) {
+                            String str = null;
+                            if(cookies[i].getName().equals(s.getDishesId())){
+                                int goodsNum = Integer.valueOf(c[0]) + s.getNum();
+                                str = String.valueOf(goodsNum) + ":" + c[1];
+                                CookieUtils.setCookie(request,response,cookies[i].getName(),str);
+                            }else{
+                                str = s.getNum().toString() + ":" + s.getDishesPrice();
+                                CookieUtils.setCookie(request,response,s.getDishesId().toString(),str);
+                            }
+                        }
+                    }
+                }
+
+                List<ShoppingCartDetail> details = Lists.newArrayList();
+                for (int i = 0; i < cookies.length; i++){
+                    String[] c = cookies[i].getValue().split(":");
+                    if(c.length > 1 && c[1] != null){
+                        ShoppingCartDetail shoppingCartDetail = new ShoppingCartDetail();
+                        shoppingCartDetail.setCartId(shoppingCart.getCartId());
+                        shoppingCartDetail.setDishesId(Integer.valueOf(cookies[i].getName()));
+                        shoppingCartDetail.setNum(Integer.valueOf(c[0]));
+                        shoppingCartDetail.setStatus(0);
+                        details.add(shoppingCartDetail);
+                    }
+                }
+                shoppingCartService.addShoppingDetailList(details);
                 return "200";
             }else{
                 //失败

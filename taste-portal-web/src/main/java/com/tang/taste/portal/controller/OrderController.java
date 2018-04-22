@@ -3,9 +3,11 @@ package com.tang.taste.portal.controller;
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
 import com.tang.taste.common.entity.pojo.*;
+import com.tang.taste.common.util.CookieUtils;
 import com.tang.taste.common.util.SessionUtils;
 import com.tang.taste.portal.service.DishesService;
 import com.tang.taste.portal.service.OrderService;
+import com.tang.taste.portal.service.ShoppingCartService;
 import com.tang.taste.portal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.List;
 
@@ -34,6 +37,8 @@ public class OrderController {
     private UserService userService;
     @Autowired
     private DishesService dishesService;
+    @Autowired
+    private ShoppingCartService shoppingCartService;
     @Value("${NOTIFY_URL}")
     private String notifyUrl;
     /**
@@ -131,7 +136,7 @@ public class OrderController {
                 for (int j =0 ; j < list.size(); j++) {
                     if(String.valueOf(dishes.get(i).getId()) != null && String.valueOf(dishes.get(i).getId()) .equals(list.get(j).toString())){
                         OrderDetail orderDetail = new OrderDetail();
-                        orderDetail.setDishesId(dishes.get(0).getId());
+                        orderDetail.setDishesId(dishes.get(i).getId());
                         orderDetail.setPayPrice(0d);
                         orderDetail.setSpecialDiscount(0d);
                         orderDetail.setSumMoney(Double.valueOf(nums.get(i).toString())*dishes.get(i).getDishesPrice());
@@ -151,6 +156,11 @@ public class OrderController {
             orderDetail.setOrderId(orderId);
         }
         orderService.addOrderDetail(rows);
+        //将购物车里面东西移除
+        ShoppingCart shoppingCart = shoppingCartService.getShoppingCartByUserId(user.getId());
+        shoppingCart.setSumMoney(0d);
+        shoppingCartService.updateShoppingCart(shoppingCart,user.getId());
+        shoppingCartService.deleteShoppingDetail(shoppingCart.getCartId());
         request.setAttribute("total",total);
         request.setAttribute("orderId",orderId);
         return "pay/payType";
@@ -163,7 +173,7 @@ public class OrderController {
      * @throws Exception
      */
     @RequestMapping("pay")
-    public String toPay(HttpServletRequest request) throws Exception{
+    public String toPay(HttpServletRequest request, HttpServletResponse response) throws Exception{
         /**
          * 接收参数 创建订单
          */
@@ -175,8 +185,10 @@ public class OrderController {
         String pay_id = request.getParameter("pay_id"); //支付人的唯一标识
         String param = request.getParameter("param"); //自定义一些参数 支付后返回
 
+        CookieUtils.setCookie(request,response,"pay_id",pay_id,60*60);
+
         String notify_url = notifyUrl;//通知地址
-        String return_url = "http://www.baidu.com";//支付后同步跳转地址
+        String return_url = "http://c6d8bcd5.ngrok.io/order/paySuccess?order="+pay_id;//支付后同步跳转地址
 
         if(price == null){
             price="1";
@@ -186,8 +198,27 @@ public class OrderController {
         return url;
     }
 
+    /**
+     * 通知
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("notify")
-    public String demo(HttpServletRequest request) throws Exception{
+    public String notify(HttpServletRequest request) throws Exception{
         return "/pay/notify";
+    }
+
+    /**
+     *
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("paySuccess")
+    public String paySuccess(HttpServletRequest request) throws  Exception{
+        String pay_id =  CookieUtils.getCookieValue(request, "pay_id");
+        orderService.updateOrderPayStatus(Integer.valueOf(pay_id));
+        return "redirect:/toShopOrderList";
     }
 }

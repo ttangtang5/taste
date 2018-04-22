@@ -86,7 +86,20 @@ public class OrderService {
         return order.getOrderId();
     }
 
+    /**
+     * 添加订单详情
+     * @param orderDetail
+     */
     public void addOrderDetail(List<OrderDetail> orderDetail){
         orderDetailDao.insertOrderDetail(orderDetail);
+    }
+
+
+
+    public void updateOrderPayStatus(int orderId){
+        Order order = new Order();
+        order.setStatus(2);
+        order.setOrderId(orderId);
+        orderDao.updateByPrimaryKeySelective(order);
     }
 }

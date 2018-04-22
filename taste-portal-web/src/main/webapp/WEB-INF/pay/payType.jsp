@@ -110,7 +110,7 @@
     </style>
 </head>
 <body>
-<form name="form1" id="form1" method="get" action="${ctx}/pay">
+<form name="form1" id="form1" method="get" action="${ctx}/order/pay">
     <div>
         <table width="550" border="0" align="center" cellpadding="8" cellspacing="1" bgcolor="#ffffff">
             <tbody>
@@ -130,7 +130,7 @@
 
                 <td>
 
-                    <input name="price" id="price" type="text" value="${total}"   class="input_text" > 元</td>
+                    <input name="price" id="price" type="text" value="${total}"    class="input_text" > 元</td>
             </tr>
             <!--              注释结束位置            -->
             <tr>
@@ -138,7 +138,7 @@
                     <div align="right">订单编号：</div>
                 </td>
 
-                <td><input name="pay_id" id="pay_id" type="text" value="${orderId}"  class="input_text"
+                <td><input name="pay_id" id="pay_id" type="text" value="${orderId}"  disabled class="input_text"
                            style=" width:200px;"   ></td>
 
             </tr>

@@ -1,10 +1,8 @@
 package com.tang.taste.portal.service;
 
 import com.google.common.collect.Lists;
-import com.tang.taste.common.entity.extra.PageHelper;
 import com.tang.taste.common.entity.extra.SearchDishes;
 import com.tang.taste.common.entity.extra.SearchResult;
-import com.tang.taste.common.entity.pojo.Dishes;
 import com.tang.taste.manage.dao.DishesDao;
 import com.tang.taste.portal.dao.SearchUtilDao;
 import org.apache.solr.client.solrj.SolrQuery;

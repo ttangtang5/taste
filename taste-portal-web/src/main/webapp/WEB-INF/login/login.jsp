@@ -221,7 +221,6 @@
 <script src="/static/assets/admin/pages/scripts/login.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <!--js处理-->
-<script src="/static/portal/login.js" type="text/javascript"></script>
 <script>
 
     jQuery(document).ready(function() {
