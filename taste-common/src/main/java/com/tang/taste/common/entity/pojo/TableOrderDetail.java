@@ -7,6 +7,8 @@ public class TableOrderDetail implements Serializable {
 
     private String dishesName;
 
+    private Double dishesPrice;
+
     private Integer sumNum;
 
     private Double sumMoney;
@@ -33,6 +35,14 @@ public class TableOrderDetail implements Serializable {
 
     public void setDishesName(String dishesName) {
         this.dishesName = dishesName;
+    }
+
+    public Double getDishesPrice() {
+        return dishesPrice;
+    }
+
+    public void setDishesPrice(Double dishesPrice) {
+        this.dishesPrice = dishesPrice;
     }
 
     public Integer getSumNum() {
@@ -89,6 +99,7 @@ public class TableOrderDetail implements Serializable {
         TableOrderDetail other = (TableOrderDetail) that;
         return (this.getTableId() == null ? other.getTableId() == null : this.getTableId().equals(other.getTableId()))
             && (this.getDishesName() == null ? other.getDishesName() == null : this.getDishesName().equals(other.getDishesName()))
+            && (this.getDishesPrice() == null ? other.getDishesPrice() == null : this.getDishesPrice().equals(other.getDishesPrice()))
             && (this.getSumNum() == null ? other.getSumNum() == null : this.getSumNum().equals(other.getSumNum()))
             && (this.getSumMoney() == null ? other.getSumMoney() == null : this.getSumMoney().equals(other.getSumMoney()))
             && (this.getPayPrice() == null ? other.getPayPrice() == null : this.getPayPrice().equals(other.getPayPrice()))
@@ -102,6 +113,7 @@ public class TableOrderDetail implements Serializable {
         int result = 1;
         result = prime * result + ((getTableId() == null) ? 0 : getTableId().hashCode());
         result = prime * result + ((getDishesName() == null) ? 0 : getDishesName().hashCode());
+        result = prime * result + ((getDishesPrice() == null) ? 0 : getDishesPrice().hashCode());
         result = prime * result + ((getSumNum() == null) ? 0 : getSumNum().hashCode());
         result = prime * result + ((getSumMoney() == null) ? 0 : getSumMoney().hashCode());
         result = prime * result + ((getPayPrice() == null) ? 0 : getPayPrice().hashCode());
@@ -118,6 +130,7 @@ public class TableOrderDetail implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", tableId=").append(tableId);
         sb.append(", dishesName=").append(dishesName);
+        sb.append(", dishesPrice=").append(dishesPrice);
         sb.append(", sumNum=").append(sumNum);
         sb.append(", sumMoney=").append(sumMoney);
         sb.append(", payPrice=").append(payPrice);

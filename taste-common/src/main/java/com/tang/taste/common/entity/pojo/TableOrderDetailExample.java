@@ -234,6 +234,66 @@ public class TableOrderDetailExample {
             return (Criteria) this;
         }
 
+        public Criteria andDishesPriceIsNull() {
+            addCriterion("dishes_price is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDishesPriceIsNotNull() {
+            addCriterion("dishes_price is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDishesPriceEqualTo(Double value) {
+            addCriterion("dishes_price =", value, "dishesPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDishesPriceNotEqualTo(Double value) {
+            addCriterion("dishes_price <>", value, "dishesPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDishesPriceGreaterThan(Double value) {
+            addCriterion("dishes_price >", value, "dishesPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDishesPriceGreaterThanOrEqualTo(Double value) {
+            addCriterion("dishes_price >=", value, "dishesPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDishesPriceLessThan(Double value) {
+            addCriterion("dishes_price <", value, "dishesPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDishesPriceLessThanOrEqualTo(Double value) {
+            addCriterion("dishes_price <=", value, "dishesPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDishesPriceIn(List<Double> values) {
+            addCriterion("dishes_price in", values, "dishesPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDishesPriceNotIn(List<Double> values) {
+            addCriterion("dishes_price not in", values, "dishesPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDishesPriceBetween(Double value1, Double value2) {
+            addCriterion("dishes_price between", value1, value2, "dishesPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDishesPriceNotBetween(Double value1, Double value2) {
+            addCriterion("dishes_price not between", value1, value2, "dishesPrice");
+            return (Criteria) this;
+        }
+
         public Criteria andSumNumIsNull() {
             addCriterion("sum_num is null");
             return (Criteria) this;

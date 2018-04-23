@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.tang.taste.common.entity.pojo.TableOrderDetail">
     <id column="table_id" jdbcType="INTEGER" property="tableId" />
     <result column="dishes_name" jdbcType="VARCHAR" property="dishesName" />
+    <result column="dishes_price" jdbcType="DOUBLE" property="dishesPrice" />
     <result column="sum_num" jdbcType="INTEGER" property="sumNum" />
     <result column="sum_money" jdbcType="DOUBLE" property="sumMoney" />
     <result column="pay_price" jdbcType="DOUBLE" property="payPrice" />
@@ -69,7 +70,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    table_id, dishes_name, sum_num, sum_money, pay_price, special_discount, del_flag
+    table_id, dishes_name, dishes_price, sum_num, sum_money, pay_price, special_discount, 
+    del_flag
   </sql>
   <select id="selectByExample" parameterType="com.tang.taste.common.entity.pojo.TableOrderDetailExample" resultMap="BaseResultMap">
     select
@@ -102,12 +104,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.tang.taste.common.entity.pojo.TableOrderDetail">
-    insert into table_order_detail (table_id, dishes_name, sum_num, 
-      sum_money, pay_price, special_discount, 
-      del_flag)
-    values (#{tableId,jdbcType=INTEGER}, #{dishesName,jdbcType=VARCHAR}, #{sumNum,jdbcType=INTEGER}, 
-      #{sumMoney,jdbcType=DOUBLE}, #{payPrice,jdbcType=DOUBLE}, #{specialDiscount,jdbcType=DOUBLE}, 
-      #{delFlag,jdbcType=INTEGER})
+    insert into table_order_detail (table_id, dishes_name, dishes_price, 
+      sum_num, sum_money, pay_price, 
+      special_discount, del_flag)
+    values (#{tableId,jdbcType=INTEGER}, #{dishesName,jdbcType=VARCHAR}, #{dishesPrice,jdbcType=DOUBLE}, 
+      #{sumNum,jdbcType=INTEGER}, #{sumMoney,jdbcType=DOUBLE}, #{payPrice,jdbcType=DOUBLE}, 
+      #{specialDiscount,jdbcType=DOUBLE}, #{delFlag,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.tang.taste.common.entity.pojo.TableOrderDetail">
     insert into table_order_detail
@@ -117,6 +119,9 @@
       </if>
       <if test="dishesName != null">
         dishes_name,
+      </if>
+      <if test="dishesPrice != null">
+        dishes_price,
       </if>
       <if test="sumNum != null">
         sum_num,
@@ -140,6 +145,9 @@
       </if>
       <if test="dishesName != null">
         #{dishesName,jdbcType=VARCHAR},
+      </if>
+      <if test="dishesPrice != null">
+        #{dishesPrice,jdbcType=DOUBLE},
       </if>
       <if test="sumNum != null">
         #{sumNum,jdbcType=INTEGER},
@@ -173,6 +181,9 @@
       <if test="record.dishesName != null">
         dishes_name = #{record.dishesName,jdbcType=VARCHAR},
       </if>
+      <if test="record.dishesPrice != null">
+        dishes_price = #{record.dishesPrice,jdbcType=DOUBLE},
+      </if>
       <if test="record.sumNum != null">
         sum_num = #{record.sumNum,jdbcType=INTEGER},
       </if>
@@ -197,6 +208,7 @@
     update table_order_detail
     set table_id = #{record.tableId,jdbcType=INTEGER},
       dishes_name = #{record.dishesName,jdbcType=VARCHAR},
+      dishes_price = #{record.dishesPrice,jdbcType=DOUBLE},
       sum_num = #{record.sumNum,jdbcType=INTEGER},
       sum_money = #{record.sumMoney,jdbcType=DOUBLE},
       pay_price = #{record.payPrice,jdbcType=DOUBLE},
@@ -211,6 +223,9 @@
     <set>
       <if test="dishesName != null">
         dishes_name = #{dishesName,jdbcType=VARCHAR},
+      </if>
+      <if test="dishesPrice != null">
+        dishes_price = #{dishesPrice,jdbcType=DOUBLE},
       </if>
       <if test="sumNum != null">
         sum_num = #{sumNum,jdbcType=INTEGER},
@@ -233,6 +248,7 @@
   <update id="updateByPrimaryKey" parameterType="com.tang.taste.common.entity.pojo.TableOrderDetail">
     update table_order_detail
     set dishes_name = #{dishesName,jdbcType=VARCHAR},
+      dishes_price = #{dishesPrice,jdbcType=DOUBLE},
       sum_num = #{sumNum,jdbcType=INTEGER},
       sum_money = #{sumMoney,jdbcType=DOUBLE},
       pay_price = #{payPrice,jdbcType=DOUBLE},

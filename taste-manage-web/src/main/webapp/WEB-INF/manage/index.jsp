@@ -12,12 +12,12 @@
         <div id="one" class="col-md-2">
             <ul data-spy="affix" class="nav nav-list nav-tabs nav-stacked bs-docs-sidenav dropdown affix" style="top: 100px; z-index: 100;">
                 <li class="active">
-                    <a href="/user/index.shtml">
+                    <a href="javascript:;">
                         <i class="glyphicon glyphicon-chevron-right"></i>点餐
                     </a>
                 </li>
-                <li class="  dropdown">
-                    <a href="/role/mypermission.shtml">
+                <li class="dropdown">
+                    <a href="${ctx}/manage/toOrderCheck">
                         <i class="glyphicon glyphicon-chevron-right"></i>外卖接单
                     </a>
                 </li>
@@ -28,18 +28,10 @@
             <hr>
             <c:forEach var="table" items="${tables}">
                 <div class="col-md-2">
-                    <button type="button"  class="btn <c:if test="${table.status == 0}">btn-success</c:if> <c:if test="${table.status == 1}">btn-danger</c:if>" style="height: 80px;width: 80px;margin-top: 20px">${table.id}号桌<br/> ${table.desc}/${table.capcity}</button>
+                    <button type="button"  class="btn <c:if test="${table.status == 0}">btn-success</c:if> <c:if test="${table.status == 1}">btn-danger</c:if>" style="height: 80px;width: 80px;margin-top: 20px"><span class="id">${table.id}</span>号桌<br/> ${table.desc}/${table.capcity}</button>
                 </div>
             </c:forEach>
             <table class="table"  >
-
-                <%--<tr>
-                    <td><button type="button" class="btn btn-success ">一号桌<br/> 0/4</button></td>
-                    <td><button type="button" class="btn btn-danger">二号桌<br/> 4/4</button></td>
-                    <td><button type="button" class="btn btn-light">三号桌<br/> 0/4</button></td>
-                    <td><button type="button" class="btn btn-light">四号桌<br/> 0/4</button></td>
-                </tr>--%>
-
             </table>
         </div>
     </div>
@@ -50,10 +42,12 @@
      * 订单
      */
     $(".btn-success").click(function () {
+        var target = event.target;
+        var id = $(target).find(".id")[0].innerHTML;
         var index = layer.open( {
             type: 2,
             skin: 'demo-class',
-            content: rootPath+'/manage/orderDishes',
+            content: rootPath+'/manage/orderDishes?tableId='+id,
             area: ['1100px', '500px'],
             offset: ['100px', '100px'],
             scrollbar: false,
@@ -71,10 +65,12 @@
      * 结账
      */
     $(".btn-danger").click(function () {
+        var target = event.target;
+        var id = $(target).find(".id")[0].innerHTML;
         var index = layer.open( {
             type: 2,
             skin: 'demo-class',
-            content: rootPath+'/manage/orderDishes',
+            content: rootPath+'/order/getOrder?tableId='+id,
             area: ['1100px', '500px'],
             offset: ['100px', '100px'],
             scrollbar: false,

@@ -11,21 +11,13 @@ public interface TableOrderMapper {
 
     int deleteByExample(TableOrderExample example);
 
-    int deleteByPrimaryKey(Integer tableId);
-
     int insert(TableOrder record);
 
     int insertSelective(TableOrder record);
 
     List<TableOrder> selectByExample(TableOrderExample example);
 
-    TableOrder selectByPrimaryKey(Integer tableId);
-
     int updateByExampleSelective(@Param("record") TableOrder record, @Param("example") TableOrderExample example);
 
     int updateByExample(@Param("record") TableOrder record, @Param("example") TableOrderExample example);
-
-    int updateByPrimaryKeySelective(TableOrder record);
-
-    int updateByPrimaryKey(TableOrder record);
 }

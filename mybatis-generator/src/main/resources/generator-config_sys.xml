@@ -61,7 +61,6 @@
 			<generatedKey column="order_Id" sqlStatement="MySql" identity="true" />
 		</table>-->
 		<table tableName="table_order" domainObjectName="TableOrder">
-			<generatedKey column="table_id" sqlStatement="MySql" identity="true" />
 		</table>
 		<table tableName="table_order_detail" domainObjectName="TableOrderDetail">
 		</table>

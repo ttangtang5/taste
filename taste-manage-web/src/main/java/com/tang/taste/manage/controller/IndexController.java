@@ -50,8 +50,19 @@ public class IndexController {
      * @throws Exception
      */
     @RequestMapping("orderDishes")
-    public String toOrderDishes() throws Exception{
+    public String toOrderDishes(int tableId,HttpServletRequest request) throws Exception{
+        request.setAttribute("tableId",tableId);
         return "manage/orderDishes";
+    }
+
+    /**
+     * 前往外面接单
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("toOrderCheck")
+    public String toOrderCheck() throws  Exception{
+        return "manage/orderCheck";
     }
 
 }

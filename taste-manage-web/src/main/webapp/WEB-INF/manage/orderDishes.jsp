@@ -69,6 +69,7 @@
 <script type="text/javascript" src="${ctxStatic}/js/selectpage.min.js" ></script>
 <script>
 
+    var tableId = '${tableId}';
     $(function(){
         getDate(1);
     });
@@ -106,7 +107,6 @@
                 for(var i = 0;i < table.length; i++){
                     count = table[i].innerHTML;
                     total = Number(count) + Number(total);
-
                 }
                 $("#total").html(total);
                 for(var i = 0;i < table2.length; i++){
@@ -204,6 +204,25 @@
         }
         var count = $("#count").html();
         var total = $("#total").html();
+
+        $.ajax({
+            type : 'post',
+            url : rootPath + '/order/saveOrder',
+            dataType : 'json',
+            traditional : 'true',
+            data : {
+                tableId : tableId,
+                dishesNames : names,
+                dishesNums : inputs,
+                num : count,
+                total : total
+            },
+            success : function(data){
+                if(data == 'success'){
+                    window.location.href = rootPath + '/manage/toIndex';
+                }
+            }
+        });
     }
 </script>
 </body>
