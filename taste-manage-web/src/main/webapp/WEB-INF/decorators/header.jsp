@@ -19,29 +19,36 @@
         <div role="navigation" class="navbar-collapse collapse">
             <a id="_logo"  href="http://shiro.itboy.net/" style="color:#fff; font-size: 24px;" class="navbar-brand hidden-sm">SSM + Shiro Demo 演示</a>
             <ul class="nav navbar-nav" id="topMenu">
-                <li class="dropdown ">
-                    <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="/user/index.shtml">
-                        个人中心<span class="caret"></span>
+                <li>
+                    <a class="dropdown-toggle" target="_blank" href="">
+                        点餐<span class="collapsing"></span>
                     </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/user/index.shtml">个人资料</a></li>
-                        <li><a href="/user/updateSelf.shtml" >资料修改</a></li>
-                        <li><a href="/user/updatePswd.shtml" >密码修改</a></li>
-                        <li><a href="/role/mypermission.shtml">我的权限</a></li>
-                    </ul>
                 </li>
                 <li class="dropdown ">
                     <a aria-expanded="false" aria-haspopup="true"  role="button" data-toggle="dropdown" class="dropdown-toggle" href="/member/list.shtml">
-                        用户中心<span class="caret"></span>
+                        餐厅管理<span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
+                        <li><a href="/member/list.shtml">用户列表</a></li>
+                        <li><a href="/member/list.shtml">用户列表</a></li>
                         <li><a href="/member/list.shtml">用户列表</a></li>
                         <li><a href="/member/online.shtml">在线用户</a></li>
                     </ul>
                 </li>
-                <li class="dropdown active">
+                <li class="dropdown">
                     <a aria-expanded="false" aria-haspopup="true"  role="button" data-toggle="dropdown" class="dropdown-toggle" href="/permission/index.shtml">
-                        权限管理<span class="caret"></span>
+                        配送管理<span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/role/index.shtml">角色列表</a></li>
+                        <li><a href="/role/allocation.shtml">角色分配</a></li>
+                        <li><a href="/permission/index.shtml">权限列表</a></li>
+                        <li><a href="/permission/allocation.shtml">权限分配</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a aria-expanded="false" aria-haspopup="true"  role="button" data-toggle="dropdown" class="dropdown-toggle" href="/permission/index.shtml">
+                        用户管理<span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="/role/index.shtml">角色列表</a></li>
@@ -52,12 +59,7 @@
                 </li>
                 <li>
                     <a class="dropdown-toggle" target="_blank" href="http://www.sojson.com/tag/shiro">
-                        111<span class="collapsing"></span>
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-toggle" href="http://www.sojson.com/shiro">
-                        222<span class="collapsing"></span>
+                        统计<span class="collapsing"></span>
                     </a>
                 </li>
             </ul>

@@ -3,6 +3,7 @@ package com.tang.taste.manage.dao;
 import com.tang.taste.common.dao.DishesMapper;
 import com.tang.taste.common.entity.extra.PageHelper;
 import com.tang.taste.common.entity.extra.SearchDishes;
+import com.tang.taste.common.entity.pojo.Dishes;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -50,4 +51,12 @@ public interface DishesDao extends DishesMapper{
      * @return
      */
     public long countDishesByCategoryId(int categoryId);
+
+    /**
+     * 通过分类id 查询菜品  不分页
+     * @param categoryId
+     * @return
+     */
+    public List<Dishes> selectDishes(int categoryId);
+
 }

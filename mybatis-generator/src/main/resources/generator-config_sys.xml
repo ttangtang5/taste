@@ -57,8 +57,13 @@
 		</table>
 		<table tableName="order_detail" domainObjectName="OrderDetail">
 		</table>-->
-		<table tableName="order" domainObjectName="Order">
+		<!--<table tableName="order" domainObjectName="Order">
 			<generatedKey column="order_Id" sqlStatement="MySql" identity="true" />
+		</table>-->
+		<table tableName="table_order" domainObjectName="TableOrder">
+			<generatedKey column="table_id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="table_order_detail" domainObjectName="TableOrderDetail">
 		</table>
 		<!--<table tableName="dishes_type" domainObjectName="DishesType">
 			<generatedKey column="type_id" sqlStatement="MySql" identity="true" />

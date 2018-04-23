@@ -15,6 +15,5 @@
 		<%@ include file="message.jsp"%>
 		<%@ include file="footer.jsp"%>
 		<%@ include file="foot.jsp" %>
-		<sitemesh:getProperty property="page.customizeJs" />
 </body>
 </html>
