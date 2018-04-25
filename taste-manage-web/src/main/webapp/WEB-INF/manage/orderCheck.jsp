@@ -13,7 +13,7 @@
         <div id="one" class="col-md-2">
             <ul data-spy="affix" class="nav nav-list nav-tabs nav-stacked bs-docs-sidenav dropdown affix" style="top: 100px; z-index: 100;">
                 <li class="dropdown">
-                    <a href="/user/index.shtml">
+                    <a href="${ctx}/manage/toIndex">
                         <i class="glyphicon glyphicon-chevron-right"></i>点餐
                     </a>
                 </li>
@@ -31,7 +31,7 @@
                    data-classes="table-no-bordered"
                    data-toggle="table"
                    data-cache="true"
-                   data-url="${ctx}/order/orderList"
+                   data-url="${ctx}/order/getOrderList"
                    data-pagination="true"
                    data-tool-bar="#toolbar">
                 <thead>
@@ -39,7 +39,7 @@
                     <th data-field="orderId" >订单编号</th>
                     <th data-field="receiver" >收件人</th>
                     <th data-field="phone" >联系方式</th>
-                    <th data-field="createTime" >时间</th>
+                    <th data-field="createTimeStr" >时间</th>
                     <th data-field="sumNum" >订单总计</th>
                     <th data-field="paymentType" data-formatter="payType">付款方式</th>
                     <th data-field="status" data-formatter="orderStatus">订单状态</th>
@@ -50,15 +50,22 @@
         </div>
     </div>
 </div>
-<script src="${ctxStatic}/js/bootstrap-table.js" type="text/javascript"></script>
 <script  src="${ctxStatic}/js/common/jquery-2.1.1.js"></script>
+<script src="${ctxStatic}/js/bootstrap-table.js" type="text/javascript"></script>
 <script>
     //操作
     function opFormat(value,row){
         var id = row.orderId;
-        var show = '<button class="btn btn-sm green show" onclick="show('+id+')" >查看</button>';
+        var show = '<button class="btn btn-primary" onclick="show('+id+')" >接单</button>';
         return show;
     }
+
+    /*//转换时间格式
+    function timeFormat(value){
+        var time = new Date(value).format("yyyy-MM-dd hh:mm:ss");
+        console.info(time);
+    }*/
+
     //支付类型
     function payType(value){
         var show ;
@@ -84,7 +91,7 @@
                 show = '未付款';
                 break;
             case 2:
-                show = '已付款';
+                show = '待接单';
                 break;
             case 3:
                 show = '未发货';
@@ -109,7 +116,7 @@
         var index = layer.open( {
             type: 2,
             skin: 'demo-class',
-            content: rootPath + '/toShopOrderView',
+            content: rootPath + '/order/toAcceptOrder?orderId='+orderId,
             area: ['1200px', '500px'],
             offset: ['100px', '100px'],
             scrollbar: false,

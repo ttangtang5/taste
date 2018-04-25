@@ -1,11 +1,10 @@
 package com.tang.taste.manage.service;
 
 import com.tang.taste.common.dao.TableOrderMapper;
-import com.tang.taste.common.entity.pojo.TableOrder;
-import com.tang.taste.common.entity.pojo.TableOrderDetail;
-import com.tang.taste.common.entity.pojo.TableOrderDetailExample;
-import com.tang.taste.common.entity.pojo.TableOrderExample;
+import com.tang.taste.common.entity.pojo.*;
 import com.tang.taste.manage.dao.TableOrderDetailDao;
+import com.tang.taste.portal.dao.OrderDao;
+import com.tang.taste.portal.dao.OrderDetailDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +23,10 @@ public class OrderService {
     private TableOrderMapper tableOrderMapper;
     @Autowired
     private TableOrderDetailDao tableOrderDetailDao;
+    @Autowired
+    private OrderDao orderDao;
+    @Autowired
+    private OrderDetailDao orderDetailDao;
     /**
      * 获取餐厅订单
      * @param tableId
@@ -62,9 +65,40 @@ public class OrderService {
         tableOrderDetailDao.insertTableOrderDetailList(lists);
     }
 
+    /**
+     * 更新订单
+     * @param tableOrder
+     */
     public void updateTableOrder(TableOrder tableOrder){
         TableOrderExample tableOrderExample = new TableOrderExample();
         tableOrderExample.createCriteria().andTableIdEqualTo(tableOrder.getTableId());
         tableOrderMapper.updateByExampleSelective(tableOrder, tableOrderExample);
+    }
+
+    /**
+     * 通过状态查找订单列表
+     * @param status
+     * @return
+     */
+    public List<Order> selectOrderListByStatus(int status){
+        return orderDao.selectOrderListByStatus(status);
+    }
+
+    /**
+     * 查询订单信息
+     * @param orderId
+     * @return
+     */
+    public Order selectOrderByOrderId(int orderId){
+        return orderDao.selectOrderById(orderId);
+    }
+
+    /**
+     * 查询订单详情信息
+     * @param orderId
+     * @return
+     */
+    public List<OrderDetail> selectOrderDetailByOrderId(int orderId){
+        return orderDetailDao.selectOrderDetailList(orderId);
     }
 }

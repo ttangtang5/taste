@@ -1,9 +1,11 @@
 package com.tang.taste.common.entity.pojo;
 
+import com.tang.taste.common.entity.extra.EmployeeExtra;
+
 import java.io.Serializable;
 import java.util.Date;
 
-public class Employee implements Serializable {
+public class Employee extends EmployeeExtra implements Serializable {
     private Integer id;
 
     private String empName;

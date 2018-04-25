@@ -75,4 +75,27 @@ public interface OrderDao extends OrderMapper {
             "</script>"})
     Order selectOrderById(int orderId);
 
+
+    /**
+     * 查找订单列表  后台使用
+     * @param status
+     * @return
+     */
+    @Select({"<script>" +
+            "SELECT " +
+            " order_Id 'orderId', " +
+            " receiver 'receiver', " +
+            " phone 'phone', " +
+            " create_time 'createTime', " +
+            " sum_num 'sumNum', " +
+            " STATUS 'status'  " +
+            "FROM " +
+            " `order`  " +
+            "WHERE " +
+            " del_flag = 0" +
+            " AND" +
+            " STATUS != #{status} " +
+            "</script>"})
+    List<Order> selectOrderListByStatus(int status);
+
 }

@@ -20,45 +20,27 @@
             <a id="_logo"  href="http://shiro.itboy.net/" style="color:#fff; font-size: 24px;" class="navbar-brand hidden-sm">SSM + Shiro Demo 演示</a>
             <ul class="nav navbar-nav" id="topMenu">
                 <li>
-                    <a class="dropdown-toggle" target="_blank" href="">
+                    <a class="dropdown-toggle"  href="${ctx}/manage/toIndex">
                         点餐<span class="collapsing"></span>
                     </a>
                 </li>
-                <li class="dropdown ">
-                    <a aria-expanded="false" aria-haspopup="true"  role="button" data-toggle="dropdown" class="dropdown-toggle" href="/member/list.shtml">
-                        餐厅管理<span class="caret"></span>
+                <li>
+                    <a class="dropdown-toggle"  href="">
+                        餐厅管理<span class="collapsing"></span>
                     </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/member/list.shtml">用户列表</a></li>
-                        <li><a href="/member/list.shtml">用户列表</a></li>
-                        <li><a href="/member/list.shtml">用户列表</a></li>
-                        <li><a href="/member/online.shtml">在线用户</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a aria-expanded="false" aria-haspopup="true"  role="button" data-toggle="dropdown" class="dropdown-toggle" href="/permission/index.shtml">
-                        配送管理<span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/role/index.shtml">角色列表</a></li>
-                        <li><a href="/role/allocation.shtml">角色分配</a></li>
-                        <li><a href="/permission/index.shtml">权限列表</a></li>
-                        <li><a href="/permission/allocation.shtml">权限分配</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a aria-expanded="false" aria-haspopup="true"  role="button" data-toggle="dropdown" class="dropdown-toggle" href="/permission/index.shtml">
-                        用户管理<span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/role/index.shtml">角色列表</a></li>
-                        <li><a href="/role/allocation.shtml">角色分配</a></li>
-                        <li><a href="/permission/index.shtml">权限列表</a></li>
-                        <li><a href="/permission/allocation.shtml">权限分配</a></li>
-                    </ul>
                 </li>
                 <li>
-                    <a class="dropdown-toggle" target="_blank" href="http://www.sojson.com/tag/shiro">
+                    <a class="dropdown-toggle"  href="">
+                        配送管理<span class="collapsing"></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-toggle"  href="${ctx}/manage/toUserMange">
+                        用户管理<span class="collapsing"></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-toggle"  href="http://www.sojson.com/tag/shiro">
                         统计<span class="collapsing"></span>
                     </a>
                 </li>

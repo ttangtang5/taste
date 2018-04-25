@@ -1,6 +1,12 @@
 package com.tang.taste.manage.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.google.common.collect.Lists;
+import com.tang.taste.common.entity.pojo.Employee;
+import com.tang.taste.common.entity.pojo.Menu;
+import com.tang.taste.common.entity.pojo.Role;
 import com.tang.taste.common.entity.pojo.Tables;
+import com.tang.taste.manage.service.EmpService;
 import com.tang.taste.manage.service.TableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +27,8 @@ public class IndexController {
 
     @Autowired
     private TableService tableService;
+    @Autowired
+    private EmpService empService;
     /**
      * 跳转首页
      * @return
@@ -65,4 +73,84 @@ public class IndexController {
         return "manage/orderCheck";
     }
 
+    /**
+     * 前往用户管理
+     * @param findContent
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("toUserMange")
+    public String toUserManage(String findContent,HttpServletRequest request) throws Exception{
+        List<Employee> lists =  empService.selectEmployee(findContent);
+        request.setAttribute("employeeList",lists);
+        return "manage/userList";
+    }
+
+    /**
+     * 角色列表
+     * @param findContent
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("toRoleList")
+    public String toRoleList(String findContent,HttpServletRequest request) throws Exception{
+        List<Role> lists =  empService.selectRoleList(findContent);
+        request.setAttribute("RoleList",lists);
+        return "manage/userRoleList";
+    }
+
+    /**
+     * 前往用户角色分配
+     * @param findContent
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("toAllocationRole")
+    public String toAllocationRole(String findContent,HttpServletRequest request) throws Exception{
+        List<Employee> lists =  empService.getEmpAllRole(findContent);
+        request.setAttribute("employeeList",lists);
+        return "manage/allocationRole";
+    }
+
+    /**
+     * 前往权限列表
+     * @param findContent
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("toMenuList")
+    public String toMenuList(String findContent,HttpServletRequest request) throws Exception{
+        List<Menu> menus = empService.selectMenu(findContent);
+        request.setAttribute("menuList",menus);
+        return "manage/menuList";
+    }
+
+    /**
+     * 前往权限分配
+     * @param findContent
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("toAllocationMenu")
+    public String toAllocationMenu(String findContent,HttpServletRequest request) throws Exception{
+        List<Role> lists = empService.getRolePermission(findContent);
+        request.setAttribute("lists",lists);
+        return "manage/allocationMenu";
+    }
+
+    /**
+     * 去菜品列表
+     * @param findContent
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("toDishesManage")
+    public String toDishesManage(String findContent,HttpServletRequest request) throws Exception{
+        return "manage/dishesList";
+    }
 }

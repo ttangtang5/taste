@@ -1,8 +1,10 @@
 package com.tang.taste.common.entity.pojo;
 
+import com.tang.taste.common.entity.extra.MenuExtra;
+
 import java.io.Serializable;
 
-public class Menu implements Serializable {
+public class Menu extends MenuExtra implements Serializable {
     private Integer id;
 
     private Integer parentId;

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tang.taste.manage.dao.MenuDao">
+    <!--查询菜单-->
+    <select id="selectMenu" parameterType="java.lang.String" resultType="com.tang.taste.common.entity.pojo.Menu">
+        SELECT id, parent_id, parent_ids, NAME, href, is_blank, permission, del_flag
+        FROM
+            sys_menu
+        WHERE
+            NAME LIKE '%${findContent}%'
+            AND del_flag = 0
+    </select>
+
+    <select id="selectMenuByList" parameterType="java.lang.Integer" resultType="com.tang.taste.common.entity.pojo.Menu">
+        SELECT id, parent_id, parent_ids, NAME, href, is_blank, permission, del_flag,rm.role_id,'true' as `check`
+        FROM
+        sys_menu m,
+        sys_role_menu rm
+        WHERE
+        rm.menu_id = m.id
+        AND del_flag = 0
+        AND  rm.role_id IN
+        <foreach collection="list" item="ids" open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+    </select>
+
+    <select id="selectMenuNoCheck" parameterType="java.lang.Integer" resultType="com.tang.taste.common.entity.pojo.Menu">
+        SELECT id, parent_id, parent_ids, NAME, href, is_blank, permission, del_flag,'false' as `check`
+        FROM
+        sys_menu m
+        WHERE
+        del_flag = 0
+        <if test=" list != null and list.size() > 0 ">
+            AND  m.id NOT IN
+            <foreach collection="list" item="ids" open="(" separator="," close=")">
+                #{ids}
+            </foreach>
+        </if>
+    </select>
+    
+    <!--删除角色权限关系-->
+    <delete id="deleteRoleMenu" parameterType="java.lang.Integer">
+        DELETE FROM sys_role_menu WHERE role_id = #{roleId}
+    </delete>
+
+    <!--创建角色用户关系-->
+    <insert id="insertRoelMenu" parameterType="com.tang.taste.common.entity.pojo.Role">
+        INSERT INTO sys_role_menu(role_id,menu_id) VALUES
+        <foreach collection="list" item="roles" separator=",">
+            (#{roles.id},#{roles.menuIds})
+        </foreach>
+    </insert>
+</mapper>

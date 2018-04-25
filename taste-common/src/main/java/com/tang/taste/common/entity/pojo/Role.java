@@ -1,8 +1,10 @@
 package com.tang.taste.common.entity.pojo;
 
+import com.tang.taste.common.entity.extra.RoleExtra;
+
 import java.io.Serializable;
 
-public class Role implements Serializable {
+public class Role extends RoleExtra implements Serializable {
     private Integer id;
 
     private String roleName;

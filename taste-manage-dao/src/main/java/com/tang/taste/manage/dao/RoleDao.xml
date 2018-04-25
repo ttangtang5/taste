@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tang.taste.manage.dao.RoleDao">
+
+    <!--条件查询整个用户列表-->
+    <select id="selectRoleList" parameterType="java.lang.String" resultType="com.tang.taste.common.entity.pojo.Role">
+        SELECT r.id,role_name, remarks
+        FROM s sys_role r
+          WHERE
+            ( role_name LIKE '%${findContent}%'
+            OR remarks LIKE '%${findContent}%' )
+            AND r.del_flag = 0
+    </select>
+
+    <!--获取员工拥有的角色-->
+    <select id="selectEmpAllRole" parameterType="java.lang.String" resultType="com.tang.taste.common.entity.pojo.Role">
+        SELECT er.emp_id,r.id,role_name, remarks
+        FROM sys_emp_role er LEFT JOIN sys_role r ON  er.role_id = r.id
+        WHERE
+          emp_id IN
+          <foreach collection="list" item="ids" open="(" separator="," close=")">
+              #{ids}
+          </foreach>
+        AND er.del_flag = 0 AND  r.del_flag = 0
+    </select>
+    <!--查找该用户不拥有的角色-->
+    <select id="selectEmpNoRole" parameterType="java.lang.String" resultType="com.tang.taste.common.entity.pojo.Role">
+        SELECT id,role_name, remarks
+        FROM sys_role
+        WHERE
+        del_flag = 0
+        <if test=" list != null and list.size() > 0 ">
+        AND
+        id NOT IN
+            <foreach collection="list" item="ids" open="(" separator="," close=")">
+                #{ids}
+            </foreach>
+        </if>
+    </select>
+
+    <!--删除用户于角色的关系-->
+    <update id="delEmpRoleByEmpId" parameterType="java.lang.Integer">
+        UPDATE sys_emp_role SET del_flag = 1 WHERE emp_id = #{empId}
+    </update>
+
+    <!--建立用户于角色的关系-->
+    <insert id="addEmpRole" parameterType="com.tang.taste.common.entity.pojo.Role">
+        INSERT INTO sys_emp_role(emp_id,role_id,del_flag)
+        VALUES
+        <foreach collection="list" item="roles" separator=",">
+            (#{roles.empId},#{roles.id},#{roles.delFlag})
+        </foreach>
+    </insert>
+
+    <!--删除用户于角色的关系-->
+    <update id="delEmpRole" parameterType="com.tang.taste.common.entity.pojo.Role">
+        UPDATE sys_emp_role SET del_flag = 1
+        WHERE emp_id IN
+        <foreach collection="list" item="empIds" open="(" separator="," close=")">
+            #{empIds}
+        </foreach>
+    </update>
+
+    <!--每个角色拥有的所有权限列表-->
+    <select id="getRolePermission" parameterType="java.lang.String" resultType="com.tang.taste.common.entity.pojo.Role">
+        SELECT r.id, r.role_name, r.remarks
+        FROM
+        sys_role r
+        WHERE
+        r.role_name like '%${findContent}%'
+        AND r.del_flag = 0
+    </select>
+</mapper>

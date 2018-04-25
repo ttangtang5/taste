@@ -1,8 +1,13 @@
 package com.tang.taste.manage.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
+import com.tang.taste.common.entity.pojo.Order;
+import com.tang.taste.common.entity.pojo.OrderDetail;
 import com.tang.taste.common.entity.pojo.TableOrder;
 import com.tang.taste.common.entity.pojo.TableOrderDetail;
+import com.tang.taste.common.util.DateUtil;
+import com.tang.taste.common.util.DateUtils;
 import com.tang.taste.manage.service.OrderService;
 import com.tang.taste.portal.dao.OrderDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -67,6 +76,13 @@ public class OrderController {
         return "/manage/index";
     }
 
+    /**
+     * 结账显示订单信息
+     * @param tableId
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("getOrder")
     public String getOrder(int tableId, HttpServletRequest request) throws Exception{
         List<TableOrder> tableOrder = orderService.getTableOrderByTableId(tableId);
@@ -82,4 +98,40 @@ public class OrderController {
         request.setAttribute("tableOrderDetail",lists);
         return "/manage/checkout";
     }
+
+    /**
+     * 获取列表
+     * @return
+     */
+    @RequestMapping("getOrderList")
+    @ResponseBody
+    public String getOrderList() throws Exception {
+        List<Order> lists = orderService.selectOrderListByStatus(1);
+        List<Order> listNew = Lists.newArrayList();
+        for(Order order : lists){
+            order.setCreateTimeStr(DateUtil.getDateTime("yyyy-MM-dd HH:mm:ss",order.getCreateTime()));
+            listNew.add(order);
+        }
+        return JSON.toJSONString(lists);
+    }
+
+    /**
+     * 跳转接单
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("toAcceptOrder")
+    public String toAcceptOrder(int orderId, HttpServletRequest request) throws Exception{
+        Order order = orderService.selectOrderByOrderId(orderId);
+        int count = 0;
+        List<OrderDetail> lists = orderService.selectOrderDetailByOrderId(orderId);
+        for(int i = 0;i < lists.size();i++){
+            count = count + lists.get(i).getSumNum();
+        }
+        request.setAttribute("order",order);
+        request.setAttribute("count",count);
+        request.setAttribute("orderDetail",lists);
+        return "manage/acceptOrder";
+    }
+
 }

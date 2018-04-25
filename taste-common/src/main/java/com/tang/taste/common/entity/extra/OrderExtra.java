@@ -12,6 +12,16 @@ public class OrderExtra {
 
     private String empPhone;
 
+    private String createTimeStr;
+
+    public String getCreateTimeStr() {
+        return createTimeStr;
+    }
+
+    public void setCreateTimeStr(String createTimeStr) {
+        this.createTimeStr = createTimeStr;
+    }
+
     public String getEmpName() {
         return empName;
     }
