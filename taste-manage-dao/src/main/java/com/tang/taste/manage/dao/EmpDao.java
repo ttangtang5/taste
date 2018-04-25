@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * FileName: EmpDao
@@ -18,5 +19,5 @@ public interface EmpDao extends EmployeeMapper{
 
     List<Employee> selectEmployeeList(@Param("findContent") String findContent);
 
-
+    Set<String> selectAllpermission(@Param("empName") String empName);
 }

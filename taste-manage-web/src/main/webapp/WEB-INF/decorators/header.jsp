@@ -24,21 +24,25 @@
                         点餐<span class="collapsing"></span>
                     </a>
                 </li>
+                <shiro:hasRole name="admin">
                 <li>
                     <a class="dropdown-toggle"  href="">
                         餐厅管理<span class="collapsing"></span>
                     </a>
                 </li>
+                </shiro:hasRole>
                 <li>
                     <a class="dropdown-toggle"  href="">
                         配送管理<span class="collapsing"></span>
                     </a>
                 </li>
+                <shiro:hasRole name="admin">
                 <li>
                     <a class="dropdown-toggle"  href="${ctx}/manage/toUserMange">
                         用户管理<span class="collapsing"></span>
                     </a>
                 </li>
+                </shiro:hasRole>
                 <li>
                     <a class="dropdown-toggle"  href="http://www.sojson.com/tag/shiro">
                         统计<span class="collapsing"></span>
@@ -48,12 +52,10 @@
             <ul class="nav navbar-nav  pull-right" >
                 <li class="dropdown " style="color:#fff;">
                     <a aria-expanded="false" aria-haspopup="true"  role="button" data-toggle="dropdown"
-                       onclick="location.href='/user/index.shtml'" href="/user/index.shtml" class="dropdown-toggle qqlogin" >
+                        class="dropdown-toggle qqlogin" >
                         管理员<span class="caret"></span></a>
                     <ul class="dropdown-menu" userid="1">
-                        <li><a href="/user/index.shtml">个人资料</a></li>
-                        <li><a href="/role/mypermission.shtml">我的权限</a></li>
-                        <li><a href="javascript:void(0);" onclick="logout();">退出登录</a></li>
+                        <li><a href="${ctx}/logout" >退出登录</a></li>
                     </ul>
                 </li>
             </ul>

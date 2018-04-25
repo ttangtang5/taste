@@ -37,10 +37,10 @@ public class UserController {
         //将信息封装进usernamepasswordToken
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         //是否记住token.setRememberMe(true);
-        System.out.println("1、"+token.hashCode());
         try {
             //调用subject.login();
             subject.login(token);
+            SecurityUtils.getSubject().isPermitted();
         } catch (AuthenticationException e) {
             System.out.println(e.getMessage());
         }

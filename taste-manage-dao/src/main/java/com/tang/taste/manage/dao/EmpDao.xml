@@ -10,4 +10,23 @@
             OR phone LIKE '%${findContent}%'
     </select>
 
+    <select id="selectAllpermission" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT permission
+        FROM
+            sys_employee e,
+            sys_emp_role er,
+            sys_role r,
+            sys_role_menu rm,
+            sys_menu m
+        WHERE
+            e.id = er.emp_id
+            AND er.role_id = r.id
+            AND rm.menu_id = m.id
+            AND e.del_flag = 0
+            AND er.del_flag = 0
+            AND m.del_flag = 0
+            AND e.emp_name = #{empName}
+            GROUP BY
+            permission
+    </select>
 </mapper>

@@ -1,12 +1,17 @@
 package com.tang.taste.manage.realm;
 import com.tang.taste.common.entity.pojo.Employee;
+import com.tang.taste.common.entity.pojo.Role;
 import com.tang.taste.common.entity.pojo.User;
 import com.tang.taste.manage.service.EmpService;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.Permission;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -58,15 +63,18 @@ public class LoginRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         //1、从PrincipalCollection 获取登录用户信息
-        Object principal=principalCollection.getPrimaryPrincipal();
+        Object principal = principalCollection.getPrimaryPrincipal();
+        List<Employee> employees = empService.selectUserByUsername((String) principal);
+        List<Role> role =  empService.getAllRoleByEmpId(employees.get(0).getId());
         //2、通过用户信息获取角色信息（从数据库）
         Set<String> roles = new HashSet<String>();
-        roles.add("user");
-        if("admin".equals(principal)){
-            roles.add("admin");
+        for (Role role1 : role) {
+            roles.add(role1.getRemarks());
         }
         //3、创建SimpleAuthorizationInfo对象、将角色放入
-        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo(roles);
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+        info.addRoles(roles);
+        info.setStringPermissions(empService.getAllPermission((String) principal));
         return info;
     }
 

@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../decorators/taglib.jsp" %>
+<%--添加shiro的标签--%>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <html>
 <head>
     <title>Title</title>
