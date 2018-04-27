@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.tang.taste.common.entity.pojo.Employee;
 import com.tang.taste.common.entity.pojo.Menu;
 import com.tang.taste.common.entity.pojo.Role;
+import com.tang.taste.common.util.SessionUtils;
 import com.tang.taste.manage.service.EmpService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -31,7 +33,7 @@ public class UserController {
     private EmpService empService;
 
     @RequestMapping("login")
-    public String login(String username, String password, Model model) throws Exception{
+    public String login(String username, String password, HttpServletRequest request) throws Exception{
         //获取Subject --SecurityUtils.getSubject()
         Subject subject= SecurityUtils.getSubject();
         //将信息封装进usernamepasswordToken
@@ -41,6 +43,8 @@ public class UserController {
             //调用subject.login();
             subject.login(token);
             SecurityUtils.getSubject().isPermitted();
+            List<Employee> employees = empService.selectUserByUsername(username);
+            SessionUtils.setAttr(request,"empName",employees.get(0).getEmpName());
         } catch (AuthenticationException e) {
             System.out.println(e.getMessage());
         }

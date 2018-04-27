@@ -16,42 +16,22 @@
 
                 <li class="active">
                     <a href="javascript:;">
-                        <i class="glyphicon glyphicon-chevron-right"></i>用户列表
-                    </a>
-                </li>
-                <li class="dropdown">
-                    <a href="${ctx}/manage/toRoleList">
-                        <i class="glyphicon glyphicon-chevron-right"></i>角色列表
-                    </a>
-                </li>
-                <li class="dropdown">
-                    <a href="${ctx}/manage/toAllocationRole">
-                        <i class="glyphicon glyphicon-chevron-right"></i>角色分配
-                    </a>
-                </li>
-                <li class="dropdown">
-                    <a href="${ctx}/manage/toMenuList">
-                        <i class="glyphicon glyphicon-chevron-right"></i>权限列表
-                    </a>
-                </li>
-                <li class="  dropdown">
-                    <a href="${ctx}/manage/toAllocationMenu">
-                        <i class="glyphicon glyphicon-chevron-right"></i>权限分配
+                        <i class="glyphicon glyphicon-chevron-right"></i>菜品列表
                     </a>
                 </li>
             </ul>
         </div>
         <div class="col-md-10">
-            <h2>用户列表</h2>
+            <h2>菜品列表</h2>
             <hr>
             <form method="post" action="" id="formId" class="form-inline">
                 <div clss="well">
                     <div class="form-group">
-                        <input type="text" class="form-control" style="width: 300px;" value="" name="findContent" id="findContent" placeholder="输入昵称 / 帐号">
+                        <input type="text" class="form-control" style="width: 300px;" value="" name="findContent" id="findContent" placeholder="输入菜品名称">
                     </div>
                     <span class="">
 				         	<button type="submit" class="btn btn-primary">查询</button>
-                             <a class="btn btn-success" onclick="$('#addEmp').modal();">增加角色</a>
+                             <a class="btn btn-success" onclick="$('#addEmp').modal();">增加菜品</a>
                             <button type="button" id="deleteAll" class="btn  btn-danger">删除</button>
                      </span>
                 </div>
@@ -59,29 +39,23 @@
                 <table class="table table-bordered">
                     <tbody><tr>
                         <th><input type="checkbox" id="checkAll"></th>
-                        <th>员工编号</th>
-                        <th>员工名称</th>
-                        <th>身份证</th>
-                        <th>性别</th>
-                        <th>联系电话</th>
-                        <th>地址</th>
-                        <th>入职时间</th>
-                        <th>离职时间</th>
+                        <th>菜名</th>
+                        <th>价格</th>
+                        <th>菜品类型</th>
+                        <th>图片</th>
+                        <th>描述</th>
                         <th>操作</th>
                     </tr>
-                    <c:forEach var="employee" items="${employeeList}">
+                    <c:forEach var="dishes" items="${dishesList}">
                         <tr>
-                            <td><input value="${employee.id}" check="box" type="checkbox"></td>
-                            <td>${employee.id}</td>
-                            <td>${employee.empName}</td>
-                            <td>${employee.idcard}</td>
-                            <td>${employee.sax}</td>
-                            <td>${employee.phone}</td>
-                            <td>${employee.address}</td>
-                            <td>${employee.entryTimeStr}</td>
-                            <td>${employee.leaveTimeStr}</td>
+                            <td><input value="${dishes.id}" check="box" type="checkbox"></td>
+                            <td>${dishes.dishesName}</td>
+                            <td>${dishes.dishesPrice}</td>
+                            <td>${dishes.dishesTypeName}</td>
+                            <td><img src="${ctxStatic}${dishes.picture}" width="50px" height="50px"></td>
+                            <td>${dishes.desc}</td>
                             <td>
-                                <c:if test="${employee.delFlag == 0}"><a href="javascript:_delete([${employee.id}]);">删除</a></c:if>
+                                <a href="javascript:_delete([${dishes.id}]);">删除</a>
                             </td>
                         </tr>
                     </c:forEach>
@@ -94,46 +68,42 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="addroleLabel">添加用户</h4>
+                    <h4 class="modal-title" id="addroleLabel">添加菜品</h4>
                 </div>
                 <div class="modal-body">
-                    <form id="boxEmpForm">
+                    <form id="boxDishesForm" enctype="multipart/form-data">
                         <div class="form-group">
-                            <label for="recipient-name" class="control-label">员工姓名:</label>
-                            <input type="text" class="form-control" name="empName" id="empName" placeholder="员工姓名" required/>
+                            <label for="recipient-name" class="control-label">菜品名称:</label>
+                            <input type="text" class="form-control" name="dishesName" id="dishesName" placeholder="菜品名称" required/>
                         </div>
                         <div class="form-group">
-                            <label for="recipient-name" class="control-label">员工密码:</label>
-                            <input type="password" class="form-control" id="password" name="password"  placeholder="请输入密码  [字母 + 数字] 小于16位" required>
+                            <label for="recipient-name" class="control-label">菜品价格:</label>
+                            <input type="text" class="form-control" id="dishesPrice" name="dishesPrice"  placeholder="菜品价格" required>
                         </div>
                         <div class="form-group">
-                            <label for="recipient-name" class="control-label">确认密码:</label>
-                            <input type="password" class="form-control" id="rpassword" name="rpassword"  placeholder="请输入密码  [字母 + 数字] 小于16位" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="recipient-name" class="control-label">身份证:</label>
-                            <input type="text" class="form-control" id="idcard" name="idcard"  placeholder="身份证号码" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="recipient-name" class="control-label">性别:</label>
-                            <select name="sax" id="sax">
-                            <option value="0">男</option>
-                            <option value="1">女</option>
+                            <label for="recipient-name" class="control-label">类型:</label>
+                            <select name="dishesType" id="dishesType">
+                            <option value="1">主食</option>
+                            <option value="2">粥、粉</option>
+                            <option value="3">饮料</option>
+                            <option value="4">其他</option>
                         </select>
                         </div>
                         <div class="form-group">
-                            <label for="recipient-name" class="control-label">联系电话:</label>
-                            <input type="text" class="form-control" id="phone" name="phone"  placeholder="联系电话" required>
+                            <label for="recipient-name" class="control-label">图片:</label>
+                            <div class="layui-upload">
+                                <input type="file" name="file" id="test8">
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label for="recipient-name" class="control-label">住址:</label>
-                            <input type="text" class="form-control" id="address" name="address"  placeholder="住址" required>
+                            <label for="recipient-name" class="control-label">描述:</label>
+                            <input type="text" class="form-control" id="desc" name="desc"  placeholder="描述" required>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                    <button type="button" onclick="addEmp();" class="btn btn-primary">保存</button>
+                    <button type="button" id="save" onclick="addDishes();" class="btn btn-primary">保存</button>
                 </div>
             </div>
         </div>
@@ -143,6 +113,7 @@
 <script src="${ctxStatic}/js/common/layer/layer.js"></script>
 <script src="${ctxStatic}/js/common/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="${ctxStatic}/js/shiro.demo.js"></script>
+<script src="${ctxStatic}/layui/layui.all.js"></script>
 <script >
     so.init(function(){
         //初始化全选。
@@ -162,11 +133,11 @@
     });
     //根据ID数组，删除
     function _delete(ids){
-        var index = layer.confirm("确定这"+ ids.length +"个用户？",function(){
+
             var load = layer.load();
-            $.post(rootPath + '/delEmp',{ids:ids.join(',')},function(result){
+            $.post(rootPath + '/dishes/delDishes',{ids:ids.join(',')},function(result){
                 layer.close(load);
-                if(result && result.status != 200){
+                if(result && result.status != 'success'){
                     return layer.msg(result.message,so.default),!0;
                 }else{
                     layer.msg('删除成功');
@@ -176,9 +147,9 @@
                 }
             },'json');
             layer.close(index);
-        });
+
     }
-    function addEmp(){
+    function addDishes(){
         /*if($.trim(name) == ''){
             return layer.msg('角色名称不能为空。',so.default),!1;
         }
@@ -186,7 +157,7 @@
             return layer.msg('角色类型为6数字字母。',so.default),!1;
         }*/
         var load = layer.load();
-        $.post(rootPath + '/addEmp',$("#boxEmpForm").serialize(),function(result){
+        $.post(rootPath + '/dishes/addDishes',$("#boxDishesForm").serialize(),function(result){
             layer.close(load);
             if(result.status != 'success'){
                 return layer.msg(result.message,so.default),!1;
@@ -197,6 +168,19 @@
             },1000);
         },'json');
     }
+    layui.use('upload', function() {
+            var $ = layui.jquery
+                ,upload = layui.upload;
+            upload.render({
+                 elem: '#test8'
+                , url: rootPath + '/dishes/uploadFile'
+                , done: function (res) {
+                    if(res == '200'){
+
+                    }
+                }
+            });
+    });
 </script>
 </body>
 </html>

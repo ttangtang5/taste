@@ -97,4 +97,24 @@
         AND d.del_flag = 0
         AND type_id = #{categoryId}
     </select>
+
+    <select id="selectDishesMange" resultType="com.tang.taste.common.entity.pojo.Dishes">
+        SELECT
+        d.id,
+        d.dishes_name,
+        d.dishes_price,
+        d.picture ,
+        d.`desc` ,
+        t.type 'dishesTypeName'
+        FROM
+        sys_dishes d,
+        dishes_type t
+        WHERE
+        d.dishes_type = t.type_id
+        AND d.del_flag = 0
+        <if test=" categoryId != null and categoryId != '' or categoryId == 0">
+            AND type_id = #{categoryId}
+        </if>
+        AND d.dishes_name like '%${findsContent}%'
+    </select>
 </mapper>

@@ -2,10 +2,8 @@ package com.tang.taste.manage.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
-import com.tang.taste.common.entity.pojo.Employee;
-import com.tang.taste.common.entity.pojo.Menu;
-import com.tang.taste.common.entity.pojo.Role;
-import com.tang.taste.common.entity.pojo.Tables;
+import com.tang.taste.common.entity.pojo.*;
+import com.tang.taste.manage.service.DishesService;
 import com.tang.taste.manage.service.EmpService;
 import com.tang.taste.manage.service.TableService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +27,8 @@ public class IndexController {
     private TableService tableService;
     @Autowired
     private EmpService empService;
+    @Autowired
+    private DishesService dishesService;
     /**
      * 跳转首页
      * @return
@@ -145,12 +145,15 @@ public class IndexController {
     /**
      * 去菜品列表
      * @param findContent
+     * @param categoryId
      * @param request
      * @return
      * @throws Exception
      */
     @RequestMapping("toDishesManage")
-    public String toDishesManage(String findContent,HttpServletRequest request) throws Exception{
+    public String toDishesManage(String findContent,Integer categoryId,HttpServletRequest request) throws Exception{
+        List<Dishes> lists = dishesService.selectDishesMange(findContent,1);
+        request.setAttribute("dishesList",lists);
         return "manage/dishesList";
     }
 }

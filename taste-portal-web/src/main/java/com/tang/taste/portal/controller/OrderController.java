@@ -188,7 +188,7 @@ public class OrderController {
         CookieUtils.setCookie(request,response,"pay_id",pay_id,60*60);
 
         String notify_url = notifyUrl;//通知地址
-        String return_url = "http://c6d8bcd5.ngrok.io/order/paySuccess?order="+pay_id;//支付后同步跳转地址
+        String return_url = "http://8d966557.ngrok.io/order/paySuccess?order="+pay_id;//支付后同步跳转地址
 
         if(price == null){
             price="1";

@@ -65,7 +65,7 @@
             <!-- BEGIN PAGE BREADCRUMB -->
             <ul class="page-breadcrumb breadcrumb">
                 <li>
-                    <a href="/toIndex">主页</a><</i>
+                    <a href="/toIndex">主页</a></i>
                 </li>
                 <li class="active">
                     订单列表

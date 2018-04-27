@@ -133,7 +133,7 @@
         });
     });
     function deleteById(ids){
-        var index = layer.confirm("确定这"+ ids.length +"个权限？",function(){
+        var index = layer.confirm("确定删除？",function(){
             var load = layer.load();
             $.post(rootPath + '/delPermission',{ids:ids.join(',')},function(result){
                 layer.close(load);

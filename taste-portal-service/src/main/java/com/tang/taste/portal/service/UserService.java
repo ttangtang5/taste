@@ -128,7 +128,9 @@ public class UserService {
                         details.add(shoppingCartDetail);
                     }
                 }
-                shoppingCartService.addShoppingDetailList(details);
+                if(details != null && details.size() > 0){
+                 shoppingCartService.addShoppingDetailList(details);
+                }
                 return "200";
             }else{
                 //失败

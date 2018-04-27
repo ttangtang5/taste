@@ -26,7 +26,7 @@
                 </li>
                 <shiro:hasRole name="admin">
                 <li>
-                    <a class="dropdown-toggle"  href="">
+                    <a class="dropdown-toggle"  href="${ctx}/manage/toDishesManage">
                         餐厅管理<span class="collapsing"></span>
                     </a>
                 </li>
@@ -53,7 +53,7 @@
                 <li class="dropdown " style="color:#fff;">
                     <a aria-expanded="false" aria-haspopup="true"  role="button" data-toggle="dropdown"
                         class="dropdown-toggle qqlogin" >
-                        管理员<span class="caret"></span></a>
+                        ${sessionScope.empName}<span class="caret"></span></a>
                     <ul class="dropdown-menu" userid="1">
                         <li><a href="${ctx}/logout" >退出登录</a></li>
                     </ul>

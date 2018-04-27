@@ -59,4 +59,12 @@ public interface DishesDao extends DishesMapper{
      */
     public List<Dishes> selectDishes(int categoryId);
 
+    /**
+     * 后台菜品列表
+     * @param findsContent
+     * @param categoryId
+     * @return
+     */
+    public List<Dishes> selectDishesMange(@Param("findsContent") String findsContent,@Param("categoryId") int categoryId);
+
 }

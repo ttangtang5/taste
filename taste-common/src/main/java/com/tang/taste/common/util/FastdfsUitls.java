@@ -1,5 +1,6 @@
 package com.tang.taste.common.util;
 
+import org.apache.zookeeper.data.Stat;
 import org.csource.common.NameValuePair;
 import org.csource.fastdfs.*;
 
@@ -23,8 +24,9 @@ public class FastdfsUitls {
     /**
      * 上传文件
      * @param local_filename
+     * @param fileExtName
      */
-    public void uploadFile(String local_filename){
+    public static String[] uploadFile(byte[] local_filename,String fileExtName){
         try {
             ClientGlobal.init(conf_filename);
 
@@ -39,13 +41,13 @@ public class FastdfsUitls {
                     new NameValuePair("width", "80"),
                     new NameValuePair("height", "90")
             };
-            String fileIds[] = storageClient.upload_file(local_filename, null,
+            String fileIds[] = storageClient.upload_file(local_filename, fileExtName,
                     nvp);
 
             System.out.println(fileIds.length);
             System.out.println("组名：" + fileIds[0]);
             System.out.println("路径: " + fileIds[1]);
-
+            return fileIds;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -53,6 +55,7 @@ public class FastdfsUitls {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     //将字节流写到磁盘生成文件

@@ -91,7 +91,7 @@
 <div class="main">
     <div class="container">
         <ul class="breadcrumb">
-            <li><a href="index.html">主页</a></li>
+            <li><a href="/toIndex">主页</a></li>
             <li class="active">搜索</li>
         </ul>
 
@@ -103,17 +103,17 @@
                 <div class="sidebar-products clearfix">
                     <h2>热销产品</h2>
                     <div class="item">
-                        <a href="shop-item.html"><img src="${ctxStatic}/assets/frontend/pages/img/products/k1.jpg" alt="Some Shoes in Animal with Cut Out"></a>
+                        <a href="shop-item.html"><img src="${ctxStatic}/dishes/other/dgw.jpg" alt="Some Shoes in Animal with Cut Out"></a>
                         <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
                         <div class="price">$31.00</div>
                     </div>
                     <div class="item">
-                        <a href="shop-item.html"><img src="${ctxStatic}/assets/frontend/pages/img/products/k4.jpg" alt="Some Shoes in Animal with Cut Out"></a>
+                        <a href="shop-item.html"><img src="${ctxStatic}/dishes/other/dgw.jpg" alt="Some Shoes in Animal with Cut Out"></a>
                         <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
                         <div class="price">$23.00</div>
                     </div>
                     <div class="item">
-                        <a href="shop-item.html"><img src="${ctxStatic}/assets/frontend/pages/img/products/k3.jpg" alt="Some Shoes in Animal with Cut Out"></a>
+                        <a href="shop-item.html"><img src="${ctxStatic}/dishes/other/dgw.jpg" alt="Some Shoes in Animal with Cut Out"></a>
                         <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
                         <div class="price">$86.00</div>
                     </div>
@@ -121,17 +121,17 @@
                 <div class="sidebar-products clearfix">
                     <h2>热销产品</h2>
                     <div class="item">
-                        <a href="shop-item.html"><img src="${ctxStatic}/assets/frontend/pages/img/products/k1.jpg" alt="Some Shoes in Animal with Cut Out"></a>
+                        <a href="shop-item.html"><img src="${ctxStatic}/dishes/other/dgw.jpg" alt="Some Shoes in Animal with Cut Out"></a>
                         <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
                         <div class="price">$31.00</div>
                     </div>
                     <div class="item">
-                        <a href="shop-item.html"><img src="${ctxStatic}/assets/frontend/pages/img/products/k4.jpg" alt="Some Shoes in Animal with Cut Out"></a>
+                        <a href="shop-item.html"><img src="${ctxStatic}/dishes/other/dgw.jpg" alt="Some Shoes in Animal with Cut Out"></a>
                         <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
                         <div class="price">$23.00</div>
                     </div>
                     <div class="item">
-                        <a href="shop-item.html"><img src="${ctxStatic}/assets/frontend/pages/img/products/k3.jpg" alt="Some Shoes in Animal with Cut Out"></a>
+                        <a href="shop-item.html"><img src="${ctxStatic}/dishes/other/dgw.jpg" alt="Some Shoes in Animal with Cut Out"></a>
                         <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
                         <div class="price">$86.00</div>
                     </div>
@@ -139,17 +139,17 @@
                 <div class="sidebar-products clearfix">
                     <h2>热销产品</h2>
                     <div class="item">
-                        <a href="shop-item.html"><img src="${ctxStatic}/assets/frontend/pages/img/products/k1.jpg" alt="Some Shoes in Animal with Cut Out"></a>
+                        <a href="shop-item.html"><img src="${ctxStatic}/dishes/other/dgw.jpg" alt="Some Shoes in Animal with Cut Out"></a>
                         <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
                         <div class="price">$31.00</div>
                     </div>
                     <div class="item">
-                        <a href="shop-item.html"><img src="${ctxStatic}/assets/frontend/pages/img/products/k4.jpg" alt="Some Shoes in Animal with Cut Out"></a>
+                        <a href="shop-item.html"><img src="${ctxStatic}/dishes/other/dgw.jpg" alt="Some Shoes in Animal with Cut Out"></a>
                         <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
                         <div class="price">$23.00</div>
                     </div>
                     <div class="item">
-                        <a href="shop-item.html"><img src="${ctxStatic}/assets/frontend/pages/img/products/k3.jpg" alt="Some Shoes in Animal with Cut Out"></a>
+                        <a href="shop-item.html"><img src="${ctxStatic}/dishes/other/dgw.jpg" alt="Some Shoes in Animal with Cut Out"></a>
                         <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
                         <div class="price">$86.00</div>
                     </div>
