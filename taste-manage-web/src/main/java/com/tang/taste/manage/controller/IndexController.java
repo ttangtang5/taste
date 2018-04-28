@@ -156,4 +156,19 @@ public class IndexController {
         request.setAttribute("dishesList",lists);
         return "manage/dishesList";
     }
+
+    /**
+     * 前往桌子列表
+     * @param findContent
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("toTableManage")
+    public String toTableManage(String findContent,HttpServletRequest request) throws Exception{
+        List<Tables> lists = tableService.selectTable(findContent);
+        request.setAttribute("tablesList",lists);
+        return "manage/tableList";
+    }
+
 }

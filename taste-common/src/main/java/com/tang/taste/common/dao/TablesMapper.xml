@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.tang.taste.common.entity.pojo.Tables">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="capcity" jdbcType="INTEGER" property="capcity" />
-    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="num" jdbcType="INTEGER" property="num" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="desc" jdbcType="VARCHAR" property="desc" />
     <result column="del_flag" jdbcType="INTEGER" property="delFlag" />
@@ -68,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, capcity, `type`, `status`, `desc`, del_flag
+    id, capcity, num, `status`, `desc`, del_flag
   </sql>
   <select id="selectByExample" parameterType="com.tang.taste.common.entity.pojo.TablesExample" resultMap="BaseResultMap">
     select
@@ -104,9 +104,9 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into sys_tables (capcity, `type`, `status`, 
+    insert into sys_tables (capcity, num, `status`, 
       `desc`, del_flag)
-    values (#{capcity,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+    values (#{capcity,jdbcType=INTEGER}, #{num,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
       #{desc,jdbcType=VARCHAR}, #{delFlag,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.tang.taste.common.entity.pojo.Tables">
@@ -118,8 +118,8 @@
       <if test="capcity != null">
         capcity,
       </if>
-      <if test="type != null">
-        `type`,
+      <if test="num != null">
+        num,
       </if>
       <if test="status != null">
         `status`,
@@ -135,8 +135,8 @@
       <if test="capcity != null">
         #{capcity,jdbcType=INTEGER},
       </if>
-      <if test="type != null">
-        #{type,jdbcType=VARCHAR},
+      <if test="num != null">
+        #{num,jdbcType=INTEGER},
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
@@ -164,8 +164,8 @@
       <if test="record.capcity != null">
         capcity = #{record.capcity,jdbcType=INTEGER},
       </if>
-      <if test="record.type != null">
-        `type` = #{record.type,jdbcType=VARCHAR},
+      <if test="record.num != null">
+        num = #{record.num,jdbcType=INTEGER},
       </if>
       <if test="record.status != null">
         `status` = #{record.status,jdbcType=INTEGER},
@@ -185,7 +185,7 @@
     update sys_tables
     set id = #{record.id,jdbcType=INTEGER},
       capcity = #{record.capcity,jdbcType=INTEGER},
-      `type` = #{record.type,jdbcType=VARCHAR},
+      num = #{record.num,jdbcType=INTEGER},
       `status` = #{record.status,jdbcType=INTEGER},
       `desc` = #{record.desc,jdbcType=VARCHAR},
       del_flag = #{record.delFlag,jdbcType=INTEGER}
@@ -199,8 +199,8 @@
       <if test="capcity != null">
         capcity = #{capcity,jdbcType=INTEGER},
       </if>
-      <if test="type != null">
-        `type` = #{type,jdbcType=VARCHAR},
+      <if test="num != null">
+        num = #{num,jdbcType=INTEGER},
       </if>
       <if test="status != null">
         `status` = #{status,jdbcType=INTEGER},
@@ -217,7 +217,7 @@
   <update id="updateByPrimaryKey" parameterType="com.tang.taste.common.entity.pojo.Tables">
     update sys_tables
     set capcity = #{capcity,jdbcType=INTEGER},
-      `type` = #{type,jdbcType=VARCHAR},
+      num = #{num,jdbcType=INTEGER},
       `status` = #{status,jdbcType=INTEGER},
       `desc` = #{desc,jdbcType=VARCHAR},
       del_flag = #{delFlag,jdbcType=INTEGER}

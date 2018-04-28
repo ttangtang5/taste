@@ -117,4 +117,25 @@
         </if>
         AND d.dishes_name like '%${findsContent}%'
     </select>
+
+    <!--热销列表-->
+    <select id="selectHotDishes" resultType="com.tang.taste.common.entity.pojo.Dishes">
+        SELECT
+            dishes_id,
+            count( dishes_id ) AS 'countNum',
+            dishes_name,
+            dishes_price,
+            picture
+        FROM
+            order_detail o,
+            sys_dishes d
+        WHERE
+            o.dishes_id = d.id
+            AND d.del_flag = 0
+        GROUP BY
+            dishes_id
+        ORDER BY
+            countNum DESC
+            LIMIT 0,8
+    </select>
 </mapper>

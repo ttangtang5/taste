@@ -69,7 +69,7 @@
                 <li><a href="${ctx}/search/toCategoryList?categoryId=2">粥、粉</a></li>
                 <li><a href="${ctx}/search/toCategoryList?categoryId=3">饮料</a></li>
                 <li><a href="${ctx}/search/toCategoryList?categoryId=4">其他</a></li>
-                <li><a href="">评价</a></li>
+                <li><a href="${ctx}/toRatingList">评价</a></li>
 
                 <!-- BEGIN TOP SEARCH -->
                 <li class="menu-search">
@@ -267,10 +267,9 @@
                             <img  class="img-responsive imgNewProduct" alt="Berry Lace Dress">
                             <div>
                                 <a  class="btn btn-default fancybox-button newProductZoom">缩放</a>
-                                <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">查看</a>
                             </div>
                         </div>
-                        <h3><a href="shop-item.html" class="aNewProduct"></a></h3>
+                        <h3><a href="javascript:;" class="aNewProduct"></a></h3>
                         <div class="pi-price priceNewProduct" ></div>
                         <a href="javascript:;"  class="btn btn-default add2cart">加入购物车</a>
                         <div class="sticker sticker-sale"></div>
@@ -282,10 +281,9 @@
                                 <img  class="img-responsive imgNewProduct" alt="Berry Lace Dress">
                                 <div>
                                     <a  class="btn btn-default fancybox-button newProductZoom">缩放</a>
-                                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">查看</a>
                                 </div>
                             </div>
-                            <h3><a href="shop-item.html" class="aNewProduct"></a></h3>
+                            <h3><a href="javascript:;" class="aNewProduct"></a></h3>
                             <div class="pi-price priceNewProduct"></div>
                             <a href="javascript:;" class="btn btn-default add2cart">加入购物车</a>
                         </div>
@@ -296,10 +294,9 @@
                                 <img  class="img-responsive imgNewProduct" alt="Berry Lace Dress">
                                 <div>
                                     <a  class="btn btn-default fancybox-button newProductZoom">缩放</a>
-                                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">查看</a>
                                 </div>
                             </div>
-                            <h3><a href="shop-item.html" class="aNewProduct"></a></h3>
+                            <h3><a href="javascript:;" class="aNewProduct"></a></h3>
                             <div class="pi-price priceNewProduct"></div>
                             <a href="javascript:;" class="btn btn-default add2cart">加入购物车</a>
                         </div>
@@ -310,10 +307,9 @@
                                 <img  class="img-responsive imgNewProduct" alt="Berry Lace Dress">
                                 <div>
                                     <a  class="btn btn-default fancybox-button newProductZoom">缩放</a>
-                                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">查看</a>
                                 </div>
                             </div>
-                            <h3><a href="shop-item.html" class="aNewProduct"></a></h3>
+                            <h3><a href="javascript:;" class="aNewProduct"></a></h3>
                             <div class="pi-price priceNewProduct"></div>
                             <a href="javascript:;" class="btn btn-default add2cart">加入购物车</a>
                         </div>
@@ -324,10 +320,9 @@
                                 <img  class="img-responsive imgNewProduct" alt="Berry Lace Dress">
                                 <div>
                                     <a  class="btn btn-default fancybox-button newProductZoom">缩放</a>
-                                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">查看</a>
                                 </div>
                             </div>
-                            <h3><a href="shop-item.html" class="aNewProduct"></a></h3>
+                            <h3><a href="javascript:;" class="aNewProduct"></a></h3>
                             <div class="pi-price priceNewProduct"></div>
                             <a href="javascript:;" class="btn btn-default add2cart">加入购物车</a>
                         </div>
@@ -338,7 +333,6 @@
                                 <img  class="img-responsive imgNewProduct" alt="Berry Lace Dress">
                                 <div>
                                     <a  class="btn btn-default fancybox-button newProductZoom">缩放</a>
-                                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">查看</a>
                                 </div>
                             </div>
                             <h3><a href="javascript:;" class="aNewProduct"></a></h3>
@@ -389,10 +383,9 @@
                                 <img  class="img-responsive imgRecommend" alt="Berry Lace Dress">
                                 <div>
                                     <a  class="btn btn-default fancybox-button recommendZoom">缩放</a>
-                                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">查看</a>
                                 </div>
                             </div>
-                            <h3><a href="shop-item.html" class="aRecommend"></a></h3>
+                            <h3><a href="javascript:;" class="aRecommend"></a></h3>
                             <div class="pi-price priceRecommend"></div>
                             <a href="javascript:;" class="btn btn-default add2cart">加入购物车</a>
                         </div>
@@ -403,10 +396,9 @@
                                 <img  class="img-responsive imgRecommend" alt="Berry Lace Dress">
                                 <div>
                                     <a  class="btn btn-default fancybox-button recommendZoom">缩放</a>
-                                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">查看</a>
                                 </div>
                             </div>
-                            <h3><a href="shop-item.html" class="aRecommend"></a></h3>
+                            <h3><a href="javascript:;" class="aRecommend"></a></h3>
                             <div class="pi-price priceRecommend"></div>
                             <a href="javascript:;" class="btn btn-default add2cart">加入购物车</a>
                         </div>
@@ -417,10 +409,9 @@
                                 <img  class="img-responsive imgRecommend" alt="Berry Lace Dress">
                                 <div>
                                     <a class="btn btn-default fancybox-button recommendZoom">缩放</a>
-                                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">查看</a>
                                 </div>
                             </div>
-                            <h3><a href="shop-item.html" class="aRecommend"></a></h3>
+                            <h3><a href="javascript:;" class="aRecommend"></a></h3>
                             <div class="pi-price priceRecommend"></div>
                             <a href="javascript:;" class="btn btn-default add2cart">加入购物车</a>
                         </div>
@@ -431,10 +422,9 @@
                                 <img  class="img-responsive imgRecommend" alt="Berry Lace Dress">
                                 <div>
                                     <a class="btn btn-default fancybox-button recommendZoom">缩放</a>
-                                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">查看</a>
                                 </div>
                             </div>
-                            <h3><a href="shop-item.html" class="aRecommend"></a></h3>
+                            <h3><a href="javascript:;" class="aRecommend"></a></h3>
                             <div class="pi-price priceRecommend"></div>
                             <a href="javascript:;" class="btn btn-default add2cart">加入购物车</a>
                         </div>

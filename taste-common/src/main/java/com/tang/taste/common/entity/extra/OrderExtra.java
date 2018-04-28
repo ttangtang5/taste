@@ -14,6 +14,26 @@ public class OrderExtra {
 
     private String createTimeStr;
 
+    private String userName;
+
+    private String[] ratePictureArr;
+
+    public String[] getRatePictureArr() {
+        return ratePictureArr;
+    }
+
+    public void setRatePictureArr(String[] ratePictureArr) {
+        this.ratePictureArr = ratePictureArr;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     public String getCreateTimeStr() {
         return createTimeStr;
     }

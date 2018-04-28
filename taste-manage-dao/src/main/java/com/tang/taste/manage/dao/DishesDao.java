@@ -20,7 +20,7 @@ public interface DishesDao extends DishesMapper{
      * 查找出所有菜品信息
      * @return
      */
-    public List<SearchDishes> getSearchContent();
+      List<SearchDishes> getSearchContent();
 
     /**
      * 无搜索信息  分页查询
@@ -28,13 +28,13 @@ public interface DishesDao extends DishesMapper{
      * @param limit
      * @return
      */
-    public List<SearchDishes> getAllSearchContent(@Param("offset") int offset,@Param("limit") int limit);
+      List<SearchDishes> getAllSearchContent(@Param("offset") int offset,@Param("limit") int limit);
 
     /**
      * 统计无搜索信息  分页查询
      * @return
      */
-    public long countAllSearchContent();
+      long countAllSearchContent();
 
     /**
      * 通过分类id查询 分页
@@ -43,21 +43,21 @@ public interface DishesDao extends DishesMapper{
      * @param limit
      * @return
      */
-    public List<SearchDishes>  selectDishesByCategoryId(@Param("categoryId") int categoryId,@Param("offset") int offset,@Param("limit") int limit);
+      List<SearchDishes>  selectDishesByCategoryId(@Param("categoryId") int categoryId,@Param("offset") int offset,@Param("limit") int limit);
 
     /**
      *统计类型为categoryId代理数量
      * @param categoryId
      * @return
      */
-    public long countDishesByCategoryId(int categoryId);
+      long countDishesByCategoryId(int categoryId);
 
     /**
      * 通过分类id 查询菜品  不分页
      * @param categoryId
      * @return
      */
-    public List<Dishes> selectDishes(int categoryId);
+      List<Dishes> selectDishes(int categoryId);
 
     /**
      * 后台菜品列表
@@ -65,6 +65,7 @@ public interface DishesDao extends DishesMapper{
      * @param categoryId
      * @return
      */
-    public List<Dishes> selectDishesMange(@Param("findsContent") String findsContent,@Param("categoryId") int categoryId);
+      List<Dishes> selectDishesMange(@Param("findsContent") String findsContent,@Param("categoryId") int categoryId);
 
+      List<Dishes> selectHotDishes();
 }

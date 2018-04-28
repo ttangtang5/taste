@@ -1165,66 +1165,6 @@ public class OrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andBuyerRateIsNull() {
-            addCriterion("buyer_rate is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andBuyerRateIsNotNull() {
-            addCriterion("buyer_rate is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andBuyerRateEqualTo(Integer value) {
-            addCriterion("buyer_rate =", value, "buyerRate");
-            return (Criteria) this;
-        }
-
-        public Criteria andBuyerRateNotEqualTo(Integer value) {
-            addCriterion("buyer_rate <>", value, "buyerRate");
-            return (Criteria) this;
-        }
-
-        public Criteria andBuyerRateGreaterThan(Integer value) {
-            addCriterion("buyer_rate >", value, "buyerRate");
-            return (Criteria) this;
-        }
-
-        public Criteria andBuyerRateGreaterThanOrEqualTo(Integer value) {
-            addCriterion("buyer_rate >=", value, "buyerRate");
-            return (Criteria) this;
-        }
-
-        public Criteria andBuyerRateLessThan(Integer value) {
-            addCriterion("buyer_rate <", value, "buyerRate");
-            return (Criteria) this;
-        }
-
-        public Criteria andBuyerRateLessThanOrEqualTo(Integer value) {
-            addCriterion("buyer_rate <=", value, "buyerRate");
-            return (Criteria) this;
-        }
-
-        public Criteria andBuyerRateIn(List<Integer> values) {
-            addCriterion("buyer_rate in", values, "buyerRate");
-            return (Criteria) this;
-        }
-
-        public Criteria andBuyerRateNotIn(List<Integer> values) {
-            addCriterion("buyer_rate not in", values, "buyerRate");
-            return (Criteria) this;
-        }
-
-        public Criteria andBuyerRateBetween(Integer value1, Integer value2) {
-            addCriterion("buyer_rate between", value1, value2, "buyerRate");
-            return (Criteria) this;
-        }
-
-        public Criteria andBuyerRateNotBetween(Integer value1, Integer value2) {
-            addCriterion("buyer_rate not between", value1, value2, "buyerRate");
-            return (Criteria) this;
-        }
-
         public Criteria andRateLevelIsNull() {
             addCriterion("rate_level is null");
             return (Criteria) this;
@@ -1282,6 +1222,76 @@ public class OrderExample {
 
         public Criteria andRateLevelNotBetween(Integer value1, Integer value2) {
             addCriterion("rate_level not between", value1, value2, "rateLevel");
+            return (Criteria) this;
+        }
+
+        public Criteria andRatePictureIsNull() {
+            addCriterion("rate_picture is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRatePictureIsNotNull() {
+            addCriterion("rate_picture is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRatePictureEqualTo(String value) {
+            addCriterion("rate_picture =", value, "ratePicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andRatePictureNotEqualTo(String value) {
+            addCriterion("rate_picture <>", value, "ratePicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andRatePictureGreaterThan(String value) {
+            addCriterion("rate_picture >", value, "ratePicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andRatePictureGreaterThanOrEqualTo(String value) {
+            addCriterion("rate_picture >=", value, "ratePicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andRatePictureLessThan(String value) {
+            addCriterion("rate_picture <", value, "ratePicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andRatePictureLessThanOrEqualTo(String value) {
+            addCriterion("rate_picture <=", value, "ratePicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andRatePictureLike(String value) {
+            addCriterion("rate_picture like", value, "ratePicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andRatePictureNotLike(String value) {
+            addCriterion("rate_picture not like", value, "ratePicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andRatePictureIn(List<String> values) {
+            addCriterion("rate_picture in", values, "ratePicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andRatePictureNotIn(List<String> values) {
+            addCriterion("rate_picture not in", values, "ratePicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andRatePictureBetween(String value1, String value2) {
+            addCriterion("rate_picture between", value1, value2, "ratePicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andRatePictureNotBetween(String value1, String value2) {
+            addCriterion("rate_picture not between", value1, value2, "ratePicture");
             return (Criteria) this;
         }
 

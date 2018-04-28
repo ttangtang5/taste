@@ -1,20 +1,21 @@
 package com.tang.taste.portal.controller;
 
 import com.google.common.collect.Lists;
-import com.tang.taste.common.entity.pojo.Dishes;
-import com.tang.taste.common.entity.pojo.ShoppingCart;
-import com.tang.taste.common.entity.pojo.ShoppingCartDetail;
-import com.tang.taste.common.entity.pojo.User;
+import com.tang.taste.common.entity.pojo.*;
 import com.tang.taste.common.util.ClusterRedis;
 import com.tang.taste.common.util.CookieUtils;
 import com.tang.taste.common.util.SerializeUtils;
 import com.tang.taste.common.util.SessionUtils;
+import com.tang.taste.portal.service.OrderService;
+import com.tang.taste.portal.service.SearchService;
 import com.tang.taste.portal.service.ShoppingCartService;
 import com.tang.taste.portal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -34,6 +35,10 @@ public class IndexController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private SearchService searchService;
+    @Autowired
+    private OrderService orderService;
     @Autowired
     private ClusterRedis clusterRedis;
 
@@ -84,10 +89,9 @@ public class IndexController {
                 //命中内存反序列化
                 user = (User)SerializeUtils.unSerialize(Base64.getDecoder().decode(clusterRedis.getValue("user:" + id)));
             }*/
-
-            request.setAttribute("loginFlag","1");
+            SessionUtils.setAttr(request,"loginFlag","1");
         }else{
-            request.setAttribute("loginFlag","0");
+            SessionUtils.setAttr(request,"loginFlag","0");
         }
         return "portal/shop_index";
     }
@@ -189,6 +193,24 @@ public class IndexController {
         return "/portal/shop_order_view";
     }
 
-
+    /**
+     * 跳转评价列表
+     * @param model
+     * @param page
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("toRatingList")
+    public String toRatingList(Model model, @RequestParam(defaultValue = "1") Integer page) throws Exception{
+        long count = orderService.countRateList();
+        List<Order> lists = orderService.selectRateList(page);
+        model.addAttribute("totalPages",count);
+        model.addAttribute("rateList",lists);
+        model.addAttribute("page",page);
+        //左边的热销推荐
+        List<Dishes> hotList = searchService.selectHotDishes();
+        model.addAttribute("hotList", hotList);
+        return "/portal/order_rating";
+    }
 
 }

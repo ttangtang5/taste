@@ -40,9 +40,9 @@ public class Order extends OrderExtra implements Serializable {
 
     private String buyerMessage;
 
-    private Integer buyerRate;
-
     private Integer rateLevel;
+
+    private String ratePicture;
 
     private String rateContent;
 
@@ -186,20 +186,20 @@ public class Order extends OrderExtra implements Serializable {
         this.buyerMessage = buyerMessage;
     }
 
-    public Integer getBuyerRate() {
-        return buyerRate;
-    }
-
-    public void setBuyerRate(Integer buyerRate) {
-        this.buyerRate = buyerRate;
-    }
-
     public Integer getRateLevel() {
         return rateLevel;
     }
 
     public void setRateLevel(Integer rateLevel) {
         this.rateLevel = rateLevel;
+    }
+
+    public String getRatePicture() {
+        return ratePicture;
+    }
+
+    public void setRatePicture(String ratePicture) {
+        this.ratePicture = ratePicture;
     }
 
     public String getRateContent() {
@@ -247,8 +247,8 @@ public class Order extends OrderExtra implements Serializable {
             && (this.getEndTime() == null ? other.getEndTime() == null : this.getEndTime().equals(other.getEndTime()))
             && (this.getCloseTime() == null ? other.getCloseTime() == null : this.getCloseTime().equals(other.getCloseTime()))
             && (this.getBuyerMessage() == null ? other.getBuyerMessage() == null : this.getBuyerMessage().equals(other.getBuyerMessage()))
-            && (this.getBuyerRate() == null ? other.getBuyerRate() == null : this.getBuyerRate().equals(other.getBuyerRate()))
             && (this.getRateLevel() == null ? other.getRateLevel() == null : this.getRateLevel().equals(other.getRateLevel()))
+            && (this.getRatePicture() == null ? other.getRatePicture() == null : this.getRatePicture().equals(other.getRatePicture()))
             && (this.getRateContent() == null ? other.getRateContent() == null : this.getRateContent().equals(other.getRateContent()))
             && (this.getDelFlag() == null ? other.getDelFlag() == null : this.getDelFlag().equals(other.getDelFlag()));
     }
@@ -274,8 +274,8 @@ public class Order extends OrderExtra implements Serializable {
         result = prime * result + ((getEndTime() == null) ? 0 : getEndTime().hashCode());
         result = prime * result + ((getCloseTime() == null) ? 0 : getCloseTime().hashCode());
         result = prime * result + ((getBuyerMessage() == null) ? 0 : getBuyerMessage().hashCode());
-        result = prime * result + ((getBuyerRate() == null) ? 0 : getBuyerRate().hashCode());
         result = prime * result + ((getRateLevel() == null) ? 0 : getRateLevel().hashCode());
+        result = prime * result + ((getRatePicture() == null) ? 0 : getRatePicture().hashCode());
         result = prime * result + ((getRateContent() == null) ? 0 : getRateContent().hashCode());
         result = prime * result + ((getDelFlag() == null) ? 0 : getDelFlag().hashCode());
         return result;
@@ -304,8 +304,8 @@ public class Order extends OrderExtra implements Serializable {
         sb.append(", endTime=").append(endTime);
         sb.append(", closeTime=").append(closeTime);
         sb.append(", buyerMessage=").append(buyerMessage);
-        sb.append(", buyerRate=").append(buyerRate);
         sb.append(", rateLevel=").append(rateLevel);
+        sb.append(", ratePicture=").append(ratePicture);
         sb.append(", rateContent=").append(rateContent);
         sb.append(", delFlag=").append(delFlag);
         sb.append(", serialVersionUID=").append(serialVersionUID);

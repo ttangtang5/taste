@@ -3,6 +3,7 @@ package com.tang.taste.portal.service;
 import com.google.common.collect.Lists;
 import com.tang.taste.common.entity.extra.SearchDishes;
 import com.tang.taste.common.entity.extra.SearchResult;
+import com.tang.taste.common.entity.pojo.Dishes;
 import com.tang.taste.manage.dao.DishesDao;
 import com.tang.taste.portal.dao.SearchUtilDao;
 import org.apache.solr.client.solrj.SolrQuery;
@@ -139,5 +140,13 @@ public class SearchService  {
     public long countDishesByCategoryId(int categoryId){
         long count = dishesDao.countDishesByCategoryId(categoryId);
         return count;
+    }
+
+    /**
+     * 获取热销排行榜
+     * @return
+     */
+    public List<Dishes> selectHotDishes(){
+        return dishesDao.selectHotDishes();
     }
 }

@@ -2,6 +2,7 @@ package com.tang.taste.portal.controller;
 
 import com.tang.taste.common.entity.extra.SearchDishes;
 import com.tang.taste.common.entity.extra.SearchResult;
+import com.tang.taste.common.entity.pojo.Dishes;
 import com.tang.taste.portal.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -52,6 +53,9 @@ public class SearchController {
             model.addAttribute("itemList",searchResult.getSearchDishes());
             model.addAttribute("page",page);
         }
+        //左边的热销推荐
+        List<Dishes> hotList = searchService.selectHotDishes();
+        model.addAttribute("hotList", hotList);
         return "/portal/shop_product_list";
     }
 
@@ -81,6 +85,9 @@ public class SearchController {
         model.addAttribute("totalPages",count);
         model.addAttribute("itemList",list);
         model.addAttribute("page",page);
+        //左边的热销推荐
+        List<Dishes> hotList = searchService.selectHotDishes();
+        model.addAttribute("hotList", hotList);
         return "/portal/shop_category_list";
     }
 

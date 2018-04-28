@@ -19,8 +19,8 @@
     <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
     <result column="close_time" jdbcType="TIMESTAMP" property="closeTime" />
     <result column="buyer_message" jdbcType="VARCHAR" property="buyerMessage" />
-    <result column="buyer_rate" jdbcType="INTEGER" property="buyerRate" />
     <result column="rate_level" jdbcType="INTEGER" property="rateLevel" />
+    <result column="rate_picture" jdbcType="VARCHAR" property="ratePicture" />
     <result column="rate_content" jdbcType="VARCHAR" property="rateContent" />
     <result column="del_flag" jdbcType="INTEGER" property="delFlag" />
   </resultMap>
@@ -85,7 +85,7 @@
   <sql id="Base_Column_List">
     order_Id, user_id, receiver, address, phone, num, sum_num, emp_id, create_time, payment_type, 
     `status`, update_time, payment_time, consign_time, end_time, close_time, buyer_message, 
-    buyer_rate, rate_level, rate_content, del_flag
+    rate_level, rate_picture, rate_content, del_flag
   </sql>
   <select id="selectByExample" parameterType="com.tang.taste.common.entity.pojo.OrderExample" resultMap="BaseResultMap">
     select
@@ -126,14 +126,14 @@
       emp_id, create_time, payment_type, 
       `status`, update_time, payment_time, 
       consign_time, end_time, close_time, 
-      buyer_message, buyer_rate, rate_level, 
+      buyer_message, rate_level, rate_picture, 
       rate_content, del_flag)
     values (#{userId,jdbcType=INTEGER}, #{receiver,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
       #{phone,jdbcType=VARCHAR}, #{num,jdbcType=INTEGER}, #{sumNum,jdbcType=DOUBLE}, 
       #{empId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{paymentType,jdbcType=INTEGER}, 
       #{status,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{paymentTime,jdbcType=TIMESTAMP}, 
       #{consignTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{closeTime,jdbcType=TIMESTAMP}, 
-      #{buyerMessage,jdbcType=VARCHAR}, #{buyerRate,jdbcType=INTEGER}, #{rateLevel,jdbcType=INTEGER}, 
+      #{buyerMessage,jdbcType=VARCHAR}, #{rateLevel,jdbcType=INTEGER}, #{ratePicture,jdbcType=VARCHAR}, 
       #{rateContent,jdbcType=VARCHAR}, #{delFlag,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.tang.taste.common.entity.pojo.Order">
@@ -190,11 +190,11 @@
       <if test="buyerMessage != null">
         buyer_message,
       </if>
-      <if test="buyerRate != null">
-        buyer_rate,
-      </if>
       <if test="rateLevel != null">
         rate_level,
+      </if>
+      <if test="ratePicture != null">
+        rate_picture,
       </if>
       <if test="rateContent != null">
         rate_content,
@@ -252,11 +252,11 @@
       <if test="buyerMessage != null">
         #{buyerMessage,jdbcType=VARCHAR},
       </if>
-      <if test="buyerRate != null">
-        #{buyerRate,jdbcType=INTEGER},
-      </if>
       <if test="rateLevel != null">
         #{rateLevel,jdbcType=INTEGER},
+      </if>
+      <if test="ratePicture != null">
+        #{ratePicture,jdbcType=VARCHAR},
       </if>
       <if test="rateContent != null">
         #{rateContent,jdbcType=VARCHAR},
@@ -267,13 +267,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.tang.taste.common.entity.pojo.OrderExample" resultType="java.lang.Long">
-    select count(*) from `order`
+    select count(*) from order
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update order
+    update `order`
     <set>
       <if test="record.orderId != null">
         order_Id = #{record.orderId,jdbcType=INTEGER},
@@ -326,11 +326,11 @@
       <if test="record.buyerMessage != null">
         buyer_message = #{record.buyerMessage,jdbcType=VARCHAR},
       </if>
-      <if test="record.buyerRate != null">
-        buyer_rate = #{record.buyerRate,jdbcType=INTEGER},
-      </if>
       <if test="record.rateLevel != null">
         rate_level = #{record.rateLevel,jdbcType=INTEGER},
+      </if>
+      <if test="record.ratePicture != null">
+        rate_picture = #{record.ratePicture,jdbcType=VARCHAR},
       </if>
       <if test="record.rateContent != null">
         rate_content = #{record.rateContent,jdbcType=VARCHAR},
@@ -344,7 +344,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update order
+    update `order`
     set order_Id = #{record.orderId,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=INTEGER},
       receiver = #{record.receiver,jdbcType=VARCHAR},
@@ -362,8 +362,8 @@
       end_time = #{record.endTime,jdbcType=TIMESTAMP},
       close_time = #{record.closeTime,jdbcType=TIMESTAMP},
       buyer_message = #{record.buyerMessage,jdbcType=VARCHAR},
-      buyer_rate = #{record.buyerRate,jdbcType=INTEGER},
       rate_level = #{record.rateLevel,jdbcType=INTEGER},
+      rate_picture = #{record.ratePicture,jdbcType=VARCHAR},
       rate_content = #{record.rateContent,jdbcType=VARCHAR},
       del_flag = #{record.delFlag,jdbcType=INTEGER}
     <if test="_parameter != null">
@@ -371,7 +371,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.tang.taste.common.entity.pojo.Order">
-    update order
+    update `order`
     <set>
       <if test="userId != null">
         user_id = #{userId,jdbcType=INTEGER},
@@ -421,11 +421,11 @@
       <if test="buyerMessage != null">
         buyer_message = #{buyerMessage,jdbcType=VARCHAR},
       </if>
-      <if test="buyerRate != null">
-        buyer_rate = #{buyerRate,jdbcType=INTEGER},
-      </if>
       <if test="rateLevel != null">
         rate_level = #{rateLevel,jdbcType=INTEGER},
+      </if>
+      <if test="ratePicture != null">
+        rate_picture = #{ratePicture,jdbcType=VARCHAR},
       </if>
       <if test="rateContent != null">
         rate_content = #{rateContent,jdbcType=VARCHAR},
@@ -437,7 +437,7 @@
     where order_Id = #{orderId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.tang.taste.common.entity.pojo.Order">
-    update order
+    update `order`
     set user_id = #{userId,jdbcType=INTEGER},
       receiver = #{receiver,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
@@ -454,8 +454,8 @@
       end_time = #{endTime,jdbcType=TIMESTAMP},
       close_time = #{closeTime,jdbcType=TIMESTAMP},
       buyer_message = #{buyerMessage,jdbcType=VARCHAR},
-      buyer_rate = #{buyerRate,jdbcType=INTEGER},
       rate_level = #{rateLevel,jdbcType=INTEGER},
+      rate_picture = #{ratePicture,jdbcType=VARCHAR},
       rate_content = #{rateContent,jdbcType=VARCHAR},
       del_flag = #{delFlag,jdbcType=INTEGER}
     where order_Id = #{orderId,jdbcType=INTEGER}

@@ -26,16 +26,19 @@
 		<!--生成dao接口 type="XMLMAPPER"生成xml的dao实现-->
 		<javaClientGenerator type="XMLMAPPER" targetPackage="com.tang.taste.common.dao" targetProject="src/main/java">
 		</javaClientGenerator>
-       <!-- <table tableName="sys_user" domainObjectName="User">
+		<table tableName="order" domainObjectName="Order">
+			<generatedKey column="order_Id" sqlStatement="MySql" identity="true" />
+		</table>
+        <!--<table tableName="sys_user" domainObjectName="User">
             <generatedKey column="id" sqlStatement="MySql" identity="true" />
         </table>
         <table tableName="sys_employee" domainObjectName="Employee">
             <generatedKey column="id" sqlStatement="MySql" identity="true" />
-        </table>
-		<table tableName="sys_tables" domainObjectName="Tables">
+        </table>-->
+		<!--<table tableName="sys_tables" domainObjectName="Tables">
 			<generatedKey column="id" sqlStatement="MySql" identity="true" />
-		</table>
-		<table tableName="sys_stuff" domainObjectName="Stuff">
+		</table>-->
+		<!--<table tableName="sys_stuff" domainObjectName="Stuff">
 			<generatedKey column="id" sqlStatement="MySql" identity="true" />
 		</table>
 		<table tableName="sys_salary" domainObjectName="Salary">
@@ -56,15 +59,15 @@
 		<table tableName="shopping_cart_detail" domainObjectName="ShoppingCartDetail">
 		</table>
 		<table tableName="order_detail" domainObjectName="OrderDetail">
-		</table>-->
-		<!--<table tableName="order" domainObjectName="Order">
+		</table>
+		<table tableName="order" domainObjectName="Order">
 			<generatedKey column="order_Id" sqlStatement="MySql" identity="true" />
-		</table>-->
+		</table>
 		<table tableName="table_order" domainObjectName="TableOrder">
 		</table>
 		<table tableName="table_order_detail" domainObjectName="TableOrderDetail">
 		</table>
-		<!--<table tableName="dishes_type" domainObjectName="DishesType">
+		<table tableName="dishes_type" domainObjectName="DishesType">
 			<generatedKey column="type_id" sqlStatement="MySql" identity="true" />
 		</table>
 		<table tableName="content_category" domainObjectName="ContentCategory">

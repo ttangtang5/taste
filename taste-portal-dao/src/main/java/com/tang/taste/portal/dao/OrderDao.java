@@ -2,6 +2,7 @@ package com.tang.taste.portal.dao;
 
 import com.tang.taste.common.dao.OrderMapper;
 import com.tang.taste.common.entity.pojo.Order;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -32,7 +33,8 @@ public interface OrderDao extends OrderMapper {
             "WHERE " +
             " del_flag = 0" +
             " AND" +
-            " user_id = #{userId} " +
+            " user_id = #{userId}" +
+            " order by create_time desc " +
             "</script>"})
     List<Order> selectOrderList(int userId);
 
@@ -97,5 +99,42 @@ public interface OrderDao extends OrderMapper {
             " STATUS != #{status} " +
             "</script>"})
     List<Order> selectOrderListByStatus(int status);
+
+    /**
+     * 分页查询评论列表
+     * @param offset
+     * @param limit
+     * @return
+     */
+    @Select({"<script>" +
+            " SELECT " +
+            " LEFT(user_name,7) as 'userName', " +
+            " o.create_time, " +
+            " rate_level, " +
+            " rate_picture, " +
+            " rate_content  " +
+            "FROM " +
+            " `order` o, " +
+            " sys_user u  " +
+            "WHERE " +
+            " o.user_id = u.id " +
+            " AND " +
+            "  o.`status` = 5 " +
+            "  LIMIT #{offset},#{limit}" +
+            "</script>"})
+    List<Order> selectOrderRateList(@Param("offset") int offset, @Param("limit") int limit);
+
+    @Select({"<script>" +
+            "SELECT " +
+            " count(0) " +
+            "FROM " +
+            " `order` o, " +
+            " sys_user u  " +
+            "WHERE " +
+            " o.user_id = u.id " +
+            " AND " +
+            "  o.`status` = 5 " +
+            "</script>"})
+    long countOrderRateList();
 
 }

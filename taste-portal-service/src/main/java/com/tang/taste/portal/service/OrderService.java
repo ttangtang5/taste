@@ -1,12 +1,15 @@
 package com.tang.taste.portal.service;
 
+import com.google.common.collect.Lists;
 import com.tang.taste.common.entity.pojo.Order;
 import com.tang.taste.common.entity.pojo.OrderDetail;
 import com.tang.taste.common.entity.pojo.OrderDetailExample;
 import com.tang.taste.common.entity.pojo.OrderExample;
+import com.tang.taste.common.util.DateUtil;
 import com.tang.taste.portal.dao.OrderDao;
 import com.tang.taste.portal.dao.OrderDetailDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,6 +28,9 @@ public class OrderService {
 
     @Autowired
     private OrderDetailDao orderDetailDao;
+
+    @Value("${SEARCH_PAGE_SIZE}")
+    private Integer pageSize;
     /**
      * 获取订单列表
      * @param userId
@@ -95,11 +101,51 @@ public class OrderService {
     }
 
 
-
+    /**
+     * 付款更新
+     * @param orderId
+     */
     public void updateOrderPayStatus(int orderId){
         Order order = new Order();
         order.setStatus(2);
         order.setOrderId(orderId);
         orderDao.updateByPrimaryKeySelective(order);
     }
+
+    /**
+     * 添加评价内容
+     * @param order
+     */
+    public void updateOrderRateStatus(Order order){
+        orderDao.updateByPrimaryKeySelective(order);
+    }
+
+    /**
+     * 分页查询评论列表
+     * @param page
+     * @return
+     */
+    public List<Order> selectRateList(int page){
+        List<Order> lists = orderDao.selectOrderRateList(pageSize*(page-1),pageSize);
+        List<Order> listNew = Lists.newArrayList();
+        for (Order order : lists) {
+            order.setCreateTimeStr(DateUtil.getDateTime("yyyy-MM-dd HH:mm:ss",order.getCreateTime()));
+            if(order != null && order.getRatePicture() != null){
+                String[] picture = order.getRatePicture().split("==");
+                order.setRatePictureArr(picture);
+            }
+            listNew.add(order);
+        }
+       return listNew;
+    }
+
+    /**
+     * 统计评论条数
+     * @return
+     */
+    public long countRateList(){
+       return orderDao.countOrderRateList();
+    }
+
+
 }

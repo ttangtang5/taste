@@ -102,57 +102,13 @@
 
                 <div class="sidebar-products clearfix">
                     <h2>热销产品</h2>
-                    <div class="item">
-                        <a href="shop-item.html"><img src="${ctxStatic}/dishes/other/dgw.jpg" alt="Some Shoes in Animal with Cut Out"></a>
-                        <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-                        <div class="price">$31.00</div>
-                    </div>
-                    <div class="item">
-                        <a href="shop-item.html"><img src="${ctxStatic}/dishes/other/dgw.jpg" alt="Some Shoes in Animal with Cut Out"></a>
-                        <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-                        <div class="price">$23.00</div>
-                    </div>
-                    <div class="item">
-                        <a href="shop-item.html"><img src="${ctxStatic}/dishes/other/dgw.jpg" alt="Some Shoes in Animal with Cut Out"></a>
-                        <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-                        <div class="price">$86.00</div>
-                    </div>
-                </div>
-                <div class="sidebar-products clearfix">
-                    <h2>热销产品</h2>
-                    <div class="item">
-                        <a href="shop-item.html"><img src="${ctxStatic}/dishes/other/dgw.jpg" alt="Some Shoes in Animal with Cut Out"></a>
-                        <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-                        <div class="price">$31.00</div>
-                    </div>
-                    <div class="item">
-                        <a href="shop-item.html"><img src="${ctxStatic}/dishes/other/dgw.jpg" alt="Some Shoes in Animal with Cut Out"></a>
-                        <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-                        <div class="price">$23.00</div>
-                    </div>
-                    <div class="item">
-                        <a href="shop-item.html"><img src="${ctxStatic}/dishes/other/dgw.jpg" alt="Some Shoes in Animal with Cut Out"></a>
-                        <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-                        <div class="price">$86.00</div>
-                    </div>
-                </div>
-                <div class="sidebar-products clearfix">
-                    <h2>热销产品</h2>
-                    <div class="item">
-                        <a href="shop-item.html"><img src="${ctxStatic}/dishes/other/dgw.jpg" alt="Some Shoes in Animal with Cut Out"></a>
-                        <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-                        <div class="price">$31.00</div>
-                    </div>
-                    <div class="item">
-                        <a href="shop-item.html"><img src="${ctxStatic}/dishes/other/dgw.jpg" alt="Some Shoes in Animal with Cut Out"></a>
-                        <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-                        <div class="price">$23.00</div>
-                    </div>
-                    <div class="item">
-                        <a href="shop-item.html"><img src="${ctxStatic}/dishes/other/dgw.jpg" alt="Some Shoes in Animal with Cut Out"></a>
-                        <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-                        <div class="price">$86.00</div>
-                    </div>
+                    <c:forEach var="hot" items="${hotList}">
+                        <div class="item">
+                            <a href="javascript:;"><img src="${ctxStatic}${hot.picture}" alt="Some Shoes in Animal with Cut Out"></a>
+                            <h3><a href="${ctx}/search?word=${hot.dishesName}">${hot.dishesName}</a></h3>
+                            <div class="price">￥${hot.dishesPrice}</div>
+                        </div>
+                    </c:forEach>
                 </div>
             </div>
             <!-- END SIDEBAR -->
@@ -210,7 +166,7 @@
                                     <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">查看</a>
                                 </div>
                             </div>
-                            <h3><a href="shop-item.html" class="aNewProduct">${item.dishesName}</a></h3>
+                            <h3><a href="javascript:;" class="aNewProduct">${item.dishesName}</a></h3>
                             <div class="pi-price priceNewProduct">￥${item.dishesPrice}</div>
                             <a href="javascript:;" class="btn btn-default add2cart">加入购物车</a>
                         </div>
@@ -285,7 +241,7 @@
                         <input id="product-quantity" type="text" value="1" readonly name="product-quantity" class="form-control input-sm">
                     </div>
                     <button class="btn btn-primary" type="submit">Add to cart</button>
-                    <a href="shop-item.html" class="btn btn-default">More details</a>
+                    <a href="javascript:;" class="btn btn-default">More details</a>
                 </div>
             </div>
 

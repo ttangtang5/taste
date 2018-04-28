@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
 import com.tang.taste.common.entity.pojo.*;
 import com.tang.taste.common.util.CookieUtils;
+import com.tang.taste.common.util.FastdfsUitls;
 import com.tang.taste.common.util.SessionUtils;
 import com.tang.taste.portal.service.DishesService;
 import com.tang.taste.portal.service.OrderService;
@@ -12,8 +13,11 @@ import com.tang.taste.portal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -41,6 +45,9 @@ public class OrderController {
     private ShoppingCartService shoppingCartService;
     @Value("${NOTIFY_URL}")
     private String notifyUrl;
+    @Value("${RETURN_URL}")
+    private String returnUrl;
+
     /**
      * 显示订单列表
      * @param request
@@ -188,7 +195,7 @@ public class OrderController {
         CookieUtils.setCookie(request,response,"pay_id",pay_id,60*60);
 
         String notify_url = notifyUrl;//通知地址
-        String return_url = "http://8d966557.ngrok.io/order/paySuccess?order="+pay_id;//支付后同步跳转地址
+        String return_url = returnUrl + pay_id;//支付后同步跳转地址
 
         if(price == null){
             price="1";
@@ -210,7 +217,7 @@ public class OrderController {
     }
 
     /**
-     *
+     *支付成功
      * @param request
      * @return
      * @throws Exception
@@ -220,5 +227,62 @@ public class OrderController {
         String pay_id =  CookieUtils.getCookieValue(request, "pay_id");
         orderService.updateOrderPayStatus(Integer.valueOf(pay_id));
         return "redirect:/toShopOrderList";
+    }
+
+    /**
+     * 添加评价
+     * @param orderId
+     * @param rating
+     * @param content
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("orderRate")
+    public String orderRate(int orderId,Integer rating,String content,HttpServletRequest request) throws Exception{
+        String content2 = new String(content.getBytes("iso-8859-1"), "utf-8");
+        List<String> url = (List) SessionUtils.getAttr(request, "url");
+        StringBuffer sb = new StringBuffer();
+        Order order = new Order();
+        if(url != null ){
+            for (String str : url) {
+                sb.append(str);
+                sb.append("==");
+            }
+            order.setRatePicture(sb.toString());
+        }
+        order.setOrderId(orderId);
+        order.setRateContent(content2);
+        order.setRateLevel(rating);
+        order.setStatus(5);
+        orderService.updateOrderRateStatus(order);
+        return "portal/shop_order_list";
+    }
+
+    /**
+     * 上传图片
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("uploadRate")
+    @ResponseBody
+    public String uploadRate(HttpServletRequest request) throws Exception{
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+        MultiValueMap<String,MultipartFile> multipartFile = multipartRequest.getMultiFileMap();
+        MultipartFile multi = multipartFile.getFirst("file");
+        String fileName = multi.getOriginalFilename();
+        String fileExtName = fileName.split("\\.")[1];
+        if("jpg,png,jpeg".contains(fileExtName)){
+            String [] fileMsg = FastdfsUitls.uploadFile(multi.getBytes(),fileExtName);
+            List<String> url = (List) SessionUtils.getAttr(request, "url");
+            if(url == null){
+                url = Lists.newArrayList();
+            }
+            url.add("http://119.23.252.58/"+fileMsg[0]+"/"+fileMsg[1]);
+            SessionUtils.setAttr(request,"url",url);
+            return "200";
+        }
+        return "500";
     }
 }

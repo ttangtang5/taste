@@ -28,6 +28,8 @@
     <!-- END THEME STYLES -->
     <link rel="shortcut icon" href="favicon.ico"/>
     <link href="${ctxStatic}/assets/global/plugins/bootstrap-table/bootstrap-table.css" rel="stylesheet" type="text/css"/>
+    <link href="${ctxStatic}/layui/css/layui.css" rel="stylesheet" type="text/css"/>
+    <link href="${ctxStatic}/assets/global/plugins/rateit/src/rateit.css" rel="stylesheet" type="text/css">
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -42,24 +44,41 @@
     <div class="page-content">
         <div class="container">
             <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-            <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
+            <div class="modal fade" id="addRate" tabindex="-1" role="dialog" aria-labelledby="addroleLabel">
+                <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                            <h4 class="modal-title">Modal title</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="addroleLabel">添加评价</h4>
                         </div>
                         <div class="modal-body">
-                            Widget settings form goes here
+                            <form id="boxRateForm" action="${ctx}/order/orderRate" enctype="multipart/form-data">
+                                <input type="text" id="orderId" name="orderId" hidden/>
+                                <div class="form-group">
+                                    <label for="recipient-name" class="control-label">评价内容:</label>
+                                    <input class="form-control" id="content" name="content" maxlength="100" placeholder="评价内容"  required/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email"></label>
+                                    <input type="range" value="4" name="rating" step="0.25" id="backing5">
+                                    <div class="rateit" data-rateit-backingfld="#backing5" data-rateit-resetable="false"  data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5">
+                                    </div>
+                                </div>
+                                <div class="layui-upload">
+                                    <button type="button" class="layui-btn" id="test2">多图片上传</button>
+                                    <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                                        预览图：
+                                        <div class="layui-upload-list" id="demo2"></div>
+                                    </blockquote>
+                                </div>
+                            </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn blue">Save changes</button>
-                            <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                            <button type="button" id="save" onclick="saveRate()"  class="btn btn-primary">保存</button>
                         </div>
                     </div>
-                    <!-- /.modal-content -->
                 </div>
-                <!-- /.modal-dialog -->
             </div>
             <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
             <!-- BEGIN PAGE BREADCRUMB -->
@@ -82,24 +101,11 @@
                                 <i class="icon-basket font-green-sharp"></i>
                                 <span class="caption-subject font-green-sharp bold uppercase">
 								订单列表</span>
-                                <span class="caption-helper">Dec 27, 2013 7:16:25</span>
+                                <span class="caption-helper"></span>
                             </div>
                         </div>
                         <div class="portlet-body">
                             <div class="tabbable">
-                                <div class="input-group date date-picker "  style="width: 300px" data-date-format="dd/mm/yyyy">
-                                    <input type="text" class="form-control form-filter input-sm" readonly name="order_shipment_date_from" placeholder="From">
-                                    <span class="input-group-btn">
-														<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
-														</span>
-                                </div>
-                                <br>
-                                <div class="input-group date date-picker"  style="width: 300px" data-date-format="dd/mm/yyyy">
-                                    <input type="text" class="form-control form-filter input-sm" readonly name="order_shipment_date_to" placeholder="To">
-                                    <span class="input-group-btn">
-                                    <button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
-                                    </span>
-                                </div>
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="tab_1">
                                         <div class="row">
@@ -189,7 +195,9 @@
 <!-- END PAGE LEVEL SCRIPTS -->
 <!--自定义js-->
 <script src="${ctxStatic}/layer/layer.js" type="text/javascript"></script>
+<script src="${ctxStatic}/layui/layui.js" type="text/javascript"></script>
 <script src="${ctxStatic}/assets/global/plugins/bootstrap-table/bootstrap-table.js" type="text/javascript"></script>
+<script src="${ctxStatic}/assets/global/plugins/rateit/src/jquery.rateit.js" type="text/javascript"></script>
 <script>
     jQuery(document).ready(function() {
         Metronic.init(); // init metronic core components
@@ -198,10 +206,22 @@
         EcommerceOrdersView.init();
     });
 
+    function rateMsg(id){
+        $("#orderId").val(id);
+        $("#addRate").modal("show");
+    }
+    function saveRate(){
+        $("#boxRateForm").submit();
+    };
     //操作
     function opFormat(value,row){
         var id = row.orderId;
-        var show = '<button class="btn btn-sm green show" onclick="show('+id+')" >查看</button><button class="btn btn-sm red del" onclick="del('+id+')" >删除</button>';
+        var status = row.status;
+        if(status == 4){
+            var show = '<button class="btn btn-sm green show" onclick="rateMsg('+id+')" >评价</button><button class="btn btn-sm green show" onclick="show('+id+')" >查看</button><button class="btn btn-sm red del" onclick="del('+id+')" >删除</button>';
+        }else{
+            var show = '<button class="btn btn-sm green show" onclick="show('+id+')" >查看</button><button class="btn btn-sm red del" onclick="del('+id+')" >删除</button>';
+        }
         return show;
     }
     //支付类型
@@ -285,6 +305,25 @@
             }
         });
     }
+    layui.use('upload', function(){
+        var $ = layui.jquery
+            ,upload = layui.upload;
+        //多图片上传
+        upload.render({
+            elem: '#test2'
+            ,url:rootPath +  '/order/uploadRate'
+            ,multiple: true
+            ,before: function(obj){
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result){
+                    $('#demo2').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img" width="20%">')
+                });
+            }
+            ,done: function(res){
+                //上传完毕
+            }
+        });
+    });
 </script>
 <!-- END JAVASCRIPTS -->
 </body>

@@ -91,7 +91,7 @@
 <div class="main">
     <div class="container">
         <ul class="breadcrumb">
-            <li><a href="/toIndex">主页</a></li>
+            <li><a href="${ctx}/toIndex">主页</a></li>
             <li class="active">搜索</li>
         </ul>
 
@@ -102,57 +102,13 @@
 
                 <div class="sidebar-products clearfix">
                     <h2>热销产品</h2>
-                    <div class="item">
-                        <a href="shop-item.html"><img src="${ctxStatic}/dishes/other/dgw.jpg" alt="Some Shoes in Animal with Cut Out"></a>
-                        <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-                        <div class="price">$31.00</div>
-                    </div>
-                    <div class="item">
-                        <a href="shop-item.html"><img src="${ctxStatic}/dishes/other/dgw.jpg" alt="Some Shoes in Animal with Cut Out"></a>
-                        <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-                        <div class="price">$23.00</div>
-                    </div>
-                    <div class="item">
-                        <a href="shop-item.html"><img src="${ctxStatic}/dishes/other/dgw.jpg" alt="Some Shoes in Animal with Cut Out"></a>
-                        <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-                        <div class="price">$86.00</div>
-                    </div>
-                </div>
-                <div class="sidebar-products clearfix">
-                    <h2>热销产品</h2>
-                    <div class="item">
-                        <a href="shop-item.html"><img src="${ctxStatic}/dishes/other/dgw.jpg" alt="Some Shoes in Animal with Cut Out"></a>
-                        <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-                        <div class="price">$31.00</div>
-                    </div>
-                    <div class="item">
-                        <a href="shop-item.html"><img src="${ctxStatic}/dishes/other/dgw.jpg" alt="Some Shoes in Animal with Cut Out"></a>
-                        <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-                        <div class="price">$23.00</div>
-                    </div>
-                    <div class="item">
-                        <a href="shop-item.html"><img src="${ctxStatic}/dishes/other/dgw.jpg" alt="Some Shoes in Animal with Cut Out"></a>
-                        <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-                        <div class="price">$86.00</div>
-                    </div>
-                </div>
-                <div class="sidebar-products clearfix">
-                    <h2>热销产品</h2>
-                    <div class="item">
-                        <a href="shop-item.html"><img src="${ctxStatic}/dishes/other/dgw.jpg" alt="Some Shoes in Animal with Cut Out"></a>
-                        <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-                        <div class="price">$31.00</div>
-                    </div>
-                    <div class="item">
-                        <a href="shop-item.html"><img src="${ctxStatic}/dishes/other/dgw.jpg" alt="Some Shoes in Animal with Cut Out"></a>
-                        <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-                        <div class="price">$23.00</div>
-                    </div>
-                    <div class="item">
-                        <a href="shop-item.html"><img src="${ctxStatic}/dishes/other/dgw.jpg" alt="Some Shoes in Animal with Cut Out"></a>
-                        <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-                        <div class="price">$86.00</div>
-                    </div>
+                    <c:forEach var="hot" items="${hotList}">
+                        <div class="item">
+                            <a href="javascript:;"><img src="${ctxStatic}${hot.picture}" alt="Some Shoes in Animal with Cut Out"></a>
+                            <h3><a href="${ctx}/search?word=${hot.dishesName}">${hot.dishesName}</a></h3>
+                            <div class="price">￥${hot.dishesPrice}</div>
+                        </div>
+                    </c:forEach>
                 </div>
             </div>
             <!-- END SIDEBAR -->
@@ -164,38 +120,12 @@
                             <h1>关于搜索 <em><c:if test="${query == ''}">所有的</c:if>${query}
                             </em>结果</h1>
                         </div>
-                        <%--<div class="col-md-6">
-                            <form action="#">
-                                <div class="input-group">
-                                    <input type="text" placeholder="请输入搜索内容" class="form-control">
-                                    <span class="input-group-btn">
-                        <button class="btn btn-primary" type="submit">搜索</button>
-                      </span>
-                                </div>
-                            </form>
-                        </div>--%>
                     </div>
                 </div>
                 <div class="row list-view-sorting clearfix">
                     <div class="col-md-2 col-sm-2 list-view">
                         <a href="javascript:;"><i class="fa fa-th-large"></i></a>
                         <a href="javascript:;"><i class="fa fa-th-list"></i></a>
-                    </div>
-                    <div class="col-md-10 col-sm-10">
-                        <%--<div class="pull-right">
-                            <label class="control-label">排&nbsp;序:</label>
-                            <select class="form-control input-sm">
-                                <option value="#?sort=p.sort_order&amp;order=ASC" selected="selected">Default</option>
-                                <option value="#?sort=pd.name&amp;order=ASC">Name (A - Z)</option>
-                                <option value="#?sort=pd.name&amp;order=DESC">Name (Z - A)</option>
-                                <option value="#?sort=p.price&amp;order=ASC">Price (Low &gt; High)</option>
-                                <option value="#?sort=p.price&amp;order=DESC">Price (High &gt; Low)</option>
-                                <option value="#?sort=rating&amp;order=DESC">Rating (Highest)</option>
-                                <option value="#?sort=rating&amp;order=ASC">Rating (Lowest)</option>
-                                <option value="#?sort=p.model&amp;order=ASC">Model (A - Z)</option>
-                                <option value="#?sort=p.model&amp;order=DESC">Model (Z - A)</option>
-                            </select>
-                        </div>--%>
                     </div>
                 </div>
                 <!-- BEGIN PRODUCT LIST -->
@@ -210,7 +140,7 @@
                                     <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">查看</a>
                                 </div>
                             </div>
-                            <h3><a href="shop-item.html" class="aNewProduct">${item.dishesName}</a></h3>
+                            <h3><a href="javascript:;" class="aNewProduct">${item.dishesName}</a></h3>
                             <div class="pi-price priceNewProduct">￥${item.dishesPrice}</div>
                             <a href="javascript:;" class="btn btn-default add2cart">加入购物车</a>
                         </div>
@@ -285,7 +215,7 @@
                         <input id="product-quantity" type="text" value="1" readonly name="product-quantity" class="form-control input-sm">
                     </div>
                     <button class="btn btn-primary" type="submit">Add to cart</button>
-                    <a href="shop-item.html" class="btn btn-default">More details</a>
+                    <a href="javascript:;" class="btn btn-default">More details</a>
                 </div>
             </div>
 

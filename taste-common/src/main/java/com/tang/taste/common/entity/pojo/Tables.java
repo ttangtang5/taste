@@ -1,13 +1,15 @@
 package com.tang.taste.common.entity.pojo;
 
+import com.tang.taste.common.entity.extra.TablesExtra;
+
 import java.io.Serializable;
 
-public class Tables implements Serializable {
+public class Tables extends TablesExtra implements Serializable {
     private Integer id;
 
     private Integer capcity;
 
-    private String type;
+    private Integer num;
 
     private Integer status;
 
@@ -33,12 +35,12 @@ public class Tables implements Serializable {
         this.capcity = capcity;
     }
 
-    public String getType() {
-        return type;
+    public Integer getNum() {
+        return num;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setNum(Integer num) {
+        this.num = num;
     }
 
     public Integer getStatus() {
@@ -79,7 +81,7 @@ public class Tables implements Serializable {
         Tables other = (Tables) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getCapcity() == null ? other.getCapcity() == null : this.getCapcity().equals(other.getCapcity()))
-            && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
+            && (this.getNum() == null ? other.getNum() == null : this.getNum().equals(other.getNum()))
             && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
             && (this.getDesc() == null ? other.getDesc() == null : this.getDesc().equals(other.getDesc()))
             && (this.getDelFlag() == null ? other.getDelFlag() == null : this.getDelFlag().equals(other.getDelFlag()));
@@ -91,7 +93,7 @@ public class Tables implements Serializable {
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getCapcity() == null) ? 0 : getCapcity().hashCode());
-        result = prime * result + ((getType() == null) ? 0 : getType().hashCode());
+        result = prime * result + ((getNum() == null) ? 0 : getNum().hashCode());
         result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
         result = prime * result + ((getDesc() == null) ? 0 : getDesc().hashCode());
         result = prime * result + ((getDelFlag() == null) ? 0 : getDelFlag().hashCode());
@@ -106,7 +108,7 @@ public class Tables implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", capcity=").append(capcity);
-        sb.append(", type=").append(type);
+        sb.append(", num=").append(num);
         sb.append(", status=").append(status);
         sb.append(", desc=").append(desc);
         sb.append(", delFlag=").append(delFlag);
