@@ -1,10 +1,8 @@
 package com.tang.taste.portal.service;
 
 import com.google.common.collect.Lists;
-import com.tang.taste.common.entity.pojo.Order;
-import com.tang.taste.common.entity.pojo.OrderDetail;
-import com.tang.taste.common.entity.pojo.OrderDetailExample;
-import com.tang.taste.common.entity.pojo.OrderExample;
+import com.tang.taste.common.dao.BookingMapper;
+import com.tang.taste.common.entity.pojo.*;
 import com.tang.taste.common.util.DateUtil;
 import com.tang.taste.portal.dao.OrderDao;
 import com.tang.taste.portal.dao.OrderDetailDao;
@@ -28,6 +26,9 @@ public class OrderService {
 
     @Autowired
     private OrderDetailDao orderDetailDao;
+
+    @Autowired
+    private BookingMapper bookingMapper;
 
     @Value("${SEARCH_PAGE_SIZE}")
     private Integer pageSize;
@@ -147,5 +148,49 @@ public class OrderService {
        return orderDao.countOrderRateList();
     }
 
+    /**
+     * 添加预订
+     * @param booking
+     * @return
+     */
+    public String addBooking(Booking booking) {
+        int i = bookingMapper.insertSelective(booking);
+        if(i == 1){
+            return "200";
+        }
+        return "500";
+    }
 
+    /***
+     * 取消订单
+     * @param id
+     * @return
+     */
+    public String cancelBooking(int id){
+        Booking booking = new Booking();
+        booking.setId(id);
+        booking.setDelFlag(1);
+        int i = bookingMapper.updateByPrimaryKeySelective(booking);
+        if(i == 1){
+            return "200";
+        }
+        return "500";
+    }
+
+    /**
+     * 查看订单
+     * @param userId
+     * @return
+     */
+    public Booking showBooking(int userId){
+        BookingExample bookingExample = new BookingExample();
+        BookingExample.Criteria criteria = bookingExample.createCriteria();
+        criteria.andUserIdEqualTo(userId);
+        criteria.andDelFlagEqualTo(0);
+        List<Booking> bookings = bookingMapper.selectByExample(bookingExample);
+        if(bookings != null && bookings.size() == 1){
+            return bookings.get(0);
+        }
+        return null;
+    }
 }

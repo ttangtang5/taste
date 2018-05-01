@@ -1,7 +1,14 @@
 package com.tang.taste.manage.service;
 
+import com.alibaba.fastjson.JSON;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.tang.taste.common.dao.BookingMapper;
 import com.tang.taste.common.dao.TableOrderMapper;
 import com.tang.taste.common.entity.pojo.*;
+import com.tang.taste.common.util.DateUtil;
+import com.tang.taste.manage.dao.BookingDao;
+import com.tang.taste.manage.dao.TableDao;
 import com.tang.taste.manage.dao.TableOrderDetailDao;
 import com.tang.taste.portal.dao.OrderDao;
 import com.tang.taste.portal.dao.OrderDetailDao;
@@ -9,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * FileName: OrderService
@@ -27,6 +35,10 @@ public class OrderService {
     private OrderDao orderDao;
     @Autowired
     private OrderDetailDao orderDetailDao;
+    @Autowired
+    private BookingDao bookingMapper;
+    @Autowired
+    private TableDao tableDao;
     /**
      * 获取餐厅订单
      * @param tableId
@@ -100,5 +112,55 @@ public class OrderService {
      */
     public List<OrderDetail> selectOrderDetailByOrderId(int orderId){
         return orderDetailDao.selectOrderDetailList(orderId);
+    }
+
+    /**
+     * 查找预订列表
+     * @return
+     */
+    public List<Booking> selectBookingList(){
+        BookingExample bookingExample = new BookingExample();
+        BookingExample.Criteria criteria = bookingExample.createCriteria();
+        criteria.andDelFlagEqualTo(0);
+        List<Booking> bookings = bookingMapper.selectByExample(bookingExample);
+        List<Booking> lists = Lists.newArrayList();
+        for (Booking booking : bookings) {
+            booking.setTimeStr(DateUtil.getDateTime("yyyy-MM-dd HH:mm:ss",booking.getTime()));
+            lists.add(booking);
+        }
+        return  lists;
+    }
+
+    /**
+     *获取可以选择餐桌
+     * @param id
+     * @return
+     */
+    public List<Tables> selectExitTable(int id){
+        Booking booking = bookingMapper.selectByPrimaryKey(id);
+        List<Integer> lists = bookingMapper.selectExitTable(DateUtil.getDateTime("yyyy-MM-dd HH:mm:ss", booking.getTime()));
+        TablesExample tablesExample = new TablesExample();
+        TablesExample.Criteria criteria = tablesExample.createCriteria();
+        criteria.andDelFlagEqualTo(0);
+        criteria.andIdNotIn(lists);
+        return tableDao.selectByExample(tablesExample);
+    }
+
+    /**
+     * 安排预订餐桌
+     * @param booking
+     * @return
+     */
+    public String updateBooking(Booking booking){
+        Map map = Maps.newHashMap();
+        int i = bookingMapper.updateByPrimaryKeySelective(booking);
+        if(i == 1){
+            map.put("status", "200");
+            map.put("message", "安排成功！");
+            return JSON.toJSONString(map);
+        }
+        map.put("status", "500");
+        map.put("message", "安排失败！");
+        return JSON.toJSONString(map);
     }
 }

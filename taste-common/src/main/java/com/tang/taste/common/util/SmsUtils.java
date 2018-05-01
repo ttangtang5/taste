@@ -12,6 +12,8 @@ import com.aliyuncs.http.FormatType;
 import com.aliyuncs.http.HttpResponse;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
+import com.tang.taste.common.entity.pojo.Booking;
+
 import java.text.SimpleDateFormat;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
@@ -43,7 +45,7 @@ public class SmsUtils {
     static final String accessKeySecret = "FXjHq9sCPNXcDXlSzUA0kE8KoBjNGh";
 
     /**
-     * 发送短信
+     * 发送短信  验证码类型
      * @param phoneNum 手机号码
      * @param code 验证码
      * @return
@@ -70,6 +72,56 @@ public class SmsUtils {
         request.setTemplateCode(template);
         //可选:模板中的变量替换JSON串,如模板内容为"亲爱的${name},您的验证码为${code}"时,此处的值为
         request.setTemplateParam("{\"code\":\""+code+"\"}");
+
+        //选填-上行短信扩展码(无特殊需求用户请忽略此字段)
+        //request.setSmsUpExtendCode("90997");
+
+        //可选:outId为提供给业务方扩展字段,最终在短信回执消息中将此值带回给调用者
+        request.setOutId("yourOutId");
+
+        //hint 此处可能会抛出异常，注意catch
+        SendSmsResponse sendSmsResponse = null;
+        try {
+            sendSmsResponse = acsClient.getAcsResponse(request);
+        } catch (ClientException e) {
+            e.printStackTrace();
+        }
+
+        return sendSmsResponse;
+    }
+
+    /**
+     * 预定通知
+     * @param phoneNum
+     * @param code
+     * @param template
+     * @qaram booking
+     * @return
+     * @throws ClientException
+     */
+    public static SendSmsResponse sendSmsInform(String phoneNum, String code, String template, Booking booking) throws ClientException {
+
+        //可自助调整超时时间
+        System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
+        System.setProperty("sun.net.client.defaultReadTimeout", "10000");
+
+        //初始化acsClient,暂不支持region化
+        IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessKeySecret);
+        DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", product, domain);
+        IAcsClient acsClient = new DefaultAcsClient(profile);
+
+        //组装请求对象-具体描述见控制台-文档部分内容
+        SendSmsRequest request = new SendSmsRequest();
+        //必填:待发送手机号
+        request.setPhoneNumbers(phoneNum);
+        //必填:短信签名-可在短信控制台中找到
+        request.setSignName("唐蓝云");
+        //必填:短信模板-可在短信控制台中找到
+        request.setTemplateCode(template);
+        //可选:模板中的变量替换JSON串,如模板内容为"亲爱的${name},您的验证码为${code}"时,此处的值为
+        request.setTemplateParam("{\"bookingTime\":\""+booking.getTime()+"\"}");
+        request.setTemplateParam("{\"num\":\""+booking.getNum()+"\"}");
+        request.setTemplateParam("{\"tableId\":\""+booking.getTableId()+"\"}");
 
         //选填-上行短信扩展码(无特殊需求用户请忽略此字段)
         //request.setSmsUpExtendCode("90997");
@@ -133,16 +185,25 @@ public class SmsUtils {
     }
 
     /**
-     * 发送短信
+     * 发短信返回信息
      * @param phoneNum
      * @param code
+     * @param template
+     * @param type
+     * @param booking
+     * @return
      * @throws ClientException
      * @throws InterruptedException
      */
-    public static boolean sendCaptcha(String phoneNum,String code,String template)throws ClientException, InterruptedException{
+    public static boolean sendCaptcha(String phoneNum,String code,String template,int type,Booking booking)throws ClientException, InterruptedException{
         boolean flag = false;
         //发短信
-        SendSmsResponse response = sendSms(phoneNum,code,template);
+        SendSmsResponse response = null;
+        if(type == 1){
+             response = sendSms(phoneNum,code,template);
+        }else{
+             response = sendSmsInform(phoneNum,code,template,booking);
+        }
         System.out.println("短信接口返回的数据----------------");
         System.out.println("Code=" + response.getCode());
         System.out.println("Message=" + response.getMessage());

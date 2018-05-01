@@ -3,10 +3,7 @@ package com.tang.taste.portal.controller;
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.tang.taste.common.entity.pojo.ShoppingCart;
-import com.tang.taste.common.entity.pojo.ShoppingCartDetail;
-import com.tang.taste.common.entity.pojo.User;
-import com.tang.taste.common.entity.pojo.UserAddress;
+import com.tang.taste.common.entity.pojo.*;
 import com.tang.taste.common.util.*;
 import com.tang.taste.portal.service.ShoppingCartService;
 import com.tang.taste.portal.service.UserService;
@@ -179,21 +176,38 @@ public class UserController {
      */
     @RequestMapping("getCaptcha")
     @ResponseBody
-    public String getCaptcha(String phoneNum,String type,HttpServletRequest request) throws Exception{
+    public String getCaptcha(String phoneNum, String type, Booking booking, HttpServletRequest request) throws Exception{
         String template = null;
-        if("1".equals(type)){
-            //注册模板
-            template = "SMS_128025051";
-        }else if("2".equals(type)){
-            //重置密码模板
-            template = "SMS_128095031";
+        switch (type){
+            case "1":
+                //注册模板
+                template = "SMS_128025051";
+                break;
+            case "2":
+                //重置密码模板
+                template = "SMS_128095031";
+                break;
+            case "3":
+                //验证码模板
+                template = "SMS_134150094";
+                break;
+            case "4":
+                break;
+            default:
+                //验证码模板
+                template = "SMS_134150094";
+                break;
         }
         //获取随机数
         int numCode = RandomNumberUtils.getRandomCode(6);
         SessionUtils.setValidateCode(request,String.valueOf(numCode));
         HttpSession session = request.getSession(true);
         try {
-            boolean flag = SmsUtils.sendCaptcha(phoneNum,String.valueOf(numCode),template);
+            if("4".equals(type)){
+                boolean flag = SmsUtils.sendCaptcha(phoneNum,String.valueOf(numCode),template,2,booking);
+            }else{
+                boolean flag = SmsUtils.sendCaptcha(phoneNum,String.valueOf(numCode),template,1,null);
+            }
             //TimerTask实现5分钟后从session中删除checkCode
             final Timer timer = new Timer();
             timer.schedule(new TimerTask() {

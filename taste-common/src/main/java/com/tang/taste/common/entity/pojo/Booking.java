@@ -14,11 +14,21 @@ public class Booking implements Serializable {
 
     private Date time;
 
+    private String timeStr;
+
     private Integer tableId;
 
     private Integer delFlag;
 
     private static final long serialVersionUID = 1L;
+
+    public String getTimeStr() {
+        return timeStr;
+    }
+
+    public void setTimeStr(String timeStr) {
+        this.timeStr = timeStr;
+    }
 
     public Integer getId() {
         return id;

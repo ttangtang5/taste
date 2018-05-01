@@ -22,6 +22,11 @@
                         <i class="glyphicon glyphicon-chevron-right"></i>外卖接单
                     </a>
                 </li>
+                <li class="dropdown">
+                    <a href="${ctx}/manage/toBooking">
+                        <i class="glyphicon glyphicon-chevron-right"></i>预订
+                    </a>
+                </li>
             </ul>
         </div>
         <div class="col-md-10">

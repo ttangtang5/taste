@@ -2,10 +2,7 @@ package com.tang.taste.manage.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
-import com.tang.taste.common.entity.pojo.Order;
-import com.tang.taste.common.entity.pojo.OrderDetail;
-import com.tang.taste.common.entity.pojo.TableOrder;
-import com.tang.taste.common.entity.pojo.TableOrderDetail;
+import com.tang.taste.common.entity.pojo.*;
 import com.tang.taste.common.util.DateUtil;
 import com.tang.taste.common.util.DateUtils;
 import com.tang.taste.manage.service.OrderService;
@@ -134,4 +131,45 @@ public class OrderController {
         return "manage/acceptOrder";
     }
 
+    /**
+     * 获取预订列表
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("getBookingList")
+    @ResponseBody
+    public String getBookingList() throws Exception{
+        List<Booking> lists = orderService.selectBookingList();
+        return JSON.toJSONString(lists);
+    }
+
+    /**
+     * 获取能安排的餐桌
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("getTableBooking")
+    @ResponseBody
+    public String getTableBooking(int id) throws Exception{
+        List<Tables> lists = orderService.selectExitTable(id);
+        return JSON.toJSONString(lists);
+    }
+
+    /**
+     * 安排预订餐桌
+     * @param id
+     * @param tableId
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("saveBooking")
+    @ResponseBody
+    public String saveBooking(int id,int tableId) throws Exception{
+        Booking booking = new Booking();
+        booking.setId(id);
+        booking.setTableId(tableId);
+        booking.setDelFlag(0);
+        return orderService.updateBooking(booking);
+    }
 }

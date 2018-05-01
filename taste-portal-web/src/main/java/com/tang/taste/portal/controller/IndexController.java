@@ -2,10 +2,7 @@ package com.tang.taste.portal.controller;
 
 import com.google.common.collect.Lists;
 import com.tang.taste.common.entity.pojo.*;
-import com.tang.taste.common.util.ClusterRedis;
-import com.tang.taste.common.util.CookieUtils;
-import com.tang.taste.common.util.SerializeUtils;
-import com.tang.taste.common.util.SessionUtils;
+import com.tang.taste.common.util.*;
 import com.tang.taste.portal.service.OrderService;
 import com.tang.taste.portal.service.SearchService;
 import com.tang.taste.portal.service.ShoppingCartService;
@@ -213,4 +210,28 @@ public class IndexController {
         return "/portal/order_rating";
     }
 
+    /**
+     * 跳转预订
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("toBooking")
+    public String toBooking(Model model,HttpServletRequest request) throws Exception{
+        User user = SessionUtils.getUser(request);
+        if(user == null){
+            return "/portal/shop_booking";
+        }
+        Booking booking = orderService.showBooking(user.getId());
+        if(booking == null){
+            model.addAttribute("flag", 1);
+        }else {
+            model.addAttribute("flag", 2);
+            booking.setTimeStr(DateUtil.getDateTime("yyyy-MM-dd HH:mm:ss",booking.getTime()));
+            model.addAttribute("booking", booking);
+        }
+        //左边的热销推荐
+        List<Dishes> hotList = searchService.selectHotDishes();
+        model.addAttribute("hotList", hotList);
+        return "/portal/shop_booking";
+    }
 }

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
 import com.tang.taste.common.entity.pojo.*;
 import com.tang.taste.common.util.CookieUtils;
+import com.tang.taste.common.util.DateUtil;
 import com.tang.taste.common.util.FastdfsUitls;
 import com.tang.taste.common.util.SessionUtils;
 import com.tang.taste.portal.service.DishesService;
@@ -284,5 +285,45 @@ public class OrderController {
             return "200";
         }
         return "500";
+    }
+
+    /**
+     * 提交预订
+     * @param phone
+     * @param num
+     * @param time
+     * @param time2
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("booking")
+    @ResponseBody
+    public String bookingOrder(String phone,int num,String time,String time2,HttpServletRequest request) throws Exception{
+        Booking booking = new Booking();
+        User user = SessionUtils.getUser(request);
+        if(user == null){
+            return "500";
+        }
+        booking.setUserId(user.getId());
+        booking.setPhone(phone);
+        booking.setNum(num);
+        String timeStr = time + " " + time2;
+        Date date = DateUtil.convertStringToDate("yyyy-MM-dd HH:mm:ss",timeStr);
+        booking.setTime(date);
+        return orderService.addBooking(booking);
+    }
+
+    /**
+     * 取消预定
+     * @param id
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("bookingCancel")
+    @ResponseBody
+    public String bookingCancel(int id,HttpServletRequest request) throws Exception{
+        return orderService.cancelBooking(id);
     }
 }

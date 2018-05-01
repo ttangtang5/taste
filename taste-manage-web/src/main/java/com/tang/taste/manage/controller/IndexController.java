@@ -171,4 +171,14 @@ public class IndexController {
         return "manage/tableList";
     }
 
+    /**
+     * 前往预订处理
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("toBooking")
+    public String toBooking() throws Exception{
+        return "manage/bookingOrder";
+    }
+
 }

@@ -259,6 +259,11 @@
                 $("#Msg").html("收货人必填信息！");
             }
             if(isMobileMethod(phone)){
+                if(!bdGEO()){
+                    $("#Msg").empty();
+                    $("#Msg").html("此地址不在配送范围！");
+                    return;
+                }
                 $.ajax({
                     type : 'post',
                     url : rootPath+'/taste/addAddress',

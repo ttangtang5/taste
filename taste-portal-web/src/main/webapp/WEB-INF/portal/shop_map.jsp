@@ -60,16 +60,17 @@
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <form class="form-inline margin-bottom-10" action="#">
+                        <%--<form class="form-inline margin-bottom-10" action="#">--%>
                             <div class="input-group">
                                 <input type="text"  style="width: 500px;" class="form-control" id="suggestId" placeholder="请输入地址...">
                                 <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
                                 <span class="input-group-btn">
-                                <button class="btn blue" id="gmap_geocoding_btn">确定</button>
+                                <button class="btn blue" id="gmap_geocoding_btn" onclick="bdGEO()">确定</button>
                                  </span>
                             </div>
-                        </form>
-                        <div id="gmap_geocoding" class="gmaps">
+                        <%--</form>--%>
+                        <div id="gmap_geocoding" class="gmaps" style="height: 500px">
+
                     </div>
                 </div>
                 <!-- END GEOCODING PORTLET-->
@@ -110,52 +111,35 @@
         Demo.init(); // init demo features
     });
 
-    var map = new BMap.Map("gmap_geocoding");
-    //浏览器定位
-    var point = new BMap.Point(116.331398,39.897445);
-    map.centerAndZoom(point,12);
+    var map = new BMap.Map("gmap_geocoding",{minZoom:17,maxZoom:20});
+    var point = new BMap.Point(113.033449,28.253733);
+    map.enableScrollWheelZoom(true);
+    map.centerAndZoom(point,6);
+    var marker = new BMap.Marker(point);        // 创建标注
+    map.addOverlay(marker);
+    map.centerAndZoom(point,18);
+    var pointA = new BMap.Point(113.033449,28.253733);  // 创建点坐标中心  维智
+
+    //单击获取点击的经纬度
+    map.addEventListener("click",function(e){
+        var pointB = new BMap.Point(e.point.lng,e.point.lat);  // 创建点坐标B 鼠标点击的地方
+        alert('两点距离是：'+(map.getDistance(pointA,pointB)).toFixed(2)+' 米。');
+    });
 
     var geoc = new BMap.Geocoder();
-    var geolocation = new BMap.Geolocation();
-    geolocation.getCurrentPosition(function(r){
-        if(this.getStatus() == BMAP_STATUS_SUCCESS){
-            var mk = new BMap.Marker(r.point);
-            map.addOverlay(mk);
-            map.panTo(r.point);
-            geoc.getLocation(r.point, function(rs){
-                var addComp = rs.addressComponents;
-                alert(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
-                $("#suggestId").val(addComp.province + "" + addComp.city + "" + addComp.district + "" + addComp.street + "" + addComp.streetNumber);
-            });
-        }
-        else {
-            alert('failed'+this.getStatus());
-        }
-    },{enableHighAccuracy: true})
-    map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
-    map.enableContinuousZoom();
 
-    //地址解析
     map.addEventListener("click", function(e){
         var pt = e.point;
-        map.clearOverlays();
-        map.centerAndZoom(pt, 18);
-        var marker = new BMap.Marker(e.point);        // 创建标注
-        map.addOverlay(marker);
         geoc.getLocation(pt, function(rs){
             var addComp = rs.addressComponents;
             alert(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
-            $("#suggestId").val(addComp.province + "" + addComp.city + "" + addComp.district + "" + addComp.street + "" + addComp.streetNumber);
         });
     });
 
-    //搜索
     // 百度地图API功能
     function G(id) {
         return document.getElementById(id);
     }
-
-    map.addControl(new BMap.NavigationControl());
     var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
         {"input" : "suggestId"
             ,"location" : map
@@ -168,7 +152,7 @@
         if (e.fromitem.index > -1) {
             value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
         }
-        str = "FromItem<br/>index = " + e.fromitem.index + "<br/>value = " + value;
+        str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
 
         value = "";
         if (e.toitem.index > -1) {
@@ -201,6 +185,33 @@
         local.search(myValue);
     }
 
+
+    // 百度地图API功能
+    var myGeo = new BMap.Geocoder();
+    var index = 0;
+    var adds = [];
+    function bdGEO(){
+        adds = [];
+        adds.push($("#suggestId").val());
+        var add = adds[index];
+        geocodeSearch(add);
+    }
+    function geocodeSearch(add){
+        myGeo.getPoint(add, function(point){
+            if (point) {
+                var address = new BMap.Point(point.lng, point.lat);
+                addMarker(address,new BMap.Label(index+":"+add,{offset:new BMap.Size(20,-10)}));
+                var pointB = new BMap.Point(point.lng,point.lat);  // 创建点坐标B 鼠标点击的地方
+                alert('两点距离是：'+(map.getDistance(pointA,pointB)).toFixed(2)+' 米。');
+            }
+        }, "长沙市开福区长沙大学");
+    }
+    // 编写自定义函数,创建标注
+    function addMarker(point,label){
+        var marker = new BMap.Marker(point);
+        map.addOverlay(marker);
+        marker.setLabel(label);
+    }
 </script>
 </body>
 <!-- END BODY -->
