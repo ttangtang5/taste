@@ -29,7 +29,7 @@ public class GlobalExceptionResolver implements HandlerExceptionResolver {
         //展示错误页面
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("message","系统繁忙，请稍后重试。");
-        modelAndView.setViewName("error/exception");
+        modelAndView.setViewName("portal/page_exception");
         return modelAndView;
     }
 }
