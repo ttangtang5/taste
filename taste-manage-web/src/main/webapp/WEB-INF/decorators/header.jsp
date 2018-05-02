@@ -32,7 +32,7 @@
                 </li>
                 </shiro:hasRole>
                 <li>
-                    <a class="dropdown-toggle"  href="">
+                    <a class="dropdown-toggle"  href="${ctx}/manage/toContent">
                         内容管理<span class="collapsing"></span>
                     </a>
                 </li>

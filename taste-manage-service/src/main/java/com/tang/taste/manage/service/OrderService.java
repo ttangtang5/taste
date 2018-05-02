@@ -84,7 +84,9 @@ public class OrderService {
      */
     public void updateTableOrder(TableOrder tableOrder){
         TableOrderExample tableOrderExample = new TableOrderExample();
-        tableOrderExample.createCriteria().andTableIdEqualTo(tableOrder.getTableId());
+        TableOrderExample.Criteria criteria = tableOrderExample.createCriteria();
+        criteria.andTableIdEqualTo(tableOrder.getTableId());
+        criteria.andDelFlagEqualTo(0);
         tableOrderMapper.updateByExampleSelective(tableOrder, tableOrderExample);
     }
 
@@ -183,5 +185,32 @@ public class OrderService {
      */
     public long countOrderMoney(){
         return tableOrderMapper.sumOrder();
+    }
+
+    /**
+     * 更新订单详情
+     * @param tableOrderDetail
+     * @return
+     */
+    public void updateTableOrderDetail(TableOrderDetail tableOrderDetail){
+        TableOrderDetailExample tableOrderDetailExample = new TableOrderDetailExample();
+        TableOrderDetailExample.Criteria criteria = tableOrderDetailExample.createCriteria();
+        criteria.andTableIdEqualTo(tableOrderDetail.getTableId());
+        criteria.andDelFlagEqualTo(0);
+        tableOrderDetailDao.updateByExampleSelective(tableOrderDetail, tableOrderDetailExample);
+    }
+
+
+    /**
+     * 更新订单状态
+     * @param id
+     * @param distribution
+     */
+    public void updateOrder(int id,int distribution){
+        Order order = new Order();
+        order.setOrderId(id);
+        order.setStatus(4);
+        order.setEmpId(distribution);
+        orderDao.updateByPrimaryKeySelective(order);
     }
 }

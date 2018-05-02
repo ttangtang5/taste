@@ -29,8 +29,9 @@ public class TableService {
      */
     public List<Tables> selectTableBystatus(){
         TablesExample tablesExample = new TablesExample();
-        tablesExample.createCriteria().andStatusNotEqualTo(2);
-        tablesExample.createCriteria().andDelFlagEqualTo(0);
+        TablesExample.Criteria criteria = tablesExample.createCriteria();
+        criteria.andStatusNotEqualTo(2);
+        criteria.andDelFlagEqualTo(0);
        return tableDao.selectByExample(tablesExample);
     }
 
@@ -130,4 +131,5 @@ public class TableService {
         map.put("message", "删除失败！");
         return JSON.toJSONString(map);
     }
+
 }

@@ -7,6 +7,7 @@
     <meta name="decorator" content="default">
     <link href="${ctxStatic}/js/common/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="${ctxStatic}/css/common/base.css" rel="stylesheet"/>
+    <link href="${ctxStatic}/layui/css/layui.css" rel="stylesheet" type="text/css">
 </head>
 <body data-target="#one" data-spy="scroll">
 <div class="container" style="padding-bottom: 15px;min-height: 300px; margin-top: 40px;">
@@ -30,18 +31,16 @@
                         <th>内容标题</th>
                         <th>图片</th>
                         <th>关联内容</th>
-                        <th>更新时间</th>
                         <th>操作</th>
                     </tr>
-                    <c:forEach var="dishes" items="${dishesList}">
+                    <c:forEach var="content" items="${contentList}">
                         <tr>
-                            <td>${dishes.dishesName}</td>
-                            <td>${dishes.dishesPrice}</td>
-                            <td>${dishes.dishesTypeName}</td>
-                            <td><img src="${ctxStatic}${dishes.picture}" width="50px" height="50px"></td>
-                            <td>${dishes.desc}</td>
+                            <td>${content.categoryStr}</td>
+                            <td>${content.title}</td>
+                            <td><img src="${content.picture}" width="50px" height="50px"></td>
+                            <td>${content.content}</td>
                             <td>
-                                <a href="javascript:_delete([${dishes.id}]);">删除</a>
+                                <a  href="javascript:updateContent(${content.id});">修改</a>
                             </td>
                         </tr>
                     </c:forEach>
@@ -58,14 +57,17 @@
                 <div class="modal-body">
                     <form id="boxContentForm" enctype="multipart/form-data">
                         <div class="form-group">
-                            <label for="recipient-name" class="control-label">图片:</label>
-                            <div class="layui-upload">
-                                <input type="file" name="file" id="test8">
-                            </div>
+                            <button type="button" class="layui-btn" id="test2">图片上传</button>
+                            <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                                预览图：
+                                <div class="layui-upload-list" id="demo2"></div>
+                            </blockquote>
                         </div>
                         <div class="form-group">
                             <label for="recipient-name" class="control-label">关联内容:</label>
-                            <input type="text" class="form-control" id="desc" name="desc"  placeholder="关联内容" required>
+                            <select id="dishes">
+                                <option value="0">无</option>
+                            </select>
                         </div>
                     </form>
                 </div>
@@ -83,37 +85,54 @@
 <script src="${ctxStatic}/js/shiro.demo.js"></script>
 <script src="${ctxStatic}/layui/layui.all.js"></script>
 <script >
-    function addDishes(){
-        /*if($.trim(name) == ''){
-            return layer.msg('角色名称不能为空。',so.default),!1;
-        }
-        if(!/^[a-z0-9A-Z]{6}$/.test(type)){
-            return layer.msg('角色类型为6数字字母。',so.default),!1;
-        }*/
+
+    var contentId;
+
+    function updateContent(id) {
+        contentId = id;
+        $.ajax({
+            type : 'post',
+            url : rootPath +  '/content/getDishes',
+            dataType : 'json',
+            success : function(msg){
+                for(var i = 1; i < msg.length; i++){
+                    var html = '<option value="'+msg[i].id+'">'+msg[i].dishesName+'</option>';
+                    $("#dishes").append(html);
+                }
+            }
+        });
+        $("#alertContent").modal("show");
+    }
+    function alertContent(){
         var load = layer.load();
-        $.post(rootPath + '/dishes/addDishes',$("#boxDishesForm").serialize(),function(result){
+        $.post(rootPath + '/content/saveContent',{id : contentId,dishesId : $("#dishes").val()},function(result){
             layer.close(load);
-            if(result.status != 'success'){
+            if(result.status != '200'){
                 return layer.msg(result.message,so.default),!1;
             }
-            layer.msg('添加成功。');
+            layer.msg('修改成功。');
             setTimeout(function(){
-                $('#formId').submit();
+                location.reload();
             },1000);
         },'json');
     }
     layui.use('upload', function() {
-            var $ = layui.jquery
-                ,upload = layui.upload;
-            upload.render({
-                 elem: '#test8'
-                , url: rootPath + '/dishes/uploadFile'
-                , done: function (res) {
-                    if(res == '200'){
-
-                    }
-                }
-            });
+        var $ = layui.jquery
+            ,upload = layui.upload;
+        upload.render({
+            elem: '#test2'
+            ,url: rootPath + '/dishes/uploadFile'
+            ,multiple: true
+            ,before: function(obj){
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result){
+                    $('#demo2').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img" style="width: 20%" >')
+                });
+            }
+            ,done: function(res){
+                //上传完毕
+            }
+        });
     });
 </script>
 </body>

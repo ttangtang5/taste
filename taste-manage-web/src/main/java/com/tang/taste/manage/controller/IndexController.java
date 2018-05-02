@@ -1,8 +1,7 @@
 package com.tang.taste.manage.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.google.common.collect.Lists;
 import com.tang.taste.common.entity.pojo.*;
+import com.tang.taste.manage.service.ContentService;
 import com.tang.taste.manage.service.DishesService;
 import com.tang.taste.manage.service.EmpService;
 import com.tang.taste.manage.service.TableService;
@@ -31,6 +30,8 @@ public class IndexController {
     private EmpService empService;
     @Autowired
     private DishesService dishesService;
+    @Autowired
+    private ContentService contentService;
     /**
      * 跳转首页
      * @return
@@ -149,19 +150,22 @@ public class IndexController {
      * @param findContent
      * @param categoryId
      * @param page
-     * @param request
+     * @param flag
      * @param model
      * @return
      * @throws Exception
      */
     @RequestMapping("toDishesManage")
     public String toDishesManage(String findContent, Integer categoryId, @RequestParam(defaultValue = "1") Integer page,
-                                 HttpServletRequest request,Model model) throws Exception{
-        if(findContent != null && findContent != ""){
-            findContent = new String(findContent.getBytes("iso-8859-1"),"utf-8");
+                                 Integer flag,Model model) throws Exception{
+        if(findContent != null){
+            String str = findContent.replaceAll(",","");
+            if(str != "" && flag != null){
+                findContent = new String(str.getBytes("iso-8859-1"),"utf-8");
+            }
         }
-        List<Dishes> lists = dishesService.selectDishesMange("",categoryId,page);
-        long count = dishesService.countDishesMange(findContent, categoryId);
+        List<Dishes> lists = dishesService.selectDishesMange(findContent,page);
+        long count = dishesService.countDishesMange(findContent);
         model.addAttribute("totalPages",count);
         model.addAttribute("dishesList",lists);
         model.addAttribute("page",page);
@@ -209,7 +213,9 @@ public class IndexController {
      * @throws Exception
      */
     @RequestMapping("toContent")
-    public String toContent() throws Exception{
+    public String toContent(Model model) throws Exception{
+        List<Content> list = contentService.selectContent();
+        model.addAttribute("contentList", list);
         return "manage/content";
     }
 

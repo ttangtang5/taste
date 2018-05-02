@@ -184,4 +184,16 @@ public class UserController {
     public String updatePermissionByRole(Integer roleId,String ids) throws Exception{
         return empService.updatePermission(roleId, ids);
     }
+
+    /**
+     * 获取配送员
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("distribution")
+    @ResponseBody
+    public String distribution() throws Exception{
+        List<Employee> lists = empService.selectDistribution();
+        return JSON.toJSONString(lists);
+    }
 }

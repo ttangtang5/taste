@@ -13,7 +13,8 @@ var IndexContent = function (){
             dataType : 'json',
             success : function(data){
                 for(var i = 0; i < data.length; i++){
-                    $(".ls-bg")[i].src = rootPathStatic+data[i].picture;
+                    //$(".ls-bg")[i].src = rootPathStatic+data[i].picture;
+                    $(".ls-bg")[i].src = data[i].picture;
                 }
             }
         });
@@ -32,8 +33,10 @@ var IndexContent = function (){
                     if(data[i].dishes.dishesName == undefined){
                         continue;
                     }
-                    $(".imgNewProduct")[i].src = rootPathStatic+data[i].picture;
-                    $(".newProductZoom")[i].href=rootPathStatic+data[i].picture;
+                    //$(".imgNewProduct")[i].src = rootPathStatic+data[i].picture;
+                    $(".imgNewProduct")[i].src = data[i].picture;
+                    //$(".newProductZoom")[i].href= rootPathStatic+data[i].picture;
+                    $(".newProductZoom")[i].href= data[i].picture;
                     $(".aNewProduct")[i].innerHTML = data[i].dishes.dishesName;
                     $(".priceNewProduct")[i].innerHTML = '￥'+ data[i].dishes.dishesPrice;
                 }
@@ -51,11 +54,13 @@ var IndexContent = function (){
             dataType : 'json',
             success : function(data){
                 for(var i = 0; i < data.length; i++){
-                    $(".imgRecommend")[i].src = rootPathStatic+data[i].picture;
+                    //$(".imgRecommend")[i].src = rootPathStatic+data[i].picture;
+                    $(".imgRecommend")[i].src = data[i].picture;
                     if(i > 2){
                         $(".aRecommend")[i-3].innerHTML = data[i].dishes.dishesName;
                         $(".priceRecommend")[i-3].innerHTML = '￥'+ data[i].dishes.dishesPrice;
-                        $(".recommendZoom")[i-3].href = rootPathStatic+data[i].picture;
+                        //$(".recommendZoom")[i-3].href = rootPathStatic+data[i].picture;
+                        $(".recommendZoom")[i-3].href = data[i].picture;
                     }
                 }
             }

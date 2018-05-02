@@ -112,10 +112,9 @@
         dishes_type t
         WHERE
         d.dishes_type = t.type_id
-        <if test=" categoryId != null and categoryId != '' or categoryId == 0">
-            AND type_id = #{categoryId}
+        <if test=" findsContent != null and findsContent != ''">
+            AND d.dishes_name like '%${findsContent}%'
         </if>
-        AND d.dishes_name like '%${findsContent}%'
         limit #{offset},#{limit}
     </select>
     <!--统计-->
@@ -127,10 +126,9 @@
         dishes_type t
         WHERE
           d.dishes_type = t.type_id
-        <if test=" categoryId != null and categoryId != '' or categoryId == 0">
-            AND type_id = #{categoryId}
+        <if test=" findsContent != null and findsContent != ''">
+            AND d.dishes_name like '%${findsContent}%'
         </if>
-        AND d.dishes_name like '%${findsContent}%'
     </select>
 
     <!--热销列表-->

@@ -61,7 +61,6 @@ public interface OrderDao extends OrderMapper {
             " o.end_time, " +
             " o.close_time, " +
             " o.buyer_message, " +
-            " o.buyer_rate, " +
             " o.rate_level, " +
             " o.rate_content, " +
             " o.del_flag, " +
@@ -87,16 +86,20 @@ public interface OrderDao extends OrderMapper {
             "SELECT " +
             " order_Id 'orderId', " +
             " receiver 'receiver', " +
-            " phone 'phone', " +
+            " o.phone 'phone', " +
             " create_time 'createTime', " +
             " sum_num 'sumNum', " +
-            " STATUS 'status'  " +
+            " o.STATUS 'status', " +
+            " e.emp_name 'empName', " +
+            " e.phone 'empPhone'  " +
             "FROM " +
-            " `order`  " +
+            " `order` o " +
+            " LEFT JOIN sys_employee e ON o.emp_id = e.id  " +
             "WHERE " +
-            " del_flag = 0" +
-            " AND" +
-            " STATUS != #{status} " +
+            " o.del_flag = 0  " +
+            " AND o.STATUS != #{status} " +
+            "ORDER BY " +
+            " create_time DESC" +
             "</script>"})
     List<Order> selectOrderListByStatus(int status);
 

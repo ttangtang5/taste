@@ -32,7 +32,7 @@
             <form method="post" action="" id="formId" class="form-inline">
                 <div clss="well">
                     <div class="form-group">
-                        <input type="text" class="form-control" style="width: 300px;" value="" name="findContent" id="findContent" placeholder="输入菜品名称">
+                        <input type="text" class="form-control" style="width: 300px;" name="findContent" id="findContent" placeholder="输入菜品名称">
                     </div>
                     <span class="">
 				         	<button type="submit" class="btn btn-primary">查询</button>
@@ -57,7 +57,7 @@
                             <td>${dishes.dishesName}</td>
                             <td>${dishes.dishesPrice}</td>
                             <td>${dishes.dishesTypeName}</td>
-                            <td><img src="${ctxStatic}${dishes.picture}" width="50px" height="50px"></td>
+                            <td><img src="${dishes.picture}" width="50px" height="50px"></td>
                             <td>${dishes.desc}</td>
                             <td>
                                 <c:if test="${dishes.delFlag == 0}">
@@ -167,7 +167,7 @@
     //根据ID数组，上架
     function _putaway(ids){
         var load = layer.load();
-        $.post(rootPath + '/dishes/delDishes',{ids:ids.join(',')},function(result){
+        $.post(rootPath + '/dishes/putawayDishes',{ids:ids.join(',')},function(result){
             layer.close(load);
             if(result && result.status != 'success'){
                 return layer.msg(result.message,so.default),!0;
@@ -196,7 +196,7 @@
             }
             layer.msg('添加成功。');
             setTimeout(function(){
-                $('#formId').submit();
+                location.reload();
             },1000);
         },'json');
     }
@@ -210,7 +210,7 @@
                     ,before: function(obj){
                         //预读本地文件示例，不支持ie8
                         obj.preview(function(index, file, result){
-                            $('#demo2').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
+                            $('#demo2').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img" style="width: 20%">')
                         });
                     }
                     ,done: function(res){
@@ -238,7 +238,7 @@
                 //首次不执行
                 if(!first){
                     //do something
-                    var url = ctx+"/manage/toDishesManage?page="+obj.curr+"&findContent=" + encodeURIComponent(document.getElementById("findContent").value);
+                    var url = rootPath +"/manage/toDishesManage?flag=1&page="+obj.curr+"&findContent=" + encodeURIComponent(document.getElementById("findContent").value);
                     window.location.href = url;
                 }
             }

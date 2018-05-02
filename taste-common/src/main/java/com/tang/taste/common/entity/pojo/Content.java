@@ -10,6 +10,8 @@ public class Content extends ContentExtra implements Serializable {
 
     private Integer categoryId;
 
+    private String categoryStr;
+
     private String title;
 
     private String subTitle;
@@ -29,6 +31,14 @@ public class Content extends ContentExtra implements Serializable {
     private Integer delFlag;
 
     private static final long serialVersionUID = 1L;
+
+    public String getCategoryStr() {
+        return categoryStr;
+    }
+
+    public void setCategoryStr(String categoryStr) {
+        this.categoryStr = categoryStr;
+    }
 
     public Integer getId() {
         return id;

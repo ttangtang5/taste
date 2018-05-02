@@ -34,6 +34,7 @@
                         <td>应找：<span id="breakPayer"></span></td>
                     </tr>
                 </table>
+                <button id="checkout" onclick="checkout(${tableOrder.tableId})">结账</button>
             </div>
             <div class="col-md-6">
                 <h2>订单信息</h2>
@@ -65,6 +66,23 @@
        console.info(pay);
        var back = Number(pay) - Number(total);
        $("#breakPayer").html(back);
+   }
+
+   function checkout(id){
+       $.ajax({
+           type : 'post',
+           url : rootPath + '/order/checkout',
+           data : {
+               id : id
+           },
+           success : function(msg){
+               console.info(msg);
+               if(msg == 'success'){
+                   layer.msg('结算成功');
+               }
+           }
+       });
+
    }
 </script>
 </body>

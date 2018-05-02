@@ -6,6 +6,7 @@ import com.tang.taste.common.entity.pojo.*;
 import com.tang.taste.common.util.DateUtil;
 import com.tang.taste.common.util.DateUtils;
 import com.tang.taste.manage.service.OrderService;
+import com.tang.taste.manage.service.TableService;
 import com.tang.taste.portal.dao.OrderDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +33,8 @@ public class OrderController {
 
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private TableService tableService;
     /**
      * 保存订单
      * @return
@@ -64,13 +67,18 @@ public class OrderController {
         tableOrder.setCreateTime(new Date());
         tableOrder.setStatus(1);
         List<TableOrder> tableOrder1 = orderService.getTableOrderByTableId(tableId);
-        if(tableOrder1 == null){
+        if(tableOrder1 == null || tableOrder1.size() < 1){
             orderService.insertTableOrder(tableOrder);
         }else{
             orderService.updateTableOrder(tableOrder);
         }
         orderService.insertTableOrderDetail(lists);
-        return "/manage/index";
+        Tables tables = new Tables();
+        tables.setId(tableId);
+        tables.setStatus(1);
+        tables.setDesc(String.valueOf(num));
+        tableService.alertTable(tables);
+        return "success";
     }
 
     /**
@@ -85,7 +93,7 @@ public class OrderController {
         List<TableOrder> tableOrder = orderService.getTableOrderByTableId(tableId);
         List<TableOrderDetail> lists = orderService.selectTableOrderDetail(tableId);
         if(tableOrder != null && tableOrder.size() == 1){
-            request.setAttribute("tableOrder",tableOrder);
+            request.setAttribute("tableOrder",tableOrder.get(0));
         }
         int i = 0;
         for(TableOrderDetail tableOrderDetail : lists ){
@@ -185,5 +193,46 @@ public class OrderController {
         longs[0] = orderService.countOrderMoney();
         longs[1] = orderService.countTableOrderMoney();
         return JSON.toJSONString(longs);
+    }
+
+    /**
+     * 结账
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("checkout")
+    @ResponseBody
+    public String checkout(Integer id) throws Exception{
+        Tables tables = new Tables();
+        tables.setStatus(0);
+        tables.setId(id);
+        tables.setDesc("0");
+        tableService.alertTable(tables);
+        TableOrder tableOrder = new TableOrder();
+        tableOrder.setTableId(id);
+        tableOrder.setStatus(2);
+        tableOrder.setDelFlag(1);
+        orderService.updateTableOrder(tableOrder);
+        TableOrderDetail tableOrderDetail = new TableOrderDetail();
+        tableOrderDetail.setTableId(id);
+        tableOrderDetail.setDelFlag(1);
+        orderService.updateTableOrderDetail(tableOrderDetail);
+        return "success";
+    }
+
+
+    /**
+     * 接单
+     * @param id
+     * @param distribution
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("acceptOrder")
+    @ResponseBody
+    public String acceptOrder(Integer id,int distribution) throws Exception{
+        orderService.updateOrder(id,distribution);
+        return "success";
     }
 }

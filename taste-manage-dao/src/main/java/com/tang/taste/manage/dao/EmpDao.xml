@@ -8,6 +8,7 @@
           WHERE
             emp_name LIKE '%${findContent}%'
             OR phone LIKE '%${findContent}%'
+            AND del_flag = 0
     </select>
 
     <select id="selectAllpermission" parameterType="java.lang.String" resultType="java.lang.String">
@@ -28,5 +29,22 @@
             AND e.emp_name = #{empName}
             GROUP BY
             permission
+    </select>
+
+    <select id="selectDistribution" resultType="com.tang.taste.common.entity.pojo.Employee">
+        SELECT
+            e.id,
+            e.emp_name,
+            e.phone
+        FROM
+            sys_employee e,
+            sys_emp_role er,
+            sys_role r
+        WHERE
+            e.id = er.emp_id
+            AND er.role_id = r.id
+            AND r.role_name = '配送员'
+            AND er.del_flag = 0
+            AND e.del_flag = 0
     </select>
 </mapper>

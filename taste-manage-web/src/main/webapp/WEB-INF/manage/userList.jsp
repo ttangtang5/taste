@@ -51,7 +51,7 @@
                     </div>
                     <span class="">
 				         	<button type="submit" class="btn btn-primary">查询</button>
-                             <a class="btn btn-success" onclick="$('#addEmp').modal();">增加角色</a>
+                             <a class="btn btn-success" onclick="$('#addEmp').modal();">增加用户</a>
                             <button type="button" id="deleteAll" class="btn  btn-danger">删除</button>
                      </span>
                 </div>
@@ -112,7 +112,7 @@
                         </div>
                         <div class="form-group">
                             <label for="recipient-name" class="control-label">身份证:</label>
-                            <input type="text" class="form-control" id="idcard" name="idcard"  placeholder="身份证号码" required>
+                            <input type="text" class="form-control" id="idcard" name="idcard" maxlength="18"  placeholder="身份证号码" required>
                         </div>
                         <div class="form-group">
                             <label for="recipient-name" class="control-label">性别:</label>
@@ -171,7 +171,7 @@
                 }else{
                     layer.msg('删除成功');
                     setTimeout(function(){
-                        $('#formId').submit();
+                        location.reload();
                     },1000);
                 }
             },'json');

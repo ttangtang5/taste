@@ -27,4 +27,6 @@ public interface ContentDao extends ContentMapper{
      * @return
      */
     public List<Dishes> selectDishesByContent(String[] content);
+
+    List<Content> selectContent();
 }

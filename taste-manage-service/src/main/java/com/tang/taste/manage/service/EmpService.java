@@ -445,4 +445,12 @@ public class EmpService {
          List<Role> lists = roleDao.selectEmpAllRole(list);
          return lists;
      }
+
+    /**
+     * 查找配送员
+     * @return
+     */
+     public List<Employee> selectDistribution(){
+         return empDao.selectDistribution();
+     }
 }

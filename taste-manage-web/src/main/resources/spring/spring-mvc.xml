@@ -39,9 +39,9 @@
 	</bean>
 
 	<!--配置文件上传-->
-	<bean id="multipartResolver"
+	<!--<bean id="multipartResolver"
 		  class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<!-- set the max upload size100MB -->
+		&lt;!&ndash; set the max upload size100MB &ndash;&gt;
 		<property name="maxUploadSize">
 			<value>104857600</value>
 		</property>
@@ -51,5 +51,5 @@
 		<property name="defaultEncoding">
 			<value>utf-8</value>
 		</property>
-	</bean>
+	</bean>-->
 </beans>

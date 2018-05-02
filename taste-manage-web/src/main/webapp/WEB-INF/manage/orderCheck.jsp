@@ -46,6 +46,8 @@
                     <th data-field="phone" >联系方式</th>
                     <th data-field="createTimeStr" >时间</th>
                     <th data-field="sumNum" >订单总计</th>
+                    <th data-field="empName" >配送员</th>
+                    <th data-field="empPhone">配送员电话</th>
                     <th data-field="paymentType" data-formatter="payType">付款方式</th>
                     <th data-field="status" data-formatter="orderStatus">订单状态</th>
                     <th data-field="remark" data-formatter="opFormat">操作</th>
@@ -61,7 +63,10 @@
     //操作
     function opFormat(value,row){
         var id = row.orderId;
-        var show = '<button class="btn btn-primary" onclick="show('+id+')" >接单</button>';
+        var status = row.status;
+        if(status == 2){
+            var show = '<button class="btn btn-primary" onclick="show('+id+')" >接单</button>';
+        }
         return show;
     }
 

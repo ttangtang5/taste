@@ -65,11 +65,11 @@
                         </tr>
                     </c:forEach>
                     </tbody></table>
-                <div class="row">
+             <%--   <div class="row">
                     <div class="col-md-4 col-sm-4 items-info">  总计 ${totalPages} 条</div>
                     <div class="col-md-8 col-sm-8" id="pagination">
                     </div>
-                </div>
+                </div>--%>
             </form>
         </div>
     </div>

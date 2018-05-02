@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-md-10">
             <div class="col-md-10">
-                <input type="text" value="${order.orderId}" hidden>
+                <input type="text" id="orderId" value="${order.orderId}" hidden>
                 <h2>订单信息</h2>
                 <hr>
                 <table id="checkoutTable">
@@ -56,10 +56,10 @@
                 </table>
                 <div style="margin-top: 20px;margin-left: 20px">
                     <label>选择配送员：</label>
-                    <select></select>
+                    <select id="distribution"></select>
                 </div>
                 <div style="margin-top: 20px;margin-left: 20px">
-                    <input class="btn btn-primary" type="button" value="接单"/>
+                    <input class="btn btn-primary" type="button" id="accept" value="接单"/>
                 </div>
             </div>
         </div>
@@ -71,7 +71,19 @@
 <script  src="${ctxStatic}/layui/layui.js"></script>
 <script type="text/javascript" src="${ctxStatic}/js/selectpage.min.js" ></script>
 <script>
-
+    $(function(){
+        $.ajax({
+            type : 'post',
+            url : rootPath + '/distribution',
+            dataType : 'json',
+            success : function(msg){
+                for(var i = 0; i < msg.length; i++){
+                    var html = '<option value="'+msg[i].id+'">'+msg[i].empName+'</opting>';
+                    $("#distribution").append(html);
+                }
+            }
+        });
+    });
    function deal(){
        var total = $("#total").html();
        console.info(total);
@@ -80,6 +92,26 @@
        var back = Number(pay) - Number(total);
        $("#breakPayer").html(back);
    }
+
+    /**
+     * 接单
+     * @param id
+     */
+   $("#accept").click(function() {
+       $.ajax({
+           type : 'post',
+           url : rootPath + '/order/acceptOrder',
+           data : {
+               id : $("#orderId").val(),
+               distribution : $("#distribution").val()
+           },
+           success : function(msg){
+               if(msg == 'success'){
+                   layer.msg('接单成功');
+               }
+           }
+       });
+   });
 </script>
 </body>
 </html>

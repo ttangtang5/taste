@@ -20,4 +20,6 @@ public interface EmpDao extends EmployeeMapper{
     List<Employee> selectEmployeeList(@Param("findContent") String findContent);
 
     Set<String> selectAllpermission(@Param("empName") String empName);
+
+    List<Employee> selectDistribution();
 }

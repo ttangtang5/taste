@@ -60,14 +60,15 @@ public interface DishesDao extends DishesMapper{
       List<Dishes> selectDishes(int categoryId);
 
     /**
-     * 后台菜品列表
+     *
      * @param findsContent
-     * @param categoryId
+     * @param offset
+     * @param limit
      * @return
      */
-      List<Dishes> selectDishesMange(@Param("findsContent") String findsContent,@Param("categoryId") int categoryId,@Param("offset") int offset,@Param("limit") int limit);
+      List<Dishes> selectDishesMange(@Param("findsContent") String findsContent,@Param("offset") int offset,@Param("limit") int limit);
 
-      long countDishesMange(@Param("findsContent") String findsContent,@Param("categoryId") int categoryId);
+      long countDishesMange(@Param("findsContent") String findsContent);
 
       List<Dishes> selectHotDishes();
 }

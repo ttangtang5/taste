@@ -46,4 +46,24 @@
             #{id}
       </foreach>
   </select>
+
+    <select id="selectContent" resultType="com.tang.taste.common.entity.pojo.Content">
+        SELECT
+        c.id,
+        category_id,
+        title,
+        sub_title,
+        title_desc,
+        url,
+        c.picture,
+        d.dishes_name content,
+        created_time,
+        update_time,
+        c.del_flag
+        FROM
+        content c
+        LEFT JOIN sys_dishes d ON c.content = d.id
+        WHERE
+        c.del_flag = 0
+    </select>
 </mapper>

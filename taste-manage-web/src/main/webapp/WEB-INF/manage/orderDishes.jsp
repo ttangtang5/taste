@@ -208,7 +208,6 @@
         $.ajax({
             type : 'post',
             url : rootPath + '/order/saveOrder',
-            dataType : 'json',
             traditional : 'true',
             data : {
                 tableId : tableId,
@@ -219,7 +218,7 @@
             },
             success : function(data){
                 if(data == 'success'){
-                    window.location.href = rootPath + '/manage/toIndex';
+                    layer.msg('订单成功');
                 }
             }
         });
