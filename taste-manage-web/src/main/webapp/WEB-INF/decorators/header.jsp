@@ -33,7 +33,7 @@
                 </shiro:hasRole>
                 <li>
                     <a class="dropdown-toggle"  href="">
-                        配送管理<span class="collapsing"></span>
+                        内容管理<span class="collapsing"></span>
                     </a>
                 </li>
                 <shiro:hasRole name="admin">
@@ -44,7 +44,7 @@
                 </li>
                 </shiro:hasRole>
                 <li>
-                    <a class="dropdown-toggle"  href="http://www.sojson.com/tag/shiro">
+                    <a class="dropdown-toggle"  href="${ctx}/manage/toReport">
                         统计<span class="collapsing"></span>
                     </a>
                 </li>

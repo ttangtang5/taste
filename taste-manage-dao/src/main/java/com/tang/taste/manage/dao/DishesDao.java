@@ -65,7 +65,9 @@ public interface DishesDao extends DishesMapper{
      * @param categoryId
      * @return
      */
-      List<Dishes> selectDishesMange(@Param("findsContent") String findsContent,@Param("categoryId") int categoryId);
+      List<Dishes> selectDishesMange(@Param("findsContent") String findsContent,@Param("categoryId") int categoryId,@Param("offset") int offset,@Param("limit") int limit);
+
+      long countDishesMange(@Param("findsContent") String findsContent,@Param("categoryId") int categoryId);
 
       List<Dishes> selectHotDishes();
 }

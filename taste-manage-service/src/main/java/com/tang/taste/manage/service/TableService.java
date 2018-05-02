@@ -39,7 +39,7 @@ public class TableService {
      * @param  findContent
      * @return
      */
-    public List<Tables> selectTable(String findContent){
+    public List<Tables> selectTable(String findContent,int page){
         TablesExample tablesExample = new TablesExample();
         TablesExample.Criteria criteria = tablesExample.createCriteria();
         criteria.andDelFlagEqualTo(0);

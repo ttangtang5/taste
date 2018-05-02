@@ -172,4 +172,18 @@ public class OrderController {
         booking.setDelFlag(0);
         return orderService.updateBooking(booking);
     }
+
+    /**
+     * 获取统计数据
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("getReport")
+    @ResponseBody
+    public String getReport() throws Exception{
+        Long[] longs = new Long[2];
+        longs[0] = orderService.countOrderMoney();
+        longs[1] = orderService.countTableOrderMoney();
+        return JSON.toJSONString(longs);
+    }
 }

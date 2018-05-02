@@ -8,7 +8,9 @@ import com.tang.taste.manage.service.EmpService;
 import com.tang.taste.manage.service.TableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -146,27 +148,37 @@ public class IndexController {
      * 去菜品列表
      * @param findContent
      * @param categoryId
+     * @param page
      * @param request
+     * @param model
      * @return
      * @throws Exception
      */
     @RequestMapping("toDishesManage")
-    public String toDishesManage(String findContent,Integer categoryId,HttpServletRequest request) throws Exception{
-        List<Dishes> lists = dishesService.selectDishesMange(findContent,1);
-        request.setAttribute("dishesList",lists);
+    public String toDishesManage(String findContent, Integer categoryId, @RequestParam(defaultValue = "1") Integer page,
+                                 HttpServletRequest request,Model model) throws Exception{
+        if(findContent != null && findContent != ""){
+            findContent = new String(findContent.getBytes("iso-8859-1"),"utf-8");
+        }
+        List<Dishes> lists = dishesService.selectDishesMange("",categoryId,page);
+        long count = dishesService.countDishesMange(findContent, categoryId);
+        model.addAttribute("totalPages",count);
+        model.addAttribute("dishesList",lists);
+        model.addAttribute("page",page);
         return "manage/dishesList";
     }
 
-    /**
+     /**
      * 前往桌子列表
      * @param findContent
+     * @param page
      * @param request
      * @return
      * @throws Exception
      */
     @RequestMapping("toTableManage")
-    public String toTableManage(String findContent,HttpServletRequest request) throws Exception{
-        List<Tables> lists = tableService.selectTable(findContent);
+    public String toTableManage(String findContent, @RequestParam(defaultValue = "1") Integer page,HttpServletRequest request) throws Exception{
+        List<Tables> lists = tableService.selectTable(findContent,page);
         request.setAttribute("tablesList",lists);
         return "manage/tableList";
     }
@@ -179,6 +191,26 @@ public class IndexController {
     @RequestMapping("toBooking")
     public String toBooking() throws Exception{
         return "manage/bookingOrder";
+    }
+
+    /**
+     * 前往统计
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("toReport")
+    public String toReport() throws Exception{
+        return "manage/report";
+    }
+
+    /**
+     * 前往内容管理
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("toContent")
+    public String toContent() throws Exception{
+        return "manage/content";
     }
 
 }

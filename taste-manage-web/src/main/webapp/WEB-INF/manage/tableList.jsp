@@ -7,6 +7,7 @@
     <meta name="decorator" content="default">
     <link href="${ctxStatic}/js/common/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="${ctxStatic}/css/common/base.css" rel="stylesheet"/>
+    <link href="${ctxStatic}/layui/css/layui.css" rel="stylesheet" type="text/css">
 </head>
 <body data-target="#one" data-spy="scroll">
 <div class="container" style="padding-bottom: 15px;min-height: 300px; margin-top: 40px;">
@@ -22,11 +23,6 @@
                 <li class="active">
                     <a href="javascript:;">
                         <i class="glyphicon glyphicon-chevron-right"></i>餐桌列表
-                    </a>
-                </li>
-                <li class="dropdown">
-                    <a href="${ctx}/manage/toStuffManage">
-                        <i class="glyphicon glyphicon-chevron-right"></i>物品列表
                     </a>
                 </li>
             </ul>
@@ -69,6 +65,11 @@
                         </tr>
                     </c:forEach>
                     </tbody></table>
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 items-info">  总计 ${totalPages} 条</div>
+                    <div class="col-md-8 col-sm-8" id="pagination">
+                    </div>
+                </div>
             </form>
         </div>
     </div>
@@ -205,6 +206,33 @@
             },1000);
         },'json');
     }
+    var page = '${page}';
+
+    layui.use(['laypage', 'layer'], function(){
+        var laypage = layui.laypage
+            ,layer = layui.layer;
+
+        //开启HASH
+        laypage.render({
+            elem: 'pagination'
+            ,count: '${totalPages}'
+            ,theme: '#1E9FFF'
+            ,limit: '10'
+            ,curr: page
+            ,hash: 'fenye'
+            ,jump: function(obj, first){
+                //obj包含了当前分页的所有参数，比如：
+                page = obj.curr;
+                //首次不执行
+                if(!first){
+                    //do something
+                    var url = ctx+"/manage/toTableManage?page="+obj.curr+"&findContent=" + encodeURIComponent(document.getElementById("findContent").value);
+                    window.location.href = url;
+                }
+            }
+        });
+
+    });
 </script>
 </body>
 </html>

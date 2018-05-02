@@ -7,6 +7,7 @@ import com.tang.taste.common.entity.pojo.Dishes;
 import com.tang.taste.common.entity.pojo.DishesExample;
 import com.tang.taste.manage.dao.DishesDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -24,7 +25,8 @@ public class DishesService {
 
     @Autowired
     private DishesDao dishesDao;
-
+    @Value("${PAGE_SIZE}")
+    private int pageSize;
     /**
      * 通过分类id查询不分页
      * @param categoryId
@@ -40,8 +42,18 @@ public class DishesService {
      * @param categoryId
      * @return
      */
-    public List<Dishes> selectDishesMange(String findsContent,int categoryId){
-        return dishesDao.selectDishesMange(findsContent, categoryId);
+    public List<Dishes> selectDishesMange(String findsContent,int categoryId,int page){
+        return dishesDao.selectDishesMange(findsContent, categoryId,pageSize*(page-1),pageSize);
+    }
+
+    /**
+     * 统计数量
+     * @param findsContent
+     * @param categoryId
+     * @return
+     */
+    public long countDishesMange(String findsContent,int categoryId){
+        return dishesDao.countDishesMange(findsContent, categoryId);
     }
 
     /**
@@ -98,11 +110,34 @@ public class DishesService {
             dishes.setDelFlag(1);
             dishesDao.updateByExampleSelective(dishes, dishesExample);
             map.put("status", "success");
-            map.put("message", "删除成功！");
+            map.put("message", "下架成功！");
             return JSON.toJSONString(map);
         }
         map.put("status", "error");
-        map.put("message", "删除失败！");
+        map.put("message", "下架失败！");
+        return JSON.toJSONString(map);
+    }
+
+    public String putawayDishes(String ids){
+        Map map =Maps.newHashMap();
+        if(ids != null && ids != ""){
+            DishesExample dishesExample = new DishesExample();
+            DishesExample.Criteria criteria = dishesExample.createCriteria();
+            String[] id = ids.split(",");
+            List<Integer> list = Lists.newArrayList();
+            for (String str : id) {
+                list.add(Integer.valueOf(str));
+            }
+            criteria.andIdIn(list);
+            Dishes dishes = new Dishes();
+            dishes.setDelFlag(0);
+            dishesDao.updateByExampleSelective(dishes, dishesExample);
+            map.put("status", "success");
+            map.put("message", "上架成功！");
+            return JSON.toJSONString(map);
+        }
+        map.put("status", "error");
+        map.put("message", "上架失败！");
         return JSON.toJSONString(map);
     }
 }

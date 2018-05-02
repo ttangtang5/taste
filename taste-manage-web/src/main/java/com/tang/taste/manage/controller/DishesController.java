@@ -106,4 +106,16 @@ public class DishesController {
     public String delDishes(String ids) throws Exception{
         return dishesService.delDishes(ids);
     }
+
+    /**
+     * 上架
+     * @param ids
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("putawayDishes")
+    @ResponseBody
+    public String putawayDishes(String ids) throws Exception{
+        return dishesService.putawayDishes(ids);
+    }
 }

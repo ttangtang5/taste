@@ -9,6 +9,7 @@ import com.tang.taste.common.entity.pojo.*;
 import com.tang.taste.common.util.DateUtil;
 import com.tang.taste.manage.dao.BookingDao;
 import com.tang.taste.manage.dao.TableDao;
+import com.tang.taste.manage.dao.TableOrderDao;
 import com.tang.taste.manage.dao.TableOrderDetailDao;
 import com.tang.taste.portal.dao.OrderDao;
 import com.tang.taste.portal.dao.OrderDetailDao;
@@ -28,7 +29,7 @@ import java.util.Map;
 public class OrderService {
 
     @Autowired
-    private TableOrderMapper tableOrderMapper;
+    private TableOrderDao tableOrderMapper;
     @Autowired
     private TableOrderDetailDao tableOrderDetailDao;
     @Autowired
@@ -162,5 +163,25 @@ public class OrderService {
         map.put("status", "500");
         map.put("message", "安排失败！");
         return JSON.toJSONString(map);
+    }
+
+    /**
+     * 统计线下销售总额
+     * @return
+     */
+    public long countTableOrderMoney(){
+        Long count = tableOrderMapper.sumTableOrder();
+        if(count == null){
+            return 0L;
+        }
+        return tableOrderMapper.sumTableOrder();
+    }
+
+    /**
+     * 线上 销售总额
+     * @return
+     */
+    public long countOrderMoney(){
+        return tableOrderMapper.sumOrder();
     }
 }
