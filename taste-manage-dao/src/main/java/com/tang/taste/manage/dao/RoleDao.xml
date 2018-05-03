@@ -7,8 +7,8 @@
         SELECT r.id,role_name, remarks
         FROM s sys_role r
           WHERE
-            ( role_name LIKE '%${findContent}%'
-            OR remarks LIKE '%${findContent}%' )
+            ( role_name LIKE CONCAT('%',#{findContent},'%')
+            OR remarks LIKE CONCAT('%',#{findContent},'%')
             AND r.del_flag = 0
     </select>
 
@@ -67,7 +67,7 @@
         FROM
         sys_role r
         WHERE
-        r.role_name like '%${findContent}%'
+        r.role_name like CONCAT('%',#{findContent},'%')
         AND r.del_flag = 0
     </select>
 </mapper>

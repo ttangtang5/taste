@@ -3420,7 +3420,7 @@
         },
 
         /*
-         * Filter the plugin by filterName
+         * filter the plugin by filterName
          */
         filter: function(filterName, callback) {
             var t = CubePortfolio.Private.checkInstance.call(this, 'filter'),

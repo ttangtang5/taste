@@ -1,4 +1,4 @@
-package com.tang.taste.LoginFilter;
+package com.tang.taste.filter;
 
 import com.tang.taste.common.entity.pojo.User;
 import com.tang.taste.common.util.SessionUtils;
@@ -38,7 +38,7 @@ public class LoginHandlerIntercepter implements HandlerInterceptor {
             if(user == null){
                 //System.out.println("AuthorizationInterceptor拦截请求");
                 //request.setAttribute("message", "请先登录管理员后再访问网站");
-                response.sendRedirect("toLogin");
+                response.sendRedirect("/toLogin");
             }else{
                 //用户登陆过，验证通过，放行
                 //System.out.println("AuthorizationInterceptor放行请求");

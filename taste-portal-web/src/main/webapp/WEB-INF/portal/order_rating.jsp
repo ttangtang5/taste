@@ -51,7 +51,7 @@
                     <h2>热销产品</h2>
                     <c:forEach var="hot" items="${hotList}">
                         <div class="item">
-                            <a href="javascript:;"><img src="${ctxStatic}${hot.picture}" alt="Some Shoes in Animal with Cut Out"></a>
+                            <a href="javascript:;"><img src="${hot.picture}" alt="Some Shoes in Animal with Cut Out"></a>
                             <h3><a href="${ctx}/search?word=${hot.dishesName}">${hot.dishesName}</a></h3>
                             <div class="price">￥${hot.dishesPrice}</div>
                         </div>

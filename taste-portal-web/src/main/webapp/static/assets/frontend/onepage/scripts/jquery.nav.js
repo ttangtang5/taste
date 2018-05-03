@@ -54,7 +54,7 @@
 
 			this.$nav = this.$elem.find(this.config.navItems);
 
-			//Filter any links out of the nav
+			//filter any links out of the nav
 			if(this.config.filter !== '') {
 				this.$nav = this.$nav.filter(this.config.filter);
 			}

@@ -1,12 +1,14 @@
 package com.tang.taste.manage.service;
 
 import com.alibaba.fastjson.JSON;
+import com.aliyuncs.exceptions.ClientException;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.tang.taste.common.dao.BookingMapper;
 import com.tang.taste.common.dao.TableOrderMapper;
 import com.tang.taste.common.entity.pojo.*;
 import com.tang.taste.common.util.DateUtil;
+import com.tang.taste.common.util.SmsUtils;
 import com.tang.taste.manage.dao.BookingDao;
 import com.tang.taste.manage.dao.TableDao;
 import com.tang.taste.manage.dao.TableOrderDao;
@@ -160,6 +162,13 @@ public class OrderService {
         if(i == 1){
             map.put("status", "200");
             map.put("message", "安排成功！");
+            //发短信通知
+            Booking booking1 = bookingMapper.selectByPrimaryKey(booking.getId());
+            try {
+                SmsUtils.sendSmsInform(booking1.getPhone(), "SMS_133966890", booking1);
+            } catch (ClientException e) {
+                e.printStackTrace();
+            }
             return JSON.toJSONString(map);
         }
         map.put("status", "500");

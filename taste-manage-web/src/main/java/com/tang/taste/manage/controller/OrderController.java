@@ -5,6 +5,8 @@ import com.google.common.collect.Lists;
 import com.tang.taste.common.entity.pojo.*;
 import com.tang.taste.common.util.DateUtil;
 import com.tang.taste.common.util.DateUtils;
+import com.tang.taste.common.util.SmsUtils;
+import com.tang.taste.manage.service.EmpService;
 import com.tang.taste.manage.service.OrderService;
 import com.tang.taste.manage.service.TableService;
 import com.tang.taste.portal.dao.OrderDao;
@@ -35,6 +37,8 @@ public class OrderController {
     private OrderService orderService;
     @Autowired
     private TableService tableService;
+    @Autowired
+    private EmpService empService;
     /**
      * 保存订单
      * @return
@@ -233,6 +237,12 @@ public class OrderController {
     @ResponseBody
     public String acceptOrder(Integer id,int distribution) throws Exception{
         orderService.updateOrder(id,distribution);
+        //发送短信
+        Employee employee = empService.selectEmployeeById(id);
+        Order order = orderService.selectOrderByOrderId(id);
+        order.setEmpName(employee.getEmpName());
+        order.setEmpPhone(employee.getPhone());
+        SmsUtils.sendSmsOrder(order.getPhone(), "SMS_133978296", order);
         return "success";
     }
 }

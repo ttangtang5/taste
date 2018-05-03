@@ -453,4 +453,13 @@ public class EmpService {
      public List<Employee> selectDistribution(){
          return empDao.selectDistribution();
      }
+
+    /**
+     * 查找员工信息
+     * @param id
+     * @return
+     */
+     public Employee selectEmployeeById(int id){
+         return empDao.selectByPrimaryKey(id);
+     }
 }

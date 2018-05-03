@@ -1246,7 +1246,7 @@ var out = {
     },
 
     /**
-     * Filter nested files/folders with the specified function.
+     * filter nested files/folders with the specified function.
      * @param {Function} search the predicate to use :
      * function (relativePath, file) {...}
      * It takes 2 arguments : the relative path and the file.

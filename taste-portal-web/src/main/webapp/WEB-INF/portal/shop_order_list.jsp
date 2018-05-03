@@ -52,7 +52,7 @@
                             <h4 class="modal-title" id="addroleLabel">添加评价</h4>
                         </div>
                         <div class="modal-body">
-                            <form id="boxRateForm" action="${ctx}/order/orderRate" enctype="multipart/form-data">
+                            <form id="boxRateForm" action="${ctx}/order/orderRate" method="post">
                                 <input type="text" id="orderId" name="orderId" hidden/>
                                 <div class="form-group">
                                     <label for="recipient-name" class="control-label">评价内容:</label>

@@ -17603,7 +17603,7 @@ fabric.Image.filters = fabric.Image.filters || { };
 fabric.Image.filters.BaseFilter = fabric.util.createClass(/** @lends fabric.Image.filters.BaseFilter.prototype */ {
 
   /**
-   * Filter type
+   * filter type
    * @param {String} type
    * @default
    */
@@ -17672,7 +17672,7 @@ fabric.Image.filters.BaseFilter = fabric.util.createClass(/** @lends fabric.Imag
   fabric.Image.filters.Brightness = fabric.util.createClass(fabric.Image.filters.BaseFilter, /** @lends fabric.Image.filters.Brightness.prototype */ {
 
     /**
-     * Filter type
+     * filter type
      * @param {String} type
      * @default
      */
@@ -17783,7 +17783,7 @@ fabric.Image.filters.BaseFilter = fabric.util.createClass(/** @lends fabric.Imag
   fabric.Image.filters.Convolute = fabric.util.createClass(fabric.Image.filters.BaseFilter, /** @lends fabric.Image.filters.Convolute.prototype */ {
 
     /**
-     * Filter type
+     * filter type
      * @param {String} type
      * @default
      */
@@ -17794,7 +17794,7 @@ fabric.Image.filters.BaseFilter = fabric.util.createClass(/** @lends fabric.Imag
      * @memberOf fabric.Image.filters.Convolute.prototype
      * @param {Object} [options] Options object
      * @param {Boolean} [options.opaque=false] Opaque value (true/false)
-     * @param {Array} [options.matrix] Filter matrix
+     * @param {Array} [options.matrix] filter matrix
      */
     initialize: function(options) {
       options = options || { };
@@ -17931,7 +17931,7 @@ fabric.Image.filters.BaseFilter = fabric.util.createClass(/** @lends fabric.Imag
   fabric.Image.filters.GradientTransparency = fabric.util.createClass(fabric.Image.filters.BaseFilter, /** @lends fabric.Image.filters.GradientTransparency.prototype */ {
 
     /**
-     * Filter type
+     * filter type
      * @param {String} type
      * @default
      */
@@ -18010,7 +18010,7 @@ fabric.Image.filters.BaseFilter = fabric.util.createClass(/** @lends fabric.Imag
   fabric.Image.filters.Grayscale = fabric.util.createClass(fabric.Image.filters.BaseFilter, /** @lends fabric.Image.filters.Grayscale.prototype */ {
 
     /**
-     * Filter type
+     * filter type
      * @param {String} type
      * @default
      */
@@ -18073,7 +18073,7 @@ fabric.Image.filters.BaseFilter = fabric.util.createClass(/** @lends fabric.Imag
   fabric.Image.filters.Invert = fabric.util.createClass(fabric.Image.filters.BaseFilter, /** @lends fabric.Image.filters.Invert.prototype */ {
 
     /**
-     * Filter type
+     * filter type
      * @param {String} type
      * @default
      */
@@ -18130,7 +18130,7 @@ fabric.Image.filters.BaseFilter = fabric.util.createClass(/** @lends fabric.Imag
   fabric.Image.filters.Mask = fabric.util.createClass(fabric.Image.filters.BaseFilter, /** @lends fabric.Image.filters.Mask.prototype */ {
 
     /**
-     * Filter type
+     * filter type
      * @param {String} type
      * @default
      */
@@ -18243,7 +18243,7 @@ fabric.Image.filters.BaseFilter = fabric.util.createClass(/** @lends fabric.Imag
   fabric.Image.filters.Noise = fabric.util.createClass(fabric.Image.filters.BaseFilter, /** @lends fabric.Image.filters.Noise.prototype */ {
 
     /**
-     * Filter type
+     * filter type
      * @param {String} type
      * @default
      */
@@ -18330,7 +18330,7 @@ fabric.Image.filters.BaseFilter = fabric.util.createClass(/** @lends fabric.Imag
   fabric.Image.filters.Pixelate = fabric.util.createClass(fabric.Image.filters.BaseFilter, /** @lends fabric.Image.filters.Pixelate.prototype */ {
 
     /**
-     * Filter type
+     * filter type
      * @param {String} type
      * @default
      */
@@ -18443,7 +18443,7 @@ fabric.Image.filters.BaseFilter = fabric.util.createClass(/** @lends fabric.Imag
   fabric.Image.filters.RemoveWhite = fabric.util.createClass(fabric.Image.filters.BaseFilter, /** @lends fabric.Image.filters.RemoveWhite.prototype */ {
 
     /**
-     * Filter type
+     * filter type
      * @param {String} type
      * @default
      */
@@ -18540,7 +18540,7 @@ fabric.Image.filters.BaseFilter = fabric.util.createClass(/** @lends fabric.Imag
   fabric.Image.filters.Sepia = fabric.util.createClass(fabric.Image.filters.BaseFilter, /** @lends fabric.Image.filters.Sepia.prototype */ {
 
     /**
-     * Filter type
+     * filter type
      * @param {String} type
      * @default
      */
@@ -18600,7 +18600,7 @@ fabric.Image.filters.BaseFilter = fabric.util.createClass(/** @lends fabric.Imag
   fabric.Image.filters.Sepia2 = fabric.util.createClass(fabric.Image.filters.BaseFilter, /** @lends fabric.Image.filters.Sepia2.prototype */ {
 
     /**
-     * Filter type
+     * filter type
      * @param {String} type
      * @default
      */
@@ -18675,7 +18675,7 @@ fabric.Image.filters.BaseFilter = fabric.util.createClass(/** @lends fabric.Imag
   fabric.Image.filters.Tint = fabric.util.createClass(fabric.Image.filters.BaseFilter, /** @lends fabric.Image.filters.Tint.prototype */ {
 
     /**
-     * Filter type
+     * filter type
      * @param {String} type
      * @default
      */
@@ -18786,7 +18786,7 @@ fabric.Image.filters.BaseFilter = fabric.util.createClass(/** @lends fabric.Imag
   fabric.Image.filters.Multiply = fabric.util.createClass(fabric.Image.filters.BaseFilter, /** @lends fabric.Image.filters.Multiply.prototype */ {
 
     /**
-     * Filter type
+     * filter type
      * @param {String} type
      * @default
      */
@@ -19019,7 +19019,7 @@ fabric.Image.filters.BaseFilter = fabric.util.createClass(/** @lends fabric.Imag
   fabric.Image.filters.Resize = fabric.util.createClass(fabric.Image.filters.BaseFilter, /** @lends fabric.Image.filters.Resize.prototype */ {
 
     /**
-     * Filter type
+     * filter type
      * @param {String} type
      * @default
      */

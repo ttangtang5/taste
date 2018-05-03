@@ -9748,7 +9748,7 @@ function parse_workbook(blob, options) {
 				case 'Qsi': case 'Qsif': case 'Qsir': case 'QsiSXTag': break;
 				case 'TxtQry': break;
 
-				/* Filter */
+				/* filter */
 				case 'FilterMode': break;
 				case 'AutoFilter': case 'AutoFilterInfo': break;
 				case 'AutoFilter12': break;

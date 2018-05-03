@@ -113,7 +113,7 @@
         WHERE
         d.dishes_type = t.type_id
         <if test=" findsContent != null and findsContent != ''">
-            AND d.dishes_name like '%${findsContent}%'
+            AND d.dishes_name like CONCAT('%',#{findContent},'%')
         </if>
         limit #{offset},#{limit}
     </select>
@@ -127,7 +127,7 @@
         WHERE
           d.dishes_type = t.type_id
         <if test=" findsContent != null and findsContent != ''">
-            AND d.dishes_name like '%${findsContent}%'
+            AND d.dishes_name like CONCAT('%',#{findContent},'%')
         </if>
     </select>
 

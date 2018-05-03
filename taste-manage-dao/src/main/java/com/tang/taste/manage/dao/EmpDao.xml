@@ -6,8 +6,8 @@
         SELECT id, emp_name, PASSWORD, idcard, sax, phone, address, entry_time, leave_time, del_flag
         FROM sys_employee
           WHERE
-            emp_name LIKE '%${findContent}%'
-            OR phone LIKE '%${findContent}%'
+            emp_name CONCAT('%',#{findContent},'%')
+            OR phone CONCAT('%',#{findContent},'%')
             AND del_flag = 0
     </select>
 

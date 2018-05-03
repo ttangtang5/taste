@@ -25639,7 +25639,7 @@ var LogScale = Scale.extend({
         var interval = quantity(span);
         var err = approxTickNum / span * interval;
 
-        // Filter ticks to get closer to the desired count.
+        // filter ticks to get closer to the desired count.
         if (err <= 0.5) {
             interval *= 10;
         }
@@ -41615,7 +41615,7 @@ graphProto.breadthFirstTraverse = function (
 
 // };
 
-// Filter update
+// filter update
 graphProto.update = function () {
     var data = this.data;
     var edgeData = this.edgeData;
@@ -56673,7 +56673,7 @@ var legendFilter = function (ecModel) {
 
 // Do not contain scrollable legend, for sake of file size.
 
-// Series Filter
+// Series filter
 registerProcessor(legendFilter);
 
 ComponentModel.registerSubTypeDefaulter('legend', function () {
@@ -65821,7 +65821,7 @@ var VisualMapModel = extendComponentModel({
                         || (isCategory ? itemSize[0] : [itemSize[0], itemSize[0]]);
                 }
 
-                // Filter square and none.
+                // filter square and none.
                 visuals.symbol = mapVisual$2(visuals.symbol, function (symbol) {
                     return (symbol === 'none' || symbol === 'square') ? 'roundRect' : symbol;
                 });
@@ -68228,7 +68228,7 @@ function getAxisInfo$1(item, data, coordSys, seriesModel) {
 }
 
 /**
- * Filter data which is out of coordinateSystem range
+ * filter data which is out of coordinateSystem range
  * [dataFilter description]
  * @param  {module:echarts/coord/*} [coordSys]
  * @param  {Object} item

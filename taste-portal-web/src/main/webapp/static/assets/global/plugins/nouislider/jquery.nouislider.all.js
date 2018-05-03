@@ -1052,7 +1052,7 @@ var
 
 	function testRange ( parsed, entry ) {
 
-		// Filter incorrect input.
+		// filter incorrect input.
 		if ( typeof entry !== 'object' || $.isArray(entry) ) {
 			throw new Error("noUiSlider: 'range' is not an object.");
 		}
@@ -1305,7 +1305,7 @@ var
 		// attempting to slide. The tap event also depends on this.
 		e.preventDefault();
 
-		// Filter the event to register the type, which can be
+		// filter the event to register the type, which can be
 		// touch, mouse or pointer. Offset changes need to be
 		// made on an event specific basis.
 		var  touch = e.type.indexOf('touch') === 0

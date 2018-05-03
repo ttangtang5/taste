@@ -36,12 +36,17 @@
 	<!-- 配置资源映射 -->
 	<mvc:resources location="/static/" mapping="/static/**"/>
 
-	<!--登录拦截器-->
+	<!--拦截器-->
 	<mvc:interceptors>
 		<!-- 配置登陆拦截器 -->
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
-			<bean class="com.tang.taste.LoginFilter.LoginHandlerIntercepter"></bean>
+			<bean class="com.tang.taste.filter.LoginHandlerIntercepter"></bean>
+		</mvc:interceptor>
+		<!--XSS拦截器-->
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<bean class="com.tang.taste.filter.XSSCheckFilter"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
 

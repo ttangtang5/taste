@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -240,7 +241,8 @@ public class OrderController {
      * @throws Exception
      */
     @RequestMapping("orderRate")
-    public String orderRate(int orderId,Integer rating,String content,HttpServletRequest request) throws Exception{
+    public String orderRate(int orderId, Integer rating,String content, HttpServletRequest request) throws Exception{
+        content = (String) request.getAttribute("content");
         String content2 = new String(content.getBytes("iso-8859-1"), "utf-8");
         List<String> url = (List) SessionUtils.getAttr(request, "url");
         StringBuffer sb = new StringBuffer();

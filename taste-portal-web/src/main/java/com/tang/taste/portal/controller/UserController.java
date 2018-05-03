@@ -191,8 +191,6 @@ public class UserController {
                 //验证码模板
                 template = "SMS_134150094";
                 break;
-            case "4":
-                break;
             default:
                 //验证码模板
                 template = "SMS_134150094";
@@ -203,11 +201,7 @@ public class UserController {
         SessionUtils.setValidateCode(request,String.valueOf(numCode));
         HttpSession session = request.getSession(true);
         try {
-            if("4".equals(type)){
-                boolean flag = SmsUtils.sendCaptcha(phoneNum,String.valueOf(numCode),template,2,booking);
-            }else{
-                boolean flag = SmsUtils.sendCaptcha(phoneNum,String.valueOf(numCode),template,1,null);
-            }
+            boolean flag = SmsUtils.sendCaptcha(phoneNum,String.valueOf(numCode),template,1,null,null);
             //TimerTask实现5分钟后从session中删除checkCode
             final Timer timer = new Timer();
             timer.schedule(new TimerTask() {
