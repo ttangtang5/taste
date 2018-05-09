@@ -50,7 +50,8 @@ public interface OrderDao extends OrderMapper {
             " o.receiver, " +
             " o.address, " +
             " o.phone, " +
-            " o.sum_num, " +
+            " o.sum_num," +
+            " o.num," +
             " o.emp_id, " +
             " o.create_time, " +
             " o.payment_type, " +

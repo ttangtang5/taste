@@ -73,7 +73,6 @@
     <script type="text/javascript">
         jQuery(document).ready(function() {
             Layout.init();    
-            Layout.initTwitter();
         });
     </script>
     <!-- END PAGE LEVEL JAVASCRIPTS -->

@@ -28,7 +28,6 @@ import java.util.List;
 @RequestMapping("/")
 @Controller
 public class UserController {
-
     @Autowired
     private EmpService empService;
 

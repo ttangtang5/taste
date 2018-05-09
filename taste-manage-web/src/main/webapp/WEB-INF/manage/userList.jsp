@@ -31,7 +31,7 @@
                 </li>
                 <li class="dropdown">
                     <a href="${ctx}/manage/toMenuList">
-                        <i class="glyphicon glyphicon-chevron-right"></i>权限列表
+                        <i class="glyphicon glyphicon-chevron-right"></i>菜单列表
                     </a>
                 </li>
                 <li class="  dropdown">
@@ -47,7 +47,7 @@
             <form method="post" action="" id="formId" class="form-inline">
                 <div clss="well">
                     <div class="form-group">
-                        <input type="text" class="form-control" style="width: 300px;" value="" name="findContent" id="findContent" placeholder="输入昵称 / 帐号">
+                        <input type="text" class="form-control" style="width: 300px;" value="" name="findContent" id="findContent" placeholder="输入姓名  / 手机号">
                     </div>
                     <span class="">
 				         	<button type="submit" class="btn btn-primary">查询</button>

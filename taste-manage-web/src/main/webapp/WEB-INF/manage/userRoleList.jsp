@@ -31,7 +31,7 @@
                 </li>
                 <li class="dropdown">
                     <a href="${ctx}/manage/toMenuList">
-                        <i class="glyphicon glyphicon-chevron-right"></i>权限列表
+                        <i class="glyphicon glyphicon-chevron-right"></i>菜单列表
                     </a>
                 </li>
                 <li class="  dropdown">
@@ -48,7 +48,7 @@
                 <div clss="well">
                     <div class="form-group">
                         <input type="text" class="form-control" style="width: 300px;" value=""
-                               name="findContent" id="findContent" placeholder="输入角色类型 / 角色名称">
+                               name="findContent" id="findContent" placeholder="输入角色名称 / 角色标识">
                     </div>
                     <span class="">
                         <button type="submit" class="btn btn-primary">查询</button>
@@ -61,7 +61,7 @@
                     <tr>
                         <th><input type="checkbox" id="checkAll"/></th>
                         <th>角色名称</th>
-                        <th>角色描述</th>
+                        <th>角色标识</th>
                         <th>操作</th>
                     </tr>
                     <c:forEach var="role" items="${RoleList}">
@@ -93,8 +93,8 @@
                             <input type="text" class="form-control" name="roleName" id="name" placeholder="请输入角色名称" required="required"/>
                         </div>
                         <div class="form-group">
-                            <label for="recipient-name" class="control-label">角色描述:</label>
-                            <input type="text" class="form-control" id="type" name="remarks"  placeholder="请输入角色描述" required="required">
+                            <label for="recipient-name" class="control-label">角色标识:</label>
+                            <input type="text" class="form-control" id="type" name="remarks"  placeholder="请输入角色标识" required="required">
                         </div>
                     </form>
                 </div>

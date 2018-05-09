@@ -11,6 +11,7 @@ import com.tang.taste.portal.service.DishesService;
 import com.tang.taste.portal.service.OrderService;
 import com.tang.taste.portal.service.ShoppingCartService;
 import com.tang.taste.portal.service.UserService;
+import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -61,7 +62,12 @@ public class OrderController {
     public String getOrderList(HttpServletRequest request) throws Exception{
         User user = SessionUtils.getUser(request);
         List<Order> list = orderService.selectOrderList(user.getId());
-        return JSON.toJSONString(list);
+        List<Order> lists = Lists.newArrayList();
+        for (Order order : list) {
+            order.setCreateTimeStr(DateUtil.getDateTime("yyyy-MM-dd HH:mm:ss",order.getCreateTime()));
+            lists.add(order);
+        }
+        return JSON.toJSONString(lists);
     }
 
     /**
@@ -74,6 +80,7 @@ public class OrderController {
     @ResponseBody
     public String getOrder(int orderId)throws Exception{
         Order order = orderService.selectOrderById(orderId);
+        order.setCreateTimeStr(DateUtil.getDateTime("yyyy-MM-dd HH:mm:ss",order.getCreateTime()));
         return JSON.toJSONString(order);
     }
 
@@ -113,7 +120,7 @@ public class OrderController {
      * @throws Exception
      */
     @RequestMapping("saveOrder")
-    public String createOrder(HttpServletRequest request,int addressee,int num,String remarks) throws Exception{
+    public String createOrder(int addressee,int num,String remarks,HttpServletRequest request,HttpServletResponse response) throws Exception{
         //保存订单
         User user = SessionUtils.getUser(request);
         List<OrderDetail> rows = Lists.newArrayList();
@@ -153,6 +160,7 @@ public class OrderController {
                         rows.add(orderDetail);
                     }
                 }
+                CookieUtils.deleteCookie(request,response,String.valueOf(dishes.get(i).getId()));
             }
         }
         double total = 0;
@@ -191,14 +199,13 @@ public class OrderController {
 
         String price = request.getParameter("price"); //表单提交的价格
         String type = request.getParameter("type"); //支付类型  1：支付宝 2：QQ钱包 3：微信
-        String pay_id = request.getParameter("pay_id"); //支付人的唯一标识
+        String pay_id = request.getParameter("payId"); //支付人的唯一标识
         String param = request.getParameter("param"); //自定义一些参数 支付后返回
-
-        CookieUtils.setCookie(request,response,"pay_id",pay_id,60*60);
 
         String notify_url = notifyUrl;//通知地址
         String return_url = returnUrl + pay_id;//支付后同步跳转地址
 
+        System.out.println(return_url);
         if(price == null){
             price="1";
         }
@@ -226,7 +233,7 @@ public class OrderController {
      */
     @RequestMapping("paySuccess")
     public String paySuccess(HttpServletRequest request) throws  Exception{
-        String pay_id =  CookieUtils.getCookieValue(request, "pay_id");
+        String pay_id = (String) request.getAttribute("pay_id");
         orderService.updateOrderPayStatus(Integer.valueOf(pay_id));
         return "redirect:/toShopOrderList";
     }
@@ -300,20 +307,23 @@ public class OrderController {
      * @throws Exception
      */
     @RequestMapping("booking")
-    @ResponseBody
-    public String bookingOrder(String phone,int num,String time,String time2,HttpServletRequest request) throws Exception{
+    public String bookingOrder(String phone,String captcha,int num,String time,String time2,HttpServletRequest request) throws Exception{
         Booking booking = new Booking();
         User user = SessionUtils.getUser(request);
         if(user == null){
             return "500";
         }
-        booking.setUserId(user.getId());
-        booking.setPhone(phone);
-        booking.setNum(num);
-        String timeStr = time + " " + time2;
-        Date date = DateUtil.convertStringToDate("yyyy-MM-dd HH:mm:ss",timeStr);
-        booking.setTime(date);
-        return orderService.addBooking(booking);
+        String validateCode = SessionUtils.getValidateCode(request);
+        if(validateCode != null && validateCode.equals(captcha)){
+            booking.setUserId(user.getId());
+            booking.setPhone(phone);
+            booking.setNum(num);
+            String timeStr = time + " " + time2;
+            Date date = DateUtil.convertStringToDate("yyyy-MM-dd HH:mm:ss",timeStr);
+            booking.setTime(date);
+            return orderService.addBooking(booking);
+        }
+        return "/toBooking";
     }
 
     /**

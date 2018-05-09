@@ -33,7 +33,7 @@
 
                 <li class="dropdown">
                     <a href="${ctx}/manage/toMenuList">
-                        <i class="glyphicon glyphicon-chevron-right"></i>权限列表
+                        <i class="glyphicon glyphicon-chevron-right"></i>菜单列表
                     </a>
                 </li>
 

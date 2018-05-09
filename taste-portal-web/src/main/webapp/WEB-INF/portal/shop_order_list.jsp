@@ -130,7 +130,7 @@
                                                                     <th data-field="orderId" >订单编号</th>
                                                                     <th data-field="receiver" >收件人</th>
                                                                     <th data-field="phone" >联系方式</th>
-                                                                    <th data-field="createTime" >时间</th>
+                                                                    <th data-field="createTimeStr" >时间</th>
                                                                     <th data-field="sumNum" >订单总计</th>
                                                                     <th data-field="paymentType" data-formatter="payType">付款方式</th>
                                                                     <th data-field="status" data-formatter="orderStatus">订单状态</th>

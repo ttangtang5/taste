@@ -105,7 +105,7 @@
                                                 <span class="text-muted"></span>
                                             </td>--%>
                                         </tr>
-                                        <tr>
+                                        <%--<tr>
                                             <td>
                                                 电话：
                                             </td>
@@ -114,10 +114,10 @@
                                                    data-placement="right" data-placeholder="Required"
                                                    data-original-title="请输入电话">${user.phone}</a>
                                             </td>
-                                            <%--<td>
+                                            &lt;%&ndash;<td>
                                                 <span class="text-muted">Select, loaded from js array. Custom display </span>
-                                            </td>--%>
-                                        </tr>
+                                            </td>&ndash;%&gt;
+                                        </tr>--%>
                                         </tbody>
                                     </table>
                                 </div>

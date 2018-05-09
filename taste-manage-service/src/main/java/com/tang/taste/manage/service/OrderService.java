@@ -147,7 +147,9 @@ public class OrderService {
         TablesExample tablesExample = new TablesExample();
         TablesExample.Criteria criteria = tablesExample.createCriteria();
         criteria.andDelFlagEqualTo(0);
-        criteria.andIdNotIn(lists);
+        if(lists != null && lists.size() > 0){
+            criteria.andIdNotIn(lists);
+        }
         return tableDao.selectByExample(tablesExample);
     }
 
@@ -165,8 +167,10 @@ public class OrderService {
             //发短信通知
             Booking booking1 = bookingMapper.selectByPrimaryKey(booking.getId());
             try {
-                SmsUtils.sendSmsInform(booking1.getPhone(), "SMS_133966890", booking1);
+                SmsUtils.sendCaptcha(booking1.getPhone(), null,"SMS_133966890",2, booking1,null);
             } catch (ClientException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             return JSON.toJSONString(map);

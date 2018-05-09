@@ -288,6 +288,12 @@ public class UserController {
         return "error";
     }
 
+    /**
+     * 删除地址
+     * @param id
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("deleteAddress")
     @ResponseBody
     public String deleteAddress(int id) throws Exception{

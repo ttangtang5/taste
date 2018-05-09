@@ -109,6 +109,7 @@ public class OrderService {
     public void updateOrderPayStatus(int orderId){
         Order order = new Order();
         order.setStatus(2);
+        order.setPaymentType(1);
         order.setOrderId(orderId);
         orderDao.updateByPrimaryKeySelective(order);
     }
@@ -155,10 +156,7 @@ public class OrderService {
      */
     public String addBooking(Booking booking) {
         int i = bookingMapper.insertSelective(booking);
-        if(i == 1){
-            return "200";
-        }
-        return "500";
+        return "/toBooking";
     }
 
     /***

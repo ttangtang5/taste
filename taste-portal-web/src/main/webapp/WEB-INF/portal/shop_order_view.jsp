@@ -909,7 +909,7 @@
                 $(".addressee").html(data.receiver);
                 $(".address").html(data.address);
                 $(".phone").html(data.phone);
-                $(".time").html(data.createTime);
+                $(".time").html(data.createTimeStr);
                 $(".orderTotal").html(data.sumNum);
                 var show ;
                 switch(data.paymentType)

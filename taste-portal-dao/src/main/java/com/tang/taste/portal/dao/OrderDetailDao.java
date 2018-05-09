@@ -33,7 +33,7 @@ public interface OrderDetailDao extends OrderDetailMapper{
             " d.dishes_price  " +
             "FROM " +
             " order_detail o " +
-            " LEFT JOIN sys_dishes d ON o.order_id = d.id  " +
+            " LEFT JOIN sys_dishes d ON o.dishes_id = d.id  " +
             "WHERE " +
             " o.order_id = #{orderId}  " +
             " AND o.del_flag = 0" +

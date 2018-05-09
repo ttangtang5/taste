@@ -55,7 +55,7 @@
                     <ul class="scroller" style="height: 100px;">
                     </ul>
                     <div class="text-right">
-                        <a href="/toShopOrder" class="btn btn-primary">结算</a>
+                        <a href="${ctx}/toShopOrder" class="btn btn-primary">结算</a>
                     </div>
                 </div>
             </div>
@@ -540,17 +540,6 @@
         IndexContent.init();
         ShoppingCart.init();
     });
-
-    /*$("#search").click(function(){
-        $.ajax({
-            type : 'post',
-            url : ctx +'/search/addDishesIndex',
-            dataType : 'json',
-            success : function(msg){
-                alert(msg);
-            }
-        });
-    });*/
 
 </script>
 <!-- END PAGE LEVEL JAVASCRIPTS -->

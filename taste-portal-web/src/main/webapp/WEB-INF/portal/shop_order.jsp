@@ -60,7 +60,7 @@
                 <i class="icon-basket font-green-sharp"></i>
                 <span class="caption-subject font-green-sharp bold uppercase">
 								结算</span>
-                <span class="caption-helper">Dec 27, 2013 7:16:25</span>
+                <span class="caption-helper"></span>
               </div>
             </div>
             <div class="portlet-body">
@@ -109,8 +109,8 @@
                                     <h3 class="form-section">订单信息</h3>
                                     <table id="cartTable"
                                          data-classes="table-no-bordered"
-                                         data-toggle="table" data-cache="true"
-                                         data-url="${ctx}/shoppingCart/cartDetailShow"
+                                         data-toggle="table"
+                                         <%--data-url="${ctx}/shoppingCart/cartDetailShow"--%>
                                          <%--data-pagination="true"--%>
                                          data-tool-bar="#toolbar">
                                       <thead>
@@ -129,7 +129,7 @@
                                       <ul>
                                         <li class="shopping-total-price">
                                           <em>总计</em>
-                                          <strong class="price"><span>$</span>${total}</strong>
+                                          <strong class="price" >￥<span id="total">${total}</span></strong>
                                         </li>
                                       </ul>
                                     </div>
@@ -172,7 +172,7 @@
                                       <div class="col-md-6">
                                         <div class="row">
                                           <div class="col-md-offset-3 col-md-9">
-                                            <button type="button"  class="btn default">取消</button>
+                                            <button type="button"  class="btn default" id="cancel">取消</button>
                                             <button type="submit"  class="btn green"><i class="fa fa-pencil"></i> 付款</button>
                                           </div>
                                         </div>
@@ -251,6 +251,7 @@
   });
 
   $(function(){
+      //获取地址列表
     $.ajax({
       type : 'post',
       url : rootPath + '/taste/getUserAddress',
@@ -265,8 +266,22 @@
         }
       }
     });
+      //获取商品列表
+    $.ajax({
+        type : 'post',
+        url : rootPath + '/shoppingCart/cartDetailShow',
+        dataType : 'json',
+        success : function(msg){
+            $("#cartTable").bootstrapTable('load', msg.rows);
+            $("#total").html(msg.total);
+        }
+    });
   });
 
+  $("#cancel").click(function () {
+      window.location.href = rootPath + "/toIndex";
+  });
+  //添加地址
   $("#addAddress").click(function(){
     //弹出即全屏
     var index = layer.open({
@@ -287,9 +302,8 @@
   });
 
   function picture(value){
-    return '<img style="width:68px;height:80px" src="${ctxStatic}'+value+'"/>';
+    return '<img style="width:68px;height:80px" src="'+value+'"/>';
   }
-
   function dishesName(value){
     return '<strong style="font-size: 18px;font-weight: normal;text-align:center">'+value+'</strong>';
 

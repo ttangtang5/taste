@@ -152,6 +152,7 @@ public class ShoppingCartController {
     @RequestMapping("/cartDetailShow")
     @ResponseBody
     public String cartDetailShow(HttpServletRequest request) throws  Exception{
+        Map map = Maps.newHashMap();
         PageHelper page = new PageHelper();
         List<ShoppingCartDetail> rows = Lists.newArrayList();
         //获取用户
@@ -167,8 +168,10 @@ public class ShoppingCartController {
                 for (ShoppingCartDetail shoppingCartDetail : rows) {
                     total = total + shoppingCartDetail.getDishesTotal();
                 }
-                SessionUtils.setAttr(request,"total",total);
-                return JSON.toJSONString(rows);
+                //SessionUtils.setAttr(request,"total",total);
+                map.put("total", total);
+                map.put("rows", rows);
+                return JSON.toJSONString(map);
             }else{
                 return null;
             }
@@ -213,10 +216,12 @@ public class ShoppingCartController {
                     total = total + shoppingCartDetail.getDishesTotal();
                 }
                 total = shoppingCart.getSumMoney() + total;
-                SessionUtils.setAttr(request,"total",total);
+                //SessionUtils.setAttr(request,"total",total);
                 shoppingCart.setSumMoney(total);
                 shoppingCartService.updateShoppingCart(shoppingCart, user.getId());
-                return JSON.toJSONString(rows);
+                map.put("total", total);
+                map.put("rows", rows);
+                return JSON.toJSONString(map);
             }
         }
         return null;

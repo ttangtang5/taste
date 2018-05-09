@@ -94,42 +94,45 @@ public class UserService {
                 }
 
                 //将数据库购物车的数加入cookie
-                User userCart = SessionUtils.getUser(request);
+                //User userCart = SessionUtils.getUser(request);
+                User userCart = list.get(0);
                 ShoppingCart shoppingCart = shoppingCartService.getShoppingCartByUserId(userCart.getId());
-                List<ShoppingCartDetail> lists = shoppingCartService.getShoppingCartDetailByCartId(shoppingCart.getCartId());
-                shoppingCartService.deleteShoppingDetail(shoppingCart.getCartId());
-                Cookie[] cookies = request.getCookies();
-                for (int i = 0; i < cookies.length; i++){
-                    String[] c = cookies[i].getValue().split(":");
-                    if(c.length > 1 && c[1] != null){
-                        for (ShoppingCartDetail s : lists) {
-                            String str = null;
-                            if(cookies[i].getName().equals(s.getDishesId())){
-                                int goodsNum = Integer.valueOf(c[0]) + s.getNum();
-                                str = String.valueOf(goodsNum) + ":" + c[1];
-                                CookieUtils.setCookie(request,response,cookies[i].getName(),str);
-                            }else{
-                                str = s.getNum().toString() + ":" + s.getDishesPrice();
-                                CookieUtils.setCookie(request,response,s.getDishesId().toString(),str);
+                //是不是新用户
+                if(shoppingCart != null && shoppingCart.getCartId() != null){
+                    List<ShoppingCartDetail> lists = shoppingCartService.getShoppingCartDetailByCartId(shoppingCart.getCartId());
+                    shoppingCartService.deleteShoppingDetail(shoppingCart.getCartId());
+                    Cookie[] cookies = request.getCookies();
+                    for (int i = 0; i < cookies.length; i++){
+                        String[] c = cookies[i].getValue().split(":");
+                        if(c.length > 1 && c[1] != null){
+                            for (ShoppingCartDetail s : lists) {
+                                String str = null;
+                                if(cookies[i].getName().equals(s.getDishesId())){
+                                    int goodsNum = Integer.valueOf(c[0]) + s.getNum();
+                                    str = String.valueOf(goodsNum) + ":" + c[1];
+                                    CookieUtils.setCookie(request,response,cookies[i].getName(),str);
+                                }else{
+                                    str = s.getNum().toString() + ":" + s.getDishesPrice();
+                                    CookieUtils.setCookie(request,response,s.getDishesId().toString(),str);
+                                }
                             }
                         }
                     }
-                }
-
-                List<ShoppingCartDetail> details = Lists.newArrayList();
-                for (int i = 0; i < cookies.length; i++){
-                    String[] c = cookies[i].getValue().split(":");
-                    if(c.length > 1 && c[1] != null){
-                        ShoppingCartDetail shoppingCartDetail = new ShoppingCartDetail();
-                        shoppingCartDetail.setCartId(shoppingCart.getCartId());
-                        shoppingCartDetail.setDishesId(Integer.valueOf(cookies[i].getName()));
-                        shoppingCartDetail.setNum(Integer.valueOf(c[0]));
-                        shoppingCartDetail.setStatus(0);
-                        details.add(shoppingCartDetail);
+                    List<ShoppingCartDetail> details = Lists.newArrayList();
+                    for (int i = 0; i < cookies.length; i++){
+                        String[] c = cookies[i].getValue().split(":");
+                        if(c.length > 1 && c[1] != null){
+                            ShoppingCartDetail shoppingCartDetail = new ShoppingCartDetail();
+                            shoppingCartDetail.setCartId(shoppingCart.getCartId());
+                            shoppingCartDetail.setDishesId(Integer.valueOf(cookies[i].getName()));
+                            shoppingCartDetail.setNum(Integer.valueOf(c[0]));
+                            shoppingCartDetail.setStatus(0);
+                            details.add(shoppingCartDetail);
+                        }
                     }
-                }
-                if(details != null && details.size() > 0){
-                 shoppingCartService.addShoppingDetailList(details);
+                    if(details != null && details.size() > 0){
+                        shoppingCartService.addShoppingDetailList(details);
+                    }
                 }
                 return "200";
             }else{

@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>Title</title>
-    <title>权限列表 - 权限管理</title>
+    <title>菜单列表 - 菜单管理</title>
     <meta name="decorator" content="default">
     <link href="${ctxStatic}/js/common/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="${ctxStatic}/css/common/base.css" rel="stylesheet"/>
@@ -31,28 +31,28 @@
                 </li>
                 <li class="active dropdown">
                     <a href="${ctx}/manage/toMenuList">
-                        <i class="glyphicon glyphicon-chevron-right"></i>权限列表
+                        <i class="glyphicon glyphicon-chevron-right"></i>菜单列表
                     </a>
                 </li>
                 <li class="  dropdown">
                     <a href="${ctx}/manage/toAllocationMenu">
-                        <i class="glyphicon glyphicon-chevron-right"></i>权限分配
+                        <i class="glyphicon glyphicon-chevron-right"></i>菜单分配
                     </a>
                 </li>
             </ul>
         </div>
         <div class="col-md-10">
-            <h2>权限列表</h2>
+            <h2>菜单列表</h2>
             <hr>
             <form method="post" action="" id="formId" class="form-inline">
                 <div clss="well">
                     <div class="form-group">
                         <input type="text" class="form-control" style="width: 300px;" value=""
-                               name="findContent" id="findContent" placeholder="输入权限名称">
+                               name="findContent" id="findContent" placeholder="输入菜单名称">
                     </div>
                     <span class="">
 				         	<button type="submit" class="btn btn-primary">查询</button>
-				         		<a class="btn btn-success" onclick="$('#addPermission').modal();">增加权限</a>
+				         		<a class="btn btn-success" onclick="$('#addPermission').modal();">增加菜单</a>
 				         		<button type="button" id="deleteAll" class="btn  btn-danger">删除</button>
 				         </span>
                 </div>
@@ -60,9 +60,9 @@
                 <table class="table table-bordered">
                     <tr>
                         <th><input type="checkbox" id="checkAll"/></th>
-                        <th>权限名称</th>
+                        <th>菜单名称</th>
                         <th>链接</th>
-                        <th>权限标识</th>
+                        <th>菜单标识</th>
                         <th>操作</th>
                     </tr>
                     <c:forEach var="menu" items="${menuList}">
@@ -85,21 +85,21 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="addPermissionLabel">添加权限</h4>
+                    <h4 class="modal-title" id="addPermissionLabel">添加</h4>
                 </div>
                 <div class="modal-body">
                     <form id="boxMenuForm">
                         <div class="form-group">
-                            <label for="recipient-name" class="control-label">权限名称:</label>
-                            <input type="text" class="form-control" name="name" id="name" placeholder="请输入权限名称" required="required"/>
+                            <label for="recipient-name" class="control-label">菜单名称:</label>
+                            <input type="text" class="form-control" name="name" id="name" placeholder="请输入菜单名称" required="required"/>
                         </div>
                         <div class="form-group">
                             <label for="recipient-name" class="control-label">链接:</label>
                             <input type="text" class="form-control" id="href" name="href"  placeholder="请输入URL地址" required="required">
                         </div>
                         <div class="form-group">
-                            <label for="recipient-name" class="control-label">权限标识:</label>
-                            <input type="text" class="form-control" id="permission" name="permission"  placeholder="请输入权限标识（字母组成）" required="required">
+                            <label for="recipient-name" class="control-label">菜单标识:</label>
+                            <input type="text" class="form-control" id="permission" name="permission"  placeholder="请输入菜单标识（字母组成）" required="required">
                         </div>
                     </form>
                 </div>

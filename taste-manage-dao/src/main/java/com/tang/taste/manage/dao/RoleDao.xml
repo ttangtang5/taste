@@ -5,10 +5,14 @@
     <!--条件查询整个用户列表-->
     <select id="selectRoleList" parameterType="java.lang.String" resultType="com.tang.taste.common.entity.pojo.Role">
         SELECT r.id,role_name, remarks
-        FROM s sys_role r
+        FROM  sys_role r
           WHERE
-            ( role_name LIKE CONCAT('%',#{findContent},'%')
-            OR remarks LIKE CONCAT('%',#{findContent},'%')
+        (role_name LIKE CONCAT('%'
+        <if test="findContent != null and findContent != ''">,#{findContent}</if>
+            ,'%')
+            OR remarks LIKE CONCAT('%'
+        <if test="findContent != null and findContent != ''">,#{findContent}</if>
+            ,'%'))
             AND r.del_flag = 0
     </select>
 
@@ -67,7 +71,9 @@
         FROM
         sys_role r
         WHERE
-        r.role_name like CONCAT('%',#{findContent},'%')
+        r.role_name like CONCAT('%'
+        <if test="findContent != null and findContent != ''">,#{findContent}</if>
+        ,'%')
         AND r.del_flag = 0
     </select>
 </mapper>

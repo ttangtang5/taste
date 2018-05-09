@@ -119,7 +119,7 @@
                     <div class="form-group">
                         <label class="col-lg-4 control-label">手机号:</label>
                         <div class="col-lg-8">
-                            <input type="text" class="form-control" id="phone" style="width:200px" name="phone" value="${sessionScope.session_user.userName}" disabled="">
+                            <input type="text" class="form-control" id="phone" style="width:200px" name="phone" >
                         </div>
                     </div>
                     <div class="form-group">

@@ -238,11 +238,11 @@ public class OrderController {
     public String acceptOrder(Integer id,int distribution) throws Exception{
         orderService.updateOrder(id,distribution);
         //发送短信
-        Employee employee = empService.selectEmployeeById(id);
+        Employee employee = empService.selectEmployeeById(distribution);
         Order order = orderService.selectOrderByOrderId(id);
         order.setEmpName(employee.getEmpName());
         order.setEmpPhone(employee.getPhone());
-        SmsUtils.sendSmsOrder(order.getPhone(), "SMS_133978296", order);
+        SmsUtils.sendCaptcha(order.getPhone(), null,"SMS_133978296",3, null,order);
         return "success";
     }
 }

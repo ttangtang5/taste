@@ -118,10 +118,10 @@ public class SmsUtils {
         request.setSignName("唐蓝云");
         //必填:短信模板-可在短信控制台中找到
         request.setTemplateCode(template);
+        booking.setTimeStr(DateUtil.getDateTime("yyyy-MM-dd HH:mm:ss",booking.getTime()));
         //可选:模板中的变量替换JSON串,如模板内容为"亲爱的${name},您的验证码为${code}"时,此处的值为
-        request.setTemplateParam("{\"bookingTime\":\""+booking.getTime()+"\"}");
-        request.setTemplateParam("{\"num\":\""+booking.getNum()+"\"}");
-        request.setTemplateParam("{\"tableId\":\""+booking.getTableId()+"\"}");
+        String str = "{\"bookingTime\":\""+booking.getTimeStr()+"\",\"num\":\""+booking.getNum()+"\",\"tableId\":\""+booking.getTableId()+"\"}";
+        request.setTemplateParam(str);
 
         //选填-上行短信扩展码(无特殊需求用户请忽略此字段)
         //request.setSmsUpExtendCode("90997");
@@ -168,8 +168,7 @@ public class SmsUtils {
         //必填:短信模板-可在短信控制台中找到
         request.setTemplateCode(template);
         //可选:模板中的变量替换JSON串,如模板内容为"亲爱的${name},您的验证码为${code}"时,此处的值为
-        request.setTemplateParam("{\"consignee\":\""+order.getEmpName()+"\"}");
-        request.setTemplateParam("{\"number\":\""+order.getPhone()+"\"}");
+        request.setTemplateParam("{\"consignee\":\""+order.getEmpName()+"\",\"number\":\""+order.getPhone()+"\"}");
 
         //选填-上行短信扩展码(无特殊需求用户请忽略此字段)
         //request.setSmsUpExtendCode("90997");
@@ -287,6 +286,21 @@ public class SmsUtils {
             System.out.println("RequestId=" + querySendDetailsResponse.getRequestId());
         }
             return flag;
+    }
+
+    public static void main(String[] args) {
+        Booking booking1 = new Booking();
+        booking1.setTableId(1);
+        booking1.setNum(2);
+        booking1.setTime(new Date());
+        try {
+            SmsUtils.sendCaptcha("18373156436", null,"SMS_133966890",2, booking1,null);
+        } catch (ClientException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }
