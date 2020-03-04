@@ -52,7 +52,7 @@
         <javax.servlet.jstl.version>1.2</javax.servlet.jstl.version>
         <javax.servlet.servlet-api.version>2.5</javax.servlet.servlet-api.version>
         <javax.servlet.jsp.version>2.1</javax.servlet.jsp.version>
-        <jackson.version>2.9.0</jackson.version>
+        <jackson.version>2.10.3</jackson.version>
         <poi.version>3.10.1</poi.version>
         <dubbo.version>2.5.8</dubbo.version>
         <zookeeper.version>3.4.11</zookeeper.version>
